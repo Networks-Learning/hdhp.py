@@ -60,6 +60,7 @@ setup(
     install_requires=[
         'numpy==1.11.2',
         'scipy==0.18.1',
+        'scikit-learn==0.18',
         'seaborn==0.7.1',
         'matplotlib==1.5.3'
     ],
