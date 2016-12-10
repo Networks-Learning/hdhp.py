@@ -1,0 +1,4 @@
+Sphinx==1.5
+numpy
+scipy
+-e .

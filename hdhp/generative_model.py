@@ -10,7 +10,7 @@
     :copyright: 2016 Charalampos Mavroforakis, <cmav@bu.edu> and contributors.
     :license: ISC
 """
-from __future__ import division
+from __future__ import division, print_function
 
 import datetime
 from collections import defaultdict
@@ -918,3 +918,120 @@ class HDHProcess:
             plt.savefig(filename + '.pdf', transparent=True)
             sns.set_style(None)
         return fig
+
+    def user_patterns(self, user):
+        """Returns a list with the patterns that a user has adopted.
+
+        Parameters
+        ----------
+        user : int
+        """
+        pattern_list = [self.dish_on_table_per_user[user][table]
+                        for table in self.table_history_per_user[user]]
+        return list(set(pattern_list))
+
+    def show_annotated_events(self, user=None, patterns=None, show_time=True,
+                              T_min=0, T_max=None):
+        """Returns a string where each event is annotated with the inferred
+        pattern.
+
+
+        Parameters
+        ----------
+        user : int, default is None
+            If given, the events returned are limited to the selected user
+
+        patterns : list, default is None
+            If not None, an event is return only if it belongs to one of the
+            selected patterns
+
+        show_time : bool, default is True
+            Controls whether the time of the event will be shown
+
+        T_min : float, default is 0
+            Controls the minimum timestamp after which the events will be shown
+
+        T_max : float, default is None
+            If given, T_max controls the maximum timestamp shown
+
+
+        Returns
+        -------
+        str
+        """
+        if patterns is not None and type(patterns) is not set:
+            patterns = set(patterns)
+
+        if show_time:
+            return '\n'.join(['%5.3g pattern=%3d task=%3d (u=%d)  %s' %
+                              (t, dish, table, u, doc)
+                              for u in range(self.num_users)
+                              for ((t, doc), (table, dish)) in
+                              zip([(t, d)
+                                   for t, d in zip(self.time_history_per_user[u],
+                                                   self.document_history_per_user[u])],
+                                  [(table, self.dish_on_table_per_user[u][table])
+                                   for table in self.table_history_per_user[u]])
+                              if (user is None or user == u) and
+                              (patterns is None or dish in patterns)
+                              and t >= T_min
+                              and (T_max is None or (T_max is not None and t <= T_max))])
+        else:
+            return '\n'.join(['pattern=%3d task=%3d (u=%d)  %s'
+                              % (dish, table, u, doc)
+                              for u in range(self.num_users)
+                              for ((t, doc), (table, dish)) in
+                              zip([(t, d)
+                                   for t, d in zip(self.time_history_per_user[u],
+                                                   self.document_history_per_user[u])],
+                                  [(table, self.dish_on_table_per_user[u][table])
+                                   for table in self.table_history_per_user[u]])
+                              if (user is None or user == u) and
+                              (patterns is None or dish in patterns)
+                              and t >= T_min
+                              and (T_max is None or (T_max is not None and t <= T_max))])
+
+    def show_pattern_content(self, patterns=None, words=0, detail_threshold=5):
+        """Shows the content distrubution of the inferred patterns.
+
+
+        Parameters
+        ----------
+        patterns : list, default is None
+            If not None, only the content of the selected patterns will be
+            shown
+
+        words : int, default is 0
+            A positive number that control how many words will be shown.
+            The words are being shown sorted by their likelihood, starting
+            with the most probable.
+
+        detail_threshold : int, default is 5
+            A positive number that sets the lower bound in the number of times
+            that a word appeared in a pattern so that its count is shown.
+
+
+        Returns
+        -------
+        str
+        """
+        if patterns is None:
+            patterns = self.per_pattern_word_count.keys()
+        text = ['___Pattern %d___ \n%s\n%s'
+                % (pattern,
+                   '\n'.join(['%s : %d'
+                              % (k, v)
+                              for i, (k, v)
+                              in enumerate(sorted(self.per_pattern_word_counts[pattern].iteritems(),
+                                                  key=lambda x: (x[1], x[0]),
+                                                  reverse=True))
+                              if v >= detail_threshold and (words == 0 or i < words)]
+                             ),
+                   ' '.join([k for i, (k, v)
+                             in enumerate(sorted(self.per_pattern_word_counts[pattern].iteritems(),
+                                                 key=lambda x: (x[1], x[0]),
+                                                 reverse=True))
+                             if v < detail_threshold and (words == 0 or i < words)])
+                   )
+                for pattern in self.per_pattern_word_counts if pattern in patterns]
+        return '\n\n'.join(text)
