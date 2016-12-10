@@ -6,20 +6,22 @@
 Welcome to hdhp.py's documentation!
 ===================================
 
-..  toctree::
-   :maxdepth: 2
-   :caption: Contents:
-
 The ``infer`` function
 ======================
 .. automodule:: hdhp 
     :members: infer
+
 
 The ``HDHProcess`` object
 =========================
 .. autoclass:: HDHProcess
     :members:
 
+
+The ``Particle`` object
+=========================
+.. autoclass:: HDHProcess
+    :members:
 
 .. Indices and tables
 .. ==================
