@@ -48,7 +48,7 @@ Documentation
 
 For instructions on how to use the package, consult `its documentation`__.
 
-__ https://hdhp.readthedocs.org/
+__ http://hdhpypy.readthedocs.io/en/latest/
 
 Examples
 --------
