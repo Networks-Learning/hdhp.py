@@ -13,10 +13,10 @@ To cite this work, please use
 
 ::
 
-   Mavroforakis, C., Valera, I. and Rodriguez, M.G., 2016.
+   Mavroforakis, C., Valera, I. and Rodriguez, M.G., 
    Modeling the Dynamics of Online Learning Activity.
-   Proceedings of the 26th International Conference on
-   World Wide Web. ACM, 2017. 
+   Proceedings of the 26th International Conference on World Wide Web.
+   ACM, 2017. 
 
 
 
