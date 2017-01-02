@@ -15,7 +15,8 @@ To cite this work, please use
 
    Mavroforakis, C., Valera, I. and Rodriguez, M.G., 2016.
    Modeling the Dynamics of Online Learning Activity.
-   arXiv preprint arXiv:1610.05775.
+   Proceedings of the 26th International Conference on
+   World Wide Web. ACM, 2017. 
 
 
 
