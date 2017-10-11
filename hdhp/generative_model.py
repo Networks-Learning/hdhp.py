@@ -31,8 +31,8 @@ from utils import (qualitative_cmap, weighted_choice, monthly_labels,
 
 class HDHProcess:
 
-    def __init__(self, num_patterns, alpha_0, mu_0, vocabulary, omega=1,
-                 doc_length=20, doc_min_length=5, words_per_pattern=10,
+    def __init__(self, num_patterns, alpha_0, mu_0, vocabulary, omega,
+                 doc_lengths, words_per_pattern,
                  random_state=None):
         """
         Parameters
@@ -79,8 +79,7 @@ class HDHProcess:
         self.alpha_0 = alpha_0
         self.vocabulary = vocabulary
         self.mu_0 = mu_0
-        self.document_length = doc_length
-        self.document_min_length = doc_min_length
+        self.doc_lengths = doc_lengths
         self.omega = omega
         self.words_per_pattern = words_per_pattern
         self.pattern_params = self.sample_pattern_params()
@@ -117,8 +116,8 @@ class HDHProcess:
         self.cache_per_user = defaultdict(dict)
         self.total_tables_per_user = defaultdict(int)
         self.events = []
-        self.per_pattern_word_counts = defaultdict(lambda: defaultdict(int))
-        self.per_pattern_word_count_total = defaultdict(int)
+        self.per_pattern_word_counts = {docType: defaultdict(lambda: defaultdict(int)) for docType in self.vocabulary.iterkeys()}
+        self.per_pattern_word_count_total = {docType: defaultdict(int) for docType in self.vocabulary.iterkeys()}
 
     def sample_pattern_params(self):
         """Returns the word distributions for each pattern.
@@ -129,16 +128,18 @@ class HDHProcess:
         parameters : list
             A list of word distributions, one for each pattern.
         """
-        sampled_params = {}
-        V = len(self.vocabulary)
-        for pattern in range(self.num_patterns):
-            custom_theta = [0] * V
-            words_in_pattern = self.prng.choice(V, size=self.words_per_pattern,
-                                                replace=False)
-            for word in words_in_pattern:
-                custom_theta[word] = 100. / self.words_per_pattern
-            sampled_params[pattern] = \
-                self.pattern_param_prng.dirichlet(custom_theta)
+        sampled_params = dict ()
+        for docType in self.vocabulary.iterkeys():
+            sampled_params[docType] = dict ()
+            V = len(self.vocabulary[docType])
+            for pattern in range(self.num_patterns):
+                custom_theta = [0] * V
+                words_in_pattern = self.prng.choice(V, size=self.words_per_pattern[docType],
+                                                    replace=False)
+                for word in words_in_pattern:
+                    custom_theta[word] = 100. / self.words_per_pattern[docType]
+                sampled_params[docType][pattern] = \
+                    self.pattern_param_prng.dirichlet(custom_theta)
         return sampled_params
 
     def sample_time_kernels(self):
@@ -342,10 +343,14 @@ class HDHProcess:
                 self.first_observed_time[z_n] = t_n
             self.dish_counters[z_n] += 1
 
-            doc_n = self.sample_document(z_n)
-            self._update_word_counters(doc_n.split(), z_n)
+            docs_for_user_n = dict ()
+            for docType in self.vocabulary.iterkeys():
+                doc_n = self.sample_document(z_n, docType)
+                self._update_word_counters(doc_n.split(), z_n, docType)
+                docs_for_user_n[docType] = doc_n
+
             self.document_history_per_user[user]\
-                .append(doc_n)
+                .append(docs_for_user_n)
             self.table_history_per_user[user].append(table)
             self.time_history_per_user[user].append(t_n)
             self.last_event_user_pattern[user][z_n] = t_n
@@ -368,6 +373,17 @@ class HDHProcess:
         self.num_users += 1
         return events
 
+    def generate(self, numUsers, min_num_events=100, max_num_events=None,
+                           t_max=None, reset=True):
+        if reset: self.reset ()
+        
+        for i in xrange (numUsers):
+            _ = self.sample_user_events(min_num_events=100, 
+                                        max_num_events=5000,
+                                        t_max=365)
+        
+        return self.events
+
     def kernel(self, t_i, t_j):
         """Returns the kernel function for t_i and t_j.
 
@@ -387,7 +403,7 @@ class HDHProcess:
         """
         return exp(-self.omega * (t_i - t_j))
 
-    def sample_document(self, pattern):
+    def sample_document(self, pattern, docType):
         """Sample a random document from a specific pattern.
 
 
@@ -402,14 +418,15 @@ class HDHProcess:
         str
             A space separeted string that contains all the sampled words.
         """
-        length = self.doc_prng.randint(self.document_length) + \
-            self.document_min_length
-        words = self.doc_prng.multinomial(length, self.pattern_params[pattern])
-        return ' '.join([self.vocabulary[i]
+
+        length = self.doc_prng.randint(self.doc_lengths[docType][1]) + \
+            self.doc_lengths[docType][0]
+        words = self.doc_prng.multinomial(length, self.pattern_params[docType][pattern])
+        return ' '.join([self.vocabulary[docType][i]
                          for i, repeats in enumerate(words)
                          for j in range(repeats)])
 
-    def _update_word_counters(self, doc, pattern):
+    def _update_word_counters(self, doc, pattern, docType):
         """Updates the word counters of the process for the particular document
 
 
@@ -422,12 +439,13 @@ class HDHProcess:
             The index of the latent pattern that this document belongs to.
         """
         for word in doc:
-            self.per_pattern_word_counts[pattern][word] += 1
-            self.per_pattern_word_count_total[pattern] += 1
+            self.per_pattern_word_counts[docType][pattern][word] += 1
+            self.per_pattern_word_count_total[docType][pattern] += 1
         return
 
+
     def pattern_content_str(self, patterns=None, show_words=-1,
-                            min_word_occurence=5):
+                            min_word_occurence=5, docType=None):
         """Return the content information for the patterns of the process.
 
 
@@ -445,37 +463,53 @@ class HDHProcess:
             Only show words that show up at least `min_word_occurence` number
             of times in the documents of the respective pattern.
 
+        docType: str, default is None
+            show the pattern content with respect to the provided document type.
+            If None, then iterate through all the document types.
+
 
         Returns
         -------
         str
             A string with all the content information
         """
-        if patterns is None:
-            patterns = self.per_pattern_word_counts.keys()
-        text = ['___Pattern %d___ \n%s\n%s'
-                % (pattern,
-                   '\n'.join(['%s : %d' % (k, v)
-                              for i, (k, v)
-                              in enumerate(sorted(self.per_pattern_word_counts[pattern].iteritems(),
-                                                  key=lambda x: (x[1], x[0]),
-                                                  reverse=True))
-                              if v >= min_word_occurence
-                              and (show_words == -1
-                                   or (show_words > 0 and i < show_words))]
-                             ),
-                   ' '.join([k
-                             for i, (k, v)
-                             in enumerate(sorted(self.per_pattern_word_counts[pattern].iteritems(),
-                                                 key=lambda x: (x[1], x[0]),
-                                                 reverse=True))
-                             if v < min_word_occurence
-                             and (show_words == -1
-                                  or (show_words > 0 and i < show_words))])
-                   )
-                for pattern in self.per_pattern_word_counts
-                if pattern in patterns]
-        return '\n\n'.join(text)
+
+        if docType is None:
+            docTypes = self.per_pattern_word_counts.keys()
+        else:
+            docTypes = [docType]
+
+        texts = list ()
+        for docType in docTypes:
+            if patterns is None or len (patterns) == 0:
+                patterns = self.per_pattern_word_counts[docType].keys()
+
+            text = ['___Pattern %d___ (DOC-TYPE %s)\n%s\n%s'
+                    % (pattern,
+                        docType,
+                       '\n'.join(['%s : %d' % (k, v)
+                                  for i, (k, v)
+                                  in enumerate(sorted(self.per_pattern_word_counts[docType][pattern].iteritems(),
+                                                      key=lambda x: (x[1], x[0]),
+                                                      reverse=True))
+                                if v >= min_word_occurence
+                                and (show_words == -1
+                                       or (show_words > 0 and i < show_words))]
+                               ),
+                    ' '.join([k
+                                 for i, (k, v)
+                                 in enumerate(sorted(self.per_pattern_word_counts[docType][pattern].iteritems(),
+                                                     key=lambda x: (x[1], x[0]),
+                                                     reverse=True))
+                                 if v < min_word_occurence
+                                 and (show_words == -1
+                                      or (show_words > 0 and i < show_words))])
+                    )
+                    for pattern in self.per_pattern_word_counts[docType].iterkeys()
+                    if pattern in patterns]
+            texts.append (text)
+
+        return '\n\n'.join (['\n\n'.join (text) for text in texts])
 
     def user_patterns_set(self, user):
         """Return the patterns that a specific user adopted.
