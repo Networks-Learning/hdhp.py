@@ -12,7 +12,7 @@ from __future__ import division, print_function
 
 import tempfile
 from collections import Counter, defaultdict
-from copy import copy
+from copy import copy, deepcopy
 from time import time
 
 from numpy import log as ln, array, exp
@@ -80,19 +80,20 @@ class Particle(object):
                  alpha_0=(2, 2), mu_0 = 1, theta_0=None,
                  seed=None, logweight=0, update_kernels=False, uid=0,
                  omega=1, beta=1, keep_alpha_history=False, mu_rate=0.6):
+        self.count = 0
         self.vocabulary_length = vocabulary_length
         self.vocabulary = None
         self.seed = seed
         self.prng = RandomState(self.seed)
         self.first_observed_time = {}
         self.first_observed_user_time = {}
-        self.per_topic_word_counts = {}
-        self.per_topic_word_count_total = {}
+        self.per_topic_word_counts = {k: dict () for k in vocabulary_length}
+        self.per_topic_word_count_total = {k: dict () for k in vocabulary_length}
         self.time_kernels = {}
         self.alpha_0 = alpha_0
         self.mu_0 = mu_0
-        self.theta_0 = array(theta_0)
-        self._lntheta = _ln(theta_0[0])
+        self.theta_0 = {k:array(theta_0[k]) for k in theta_0}
+        self._lntheta = {k: _ln(theta_0[k][0]) for k in self.theta_0}
         self.logweight = logweight
         self.update_kernels = update_kernels
         self.uid = uid
@@ -190,8 +191,8 @@ class Particle(object):
                     if t in self.user_table_cache[u]:
                         del self.user_table_cache[u][t]
 
-        new_p.per_topic_word_counts = copy_dict(self.per_topic_word_counts)
-        new_p.per_topic_word_count_total = copy_dict(self.per_topic_word_count_total)
+        new_p.per_topic_word_counts = deepcopy(self.per_topic_word_counts)
+        new_p.per_topic_word_count_total = deepcopy(self.per_topic_word_count_total)
         new_p.time_kernels = copy_dict(self.time_kernels)
         new_p.time_kernel_prior = copy_dict(self.time_kernel_prior)
         new_p.user_table_cache = copy_dict(self.user_table_cache)
@@ -210,14 +211,18 @@ class Particle(object):
         Parameters
         ----------
         event : tuple
-            The event is a 4-tuple of the form (user, time, content, metadata)
+            The event is a 4-tuple of the form (time, content, user, metadata)
         """
-        # u_n : user of the n-th event
         # t_n : time of the n-th event
         # d_n : text of the n-th event
+        # u_n : user of the n-th event
         # q_n : any metadata for the n-th event, e.g. the question id
         t_n, d_n, u_n, q_n = event
-        d_n = d_n.split()
+        cousers = u_n[1:]
+        u_n = u_n[0]
+        #d_n = d_n.split()
+
+        # the following conditional block can be removed and added to the initialization code.
 
         if self.num_events == 0:
             self.time_previous_user_event = [0 for i in range(self.num_users)]
@@ -230,16 +235,17 @@ class Particle(object):
                 self.time_previous_user_event[u_n] > 0:
             log_likelihood_tn = self.time_event_log_likelihood(t_n, u_n)
         else:
-            log_likelihood_tn = 0
+            log_likelihood_tn = 0 # I don't know why this is zero, should it not be the log of the base intensity?
 
         tables_before = self.total_tables_per_user[u_n]
         b_n, z_n, opened_table, log_likelihood_dn = \
-            self.sample_table(t_n, d_n, u_n)
+            self.sample_table(t_n, d_n, u_n, cousers) # this will change
         if self.total_tables_per_user[u_n] > tables_before and tables_before > 0:
             # opened a new table
             old_mu = self.mu_per_user[u_n]
             tables_num = tables_before + 1
             user_alive_time = t_n - self.first_observed_user_time[u_n]
+            #print (t_n, self.first_observed_user_time[u_n], user_alive_time)
             new_mu = (self.mu_rate * old_mu +
                       (1 - self.mu_rate) * tables_num / user_alive_time)
             self.mu_per_user[u_n] = new_mu
@@ -259,10 +265,10 @@ class Particle(object):
             self.alpha_history[z_n].append(self.time_kernels[z_n])
             self.alpha_distribution_history[z_n].append(self.time_kernel_prior[z_n])
         if self.num_events >= 1:
-            self.logweight += log_likelihood_tn
-            self.logweight += self._Qn
+            self.logweight += log_likelihood_tn # this quantity will change when multiple authors are added
+            self.logweight += self._Qn # this quantity will change when multiple vocabularies are added
         self.num_events += 1
-        self._update_word_counters(d_n, z_n)
+        self._update_word_counters(d_n, z_n) # this will change
 
         self.time_previous_user_event[u_n] = t_n
         self.topic_previous_event = z_n
@@ -277,7 +283,7 @@ class Particle(object):
             self.first_observed_user_time[u_n] = t_n
         return b_n, z_n
 
-    def sample_table(self, t_n, d_n, u_n):
+    def sample_table(self, t_n, d_n, u_n, cousers):
         """Samples table b_n and topic z_n together for the event n.
 
 
@@ -286,8 +292,9 @@ class Particle(object):
         t_n : float
             The time of the event.
 
-        d_n : list
-            The document for the event.
+        d_n : dict
+            The documents for the event. The key is the document type and the value
+            is the document content as text.
 
         u_n : int
             The user id.
@@ -298,18 +305,30 @@ class Particle(object):
         table : int
 
         dish : int
+
+        opened_table: boolean
+            True if a new table is opened, False otherwise
+
+        dish_log_likelihood: float
+
         """
         if self.total_tables_per_user[u_n] == 0:
             # This is going to be the user's first table
             self.dish_on_table_per_user[u_n] = {}
             self.user_table_cache[u_n] = {}
             self.time_previous_user_event[u_n] = 0
+        for c in cousers:
+            if self.total_tables_per_user[c] == 0:
+                # This is going to be the user's first table
+                self.dish_on_table_per_user[c] = {}
+                self.user_table_cache[c] = {}
+                self.time_previous_user_event[c] = 0
 
         tables = range(self.total_tables_per_user[u_n])
         num_dishes = len(self.dish_counters)
         intensities = []
-        dn_word_counts = Counter(d_n)
-        count_dn = len(d_n)
+        dn_word_counts = {key: Counter (d_n[key].split()) for key in d_n}
+        count_dn = {key: len (d_n[key].split()) for key in d_n}
         # Precompute the doc_log_likelihood for each of the dishes
         dish_log_likelihood = []
         for dish in self.dish_counters:
@@ -339,7 +358,7 @@ class Particle(object):
             else:
                 dish_log_likelihood_array.append(0)
                 intensities.append(0)
-        log_intensities = [ln(inten_i / total_table_int) + dish_log_likelihood_array[i]
+        log_intensities = [ln(inten_i / total_table_int) + sum(dish_log_likelihood_array[i].values())
                            if inten_i > 0 else -float('inf')
                            for i, inten_i in enumerate(intensities)]
 
@@ -348,7 +367,7 @@ class Particle(object):
             dish_intensity = (mu / total_table_int) *\
                 self.dish_counters[dish] / (self.total_tables + self.beta)
             dish_intensity = ln(dish_intensity)
-            dish_intensity += dish_log_likelihood[dish]
+            dish_intensity += sum(dish_log_likelihood[dish].values())
             log_intensities.append(dish_intensity)
 
         # Provide a last option for new table with new dish
@@ -358,7 +377,7 @@ class Particle(object):
         new_dish_log_likelihood = self.document_log_likelihood(dn_word_counts,
                                                                count_dn,
                                                                num_dishes)
-        new_dish_intensity += new_dish_log_likelihood
+        new_dish_intensity += sum(new_dish_log_likelihood.values())
         log_intensities.append(new_dish_intensity)
 
         normalizing_log_intensity = logsumexp(log_intensities)
@@ -377,6 +396,15 @@ class Particle(object):
             sum_kernels += 1
             sum_kernels *= update_value
             self.user_table_cache[u_n][table] = (t_n, sum_kernels)
+            for c in cousers:
+                if table not in self.user_table_cache[c]:
+                    self.user_table_cache[c][table] = (t_n, 0)
+                else:
+                    tl, s = self.user_table_cache[c][table]
+                    upval = self.kernel (t_n, tl)
+                    s += 1
+                    s *= upval
+                    self.user_table_cache[c][table] = (t_n, s)
         else:
             k = k - len(tables)
             table = len(tables)
@@ -385,6 +413,16 @@ class Particle(object):
             dish = k
             # Since this is a new table, initialize the cache accordingly
             self.user_table_cache[u_n][table] = (t_n, 0)
+            for c in cousers:
+                if table not in self.user_table_cache[c]:
+                    self.user_table_cache[c][table] = (t_n, 0)
+                else:
+                    tl, s = self.user_table_cache[c][table]
+                    upval = self.kernel (t_n, tl)
+                    s += 1
+                    s *= upval
+                    self.user_table_cache[c][table] = (t_n, s)
+
             self.dish_on_table_per_user[u_n][table] = dish
             opened_table = True
             if dish not in self.time_kernel_prior:
@@ -395,6 +433,8 @@ class Particle(object):
 
         self.table_history_with_user.append((u_n, table))
         self.time_previous_user_event[u_n] = t_n
+        for c in cousers:
+            self.time_previous_user_event[c] = t_n
         return table, dish, opened_table, dish_log_likelihood[dish]
 
     def kernel(self, t_i, t_j):
@@ -457,34 +497,39 @@ class Particle(object):
 
         Note: Assumes a Gamma prior on the word distribution.
         """
-        theta = self.theta_0[0]
-        V = self.vocabulary_length
-        if z_n not in self.per_topic_word_count_total:
-            count_zn_no_dn = 0
-        else:
-            count_zn_no_dn = self.per_topic_word_count_total[z_n]
-        # TODO: The code below works only for uniform theta_0. We should
-        # put the theta that corresponds to `word`. Here we assume that
-        # all the elements of theta_0 are equal
-        gamma_numerator = _gammaln(count_zn_no_dn + V * theta)
-        gamma_denominator = _gammaln(count_zn_no_dn + count_dn + V * theta)
-        is_old_topic = z_n <= self._max_dish
-        unique_words = len(dn_word_counts) == count_dn
-        topic_words = None
-        if is_old_topic:
-            topic_words = self.per_topic_word_counts[z_n]
+        types = self.vocabulary_length.keys()
+        dll = {dtype: 0 for dtype in types}
 
-        if unique_words:
-            rest = [_ln(topic_words[word] + theta)
-                    if is_old_topic and word in topic_words
-                    else self._lntheta
-                    for word in dn_word_counts]
-        else:
-            rest = [_gammaln(topic_words[word] + dn_word_counts[word] + theta) - _gammaln(topic_words[word] + theta)
-                    if is_old_topic and word in topic_words
-                    else _gammaln(dn_word_counts[word] + theta) - _gammaln(theta)
-                    for word in dn_word_counts]
-        return gamma_numerator - gamma_denominator + sum(rest)
+        for dtype in types:
+            theta = self.theta_0[dtype][0]
+            V = self.vocabulary_length[dtype]
+            if z_n not in self.per_topic_word_count_total[dtype]:
+                count_zn_no_dn = 0
+            else:
+                count_zn_no_dn = self.per_topic_word_count_total[dtype][z_n]
+            # TODO: The code below works only for uniform theta_0. We should
+            # put the theta that corresponds to `word`. Here we assume that
+            # all the elements of theta_0 are equal
+            gamma_numerator = _gammaln(count_zn_no_dn + V * theta)
+            gamma_denominator = _gammaln(count_zn_no_dn + count_dn[dtype] + V * theta)
+            is_old_topic = z_n <= self._max_dish
+            unique_words = len(dn_word_counts[dtype]) == count_dn[dtype]
+            topic_words = None
+            if is_old_topic:
+                topic_words = self.per_topic_word_counts[dtype][z_n]
+
+            if unique_words:
+                rest = [_ln(topic_words[word] + theta)
+                        if is_old_topic and word in topic_words
+                        else self._lntheta[dtype]
+                        for word in dn_word_counts[dtype]]
+            else:
+                rest = [_gammaln(topic_words[word] + dn_word_counts[dtype][word] + theta) - _gammaln(topic_words[word] + theta)
+                        if is_old_topic and word in topic_words
+                        else _gammaln(dn_word_counts[dtype][word] + theta) - _gammaln(theta)
+                        for word in dn_word_counts[dtype]]
+            dll[dtype] = gamma_numerator - gamma_denominator + sum (rest)
+        return dll
 
     def document_history_log_likelihood(self):
         """Computes the log likelihood for the whole history of documents,
@@ -495,14 +540,17 @@ class Particle(object):
             for doc, table in zip(self.doc_history_per_user[user],
                                   self.table_history_per_user[user]):
                 dish = self.dish_on_table_per_user[user][table]
-                doc_word_counts = Counter(doc.split())
-                count_doc = len(doc.split())
-                doc_log_likelihood += self.document_log_likelihood(doc_word_counts,
+
+                dn_word_counts = {key: Counter (doc[key].split()) for key in doc}
+                count_dn = {key: len (doc[key].split()) for key in doc}
+
+                doc_log_likelihood += sum(self.document_log_likelihood(doc_word_counts,
                                                                    count_doc,
-                                                                   dish)
+                                                                   dish).values())
         return doc_log_likelihood
 
     def time_event_log_likelihood(self, t_n, u_n):
+        # looks like this just calculates the hawkes process likelihood (FIXME later)
         mu = self.mu_per_user[u_n]
         integral = (t_n - self.time_previous_user_event[u_n]) * mu
         intensity = mu
@@ -519,15 +567,18 @@ class Particle(object):
         return ln(intensity) - integral
 
     def _update_word_counters(self, d_n, z_n):
-        if z_n not in self.per_topic_word_counts:
-            self.per_topic_word_counts[z_n] = {}
-        if z_n not in self.per_topic_word_count_total:
-            self.per_topic_word_count_total[z_n] = 0
-        for word in d_n:
-            if word not in self.per_topic_word_counts[z_n]:
-                self.per_topic_word_counts[z_n][word] = 0
-            self.per_topic_word_counts[z_n][word] += 1
-            self.per_topic_word_count_total[z_n] += 1
+        types = d_n.keys()
+        for dtype in types:
+            doc_length = len (d_n[dtype].split())
+            if z_n not in self.per_topic_word_counts[dtype]:
+                self.per_topic_word_counts[dtype][z_n] = {}
+            if z_n not in self.per_topic_word_count_total[dtype]:
+                self.per_topic_word_count_total[dtype][z_n] = 0
+            for word in d_n[dtype].split():
+                if word not in self.per_topic_word_counts[dtype][z_n]:
+                    self.per_topic_word_counts[dtype][z_n][word] = 0
+                self.per_topic_word_counts[dtype][z_n][word] += 1
+                self.per_topic_word_count_total[dtype][z_n] += 1
         return
 
     def to_process(self):
@@ -539,10 +590,14 @@ class Particle(object):
         -------
         HDHProcess
         """
+        # the last two are None because they are used only for generation
         process = HDHProcess(num_patterns=len(self.time_kernels),
                              mu_0=self.mu_0,
                              alpha_0=self.alpha_0,
-                             vocabulary=self.vocabulary)
+                             vocabulary=self.vocabulary,
+                             doc_lengths=None,
+                             words_per_pattern=None,
+                             generate=False)
         process.mu_per_user = self.mu_per_user
         process.table_history_per_user = self.table_history_per_user
         process.time_history_per_user = self.time_history_per_user
@@ -552,6 +607,8 @@ class Particle(object):
         process.omega = self.omega
         process.num_users = self.num_users
         process.document_history_per_user = self.doc_history_per_user
+        process.per_pattern_word_counts = copy_dict(self.per_topic_word_counts)
+        process.per_pattern_word_count_total = copy_dict(self.per_topic_word_count_total)
         return process
 
     def get_intensity(self, t_n, u_n, z_n):
@@ -570,16 +627,27 @@ class Particle(object):
         return intensity
 
 
-def _extract_words_users(history):
+def _extract_words_users(history, docTypes):
     """Returns the set of words and the set of users in the dataset
     """
-    vocabulary = set()
-    users = set()
+    vocabulary = {docType: set () for docType in docTypes}
+    users = set ()
+
     for t, doc, u, q in history:
-        for word in doc.split():
-            vocabulary.add(word)
-            users.add(u)
-    return vocabulary, users
+        for docType in docTypes:
+            for word in doc[docType].split ():
+                vocabulary[docType].add (word)
+        for elem in u:
+            users.add (elem)
+    return {key: list (vocabulary[key]) for key in vocabulary}, users
+
+def _initialize_document_distributions (vocabulary, docTypes, theta_0):
+    if theta_0 is None:
+        theta_0 = dict ()
+        for docType in docTypes:
+            theta_0[docType] = [1 / len (vocabulary[docType])] * len (vocabulary[docType])
+
+    return theta_0
 
 
 def resample_indices(weights, prng):
@@ -617,8 +685,6 @@ def _infer_single_thread(history, params):
     time_history_per_user = defaultdict(list)
     doc_history_per_user = defaultdict(list)
     question_history_per_user = defaultdict(list)
-    table_history_with_user = []
-    dish_on_table_per_user = []
 
     # Set the accuracy
     count_resamples = 0
@@ -634,7 +700,7 @@ def _infer_single_thread(history, params):
     particles = [Particle(theta_0=params.theta_0, alpha_0=params.alpha_0,
                           mu_0=params.mu_0,
                           uid=prng.randint(maxint), seed=prng.randint(maxint),
-                          vocabulary_length=len(params.vocabulary),
+                          vocabulary_length={dtype: len(params.vocabulary[dtype]) for dtype in params.vocabulary},
                           update_kernels=params.update_kernels,
                           omega=params.omega, beta=params.beta,
                           num_users=len(params.users),
@@ -654,6 +720,7 @@ def _infer_single_thread(history, params):
         weights = []
         total = 0
         t_i, d_i, u_i, q_i = h_i
+        u_i = u_i[0]
         if u_i not in time_history_per_user:
             time_history_per_user[u_i] = []
             doc_history_per_user[u_i] = []
@@ -760,6 +827,14 @@ def _infer_single_thread(history, params):
     final_particle_id = pick_new_particles(particles, normalized, prng)[0]
     final_particle = particles[final_particle_id]
 
+    #print (len (particles))
+    #print (final_particle_id)
+    #for k in particles[(final_particle_id + 1) % len (particles)].per_topic_word_counts["docs"]:
+    #    print(k, particles[(final_particle_id + 1) % len (particles)].per_topic_word_count_total["docs"][k], sum(particles[(final_particle_id + 1) % len (particles)].per_topic_word_counts["docs"][k].values()))
+
+    #for k in particles[final_particle_id].per_topic_word_counts["docs"]:
+    #    print(k, particles[final_particle_id].per_topic_word_count_total["docs"][k], sum(particles[final_particle_id].per_topic_word_counts["docs"][k].values()))
+
     table_history_with_user = table_history_with_user[final_particle_id]
     new_history = copy(final_particle.table_history_with_user)
     table_history_with_user.extend(new_history)
@@ -799,7 +874,7 @@ def _infer_single_thread(history, params):
     return final_particle, square_norms
 
 
-def infer(history, alpha_0, mu_0, omega=1, beta=1, theta_0=None,
+def infer(history, docTypes, alpha_0, mu_0, omega=1, beta=1, theta_0=None,
           threads=1, num_particles=1,
           particle_weight_threshold=1, resample_every=10,
           update_kernels=True, mu_rate=0.6,
@@ -811,7 +886,12 @@ def infer(history, alpha_0, mu_0, omega=1, beta=1, theta_0=None,
     ----------
     history : list
         A list of 4-tuples (user, time, content, metadata) that represents the
-        event history that we want to infer our model on.
+        event history that we want to infer our model on. Note that the content
+        is itself a nested dictionary with keys as document types and values
+        as documents themselves.
+
+    docTypes: list
+        A list of different document types whose content is present for each event.
 
     alpha_0 : tuple
         The Gamma prior parameter for a pattern's time kernel.
@@ -825,9 +905,10 @@ def infer(history, alpha_0, mu_0, omega=1, beta=1, theta_0=None,
     beta : float
         A parameter that controls the new-task probability.
 
-    theta_0 :  list, default is None
+    theta_0 :  dict, default is None
         If not None, theta_0 corresponds to the Dirichlet prior used for the
-        word distribution. It should have as many dimensions as the number of
+        word distribution for every document type. 
+        It should have as many dimensions as the number of
         words. By default, this is the vector :math:`[1 / |V|, \ldots, 1 / |V|]`, where
         :math:`|V|` is the size of the vocabulary.
 
@@ -853,7 +934,7 @@ def infer(history, alpha_0, mu_0, omega=1, beta=1, theta_0=None,
         a user.
 
     keep_alpha_history : bool, default is False
-        For debug reasons, we make want to keep the complete history of the value
+        For debugging purpose, we may want to keep the complete history of the value
         of each pattern's time kernel parameter as we see more events in that
         pattern.
 
@@ -861,18 +942,20 @@ def infer(history, alpha_0, mu_0, omega=1, beta=1, theta_0=None,
         Since the computation might be slow, we want to save progress
         information to a file instead of printing it. If None, a temporary,
         randomly-named file is generated for this purpose.
+
+    seed: int, default is 512
+        The seed to the random number generator.
     """
 
-    vocabulary, users = _extract_words_users(history)
-    vocabulary = list(vocabulary)
-    if theta_0 is None:
-        theta_0 = [1 / len(vocabulary)] * len(vocabulary)
+    vocabulary, users = _extract_words_users (history, docTypes)
+    theta_0 = _initialize_document_distributions (vocabulary, docTypes, theta_0)
 
     if progress_file is None:
         with tempfile.NamedTemporaryFile(mode='a', suffix='.log', dir='.',
                                          delete=False) as temp:
             progress_file = temp.name
             print('Created temporary log file %s' % (progress_file))
+
     params = InferenceParameters(alpha_0, mu_0, omega, beta, theta_0, threads,
                                  num_particles, particle_weight_threshold,
                                  resample_every, update_kernels, mu_rate,
