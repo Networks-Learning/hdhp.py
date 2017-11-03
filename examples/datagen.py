@@ -1,8 +1,17 @@
 """
-Generate the data according to Heirarchical Dirichlet Hawkes Process
+Generate the data according to Heirarchical Dirichlet Hawkes Process (HDHP)
 """
 
 import hdhp
+import numpy as np
+from sklearn.preprocessing import normalize
+
+def genCoAuthorsProbMatrix (nUsers):
+    #A = np.zeros ((nUsers, nUsers))
+    A = np.loadtxt ("authors.txt")
+    # normalize the rows so that they are probabilities
+    pA = normalize (A, axis=1, norm="l1")
+    return pA
 
 def main ():
     # parameters of the model
@@ -27,6 +36,14 @@ def main ():
     docLen = {vocabType: expectedDocLengths[vocabType] for vocabType in for_vocabs}
     wordsPerPattern = {vocabType: words_per_pattern[vocabType] for vocabType in for_vocabs}
 
+    # generate events from the process
+    numUsers = 10
+
+    # generate a co-authorship matrix between users;
+    # this could be a generative step but for now it is harcoded
+    coauthors = genCoAuthorsProbMatrix (numUsers)
+    print coauthors
+
     # create the process object
     process = hdhp.HDHProcess(num_patterns=numPatterns, 
                               alpha_0=alpha_0, 
@@ -36,10 +53,9 @@ def main ():
                               doc_lengths=docLen,
                               words_per_pattern=wordsPerPattern,
                               random_state=12)
-
-    # generate events from the process
-    numUsers = 10
-    events = process.generate (numUsers, min_num_events=100, max_num_events=5000, t_max=365, reset=True)
+ 
+    events = process.generate (numUsers, coauthors, min_num_events=100, max_num_events=5000, t_max=365, reset=True)
+    # Note: events is a list; each event is a quadruple -- time,docs,author,meta
     print 'Total #events', len(events)
 
 if __name__ == "__main__":
