@@ -58,7 +58,7 @@ setup(
               'machine learning'
     ],
     install_requires=[
-        'numpy==1.11.2',
+        'numpy==1.13.3',
         'scipy==0.18.1',
         'scikit-learn==0.18',
         'seaborn==0.7.1',

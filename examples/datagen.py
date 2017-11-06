@@ -3,6 +3,7 @@ Generate the data according to Heirarchical Dirichlet Hawkes Process
 """
 
 import hdhp
+import numpy as np
 
 def main ():
     # parameters of the model
@@ -28,18 +29,21 @@ def main ():
     wordsPerPattern = {vocabType: words_per_pattern[vocabType] for vocabType in for_vocabs}
 
     # create the process object
-    process = hdhp.HDHProcess(num_patterns=numPatterns, 
+    numUsers = 10
+    cousersMatrix = np.loadtxt ("examples/authors.txt")
+    process = hdhp.HDHProcess(num_users = numUsers,
+                              num_patterns=numPatterns, 
                               alpha_0=alpha_0, 
                               mu_0=mu_0, 
                               vocabulary=vocab,
                               omega=omega,
                               doc_lengths=docLen,
                               words_per_pattern=wordsPerPattern,
+                              cousers = cousersMatrix,
                               random_state=12)
 
     # generate events from the process
-    numUsers = 10
-    events = process.generate (numUsers, min_num_events=100, max_num_events=5000, t_max=365, reset=True)
+    events = process.generate (min_num_events=100, max_num_events=None, t_max=365, reset=True)
     print 'Total #events', len(events)
 
 if __name__ == "__main__":
