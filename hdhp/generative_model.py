@@ -356,8 +356,10 @@ class HDHProcess:
             for u in cousers:
                 self.last_event_user_pattern[u][z_n] = t_n
 
-            # Resample time for that pattern
+            # Resample time for that pattern for the user and all its cousers
             next_time_per_pattern[(user, z_n)] = self.sample_next_time (z_n, user)
+            for u in cousers:
+                next_time_per_pattern[(u, z_n)] = self.sample_next_time (z_n, u)
             user, z_n = min (next_time_per_pattern, key=next_time_per_pattern.get)
             t_n = next_time_per_pattern[(user, z_n)]
             iteration += 1
