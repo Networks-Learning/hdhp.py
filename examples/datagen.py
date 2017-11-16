@@ -4,7 +4,19 @@ Generate the data according to Heirarchical Dirichlet Hawkes Process
 
 import hdhp
 import numpy as np
+import json
 
+def eventsToJsonFile (events, filename):
+    with open (filename, "w") as fout:
+        js = json.loads ("{}")
+        for i, event in enumerate (events):
+            js["id"] = i
+            js["time"] = event[0]
+            js["docs"] = event[1]
+            js["users"] = event[2]
+            js["meta"] = event[3]
+            fout.write (json.dumps(js) + "\n")
+        
 def main ():
     # parameters of the model
     vocabTypes = ["docs", "auths"]
@@ -13,6 +25,7 @@ def main ():
     alpha_0 = (2.5, 0.75) # prior for excitation
     mu_0 = (2, 0.5) # prior for base intensity
     omega = 3.5 # decay kernel
+    targetFile = "examples/sample_events.jsonline"
 
     # The following parameters are not really required but useful to give some
     # structure to the generated data.
@@ -40,11 +53,31 @@ def main ():
                               doc_lengths=docLen,
                               words_per_pattern=wordsPerPattern,
                               cousers = cousersMatrix,
-                              random_state=12)
+                              random_state=12,
+                              generate=True)
 
     # generate events from the process
-    events = process.generate (min_num_events=100, max_num_events=None, t_max=365, reset=True)
+    events = process.generate (min_num_events=100, max_num_events=100000, t_max=30, reset=True)
+    # events is a list with the following fields
+    # t: time of the event
+    # docs: documents for the event
+    # users: a list of the cousers of this event
+    # metadata: a list
+    eventsToJsonFile (events, targetFile)
     print 'Total #events', len(events)
+
+    with open ("examples/mu_true.tsv", "w") as fout:
+        for key in process.mu_per_user:
+            fout.write ("\t".join ([str (key), str (process.mu_per_user[key])]) + "\n")
+
+    with open ("examples/alpha_true.tsv", "w") as fout:
+        for key in process.time_kernels:
+            fout.write ("\t".join ([str (key), str (process.time_kernels[key])]) + "\n")
+
+    trueLabs = [e[1] for e in process.annotatedEventsIter ()]
+    with open ("examples/clusters_true.txt", "w") as fout:
+        for trueLab in trueLabs:
+            fout.write (str (trueLab) + "\n")
 
 if __name__ == "__main__":
     main ()

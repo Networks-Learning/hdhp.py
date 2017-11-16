@@ -603,12 +603,15 @@ class Particle(object):
         HDHProcess
         """
         # the last two are None because they are used only for generation
-        process = HDHProcess(num_patterns=len(self.time_kernels),
-                             mu_0=self.mu_0,
+        process = HDHProcess(num_users = len (self.mu_per_user),
+                             num_patterns=len(self.time_kernels),
                              alpha_0=self.alpha_0,
+                             mu_0=self.mu_0,
                              vocabulary=self.vocabulary,
                              doc_lengths=None,
                              words_per_pattern=None,
+                             cousers=None,
+                             random_state=12,
                              generate=False)
         process.mu_per_user = self.mu_per_user
         process.table_history_per_user = self.table_history_per_user

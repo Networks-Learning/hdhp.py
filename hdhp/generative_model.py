@@ -13,6 +13,7 @@
 from __future__ import division, print_function
 
 import datetime
+from itertools import izip
 from collections import defaultdict
 
 import matplotlib
@@ -32,7 +33,7 @@ from utils import (qualitative_cmap, weighted_choice, monthly_labels,
 class HDHProcess:
     def __init__(self, num_users, num_patterns, alpha_0, mu_0, vocabulary, omega,
                  doc_lengths, words_per_pattern, cousers,
-                 random_state=None):
+                 random_state=None, generate=True):
         """
         Parameters
         ----------
@@ -86,10 +87,12 @@ class HDHProcess:
         self.omega = omega
         self.words_per_pattern = words_per_pattern
         self.cousers = cousers
-        self.couser_params = self.sample_couser_params ()
-        self.pattern_params = self.sample_pattern_params()
-        self.time_kernels = self.sample_time_kernels()
-        self.pattern_popularity = self.sample_pattern_popularity()
+
+        if generate: 
+            self.couser_params = self.sample_couser_params ()
+            self.pattern_params = self.sample_pattern_params()
+            self.time_kernels = self.sample_time_kernels()
+            self.pattern_popularity = self.sample_pattern_popularity()
 
         # Initialize all the counters etc.
         self.reset()
@@ -105,9 +108,6 @@ class HDHProcess:
         """
         self.mu_per_user = {i: self.sample_mu () for i in xrange (self.num_users)}
         self.time_history = []
-        self.time_history_per_user = {}
-        self.table_history_per_user = {}
-        self.dish_on_table_per_user = {}
         self.dish_counters = defaultdict(int)
         self.last_event_user_pattern = defaultdict(lambda: defaultdict(int))
         self.total_tables = 0
@@ -1183,3 +1183,16 @@ class HDHProcess:
                    )
                 for pattern in self.per_pattern_word_counts if pattern in patterns]
         return '\n\n'.join(text)
+
+    def annotatedEventsIter (self, keep_sorted=True):
+        events = [(t, dish, table, u, doc)
+        for u in xrange (self.num_users)
+        for ((t, doc), (table, dish)) in izip ([(t,d)
+                                                for t,d in izip (self.time_history_per_user[u], self.document_history_per_user[u])],
+                                                [(table, self.dish_on_table_per_user[u][table])
+                                                for table in self.table_history_per_user[u]])]
+
+        if keep_sorted: events = sorted (events, key=lambda x:x[0])
+
+        for event in events:
+            yield event
