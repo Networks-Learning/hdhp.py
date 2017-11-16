@@ -608,6 +608,7 @@ class Particle(object):
                              alpha_0=self.alpha_0,
                              mu_0=self.mu_0,
                              vocabulary=self.vocabulary,
+                             omega=self.omega,
                              doc_lengths=None,
                              words_per_pattern=None,
                              cousers=None,
