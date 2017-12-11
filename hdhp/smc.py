@@ -409,12 +409,14 @@ class Particle(object):
             for c in cousers:
                 if table not in self.user_table_cache[c]:
                     self.user_table_cache[c][table] = (t_n, 0)
+                    self.dish_on_table_per_user[c][table] = dish
                 else:
                     tl, s = self.user_table_cache[c][table]
                     upval = self.kernel (t_n, tl)
                     s += 1
                     s *= upval
                     self.user_table_cache[c][table] = (t_n, s)
+                    self.dish_on_table_per_user[c][table] = dish
         else:
             k = k - len(tables)
             table = len(tables)
@@ -427,12 +429,14 @@ class Particle(object):
             for c in cousers:
                 if table not in self.user_table_cache[c]:
                     self.user_table_cache[c][table] = (t_n, 0)
+                    self.dish_on_table_per_user[c][table] = dish
                 else:
                     tl, s = self.user_table_cache[c][table]
                     upval = self.kernel (t_n, tl)
                     s += 1
                     s *= upval
                     self.user_table_cache[c][table] = (t_n, s)
+                    self.dish_on_table_per_user[c][table] = dish
 
             self.dish_on_table_per_user[u_n][table] = dish
             opened_table = True
@@ -563,6 +567,9 @@ class Particle(object):
 
     def time_event_log_likelihood(self, t_n, u_n):
         # looks like this just calculates the hawkes process likelihood (FIXME later)
+        #print (t_n, u_n)
+        #print (self.user_table_cache[u_n])
+        #print (self.dish_on_table_per_user[u_n])
         mu = self.mu_per_user[u_n]
         integral = (t_n - self.time_previous_user_event[u_n]) * mu
         intensity = mu
@@ -736,6 +743,7 @@ def _infer_single_thread(history, params):
         weights = []
         total = 0
         t_i, d_i, u_i, q_i = h_i
+        #print ("event:", h_i)
         u_i = u_i[0]
         if u_i not in time_history_per_user:
             time_history_per_user[u_i] = []
@@ -795,7 +803,8 @@ def _infer_single_thread(history, params):
                         if user not in dish_table_user:
                             dish_table_user[user] = {}
                         for t in dishes_toadd[user]:
-                            assert t not in dish_table_user[user]
+                            #print (dishes_toadd[user])
+                            #assert t not in dish_table_user[user]
                             dish_table_user[user][t] = dishes_toadd[user][t]
                     new_dish_on_table_per_user.append(dish_table_user)
 
@@ -862,13 +871,13 @@ def _infer_single_thread(history, params):
         if user not in dish_on_table_per_user:
             dish_on_table_per_user[user] = {}
         for t in dishes_toadd[user]:
-            assert t not in dish_on_table_per_user[user]
+            #assert t not in dish_on_table_per_user[user]
             dish_on_table_per_user[user][t] = dishes_toadd[user][t]
     for user in final_particle.dish_on_table_todelete:
         if user not in dish_on_table_per_user:
             dish_on_table_per_user[user] = {}
         for t in final_particle.dish_on_table_todelete[user]:
-            assert t not in dish_on_table_per_user[user]
+            #assert t not in dish_on_table_per_user[user]
             dish_on_table_per_user[user][t] = \
                 final_particle.dish_on_table_todelete[user][t]
     final_particle.dish_on_table_per_user = dish_on_table_per_user

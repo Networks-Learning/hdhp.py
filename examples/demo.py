@@ -8,6 +8,7 @@ from sklearn.metrics import normalized_mutual_info_score
 import pickle
 import json
 import numpy as np
+import os
 
 def getArgs ():
     parser = argparse.ArgumentParser ()
@@ -109,12 +110,7 @@ def generate ():
 
 def infer (indices, use_cousers=False):
     targetFile = "examples/sample_events.jsonline"
-    types = ["docs"]
-    vocabSizes = {"docs": 100}
-    expectedDocLengths = {"docs": (30, 50)}
-    words_per_pattern = {"docs": 50}
-    vocabulary = {docType: [docType + "_{0}".format (i) for i in xrange (vocabSizes[docType])] for docType in types}
-
+    types = ["docs", "auths"]
     # priors to control the time dynamics of the events
     alpha_0 = (2.5, 0.75)
     mu_0 = (2, 0.5)
@@ -149,21 +145,49 @@ def infer (indices, use_cousers=False):
     return inf_process
 
 def main ():
-    args = getArgs ()
+    #args = getArgs ()
     # generate the data
     genHDHP = generate ()
-    # infer the parameters from the data
-    infHDHP = infer (args.indices, args.use_cousers)
 
-    # plot the base rates and the estimated alpha values
-    plotMuScatterPlot (genHDHP.mu_per_user, infHDHP.mu_per_user, "figs/base_rates.pdf")
-    plotAlphaScatterPlot (genHDHP.time_kernels, infHDHP.time_kernels, "figs/time_kernels.pdf")
+    cases = {1: ([0], False),
+             2: ([1], False),
+             3: ([0, 1], False),
+             4: ([0], True),
+             5: ([1], True),
+             6: ([0, 1], True)}
+
+    for case in cases:
+        print "Case: {0}".format (case)
+        indices, use_cousers = cases[case]
+        if not os.path.exists ("results/{0}".format (case)):
+            os.makedirs ("results/{0}".format (case))
+
+        dirname = "results/{0}".format (case)
+        # infer the parameters from the data
+        infHDHP = infer (indices, use_cousers)
+
+        # plot the base rates and the estimated alpha values
+        #plotMuScatterPlot (genHDHP.mu_per_user, infHDHP.mu_per_user, "figs/base_rates.pdf")
+        #plotAlphaScatterPlot (genHDHP.time_kernels, infHDHP.time_kernels, "figs/time_kernels.pdf")
+
+        with open (os.path.join (dirname, "base_rates.tsv"), "w") as fout:
+            for key in genHDHP.mu_per_user:
+                fout.write ("\t".join ([str (key), str (genHDHP.mu_per_user[key]), str (infHDHP.mu_per_user[key])]) + "\n")
+
+        with open (os.path.join (dirname, "set_time_kernels.tsv"), "w") as fout:
+            for key in genHDHP.time_kernels:
+                fout.write ("\t".join ([str (key), str (genHDHP.time_kernels[key])]) + "\n")
+
+        with open (os.path.join (dirname, "est_time_kernels.tsv"), "w") as fout:
+            for key in infHDHP.time_kernels:
+                fout.write ("\t".join ([str (key), str (infHDHP.time_kernels[key])]) + "\n")
    
-    trueLabs = [e[1] for e in genHDHP.annotatedEventsIter ()]
-    predLabs = [e[1] for e in infHDHP.annotatedEventsIter ()] 
-    with open ("results/patterns.tsv", "w") as fout:
-        for i in xrange (len (trueLabs)):
-            fout.write ("\t".join ([str(trueLabs[i], str (predLabs[i]))]) + "\n")
+        trueLabs = [e[1] for e in genHDHP.annotatedEventsIter ()]
+        predLabs = [e[1] for e in infHDHP.annotatedEventsIter ()] 
+
+        with open (os.path.join (dirname, "patterns.tsv"), "w") as fout:
+            for i in xrange (len (trueLabs)):
+                fout.write ("\t".join ([str(trueLabs[i]), str (predLabs[i])]) + "\n")
     
 if __name__ == "__main__":
     main ()
