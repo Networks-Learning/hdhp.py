@@ -115,7 +115,7 @@ class Particle(object):
         self.keep_alpha_history = keep_alpha_history
 
         self.user_table_cache = {}
-        self.dish_on_table_per_user = {}
+        self.dish_on_table_per_user = defaultdict (dict)
         self.dish_on_table_todelete = {}
         self.dish_counters = {}
         self._max_dish = -1
@@ -126,10 +126,10 @@ class Particle(object):
         self.total_tables_per_user = []
         self.dish_cache = {}
         self.time_kernel_prior = {}
-        self.time_history_per_user = {}
-        self.doc_history_per_user = {}
+        self.time_history_per_user = defaultdict(list)
+        self.doc_history_per_user = defaultdict (list)
         self.question_history_per_user = {}
-        self.table_history_per_user = {}
+        self.table_history_per_user = defaultdict(list)
         self.alpha_history = {}
         self.alpha_distribution_history = {}
         self.mu_rate = mu_rate
@@ -223,6 +223,8 @@ class Particle(object):
         # u_n : user of the n-th event
         # q_n : any metadata for the n-th event, e.g. the question id
         t_n, d_n, u_n, q_n = event
+        #print (t_n, d_n, u_n, q_n)
+        #print (type(d_n["docs"]))
         # modified (u_n is a list and the first item in the list is the leading author)
         cousers = u_n[1:]
         u_n = u_n[0]
@@ -243,6 +245,7 @@ class Particle(object):
         else:
             log_likelihood_tn = 0 # I don't know why this is zero, should it not be the log of the base intensity?
 
+        #print (self.num_users, u_n, self.total_tables_per_user)
         tables_before = self.total_tables_per_user[u_n]
         b_n, z_n, opened_table, log_likelihood_dn = \
             self.sample_table(t_n, d_n, u_n, cousers) # modified
@@ -622,6 +625,7 @@ class Particle(object):
                              random_state=12,
                              generate=False)
         process.mu_per_user = self.mu_per_user
+        #print (type (self.table_history_per_user))
         process.table_history_per_user = self.table_history_per_user
         process.time_history_per_user = self.time_history_per_user
         process.dish_on_table_per_user = self.dish_on_table_per_user
@@ -885,7 +889,7 @@ def _infer_single_thread(history, params):
     final_particle.time_history_per_user = copy(time_history_per_user)
     final_particle.doc_history_per_user = copy(doc_history_per_user)
     final_particle.question_history_per_user = copy(question_history_per_user)
-    final_particle.table_history_per_user = {}
+    final_particle.table_history_per_user = defaultdict(list)
     for (u_i, table) in final_particle.table_history_with_user:
         if u_i not in final_particle.table_history_per_user:
             final_particle.table_history_per_user[u_i] = []
@@ -899,7 +903,7 @@ def _infer_single_thread(history, params):
     return final_particle, square_norms
 
 
-def infer(history, docTypes, alpha_0, mu_0, omega=1, beta=1, theta_0=None,
+def infer(history, numUsers, docTypes, alpha_0, mu_0, omega=1, beta=1, theta_0=None,
           threads=1, num_particles=1,
           particle_weight_threshold=1, resample_every=10,
           update_kernels=True, mu_rate=0.6,
@@ -914,6 +918,9 @@ def infer(history, docTypes, alpha_0, mu_0, omega=1, beta=1, theta_0=None,
         event history that we want to infer our model on. Note that the content
         is itself a nested dictionary with keys as document types and values
         as documents themselves.
+
+    numUsers: int
+        The number of users for which we will estimate the base rate.
 
     docTypes: list
         A list of different document types whose content is present for each event.
@@ -973,6 +980,8 @@ def infer(history, docTypes, alpha_0, mu_0, omega=1, beta=1, theta_0=None,
     """
 
     vocabulary, users = _extract_words_users (history, docTypes)
+    users = set (range (numUsers))
+    #print ("users: {0}".format (users))
     theta_0 = _initialize_document_distributions (vocabulary, docTypes, theta_0)
 
     if progress_file is None:

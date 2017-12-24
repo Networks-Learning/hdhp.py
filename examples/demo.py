@@ -73,7 +73,7 @@ def generate ():
     numPatterns = 10
 
     expectedDocLengths = {"docs": (30, 50), "auths": (1,6)}
-    words_per_pattern = {"docs": 50, "auths": 5} # check again if this should be a parameter per dictionary.
+    words_per_pattern = {"docs": 30, "auths": 5} # check again if this should be a parameter per dictionary.
 
     # pass only the relevant parameters to the generative process
     for_vocabs = ["docs", "auths"]
@@ -85,6 +85,7 @@ def generate ():
     # create the process object
     numUsers = 10
     cousersMatrix = np.loadtxt ("examples/authors.txt")
+    #cousersMatrix = np.eye (numUsers)
     process = hdhp.HDHProcess(num_users = numUsers,
                               num_patterns=numPatterns, 
                               alpha_0=alpha_0, 
@@ -98,7 +99,7 @@ def generate ():
                               generate=True)
 
     # generate events from the process
-    events = process.generate (min_num_events=100, max_num_events=100000, t_max=30, reset=True)
+    events = process.generate (min_num_events=20, max_num_events=10000, t_max=3000, reset=True)
     # events is a list with the following fields
     # t: time of the event
     # docs: documents for the event
@@ -112,9 +113,9 @@ def infer (indices, use_cousers=False):
     targetFile = "examples/sample_events.jsonline"
     types = ["docs", "auths"]
     # priors to control the time dynamics of the events
-    alpha_0 = (2.5, 0.75)
-    mu_0 = (2, 0.5)
-    o = 3.5
+    alpha_0 = (4.0, 0.5) # prior for excitation
+    mu_0 = (8, 0.25) # prior for base intensity
+    o = 3.5 # decay kernel
 
     num_patterns = 10
     num_users = 10
@@ -130,7 +131,8 @@ def infer (indices, use_cousers=False):
         for event in rawEvents:
             events.append ((event[0], {t: event[1][t] for t in types}, [event[2][0]], event[3]))
 
-    particle, norms = hdhp.infer(events, 
+    particle, norms = hdhp.infer(events,
+                                 num_users,
                                  types,
                                  alpha_0,
                                  mu_0,
@@ -150,13 +152,10 @@ def main ():
     genHDHP = generate ()
 
     cases = {1: ([0], False),
-             2: ([1], False),
-             3: ([0, 1], False),
-             4: ([0], True),
-             5: ([1], True),
-             6: ([0, 1], True)}
+             2: ([0,1], False),
+             3: ([0,1], True)}
 
-    for case in cases:
+    for case in [1,2,3]:
         print "Case: {0}".format (case)
         indices, use_cousers = cases[case]
         if not os.path.exists ("results/{0}".format (case)):

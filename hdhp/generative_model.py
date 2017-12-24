@@ -286,9 +286,9 @@ class HDHProcess:
             if max_num_events is not None and iteration > max_num_events:
                 break
 
-            user, z_n = min (next_time_per_pattern, key=next_time_per_pattern.get)
+            z_n, user = min (next_time_per_pattern, key=next_time_per_pattern.get)
             cousers = self.sample_cousers_for (user)
-            t_n = next_time_per_pattern[(user,z_n)]
+            t_n = next_time_per_pattern[(z_n, user)]
             if t_max is not None and t_n > t_max:
                 over_tmax = True
                 break
@@ -325,7 +325,7 @@ class HDHProcess:
                 sum_kernels *= update_value
                 self.user_table_cache[user][table] = (t_n, sum_kernels)
                 for u in cousers:
-                    self.user_table_cache[u][table] = (t_n, 0)
+                    self.user_table_cache[u][table] = (t_n, sum_kernels)
             else:
                 table = num_tables_user
                 self.total_tables += 1
@@ -357,11 +357,11 @@ class HDHProcess:
                 self.last_event_user_pattern[u][z_n] = t_n
 
             # Resample time for that pattern for the user and all its cousers
-            next_time_per_pattern[(user, z_n)] = self.sample_next_time (z_n, user)
+            next_time_per_pattern[(z_n, user)] = self.sample_next_time (z_n, user)
             for u in cousers:
-                next_time_per_pattern[(u, z_n)] = self.sample_next_time (z_n, u)
-            user, z_n = min (next_time_per_pattern, key=next_time_per_pattern.get)
-            t_n = next_time_per_pattern[(user, z_n)]
+                next_time_per_pattern[(z_n, u)] = self.sample_next_time (z_n, u)
+            z_n, user = min (next_time_per_pattern, key=next_time_per_pattern.get)
+            t_n = next_time_per_pattern[(z_n, user)]
             iteration += 1
 
         for user in xrange (self.num_users):
@@ -1185,6 +1185,7 @@ class HDHProcess:
         return '\n\n'.join(text)
 
     def annotatedEventsIter (self, keep_sorted=True):
+        #print (self.table_history_per_user)
         events = [(t, dish, table, u, doc)
         for u in xrange (self.num_users)
         for ((t, doc), (table, dish)) in izip ([(t,d)
