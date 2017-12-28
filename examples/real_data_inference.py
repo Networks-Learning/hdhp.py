@@ -126,7 +126,6 @@ def infer (rawEvents, indices, use_cousers=False):
     # # Inference
     types = [types[i] for i in indices]
 
-    print(rawEvents[0])
     events = list ()
 
     if use_cousers:
