@@ -6,6 +6,7 @@ import timeit
 from datetime import datetime
 import random
 import operator
+import codecs
 
 
 
@@ -82,7 +83,8 @@ def num_unique_authors (targetFile):
 def maps_authors_to_ids(targetFile):
 
     json_data = json.load(open(targetFile))
-    new_file = "/NL/publications-corpus/work/new_CS_arXiv_real_data.json"
+    #new_file = "/NL/publications-corpus/work/new_CS_arXiv_real_data.json"
+    new_file = "data/new_CS_arXiv_real_data.json"
     base_time = datetime.strptime('1996-06-03', '%Y-%m-%d')
     counter = 0;
     names_to_ids = {}
@@ -167,7 +169,7 @@ def infer (rawEvents, indices, use_cousers=False):
 
 def main ():
 
-    real_data_file_path = "/NL/publications-corpus/work/new_CS_arXiv_real_data.json"
+    real_data_file_path = "data/new_CS_arXiv_real_data.json"
 
     events = jsonFileToEvents(real_data_file_path)
     number_of_events = 100
@@ -185,11 +187,11 @@ def main ():
         infHDHP = infer(events[: number_of_events], indices, use_cousers)   
         print("End inferring...")
         clusters = infHDHP.show_annotated_events()
-        with open("real_data_results/annotated_events_" + "Case: {0}".format (case) + "_" + str(number_of_events)+ ".txt", "w") as output_file:
+        with codecs.open("real_data_results/annotated_events_" + "Case: {0}".format (case) + "_" + str(number_of_events)+ ".txt", "w", encoding="utf-8") as output_file:
             output_file.write(clusters)
 
         dist = infHDHP.show_pattern_content()
-        with open("real_data_results/pattern_content_" + "Case: {0}".format (case) + "_" + str(number_of_events)+ ".txt", "w") as output_file:
+        with codecs.open("real_data_results/pattern_content_" + "Case: {0}".format (case) + "_" + str(number_of_events)+ ".txt", "w", encoding="utf-8") as output_file:
             output_file.write(dist)
         print("show_pattern_content return: \n" + dist)
 

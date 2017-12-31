@@ -1163,25 +1163,31 @@ class HDHProcess:
         -------
         str
         """
+        docTypes = self.per_pattern_word_counts.keys()
+        # even if there are multiple doc types, the patterns should be the same
+        for docType in docTypes:
+            patterns = self.per_pattern_word_counts[docType].keys()
+            print (patterns)
+
         if patterns is None:
-            patterns = self.per_pattern_word_count.keys()
-        text = ['___Pattern %d___ \n%s\n%s'
-                % (pattern,
+            patterns = self.per_pattern_word_counts.keys()
+        text = ['DocType %s, ___Pattern %d___ \n%s\n%s'
+                % (docType, pattern,
                    '\n'.join(['%s : %d'
                               % (k, v)
                               for i, (k, v)
-                              in enumerate(sorted(self.per_pattern_word_counts[pattern].iteritems(),
+                              in enumerate(sorted(self.per_pattern_word_counts[docType][pattern].iteritems(),
                                                   key=lambda x: (x[1], x[0]),
                                                   reverse=True))
                               if v >= detail_threshold and (words == 0 or i < words)]
                              ),
                    ' '.join([k for i, (k, v)
-                             in enumerate(sorted(self.per_pattern_word_counts[pattern].iteritems(),
+                             in enumerate(sorted(self.per_pattern_word_counts[docType][pattern].iteritems(),
                                                  key=lambda x: (x[1], x[0]),
                                                  reverse=True))
                              if v < detail_threshold and (words == 0 or i < words)])
                    )
-                for pattern in self.per_pattern_word_counts if pattern in patterns]
+                for docType in docTypes for pattern in self.per_pattern_word_counts[docType] if pattern in patterns]
         return '\n\n'.join(text)
 
     def annotatedEventsIter (self, keep_sorted=True):
