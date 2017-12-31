@@ -1,15 +1,12 @@
-# import argparse
 import hdhp
-# import seaborn as sns; sns.set(color_codes=True) 
-# import pandas as pd
-# from collections import Counter
-# from sklearn.metrics import normalized_mutual_info_score
-# import pickle
 import json
 import numpy as np
 import os
 import timeit
 from datetime import datetime
+import random
+import operator
+
 
 
 def jsonFileToEvents (targetFile):
@@ -19,17 +16,23 @@ def jsonFileToEvents (targetFile):
 
     events = list ()
     json_data = json.load(open(targetFile))
-    base_time = datetime.strptime('1996-06-03', '%Y-%m-%d')
+    times = {}
 
     for identifier in json_data:
         paper = json_data.get(identifier)
-        paper_time = datetime.strptime(paper["date"][0], '%Y-%m-%d')
-        time_diff = paper_time - base_time
+        times[identifier] = paper["time"]
+    
+    sorted_times = sorted(times.items(), key=operator.itemgetter(1))
 
+    for item in sorted_times:
+        identifier = item[0]
+        paper = json_data.get(identifier)
+   
         authors_vocabs = ''
         
         for citation in paper["citations"]:
             authors = citation["author"]
+
             for author in authors:
                 authors_vocabs += author.strip() + ' '
         # for author in paper["author"]:
@@ -37,10 +40,10 @@ def jsonFileToEvents (targetFile):
         #     new_format = splits[1].strip() + ' ' + splits[0].strip()
         #     authors_vocabs += new_format + ' '
 
-        vocabularies = {'docs': paper["abstract"], 'auths': authors_vocabs.strip()}
+        vocabularies = {"docs": paper["abstract"], "auths": authors_vocabs.strip()}
 
 
-        event = (time_diff.total_seconds()/(3600*24), vocabularies, paper["author_ids"], [])
+        event = (paper["time"], vocabularies, paper["author_ids"], [])
         events.append(event)
 
     print("Number of events: " + str(len(events)))
@@ -80,8 +83,10 @@ def maps_authors_to_ids(targetFile):
 
     json_data = json.load(open(targetFile))
     new_file = "/NL/publications-corpus/work/new_CS_arXiv_real_data.json"
+    base_time = datetime.strptime('1996-06-03', '%Y-%m-%d')
     counter = 0;
     names_to_ids = {}
+    new_json_data = {}
 
     for identifier in json_data:
         paper = json_data.get(identifier)
@@ -92,7 +97,6 @@ def maps_authors_to_ids(targetFile):
                 counter += 1
                 names_to_ids[author.strip()] = counter
 
-    new_json_data = {}
 
     for identifier in json_data:
         paper = json_data.get(identifier)
@@ -102,6 +106,11 @@ def maps_authors_to_ids(targetFile):
         for author in authors:
             ids.append(names_to_ids.get(author.strip()))
         paper['author_ids'] = ids
+
+        paper_time = datetime.strptime(paper["date"][0], '%Y-%m-%d')
+        time_diff = paper_time - base_time
+        time = time_diff.total_seconds()/(3600*24) + random.uniform(0, 1)
+        paper['time'] = time
         new_json_data[identifier] = paper
 
     with open(new_file, 'w') as output_file:
@@ -143,7 +152,7 @@ def infer (rawEvents, indices, use_cousers=False):
                                  omega=o,
                                  beta=1, 
                                  threads=1, 
-                                 num_particles=100, 
+                                 num_particles=50, 
                                  keep_alpha_history=True,
                                  seed=512)
 
@@ -155,11 +164,14 @@ def infer (rawEvents, indices, use_cousers=False):
 
     return inf_process
 
+
 def main ():
 
     real_data_file_path = "/NL/publications-corpus/work/new_CS_arXiv_real_data.json"
 
     events = jsonFileToEvents(real_data_file_path)
+    number_of_events = 100
+    print("Number of events: " + str(number_of_events))
 
     cases = {1: ([0], False),
              2: ([0,1], False),
@@ -168,12 +180,18 @@ def main ():
     for case in [1,2,3]:
         print "Case: {0}".format (case)
         indices, use_cousers = cases[case]
-        if not os.path.exists ("real_data_results/{0}".format (case)):
-            os.makedirs ("real_data_results/{0}".format (case))
+       
+        print("Start inferring.....")
+        infHDHP = infer(events[: number_of_events], indices, use_cousers)   
+        print("End inferring...")
+        clusters = infHDHP.show_annotated_events()
+        with open("real_data_results/annotated_events_" + "Case: {0}".format (case) + "_" + str(number_of_events)+ ".txt", "w") as output_file:
+            output_file.write(clusters)
 
-        dirname = "real_data_results/{0}".format (case)
-
-    infHDHP = infer(events, indices, use_cousers)
+        dist = infHDHP.show_pattern_content()
+        with open("real_data_results/pattern_content_" + "Case: {0}".format (case) + "_" + str(number_of_events)+ ".txt", "w") as output_file:
+            output_file.write(dist)
+        print("show_pattern_content return: \n" + dist)
 
     
 if __name__ == "__main__":
