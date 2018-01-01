@@ -7,13 +7,15 @@ from datetime import datetime
 import random
 import operator
 import codecs
+# from nltk.corpus import stopwords
+import re
 
 
 
 def jsonFileToEvents (targetFile):
 
     start = timeit.default_timer()
-    names_to_ids = maps_authors_to_ids(targetFile)
+    # names_to_ids = maps_authors_to_ids(targetFile)
 
     events = list ()
     json_data = json.load(open(targetFile))
@@ -83,9 +85,19 @@ def num_unique_authors (targetFile):
 def maps_authors_to_ids(targetFile):
 
     json_data = json.load(open(targetFile))
-    #new_file = "/NL/publications-corpus/work/new_CS_arXiv_real_data.json"
-    new_file = "data/new_CS_arXiv_real_data.json"
+    stopwords_file_path = "stopwords.txt"
+    stopwords = []
+    with open(stopwords_file_path) as stopwords_file:
+        stopwords = stopwords_file.readlines()
+    for i in range(len(stopwords)):
+        stopwords[i] = stopwords[i].strip()
+
+    new_file = "/NL/publications-corpus/work/new_CS_arXiv_real_data.json"
+    # new_file = "data/new_CS_arXiv_real_data.json"
     base_time = datetime.strptime('1996-06-03', '%Y-%m-%d')
+
+    # cachedStopWords = stopwords.words("english")
+
     counter = 0;
     names_to_ids = {}
     new_json_data = {}
@@ -107,6 +119,10 @@ def maps_authors_to_ids(targetFile):
         ids = []
         for author in authors:
             ids.append(names_to_ids.get(author.strip()))
+        paper_abstract = paper["abstract"].lower()
+        paper_abstract = ' '.join([word for word in paper_abstract.split() if word not in stopwords])
+        paper_abstract = re.sub(":|;|,|\?|\.", "", paper_abstract)
+        paper["abstract"] = paper_abstract
         paper['author_ids'] = ids
 
         paper_time = datetime.strptime(paper["date"][0], '%Y-%m-%d')
@@ -169,10 +185,11 @@ def infer (rawEvents, indices, use_cousers=False):
 
 def main ():
 
-    real_data_file_path = "data/new_CS_arXiv_real_data.json"
+    real_data_file_path = "/NL/publications-corpus/work/new_CS_arXiv_real_data.json"
+    # maps_authors_to_ids(real_data_file_path)
 
     events = jsonFileToEvents(real_data_file_path)
-    number_of_events = 100
+    number_of_events = len(events)
     print("Number of events: " + str(number_of_events))
 
     cases = {1: ([0], False),
@@ -186,14 +203,25 @@ def main ():
         print("Start inferring.....")
         infHDHP = infer(events[: number_of_events], indices, use_cousers)   
         print("End inferring...")
+
+        with open ( "real_data_results/" + "Case:{0}".format (case) + "/est_time_kernels_" + str(number_of_events) + ".tsv", "w") as output_file:
+            for key in infHDHP.time_kernels:
+                output_file.write ("\t".join ([str (key), str (infHDHP.time_kernels[key])]) + "\n") 
+
         clusters = infHDHP.show_annotated_events()
-        with codecs.open("real_data_results/annotated_events_" + "Case: {0}".format (case) + "_" + str(number_of_events)+ ".txt", "w", encoding="utf-8") as output_file:
+        with codecs.open("real_data_results/" + "Case:{0}".format (case) + "/annotated_events_" + str(number_of_events) + ".txt", "w", encoding="utf-8") as output_file:
             output_file.write(clusters)
 
         dist = infHDHP.show_pattern_content()
-        with codecs.open("real_data_results/pattern_content_" + "Case: {0}".format (case) + "_" + str(number_of_events)+ ".txt", "w", encoding="utf-8") as output_file:
+        with codecs.open("real_data_results/" + "Case:{0}".format (case) + "/pattern_content_" +  str(number_of_events) + ".txt", "w", encoding="utf-8") as output_file:
             output_file.write(dist)
-        print("show_pattern_content return: \n" + dist)
+        # print("show_pattern_content return: \n" + dist)
+
+        predLabs = [e[1] for e in infHDHP.annotatedEventsIter ()]
+
+        with open ("real_data_results/" + "Case:{0}".format (case) + "/patterns_" + str(number_of_events) + ".tsv", "w") as output_file:
+            for i in xrange (len (predLabs)):
+                output_file.write ("\t".join (str(predLabs[i])) + "\n")
 
     
 if __name__ == "__main__":
