@@ -26,6 +26,8 @@ def jsonFileToEvents (targetFile):
         times[identifier] = paper["time"]
     
     sorted_times = sorted(times.items(), key=operator.itemgetter(1))
+    counter = 0
+    unique_authors = {}
 
     for item in sorted_times:
         identifier = item[0]
@@ -38,14 +40,27 @@ def jsonFileToEvents (targetFile):
 
             for author in authors:
                 authors_vocabs += author.strip() + ' '
+
+        authors = paper['author']
+        authors_ids = []
+
+        for author in authors:
+            if author not in unique_authors:
+                unique_authors[author] = counter
+                authors_ids.append(counter)
+                counter += 1
+            else:
+                authors_ids.append(unique_authors[author])
+
         # for author in paper["author"]:
         #     splits = author.split(',')
         #     new_format = splits[1].strip() + ' ' + splits[0].strip()
         #     authors_vocabs += new_format + ' '
 
-        vocabularies = {"docs": paper["abstract"], "auths": authors_vocabs.strip()}
+        # vocabularies = {"docs": paper["abstract"], "auths": authors_vocabs.strip()}
+        vocabularies = {"docs": paper["title"], "auths": authors_vocabs.strip()}
 
-
+        paper["author_ids"] = authors_ids
         event = (paper["time"], vocabularies, paper["author_ids"], [])
         events.append(event)
 
@@ -80,6 +95,15 @@ def num_unique_authors (targetFile):
 
     print("Number of all authors: " + str(len(unique_authors)))
     print("Number of unique authors: " + str(len(set(unique_authors))))
+
+def get_number_of_authors(events):
+
+    unique_authors = []
+
+    for tuple in events:
+        unique_authors += tuple[2]
+
+    return len(set(unique_authors))
 
 
 def maps_authors_to_ids(targetFile):
@@ -123,6 +147,12 @@ def maps_authors_to_ids(targetFile):
         paper_abstract = ' '.join([word for word in paper_abstract.split() if word not in stopwords])
         paper_abstract = re.sub(":|;|,|\?|\.", "", paper_abstract)
         paper["abstract"] = paper_abstract
+
+        paper_title = paper["title"].lower()
+        paper_title = ' '.join([word for word in paper_title.split() if word not in stopwords])
+        paper_title = re.sub(":|;|,|\?|\.", "", paper_title)
+        paper["title"] = paper_title
+
         paper['author_ids'] = ids
 
         paper_time = datetime.strptime(paper["date"][0], '%Y-%m-%d')
@@ -137,6 +167,32 @@ def maps_authors_to_ids(targetFile):
     return names_to_ids
 
 
+def authors_info (dataset_file_path, output_file_path):
+
+    with open(dataset_file_path) as input_file, open(output_file_path, "w") as output_file:
+
+        json_data = json.load(input_file)
+        authors_info = {}
+        counter = 0
+
+        for identifier in json_data:
+
+            paper = json_data.get(identifier)
+            authors = paper["author"]
+
+            for author in authors:
+                if author not in authors_info:
+                    counter += 1
+                    authors_info[author] = {"id": counter, "num_papers": 1}
+                else:
+                    authors_info.get(author)["num_papers"] = authors_info.get(author)["num_papers"] + 1
+                    
+
+        json.dump(authors_info, output_file, indent=1)
+        print("Number of unique authors: " + str(len(authors_info)))
+
+
+
 def infer (rawEvents, indices, use_cousers=False):
 
     start = timeit.default_timer()
@@ -147,8 +203,10 @@ def infer (rawEvents, indices, use_cousers=False):
     mu_0 = (8, 0.25) # prior for base intensity
     o = 3.5 # decay kernel
 
-    num_patterns = 10
-    num_users = 64442 # Number of unique authors
+    # num_patterns = 10
+    # num_users = 64442 # Number of unique authors
+    num_users = get_number_of_authors(rawEvents) # Number of unique authors
+    print("Num of authors: " + str(num_users))
 
     # # Inference
     types = [types[i] for i in indices]
@@ -186,6 +244,7 @@ def infer (rawEvents, indices, use_cousers=False):
 def main ():
 
     real_data_file_path = "/NL/publications-corpus/work/new_CS_arXiv_real_data.json"
+    
     # maps_authors_to_ids(real_data_file_path)
 
     events = jsonFileToEvents(real_data_file_path)
@@ -196,6 +255,8 @@ def main ():
              2: ([0,1], False),
              3: ([0,1], True)}
 
+    # cases = {3: ([0,1], True)}
+
     for case in [1,2,3]:
         print "Case: {0}".format (case)
         indices, use_cousers = cases[case]
@@ -204,24 +265,34 @@ def main ():
         infHDHP = infer(events[: number_of_events], indices, use_cousers)   
         print("End inferring...")
 
-        with open ( "real_data_results/" + "Case:{0}".format (case) + "/est_time_kernels_" + str(number_of_events) + ".tsv", "w") as output_file:
+        with open("real_data_results/" + "Case:{0}".format (case) + "/title_base_rates_" + str(number_of_events) + ".tsv", "w") as output_file:
+            for key in infHDHP.mu_per_user:
+                output_file.write ("\t".join ([str (key), str (infHDHP.mu_per_user[key])]) + "\n")
+
+        with open("real_data_results/" + "Case:{0}".format (case) + "/title_est_time_kernels_" + str(number_of_events) + ".tsv", "w") as output_file:
             for key in infHDHP.time_kernels:
                 output_file.write ("\t".join ([str (key), str (infHDHP.time_kernels[key])]) + "\n") 
 
         clusters = infHDHP.show_annotated_events()
-        with codecs.open("real_data_results/" + "Case:{0}".format (case) + "/annotated_events_" + str(number_of_events) + ".txt", "w", encoding="utf-8") as output_file:
+        with codecs.open("real_data_results/" + "Case:{0}".format (case) + "/title_annotated_events_" + str(number_of_events) + ".txt", "w", encoding="utf-8") as output_file:
             output_file.write(clusters)
 
         dist = infHDHP.show_pattern_content()
-        with codecs.open("real_data_results/" + "Case:{0}".format (case) + "/pattern_content_" +  str(number_of_events) + ".txt", "w", encoding="utf-8") as output_file:
+        with codecs.open("real_data_results/" + "Case:{0}".format (case) + "/title_pattern_content_" +  str(number_of_events) + ".txt", "w", encoding="utf-8") as output_file:
             output_file.write(dist)
         # print("show_pattern_content return: \n" + dist)
 
         predLabs = [e[1] for e in infHDHP.annotatedEventsIter ()]
 
-        with open ("real_data_results/" + "Case:{0}".format (case) + "/patterns_" + str(number_of_events) + ".tsv", "w") as output_file:
+        with open ("real_data_results/" + "Case:{0}".format (case) + "/title_patterns_" + str(number_of_events) + ".tsv", "w") as output_file:
             for i in xrange (len (predLabs)):
                 output_file.write ("\t".join (str(predLabs[i])) + "\n")
+
+        # for key in infHDHP.time_history_per_user:
+        #     print(str(key) + " : " + str(infHDHP.time_history_per_user[key]))
+
+        # for key in infHDHP.pattern_popularity:
+        #     print(key + " : " + str(infHDHP.pattern_popularity[key]))
 
     
 if __name__ == "__main__":

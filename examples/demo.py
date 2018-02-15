@@ -58,43 +58,44 @@ def plotAlphaScatterPlot (xdict, ydict, outFile):
     fig = ax.get_figure () 
     fig.savefig (outFile)
 
+
 def createTriDiagonalMatrix (n):
     ones = np.ones (n)
     lessones = 0 * np.ones (n-1)
     cousers = np.diag (ones, k=0) + np.diag (lessones, k=1) + np.diag (lessones, k=-1)
     return cousers
 
-def generate ():
+def generate (num_users, num_events, num_patterns, vocab_sizes, time_horizon, alpha_0, mu_0, omega, expected_doc_lengths, words_per_pattern):
     # parameters of the model
     vocabTypes = ["docs", "auths"]
-    vocabSizes = {"docs": 300, "auths": 50}
-    vocabs = {vocabType: ["{0}_{1}".format (vocabType, i) for i in xrange (vocabSizes[vocabType])] for vocabType in vocabTypes}
-    alpha_0 = (2.5, 0.75) # prior for excitation
-    mu_0 = (2, 0.5) # prior for base intensity
-    omega = 3.5 # decay kernel
+    # vocabSizes = {"docs": 100, "auths": 20}
+    vocabs = {vocabType: ["{0}_{1}".format (vocabType, i) for i in xrange (vocab_sizes[vocabType])] for vocabType in vocabTypes}
+    # alpha_0 = (2.5, 0.75) # prior for excitation
+    # mu_0 = (2, 0.5) # prior for base intensity
+    # omega = 3.5 # decay kernel
+
     targetFile = "examples/sample_events.jsonline"
 
     # The following parameters are not really required but useful to give some
     # structure to the generated data.
-    numPatterns = 50
+    # numPatterns = 50
 
-    expectedDocLengths = {"docs": (100, 150), "auths": (20,25)}
-    words_per_pattern = {"docs": 250, "auths": 40} # check again if this should be a parameter per dictionary.
+    # expectedDocLengths = {"docs": (100, 150), "auths": (20,25)}
+    # words_per_pattern = {"docs": 250, "auths": 40} # check again if this should be a parameter per dictionary.
 
     # pass only the relevant parameters to the generative process
     for_vocabs = ["docs", "auths"]
 
     vocab = {vocabType: vocabs[vocabType] for vocabType in for_vocabs}
-    docLen = {vocabType: expectedDocLengths[vocabType] for vocabType in for_vocabs}
+    docLen = {vocabType: expected_doc_lengths[vocabType] for vocabType in for_vocabs}
     wordsPerPattern = {vocabType: words_per_pattern[vocabType] for vocabType in for_vocabs}
 
     # create the process object
-    numUsers = 200
-    #cousersMatrix = np.loadtxt ("examples/authors.txt")
     cousersMatrix = createTriDiagonalMatrix (numUsers)
-    #cousersMatrix = np.eye (numUsers)
-    process = hdhp.HDHProcess(num_users = numUsers,
-                              num_patterns=numPatterns, 
+    # numUsers = 200
+
+    process = hdhp.HDHProcess(num_users = num_users,
+                              num_patterns=num_patterns, 
                               alpha_0=alpha_0, 
                               mu_0=mu_0, 
                               vocabulary=vocab,
@@ -106,7 +107,8 @@ def generate ():
                               generate=True)
 
     # generate events from the process
-    events = process.generate (min_num_events=20, max_num_events=2000, t_max=3000, reset=True)
+    events = process.generate (min_num_events=20, max_num_events=num_events, t_max=time_horizon, reset=True)
+
     # events is a list with the following fields
     # t: time of the event
     # docs: documents for the event
@@ -116,16 +118,17 @@ def generate ():
     print 'Total #events', len(events)
     return process
 
-def infer (indices, use_cousers=False):
+def infer (num_users, num_patterns, alpha_0, mu_0, omega, num_particles, indices, use_cousers=False):
     targetFile = "examples/sample_events.jsonline"
     types = ["docs", "auths"]
     # priors to control the time dynamics of the events
-    alpha_0 = (4.0, 0.5) # prior for excitation
-    mu_0 = (8, 0.25) # prior for base intensity
-    o = 1.5 # decay kernel
 
-    num_patterns = 50
-    num_users = 200
+    # alpha_0 = (4.0, 0.5) # prior for excitation
+    # mu_0 = (8, 0.25) # prior for base intensity
+    # o = 1.5 # decay kernel
+
+    # num_patterns = 10
+    # num_users = 10
 
     # Inference
     rawEvents = jsonFileToEvents (targetFile)
@@ -143,10 +146,10 @@ def infer (indices, use_cousers=False):
                                  types,
                                  alpha_0,
                                  mu_0,
-                                 omega=o,
+                                 omega=omega,
                                  beta=1, 
-                                 threads=1, 
-                                 num_particles=5, 
+                                 threads=1,
+                                 num_particles=num_particles, 
                                  keep_alpha_history=True,
                                  seed=512)
 
@@ -155,8 +158,21 @@ def infer (indices, use_cousers=False):
 
 def main ():
     #args = getArgs ()
+    # Parameters to generate the data
+    num_users = 200
+    num_events = 10000
+    num_patterns = 50
+    vocab_sizes = {"docs": 300, "auths": 50}
+    time_horizon = 3000
+    alpha_0 = (2.5, 0.75) # prior for excitation
+    mu_0 = (2, 0.5) # prior for base intensity
+    omega = 3.5 # decay kernel
+    expected_doc_lengths = {"docs": (100, 150), "auths": (20,25)}
+    words_per_pattern = {"docs": 250, "auths": 40} # check again if this should be a parameter per dictionary.
     # generate the data
-    genHDHP = generate ()
+    genHDHP = generate (num_users, num_events, num_patterns, vocab_sizes, time_horizon, alpha_0, mu_0, omega, expected_doc_lengths, words_per_pattern)
+
+    num_particles = 20
 
     cases = {1: ([0], False),
              2: ([0,1], False),
@@ -170,26 +186,27 @@ def main ():
 
         dirname = "results/{0}".format (case)
         # infer the parameters from the data
-        infHDHP = infer (indices, use_cousers)
+        infHDHP = infer (num_users, num_patterns, alpha_0, mu_0, omega, num_particles, indices, use_cousers)
 
         # plot the base rates and the estimated alpha values
-        #plotMuScatterPlot (genHDHP.mu_per_user, infHDHP.mu_per_user, "figs/base_rates.pdf")
-        #plotAlphaScatterPlot (genHDHP.time_kernels, infHDHP.time_kernels, "figs/time_kernels.pdf")
+        plotMuScatterPlot (genHDHP.mu_per_user, infHDHP.mu_per_user, "figs/U_" + str(num_users) + "_E_" + str(num_events) + "_base_rates.pdf")
+        plotAlphaScatterPlot (genHDHP.time_kernels, infHDHP.time_kernels, "figs/U_" + str(num_users) + "_E_" + str(num_events) + "_time_kernels.pdf")
 
-        with open (os.path.join (dirname, "base_rates.tsv"), "w") as fout:
-            for key in genHDHP.mu_per_user:
-                fout.write ("\t".join ([str (key), str (genHDHP.mu_per_user[key]), str (infHDHP.mu_per_user[key])]) + "\n")
+        # with open (os.path.join (dirname, "base_rates.tsv"), "w") as fout:
+        #     for key in genHDHP.mu_per_user:
+        #         fout.write ("\t".join ([str (key), str (genHDHP.mu_per_user[key]), str (infHDHP.mu_per_user[key])]) + "\n")
 
-        with open (os.path.join (dirname, "set_time_kernels.tsv"), "w") as fout:
-            for key in genHDHP.time_kernels:
-                fout.write ("\t".join ([str (key), str (genHDHP.time_kernels[key])]) + "\n")
+        # with open (os.path.join (dirname, "set_time_kernels.tsv"), "w") as fout:
+        #     for key in genHDHP.time_kernels:
+        #         fout.write ("\t".join ([str (key), str (genHDHP.time_kernels[key])]) + "\n")
 
-        with open (os.path.join (dirname, "est_time_kernels.tsv"), "w") as fout:
-            for key in infHDHP.time_kernels:
-                fout.write ("\t".join ([str (key), str (infHDHP.time_kernels[key])]) + "\n")
+        # with open (os.path.join (dirname, "est_time_kernels.tsv"), "w") as fout:
+        #     for key in infHDHP.time_kernels:
+        #         fout.write ("\t".join ([str (key), str (infHDHP.time_kernels[key])]) + "\n")
    
-        trueLabs = [e[1] for e in genHDHP.annotatedEventsIter ()]
-        predLabs = [e[1] for e in infHDHP.annotatedEventsIter ()] 
+        # trueLabs = [e[1] for e in genHDHP.annotatedEventsIter ()]
+        # predLabs = [e[1] for e in infHDHP.annotatedEventsIter ()] 
+
 
         with open (os.path.join (dirname, "patterns.tsv"), "w") as fout:
             for i in xrange (len (trueLabs)):
