@@ -58,10 +58,16 @@ def plotAlphaScatterPlot (xdict, ydict, outFile):
     fig = ax.get_figure () 
     fig.savefig (outFile)
 
+def createTriDiagonalMatrix (n):
+    ones = np.ones (n)
+    lessones = 0 * np.ones (n-1)
+    cousers = np.diag (ones, k=0) + np.diag (lessones, k=1) + np.diag (lessones, k=-1)
+    return cousers
+
 def generate ():
     # parameters of the model
     vocabTypes = ["docs", "auths"]
-    vocabSizes = {"docs": 100, "auths": 20}
+    vocabSizes = {"docs": 300, "auths": 50}
     vocabs = {vocabType: ["{0}_{1}".format (vocabType, i) for i in xrange (vocabSizes[vocabType])] for vocabType in vocabTypes}
     alpha_0 = (2.5, 0.75) # prior for excitation
     mu_0 = (2, 0.5) # prior for base intensity
@@ -70,10 +76,10 @@ def generate ():
 
     # The following parameters are not really required but useful to give some
     # structure to the generated data.
-    numPatterns = 10
+    numPatterns = 50
 
-    expectedDocLengths = {"docs": (30, 50), "auths": (1,6)}
-    words_per_pattern = {"docs": 30, "auths": 5} # check again if this should be a parameter per dictionary.
+    expectedDocLengths = {"docs": (100, 150), "auths": (20,25)}
+    words_per_pattern = {"docs": 250, "auths": 40} # check again if this should be a parameter per dictionary.
 
     # pass only the relevant parameters to the generative process
     for_vocabs = ["docs", "auths"]
@@ -83,8 +89,9 @@ def generate ():
     wordsPerPattern = {vocabType: words_per_pattern[vocabType] for vocabType in for_vocabs}
 
     # create the process object
-    numUsers = 10
-    cousersMatrix = np.loadtxt ("examples/authors.txt")
+    numUsers = 200
+    #cousersMatrix = np.loadtxt ("examples/authors.txt")
+    cousersMatrix = createTriDiagonalMatrix (numUsers)
     #cousersMatrix = np.eye (numUsers)
     process = hdhp.HDHProcess(num_users = numUsers,
                               num_patterns=numPatterns, 
@@ -99,7 +106,7 @@ def generate ():
                               generate=True)
 
     # generate events from the process
-    events = process.generate (min_num_events=20, max_num_events=10000, t_max=3000, reset=True)
+    events = process.generate (min_num_events=20, max_num_events=2000, t_max=3000, reset=True)
     # events is a list with the following fields
     # t: time of the event
     # docs: documents for the event
@@ -115,10 +122,10 @@ def infer (indices, use_cousers=False):
     # priors to control the time dynamics of the events
     alpha_0 = (4.0, 0.5) # prior for excitation
     mu_0 = (8, 0.25) # prior for base intensity
-    o = 3.5 # decay kernel
+    o = 1.5 # decay kernel
 
-    num_patterns = 10
-    num_users = 10
+    num_patterns = 50
+    num_users = 200
 
     # Inference
     rawEvents = jsonFileToEvents (targetFile)
@@ -139,7 +146,7 @@ def infer (indices, use_cousers=False):
                                  omega=o,
                                  beta=1, 
                                  threads=1, 
-                                 num_particles=20, 
+                                 num_particles=5, 
                                  keep_alpha_history=True,
                                  seed=512)
 
@@ -155,7 +162,7 @@ def main ():
              2: ([0,1], False),
              3: ([0,1], True)}
 
-    for case in [1,2,3]:
+    for case in [1, 2, 3]:
         print "Case: {0}".format (case)
         indices, use_cousers = cases[case]
         if not os.path.exists ("results/{0}".format (case)):
@@ -187,6 +194,8 @@ def main ():
         with open (os.path.join (dirname, "patterns.tsv"), "w") as fout:
             for i in xrange (len (trueLabs)):
                 fout.write ("\t".join ([str(trueLabs[i]), str (predLabs[i])]) + "\n")
+
+        print (normalized_mutual_info_score (trueLabs, predLabs))
     
 if __name__ == "__main__":
     main ()

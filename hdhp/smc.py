@@ -239,10 +239,14 @@ class Particle(object):
                                 for i in range(self.num_users)}
             self.active_tables_per_user = {i: set()
                                            for i in range(self.num_users)}
-        if self.num_events >= 1 and u_n in self.time_previous_user_event and \
-                self.time_previous_user_event[u_n] > 0:
+        #print ("time previous user event", self.time_previous_user_event)
+        #if self.num_events >= 1 and u_n in self.time_previous_user_event and \
+                #self.time_previous_user_event[u_n] > 0:
+        if self.num_events >= 1 and self.time_previous_user_event[u_n] > 0:
+            #print ("log likelihood updated")
             log_likelihood_tn = self.time_event_log_likelihood(t_n, u_n)
         else:
+            #print ("log likelihood kept zero")
             log_likelihood_tn = 0 # I don't know why this is zero, should it not be the log of the base intensity?
 
         #print (self.num_users, u_n, self.total_tables_per_user)
@@ -274,6 +278,7 @@ class Particle(object):
             self.alpha_history[z_n].append(self.time_kernels[z_n])
             self.alpha_distribution_history[z_n].append(self.time_kernel_prior[z_n])
         if self.num_events >= 1:
+            #print ("likelihoods", log_likelihood_tn, self._Qn)
             self.logweight += log_likelihood_tn # this quantity changes when multiple authors are added
             self.logweight += self._Qn # this quantity changes when  multiple vocabularies are added
         self.num_events += 1
@@ -368,7 +373,7 @@ class Particle(object):
                 dish_log_likelihood_array.append(dish_log_likelihood[dish])
                 intensities.append(table_intensity)
             else:
-                dish_log_likelihood_array.append(0)
+                dish_log_likelihood_array.append({k:0 for k in count_dn})
                 intensities.append(0)
         log_intensities = [ln(inten_i / total_table_int) + sum(dish_log_likelihood_array[i].values())
                            if inten_i > 0 else -float('inf')
@@ -715,7 +720,6 @@ def _infer_single_thread(history, params):
 
     # Set the accuracy
     count_resamples = 0
-    square_norms = []
     with open(params.progress_file, 'a') as out:
         out.write('Starting %d particles on %d thread.\n' % (params.num_particles,
                                                              params.threads))
@@ -760,6 +764,8 @@ def _infer_single_thread(history, params):
         for p_i in particles:
             # Fit each particle to the next event
             b_i, z_i = p_i.update(h_i)
+            #print (t_i, u_i)
+            #print (p_i.uid, b_i, z_i)
             inferred_tables[p_i.uid].append((b_i, z_i))
 
         if i > 0 and i % params.resample_every == 0:
@@ -776,6 +782,7 @@ def _infer_single_thread(history, params):
                     weights.append(exp(p_i.logweight - max_logweight))
                 total += weights[-1]
             normalized = [w / sum(weights) for w in weights]
+            #print ("normalized within loop", normalized)
             # Check if resampling is needed
             norm2 = sum([w ** 2 for w in normalized])
             square_norms.append(norm2)
@@ -789,15 +796,20 @@ def _infer_single_thread(history, params):
                 new_particles = []
                 new_table_history_with_user = []
                 new_dish_on_table_per_user = []
+                #print ("outside if:", table_history_with_user, i)
                 for index in new_particle_indices:
                     # copy table_history for that particle
                     if len(table_history_with_user):
                         old_history = copy(table_history_with_user[index])
                     else:
                         old_history = []
+                    #print ("old history", old_history)
                     new_history = copy(particles[index].table_history_with_user)
+                    #print ("new history", new_history)
                     old_history.extend(new_history)
                     new_table_history_with_user.append(old_history)
+                    #print ("within if:", table_history_with_user, i)
+                    #print ("new table history with user", new_table_history_with_user)
                     if len(dish_on_table_per_user):
                         dish_table_user = copy_dict(dish_on_table_per_user[index])
                     else:
@@ -840,6 +852,9 @@ def _infer_single_thread(history, params):
                 with open(params.progress_file, mode='a') as temp:
                     temp.write("Time: %.2f (%d)\n" % (time() - start_tic, i))
 
+        #print ("per particle table history with user", table_history_with_user, i)
+        #print ("per particle dish history per user", dish_on_table_per_user, i)
+
     # Finally sample a single particle according to its weight.
     for p_i in particles:
         if max_logweight is None or max_logweight < p_i.logweight:
@@ -855,7 +870,8 @@ def _infer_single_thread(history, params):
     normalized = [w / sum(weights) for w in weights]
     final_particle_id = pick_new_particles(particles, normalized, prng)[0]
     final_particle = particles[final_particle_id]
-
+    #print ("normalized: ", normalized)
+    #print ("final particle id: ", final_particle_id)
     #print (len (particles))
     #print (final_particle_id)
     #for k in particles[(final_particle_id + 1) % len (particles)].per_topic_word_counts["docs"]:
@@ -867,6 +883,7 @@ def _infer_single_thread(history, params):
     table_history_with_user = table_history_with_user[final_particle_id]
     new_history = copy(final_particle.table_history_with_user)
     table_history_with_user.extend(new_history)
+    #print ("table history per user", table_history_with_user)
     final_particle.table_history_with_user = table_history_with_user
     dish_on_table_per_user = dish_on_table_per_user[final_particle_id]
     dishes_toadd = copy_dict(final_particle.dish_on_table_per_user)
@@ -885,7 +902,7 @@ def _infer_single_thread(history, params):
             dish_on_table_per_user[user][t] = \
                 final_particle.dish_on_table_todelete[user][t]
     final_particle.dish_on_table_per_user = dish_on_table_per_user
-
+    #print ("dish_table_per_user", final_particle.dish_on_table_per_user)
     final_particle.time_history_per_user = copy(time_history_per_user)
     final_particle.doc_history_per_user = copy(doc_history_per_user)
     final_particle.question_history_per_user = copy(question_history_per_user)
@@ -979,8 +996,10 @@ def infer(history, numUsers, docTypes, alpha_0, mu_0, omega=1, beta=1, theta_0=N
         The seed to the random number generator.
     """
 
-    vocabulary, users = _extract_words_users (history, docTypes)
+    vocabulary, extractedUsers = _extract_words_users (history, docTypes)
     users = set (range (numUsers))
+    print (vocabulary.keys(), map (len, vocabulary.values()), len (extractedUsers), len (users))
+    #return
     #print ("users: {0}".format (users))
     theta_0 = _initialize_document_distributions (vocabulary, docTypes, theta_0)
 

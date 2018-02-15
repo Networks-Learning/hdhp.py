@@ -366,14 +366,14 @@ class HDHProcess:
 
         for user in xrange (self.num_users):
             events = [(self.time_history_per_user[user][i], 
-                       self.document_history_per_user[user][i], [user] + self.couser_history_per_user[user][i], [])
+                       self.document_history_per_user[user][i], [user] + self.couser_history_per_user[user][i], [self.dish_on_table_per_user[user][self.table_history_per_user[user][i]]])
                        for i in xrange (len (self.time_history_per_user[user]))]
             self.events.extend(events)
 
         # Update the full history of events with the ones generated for the
         # current user and re-order everything so that the events are
         # ordered by their timestamp
-        self.events = sorted(self.events, key=lambda x: x[0])
+        self.events = sorted(self.events, key=lambda x: x[0]) 
         return self.events
                 
     def sample_user_events(self, min_num_events=100, max_num_events=None,

@@ -11,7 +11,7 @@ from __future__ import division
 
 import calendar
 import datetime
-from copy import copy
+from copy import copy, deepcopy
 from math import ceil
 
 import seaborn as sns
@@ -41,7 +41,7 @@ def entropy(sets, N):
 
 
 def copy_dict(original):
-    new = {k: copy(original[k]) for k in original}
+    new = {k: deepcopy(original[k]) for k in original}
     return new
 
 
