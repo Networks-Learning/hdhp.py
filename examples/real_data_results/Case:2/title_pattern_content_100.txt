@@ -1,0 +1,606 @@
+DocType auths, ___Pattern 0___ 
+J. : 14
+R. : 10
+E. : 9
+C. : 9
+A. : 9
+S. : 8
+P. : 8
+M. : 8
+H. : 8
+K. : 7
+Y. : 5
+N. : 5
+F. : 5
+B. : 5
+V. T. D. Wilks Ney L. Bertino Allen et al. Wester, Reithinger Martin Maier Grosz Ferrari Colby Apt Andersson ersson Woo Winograd Widén Whittaker Wessel Weizenbaum Webber W.-k. Ute Ueberla Turing Tretkoff Traum Tourbier Test Subrahmanian Stenton Sjöl Sidner Searle Schubert Schank Schaerf Samarati Rullo Rosenfeld Ribeiro Results Reinhard Rademakers, Poesio Perrault Partington Pallett Oplobedu Nilsson Morris McAloon Marcovitch Liermann Li Lewis, Levy Lee Lam Krotov Kreimer, Kobsa Kneser Klint Joerg Jajodia Hwang Huang Hermann Heeman Guedes Grosof Generet Frühwirth Franzkowski, Feigenbaum Essen Charniak Catizone Carlsson Carletta Bunt Buccafurri Brücher, Brunekreef Brun, Brill Boortz Bezem Bench-mark Battacharia Ballim Atluri Atis Anderson Alturi Alex Abelson
+
+DocType auths, ___Pattern 1___ 
+M. : 12
+J. : 8
+C. : 5
+S̈oderberg Peterson E. B. H. U. S. Ohlsson Lagerholm Krishnamoorthy Flaherty Benantar Beasley Y. W. Tank Schiehlen Samet Reyle Pi Parisi Mori, Kamp, Ḧakkinen Hopfield G. Emele Egg Dōgrus̈oz Dorna, D. Bos,
+
+DocType auths, ___Pattern 2___ 
+Claire : 5
+Michael M. Kohlhase Gardent van o T. Stuart Shieber Robert Pereira Fern har den V. Tancredi Suresh Scha Rosetta Rooth Robin R. Prüst Noor Noam N. Moens Melvin May Mats Mary Marc Man Leusen Lasnik Kehler Jerry Janssen Hutter Howard Hobbs Herman Hendriks Hardt H. Grover Fitting Fiengo Dieter Daniel Dalrymple Cooper Christopher Chris Chomsky C. Brew Berg Andrew
+
+DocType auths, ___Pattern 3___ 
+A. : 34
+R. : 22
+J. : 22
+G. : 16
+M. : 15
+E. : 15
+T. : 14
+K. : 13
+H. : 13
+W. : 12
+L. : 12
+S. : 11
+C. : 11
+I. : 8
+D. : 8
+Vazirani : 7
+U. : 7
+P. : 6
+N. : 5
+Miller : 5
+Gale : 5
+Church : 5
+Bernstein Ambainis Y. Thomas O. Ng John Heidorn Cover Cohen B. van Yarowsky Yao Watrous Vosse V. Tanaka Ta-Shma Rabiner McDiarmid Kukich Kondacs Jensen Ingels Freivalds Chodorow Bucklew Brassard Bennett de Zeitouni Zanten, Zamora Z. Young Wolfram Wirth Willett Wilks Wigderson Weissbuch Weischedel Walker, Voorhees Vlasov Véronis Towell Tournier Tokunaga Thornton Talagr Stroustrup Strassen Stock Sondhi Sondheimer Smith, Smedt Siret Shannon Segel Schulman S Ruth Russel Roger Richardson Ravin Rabin Proakis Pollock Pieraccini, Petersen Perelson Pedersen Okuda Nayak Naughton Narayanan, Moore Mooney Moldovan Mihalcea Mercer McIlroy Levinson Levin, Lev Lee Leacock Lavelli Ǩ{u}cera K{ö}rner Kremer Koskenniemi Koenraad Kholevo Kernighan Kempen Kasai Karen Jenkins Jelinek Inui Ide Ibm Holevo Hayes Harper Hansen Grossman Gross Granger Good Garside Fujii Fromer, Freund Francis Flexner Fellbaum Fass F. Engelson Dietterich Dembo Deller Davenport Dagan Csisz{á}r Crutchfield Corporation Chuang Carbonell C.-c. Byrd, Bruce Brigitte Braden-Harder Blahut Berkel Berger Beckwith Bar-Or Bahl Bahadur Atlan Angell Akritas
+
+DocType auths, ___Pattern 4___ 
+
+R. Peter Kenneth John Donald A. W. Robert Mercer M. L. Jelinek, J. Frederick David Church, B. of Yarowsky, William Will Volker Ute Tukey Taylor Stutz Steven Steinbiss Society Slava Self Salton, Salim Rubin Rousseeuw Roukos Rose, Ronald Resnik, Pinker, Philip Pedersen Paul, P. O. North Nan Michael Matthew Leonard Laird Knuth, Kelly Kaufman, Katz, Karger Jan James Irving Hindle, Hartigan, Gurewitz Good, Gerard Geoffrey Gale Freeman Fox Fisher, Essen, Eitan E. Douglass Douglas Don Dempster, Cutting, Classification Cheeseman, C. Brucker, Arthur Anderberg, America
+
+DocType auths, ___Pattern 5___ 
+
+Vern Varma Tan Paxson Maulloo Lampros Kelly Kalampoukas Frank David Anujan Aman
+
+DocType auths, ___Pattern 6___ 
+M. : 5
+John A. Z. Ioannis F. Emiris, Canny, Zelevinsky, Victor V. Rojas, L. J. Gritzmann, D. van der Zalgaller, Yu. Yu Yinyun Ye, Y. Xiaoshen Weyman, Wang, Wampler, Waerden, W. Sturmfels, Serge Schneider, Rolf Peter Pan, P. N. Maurice Lang, Klee, Khovanskii, Kapranov, Jerzy I. Hufnagel, G̈unter Grigoriev, Gel'f G. Ewald, Dyer, Dima Dalbec, Chistov, Charles Burago, Bernshtein, Bernd B. Askold Andrei ,
+
+DocType auths, ___Pattern 7___ 
+M. : 25
+S. : 18
+D. : 17
+E. : 16
+A. : 15
+L. : 13
+K. : 13
+B. : 13
+R. : 12
+J. : 12
+T. : 11
+P. : 11
+Bern : 10
+W. : 9
+N. : 8
+Eppstein : 8
+C. : 8
+G. : 7
+H. Weihe Rippa Ramos Plassmann Müller-Hannemann Mitchell I. Freitag V. Toussaint Teng Talmor Stephenson S.-h. Ruppert Rodin Ramaswami Miller Meiser Mehlhorn Megiddo Klein Jones Goodrich F. Clarkson Chazelle Blacker Benzley Aziz Z.-x. Z. Welzl Weiszfeld Wang Walkington Thurston Tautges Tarjan Tannenbaum Sullivan Strang Stanback Srinivasan Sjaardema Simpson Shouraboura Shimada Sharir Shamir Shakiban Schrijver Schneiders Schiff Rogers Rauch Ramsden Rafferty Perry Peleg Pavley Palios Orlin Olver Ollivier-Gooch O'Dunlaing Nackman Murdoch Montague Mine Mihályffy Merkley Melzak Matoušek Matou{š}ek Magnanti Lovász Lingas Levin Levcopoulos Langley Lang Kutten Krznaric King Katoh Joag-Dev Ibaraki Hoffman Hetyei He Hayes Haker G̈artner Grötschel Grosse Gossard Gold Gilbert Garay Frieze Fix Eriksson Dyn Dyer Doyle Dixon Dickerson Dharmadhikari Demaine D'Azevedo Cockayne Clark Chew Charters Calabi Bunton Baker Bajaj Babuška Babu{š}ka Amenta Amato Ahuja Adler
+
+DocType auths, ___Pattern 8___ 
+R. : 19
+M. : 17
+S. : 15
+J. : 14
+T. : 13
+C. : 13
+B. : 13
+D. : 12
+A. : 11
+P. : 10
+W. : 9
+L. : 7
+G. : 5
+E. : 5
+K. Zecchina Wilson U. Selman N. Monasson Kistler, Hölzle, Hanson Franz, Dean, Y. Waldspurger, Troyansky The Mertens Kirkpatrick H. Fraser F. Chen, Bollobás Ball, use is, evoorde, ard Zhang, Z. X. Weihl, Wegman, Wang, Wang Wall, Va. V. V Ungar, Tseng Tjiang Thomason Taylor Steele Steel, St Srivastava, Snodgrass Sites, Serra Schaefer S.-w. S.-t. Rényi Rosen, Rényi Reed Proebsting Prescod Pettis, Performance Parisi Papadimitriou Open Monroe, Mitchell Mézard Menezes, Manassas, Mahlke, Ma. Lindholm, Liao Levesque Leung, Lam Ladner Krintz, Korn Kim Kanefsky Johnson, Johnson John, Istrate Ingalls, Hicks, Henzinger, Hennessy Helm, Hayes Harbison Hansen, Hall Grove, Group Goldfarb Gloy, Ghemawat, Gazmuri Garey Gamma, Fu. Frieze Friedgut French Ferrante, Fernández, Evaluation Eustace, Erd̈os Erdős Deutsch, Cytron, Corp. Conte, Cohn, Click, Chvátal Chilimbi, Cheeseman Chayes Chang, Chambers, Cambridge, Calder, C.-w. Br Borgs Berc, Appel Anderson, Anderson Amarasinghe A
+
+DocType auths, ___Pattern 9___ 
+A. : 30
+M. : 25
+J. : 19
+S. : 17
+R. : 17
+L. : 17
+P. : 13
+H. : 13
+D. : 12
+C. : 12
+N. : 11
+Wigderson : 8
+U. : 8
+E. : 8
+Buhrman : 6
+de : 5
+Nisan : 5
+Lovász : 5
+I. : 5
+G. : 5
+Vazirani Safra Lund Goldwasser Feige Cleve Wolf Szegedy Sipser Shor Motwani Miltersen Mayers K. Johnson Fortnow David Brassard Bennett Babai B. Ambainis Alon van Zoller Yao W. Venkatesh T. Schulman Schrijver Radhakrishnan Ohya Noam Michael Kilian Kahale Jozsa Gr̈otschel Graaf Garey F. DiVincenzo Deutsch Cirac Chaitin Blum Bernstein Barenco Avi Arora ra er Zvi Yannakakis X. Wood Williamson Weinfurter Van Torczon Ta-Shma T\mbox{a-S}hma Szemerédi Sudan Stephen Sobelman Smolin Sleator Shmuel Shamir Schnitger Schack Ronald Rompel Raz Ran Raghavan Rackoff Ponzio Peter Pavol Papert Papadimitriou Pagh Nayak Naor Mosca Mor Minsky Milner Michel Micali Markstein Margolus Loan Lo Linial Kushilevitz Komlós Knuth Klauck Kitaev Khanna Kennedy Karloff Karger Jerrum Jeroen Jaikumar Håstad Huang Hopkins Hartmut Harry Halldórsson Halldorsson Grover Golub Goemans Gershenfeld Georg Gene Gardiner Galil Fuchs Frieze Fredman Frankl Feldman Ekert Duris Donald Demarrais Cooper Condon Cocke Chuang Christos Christopher Chau Ch Cai C-c. Bro Briggs Boyer Boppana Biham Berthiaume Berge Ben-Or Beals Avrim Ausl Alizadeh Aharonov Adleman
+
+DocType auths, ___Pattern 10___ 
+R. : 6
+David : 5
+Karger Toshihide Nagamochi Ibaraki Hiroshi C. A. network flows Williamson T. Stein St. Shmoys Serge Rajeev Raghavan Prabhakar Plotkin P. Nishimura Nash-Williams N. Multi-terminal Motwani Monika Kazuhiro Jack J. Hu. Henzinger Harold Gomory Gabow Fulkerson Ford Edmonds E. D. Clifford Béla Bollobás Benczúr András
+
+DocType auths, ___Pattern 11___ 
+
+Tal Silvio Rabin Micali Maurer Wigderson Ueli U. Shafi Ronald Ran Oded Michael M. Ivan Hirt Goldwasser Goldreich Gabriel Damgård Cramer Chor Canetti Bracha Benny Ben-Or Baruch Awerbuch Avi
+
+DocType auths, ___Pattern 12___ 
+
+Rotman Joseph J. Colmerauer C. Berge Alain
+
+DocType auths, ___Pattern 13___ 
+A. : 14
+R. : 11
+M. : 10
+J. : 7
+P. : 6
+H. : 6
+D. : 6
+C. : 5
+F. er Y. Schw S. Ryser Prangenberg Ourmazd Kisielowski Kim Gritzmann Gardner E. Baumann all Sinclair Shamir Seibt R Pinzani Nivat Lungo Itai Even Del Brualdi Barcucci Woeginger W. Tarjan Seigt S.-k. Plass Picouleau Mathematics Luby Kuba Kenyon Johnson Jerrum Irving Garey G. Dürr Combinatorial Chrobak Christophe Chang B. Aspvall
+
+DocType auths, ___Pattern 14___ 
+
+Yahalom Tim Sacco S. Roscheisen Roger Raphael R. Postel Philip Paul O. Needham Martin M. Lowe Li Kocher Karlton Jon Gong Gavin Freier E. Dierks Denning D. Christopher C. Allen Alan
+
+DocType auths, ___Pattern 15___ 
+
+B. Peter Hubermann Fishburn C. A. model: Zalman Usiskin T. Schobbens Ryan Robin Reference Pierre-Yves Neuman Miller Medvinsky Mark M. Lai Kaminsky John Iso. Hogg Hajnal H. Grady Gennady Farquharson Duncan Clifford Charlie Booch Black Architecture Andréka (10)
+
+DocType auths, ___Pattern 16___ 
+Huberman : 8
+Bernardo : 8
+A. : 8
+M. Tad S. Rajan Natalie Lukose Hogg Glance William Societies, Sheldon Sharpe Russell Ross O. Kephart Jeffrey Hardin Growing F. Collective Artificial Action :
+
+DocType auths, ___Pattern 17___ 
+
+J. el W. T. Peter Mladen Michael H Brinkmann Bestvina White V. Ringl Poenaru Misiurewicz Menasco Martin M. Lustig Los Lickorish Laudenbach Hall Franks Fathi F. A.
+
+DocType auths, ___Pattern 18___ 
+J. : 20
+A. : 14
+S. : 11
+M. : 9
+G. : 9
+D. : 9
+B. : 7
+V. : 6
+T. : 6
+R. : 6
+I. : 6
+F. : 6
+C. : 6
+P. : 5
+Engelfriet : 5
+Ullman Snodgrass Sag Pollard Greibach E. Courcelle van Richter Penn King K. Hopcroft H. Comrie Clifford Androutsopoulos Allen Aho Z. Wiederhold Whinston W. Vendler U. Tsotras Thanisch Tansel Steiner Steedman Smolka Slutzki Sergot Segev Seese Sailer Rozenberg Ritchie Reynolds Reyle Reichenbach Rajlich Pulman Prior Parsons Pan Oostrom Nakazawa Moens Meurers McDermott McCarthy Lucas Kumar Kowalski Kiel Kamp Jensen Jákl Jajodia Ḧohfeld Hodkinson Hinrichs Hennie Hayes Gottlob Goetz Gadia Gabbay Draxler De Crouch Chytil Ceri Carpenter Boehlen Benthem
+
+DocType auths, ___Pattern 19___ 
+M. : 6
+L. : 6
+B. : 6
+R. : 5
+J. : 5
+C. : 5
+S. D. A. Matthew K. James Heitmeyer George G. Dwyer Corbett Avrunin Yoko Wong Thomas Steve Robyn Richard Pnueli P. O. Lutz Lamport Kelly John Holzmann Hamilton Easterbrook E. David Covington Chechik Andre Ampo Zave Z. Wolper Wing Wilke Weber-Wulff Vito Uml Trakhtenbrot Steffen Stefan Shtull-Trauring Sherman Rosenblum Rance Ramesh Păun Politi Pierre Peter Peled Paul Partners Parrow Parnas Pamela Naamad Moataz McMillan Mats Mataga Marsha Manna Lindner Lewerentz Leue Leslie Lachover Labaw Kupferman Kitchenham Kamel Jones Jonathan Joannou Joachim Jeffords Jeannette Jackson Hoare Heninger Heimdahl Hehner Harel Hall H. Gannon Feather Eric Doron Dimitrie Di Debora Davis Danielson Daniel Crow Constance Consortium Connie Cliff Cleavel Claus Biechelle Bharadwaj Bernhard Bernd Barbara Atlee Anthony Ann Abadi
+
+DocType auths, ___Pattern 20___ 
+
+Yvinec Olivier Mariette Jean-Daniel Jacqueline Heppes Duquesne Devillers Cérézo Boissonnat André A.
+
+DocType auths, ___Pattern 21___ 
+J. : 46
+M. : 36
+S. : 30
+D. : 29
+P. : 27
+R. : 23
+H. : 19
+T. : 15
+K. : 14
+G. : 13
+L. : 12
+C. : 12
+E. : 11
+F. : 10
+A. : 8
+Sharir : 7
+Overmars : 7
+N. : 7
+Kirkpatrick : 7
+B. : 7
+Suri : 6
+Guibas : 5
+Devillers : 5
+Boissonnat : 5
+W. Teillaud O'Rourke Monique Megiddo Joseph Jean-Daniel Edelsbrunner Dobkin de Teller Subhash Reif Olivier O. Leonidas Lee Halperin Goodrich Das Chew Chang Berg Aggarwal Agarwal van Zhu Yvinec Yap Yao Wilfong Su Stefan Snoeyink Seidel Saias Preparata Paterson Mücke Mount Mitchell Meiser Matoušek Lemaire Kosaraju Kim Keil Isaac Hershberger Har-Peled Greene Fortune Fisk Ernst Erickson Devroye Czyzowicz Canny Brönnimann Booth Binhai Bhattacharya Anderson {III} {Drysdale}, title Zhang Zadicario Yang Y. Xu. Xavier Wiseman Wilson Weiler Warnock Veltkamp U. Tompa T.-h. Sylvester Swokowski Sutherl Supowit Sugihara Steinberg Sproull Sokal Sillion Sibson Shor Shewchuk Sen Schwarzkopf Schwartz Schumacker Saxe Ruppert Robert Raghavan Radke R.-c. Puech Pedoe Okabe Nishizeki Murali Mulmuley Motzkin Motwani Moser Moreau Miller Midtbø Micha McKenna Mariette Manocha Mani Manber Luebke Lozano-Pérez Lin Lay Latombe Kreveld Kokichi Knuth Kelly Kavraki Katz Kass Kannan Kanamaru Jurek Jean-Marc Jacobs J.-m. J.-d. J.-c. I. Hughes Hudson Hoff Heller Heckbert Harvey Hanrahan Gutwin Green Glassner Georges Gallai Gabriel Friedman Francis Foley Fibich Feit Feiner Erdős Eppstein Dévai Dubins Drysdale Dorward Donald Dobrindt Desikan Dam Coorg Cohen-Or Cohen Cheng Chazelle Catmull Bruggesser Bose Boots Bern Bentley Barry B.-t. Avnaim Atsuyuki Atherton Atallah Asano Aronov Alex =
+
+DocType auths, ___Pattern 22___ 
+Reiter : 5
+Ehud : 5
+Stephan Pianta Mellish Emanuele Chris Busemann de Walter Velde Van Tovena Sabine Robert Reape Pietrosanti Paiva Nicola Mike M. Lynne Lucia Levine Kamstrup John Horacek Helmut Gjertrud Geldof Ettore Daniel Dale Cancedda Cahill
+
+DocType auths, ___Pattern 23___ 
+
+S. Mehlhorn C. Stefan Schirra Preparata Näher K. Burnikel {Van {Efficient title geometry for exact computational arithmetic Yap Wyk}, Uhrig Tamassia Roberto P. O. Liotta Könnemann Kurt Jochen J. Giuseppe Franco Fortune F. Devillers Christoph Christian =
+
+DocType auths, ___Pattern 24___ 
+J. : 95
+L. : 76
+ra : 57
+R. : 41
+Hemaspa : 38
+M. : 37
+S. : 29
+K. : 29
+A. : 27
+Wagner : 21
+H. : 20
+E. : 20
+Hemach : 19
+G. : 17
+U. : 16
+Wechsung : 15
+T. : 15
+Hartmanis : 15
+V. : 14
+Schöning : 14
+Rothe : 12
+Beigel : 12
+Selman : 11
+Kadin : 11
+Fortnow : 11
+D. : 11
+Cai : 11
+N. : 10
+Chang : 10
+K{ö}bler : 9
+Hempel : 9
+Sewelson : 8
+Gundermann : 8
+C. : 8
+Stockmeyer : 7
+Allender : 7
+Y. : 6
+Watanabe : 6
+Valiant : 6
+Ogiwara : 6
+O. : 6
+Papadimitriou : 5
+P. : 5
+Buhrman : 5
+Balcázar : 5
+Thierauf Selivanov Lynch Ko. Grollmann F. Borchert B. Zachos Young Toda Stephan Sipser Rubinstein Rogers Ogihara Meyer Ladner Kurtz Joseph Impagliazzo Goldsmith Fenner Agrawal Z. Yannakakis Yacobi W. Vyskoč Vollmer Torán Torenvliet Simon Sheu Rudich Rice Regan Rao Naik Long Lipton Johnson Jiang Immerman Håstad Hopcroft Gurevich Gill Gasarch Garey Gabarró Fischer Even Díaz Crescenzi Book Biswas Berman Amir de Zim Yesha Yao Yamazaki Yamakami Yajima Wilson Viswanathan Vereshchagin Vazirani Vardi Thilikos Tarsi Tankus Takenaga Sitharam Silvestri Sherman Scḧoning Schuler Schmidt Savage Royer Rompel Reith Ranjan Radhakrishnan Rabi Protasi Nouzoe Nasser Naor Mahaney Luby Levin Krentel Koblitz Ko Kleene Karp Kari Kannan Jha Jain Homan Hertrampf Heller Hay Hausdorff Harrison Halldorsson Gr{ä}del Goldberg Furst Fortune Fellows Feigenbaum Dodgson Demers D'Atri Caritat Buss Bryant Bruschi Bovet Borodin Bodlaender Blass Black Bertoni Benford Ausiello Arvind
+
+DocType auths, ___Pattern 25___ 
+
+Information {Ž}ivaljevi{ć} Yao Wolfgang William W. Vegter Technology T. Sedgwick Rade President's Peter Ko. Kneser Ker-I Karol Jones Joel Jaco Hellmuth Hass Haken Gert Eric Chi-Chih Borsuk Björner Andrew Anders
+
+DocType auths, ___Pattern 26___ 
+
+E. Dijkstra,
+
+DocType auths, ___Pattern 27___ 
+M. : 27
+D. : 21
+R. : 19
+A. : 18
+N. : 17
+G. : 13
+J. : 10
+B. : 10
+P. : 8
+T. : 7
+Y. : 6
+L. : 6
+H. : 6
+F. : 5
+Eppstein : 5
+Vardi S. Peleg K. Frederickson Fellows W. Lingas Kolaitis Downey Chen C. Awerbuch Zwick Yuster Wong U. Sysło Seymour Robertson Ph.G. Nishizeki Janardan Immerman Grohe Frick Flum Cowen Cai Berger Alon ra Z. Yannakakis X. Wu Willett Wild Wahl Voigt Turán Thorner Thomas Thakur Taylor Tamassia Takamizawa Stahs Spencer Smith Seese Scarcello Saito Sairam Rodeh Richards Rice Regan Rajaraman Proskurowski Poirrette Plehn Ph. Pepperrell Peck Papadimitriou Merlin Levinson Leone Lawler Laumond Langston Lang Koza Kortsarz Klein Keil Kanevsky J.-p. Italiano Itai Hong H.-d. Guha Grindley Gottlob Galil Gabow Fagin Even Eisenbud Ebbinghaus E. Ding Dillencourt Di Courcelle Chrobak Chiba Chekuri Ch. Ch Bui Brown Brecht Bern Bennett Bayer Battista Bath Bar-Yehuda Baker Artymiuk Allen
+
+DocType auths, ___Pattern 28___ 
+M. : 28
+J. : 28
+A. : 20
+R. : 18
+P. : 15
+S. : 11
+E. : 11
+G. : 10
+D. : 10
+N. : 7
+C. : 7
+Rousseeuw : 6
+L. : 6
+B. : 6
+W. : 5
+Velev K. H. Bryant van Z. Y. V. T. Rowe Lubachevsky Korniss Hubert F. Eigen Burch Yao Tverberg Toroczkai Steiger Schuster Sarma Pnueli O. Novotny Mitchell Greenberg Dill Comput {Ž}ivaljevi{ć} Zia Zhu Zhou Zhang Y.-c. Wright Wilkinson Wilke Wenger Vre{ć}ica Vose Struyf Stolyar Sproat Speckmann Snoeyink Snoad Smolensky Singhal Siegel Shtrichman Shostak Shenker Sharir Sajid Sag Ruah Roy, Ronnewinkel Rogers Rodeh Riley Rikvold, Rikvold Radon Rado Pr̈ugel-Bennett Privman Prince, Prince Pollard, Patterson Parisi Oppen Noord, Nimwegen Nilsson Nicol Nelson Mohri, McCaskill McCarthy, Matou{š}ek Martinetz Magill Liu Lasry Langerman Kuehlmann Kreveld Kisseberth, Karttunen, Kardar Kane Kalai Jones J.-m. I. Husseini Hojati Hennessy Heinrich Halle Goldsmith, Goel German Fujimoto Ellison, Edwards Dold Dol'nikov DeJong Das Damm Cutaia Crutchfield Clarke Chomsky, Brayton Branke Biere Berezin Aziz Alon Ackermann
+
+DocType auths, ___Pattern 29___ 
+S. : 13
+V. : 12
+Subrahmanian : 10
+R. : 10
+J. : 7
+T. : 5
+G. : 5
+D. A. K. Eiter, Y. Ross Pick P. Ng, N. M. L. Apt, (1999 Waltz, Ullman, Tuttle Subrahmanian, Siegal, Ross, Rogers Ozcan Muth, Morgenstern, Moore, Mohr, Megiddo Masini, Mackworth, Lloyd, Leone Lehmann Lakshmanan, Kraus, Kraus Koller, Kifer, Halpern, Halpern Haddawy, Goodwin Fleming, Fagin, F. Eiter Doan, Doan Dix, Dekhtyar, Cattell, Arisha, (1997 (1990 (1987 (1984
+
+DocType auths, ___Pattern 30___ 
+A. : 10
+B. : 9
+F. : 8
+W. : 6
+Hollunder : 6
+J. : 5
+Baader : 5
+M. I. Horrocks P. Nutt H.-j. E. D. Y. U. Profitlich Nebel H. Franconi Donini Calvanese Buchheit Woods Wolper Vardi Tobies Tarski S̈alel̈a, Schmolze Schmidt Schild Schaerf Sattler S. Rector R. Press, Patel-Schneider Nowlan Muller McGuinness L. K. Hyv̈arinen, Hustadt Hurri, Heinsohn Halpern G̈avert, Glowinski G. Flannery Emerson Borgida
+
+DocType auths, ___Pattern 31___ 
+P. : 6
+Michael : 5
+J. David Wellman Peter M. Junling Hu H. A. ip Vidal Stone Sen S Pines Matarić Manuela Maja L. José Edmund Durfee Daniel Zlotkin William Weiß Watkins Victor Veloso Velos Vazirani V. Umesh Tom Tad Sycara Shaul Sekaran S. Rosenschein R. Oren O. Mitchell Meltzer Markovitch Mahendra Maes Liu Littman Lesser Kiskis Kephart Ken Kearns Katia Jyi-Shane John Jeffrey Jeffery Hübler Huberman Holl Hogg Gilad Gerhard George Etzioni Dayan D. Craig Cowan Corkill Claus Christopher Chavez Caroline Carmel Boutilier Birmingham Binmore Bernardo Alfred
+
+DocType auths, ___Pattern 32___ 
+M. : 10
+A. : 7
+R. : 6
+W. : 5
+Truszczyński, : 5
+Marek, : 5
+Niemelä, I. G. F. C. V. Scarcello, P. N. Kowalski, K. J. H. Dix, {Van {The well-founded van title semantics programs} logic general for Z. Walker, Truszczy{\ŉ}ski, Toni, T. Stefan Simons, Sideri, Schlipf, S.}, Ross, Pfeifer, Mateis, Lonc, Lifschitz, Leone, Jürgen Gottlob, Gelfond, Gelder}, Froidevaux, Fellows, Emden, Eiter, Downey, Dechter, Cholewi\ŉski, Brass, Bondarenko, Blair, Bidoit, Ben-Eliyahu, Aravindan, Apt, =
+
+DocType auths, ___Pattern 33___ 
+D. : 7
+Miller, S. J. F. Pfenning, L.-h. G. Eriksson, A. Wajs, Scott, Rohwedder, R. Nadathur, Matthews, J.-y. I. Huet, Howe, Honsell, Harper, Gunter, Girard, E. Church, Chirimar, Cervesato, C. Abramsky,
+
+DocType auths, ___Pattern 34___ 
+S. : 9
+R. : 7
+M. : 6
+K. : 6
+P. Marchiori J. Etalle D. Apt van Wadler U. Raamsdonk F. Debray Waldmann W. Shyamasundar Ruggieri Rosenblueth Reddy Rao Pedreschi Maluszynski Lüttringhaus-Kappel López-García Lloyd Krishna Kapur Hermenegildo H. Giacobazzi Ganzinger Gabbrielli E. Dembinski Codish Boye Bird A.
+
+DocType auths, ___Pattern 35___ 
+
+
+
+DocType auths, ___Pattern 36___ 
+
+
+
+DocType auths, ___Pattern 37___ 
+
+
+
+DocType auths, ___Pattern 38___ 
+
+
+
+DocType auths, ___Pattern 39___ 
+
+J.-y. Roversi L. Girard A. S. Leivant D. Asperti Y. Taylor Scedrov P. Mitchell Marion Lafont J. J-y. Girard, Cook C. Bellantoni
+
+DocType auths, ___Pattern 40___ 
+
+J. A. Savioja Rocchesso M. L. Ḧarm̈a Fontana Davide {Van {The {2-D} waveguide title mesh digital V̈alim̈aki V. U. Strikwerda Smith}, Scott Scalcon Roc­chesso O. Moorer Laird Laine Karjalainen K. Julius James Huopaniemi Francesco Fitch Federico F. Duyne D. Aird =
+
+DocType auths, ___Pattern 41___ 
+M. : 12
+S. : 10
+D. : 7
+Choi : 6
+C. : 5
+Tse K. Grossglauser A. Shin R. Kwon G. Yener Yanghee Y. Taekyoung T. Sajal Rose P. Naghshineh McCanne L. F. Das Zhang Yoon Yates Vetterli Vecchi V. Un. Towsley Tekinary Shenker Schwartz Saquib Ramjee Puterman Park Ng., Nagarajan Mansour M.l Lu Laguna Kirkpatrick Keshav Kearn Jihyuk Jamin Jabbari Ilkyu H. Goldberg Glover Gelatt E. Danzig Bisdikian Bharghavan B. Amir Abdelzaher A
+
+DocType auths, ___Pattern 42___ 
+M. : 9
+P. : 8
+A. : 8
+Vitányi : 5
+V. : 5
+J. : 5
+B. : 5
+R. N. Li L. Kolmogorov V'yugin T. Gács Cover Yu Uspensky Tromp Thomas Solomonoff Rissanen Q. Martin-L̈of Levin Gao G. Fortnow Fisher Chaitin Barron Antunes
+
+DocType auths, ___Pattern 43___ 
+
+V. U. Schöning Kumar
+
+DocType auths, ___Pattern 44___ 
+J. : 9
+F. : 7
+S. : 6
+L. : 6
+A. : 6
+T. : 5
+M. : 5
+R. P. E. Benhamou, W. K. H. G. D. Shary, Puget, Jaulin, J.-f. Granvilliers, Drucker, C. Yang, Wilkinson, Ward, Waltz, Veh\́i, V. Turing, Travé-Massuyès, Tarabanis, Sunaga, Stoer, Snyder, Smith, Sam, Pau, Older, Neumaier, Muller, Moore, Meintjes, McAllester, Markov, Mackworth, Lozano-Pérez, Liska, Lefèvre, Kutsia, Kaucher, Jirstr Jardillier, J.-m. I. Hong, Haroud, Hansen, Goualard, Gleicher, Garloff, Galyean, Farouki, Emiris, Ebers, Dorato, Delobel, Davenport, Collins, Collavizza, Blinn, Armengol, Alefeld, Abrams, Abdallah, ,
+
+DocType docs, ___Pattern 0___ 
+
+programming language within us symbolic states security project policy models logic introduction imperative human-computer help ginac framework first-order conversation context-equivalent consistency computation clustered c++ alma
+
+DocType docs, ___Pattern 1___ 
+
+verbmobil set semantic quadtrees problem mean lexical field efficient database covering coloring approach algorithms
+
+DocType docs, ___Pattern 2___ 
+
+translation sloppy identity grammars context-free compositional completeness
+
+DocType docs, ___Pattern 3___ 
+
+quantum system lower coding automata word universal turing tool theorems text technique spoken sphere-covering simulating simmune sense robust revisited recovery random programming processing oriented optimal object naive multi-tape measure machine lexical languages immune generalized foundation exemplar-based evaluating error empirically efficient disambiguation dialogue dense converse concentration computer codes bounds bound behavior bayes approaches applied analyzing algebra adaptable access 1-way
+
+DocType docs, ___Pattern 4___ 
+
+similarity-based processing natural language approaches
+
+DocType docs, ___Pattern 5___ 
+
+weighted using tcp sharing services proportional internet fair end-to-end differentiated
+
+DocType docs, ___Pattern 6___ 
+
+systems sparse solving polynomial faster degenerate
+
+DocType docs, ___Pattern 7___ 
+
+mesh smoothing signature setting quadrilateral point placement parameters packing optimal numerically meshing linear invariant hexahedral generation example curves complexity circle
+
+DocType docs, ___Pattern 8___ 
+
+phase vertex transitions transition system statistical software service random providing perspective perpetual optimization mechanics lcc hardware graphs finite-connectivity extensible experience early covering computational complexity code central asdl architecture adaptation
+
+DocType docs, ___Pattern 9___ 
+
+quantum complexity systems set semidefinite pspace proof programming problems np-complete membership interactive interaction graph dynamics computing communication coloring chaotic approximate 2-round
+
+DocType docs, ___Pattern 10___ 
+
+time near-linear minimum cuts
+
+DocType docs, ___Pattern 11___ 
+
+unconditionally structures secure q^2 multiparty computation adversary
+
+DocType docs, ___Pattern 12___ 
+
+remarks grammar geometry
+
+DocType docs, ___Pattern 13___ 
+
+reconstructing x-rays tomographic tiling three structures proof projections polyominoes polyatomic orthogonal np-completeness hv-convex discrete constraints bars atoms
+
+DocType docs, ___Pattern 14___ 
+
+using transport security proof logic level gong-needham-yahalom
+
+DocType docs, ___Pattern 15___ 
+
+theory computing collective collaborative choice
+
+DocType docs, ___Pattern 16___ 
+
+strategies restart internet congestion
+
+DocType docs, ___Pattern 17___ 
+
+surface implementation homeomorphisms bestvina-handel algorithm
+
+DocType docs, ___Pattern 18___ 
+
+two-way transductions transducers temporal string state rules representations natural mso meaning language hpsg handling front-end finite definable constraint applying
+
+DocType docs, ___Pattern 19___ 
+
+study setting properties modeling linear-time formal events commercial case
+
+DocType docs, ___Pattern 20___ 
+
+unit union quadratic origin even contain complexity balls
+
+DocType docs, ___Pattern 21___ 
+
+triangulation ordinary delaunay unbounded two tours surface sets separating separability segments removal randomized polygons largest incremental improved hyperplane hidden finite-resolution finding dilation deletion curvature convex conic computing circular circles bounded beta-skeletons
+
+DocType docs, ___Pattern 22___ 
+
+text representation mixing levels hybrid generation automatic approach
+
+DocType docs, ___Pattern 23___ 
+
+filters arithmetic results probabilistic predicates power geometric analysis
+
+DocType docs, ___Pattern 24___ 
+
+one-way np lower hierarchy bounds boolean worst-case what's using translating towards total theorem technique take-home suffices step security second rice's restrictive raising query properties problems polynomial permutations partial parallel order operations low link joins introduction functions extended existence equivalence equality easy-hard downwards downward cryptography complexity-theoretic complexity collapses collapse characterizations analogs algebraic acceptance
+
+DocType docs, ___Pattern 25___ 
+
+topology emerging computational challenges
+
+DocType docs, ___Pattern 26___ 
+
+self-stabilizing ring mutual k=n exclusion even
+
+DocType docs, ___Pattern 27___ 
+
+tractability subgraph related problems planar model isomorphism graphs fixed-parameter definability checking
+
+DocType docs, ___Pattern 28___ 
+
+logic algorithms verification using uninterpreted time-dependent systems surface scalability regression reductions prosodic propositional processor parallel one-level non-equilibrium multivariate morphology large growth genetic functions environments efficient depth asynchronous
+
+DocType docs, ___Pattern 29___ 
+
+programming viewed rule-based programs probabilistic constraint agent
+
+DocType docs, ___Pattern 30___ 
+
+theory reasoning pratice orthgonal multiplicative independent groups component axioms analysis algorithm
+
+DocType docs, ___Pattern 31___ 
+
+agents predicting learn framework expected clri behavior
+
+DocType docs, ___Pattern 32___ 
+
+stable small models large computing
+
+DocType docs, ___Pattern 33___ 
+
+syntax reasoning logical higher-order framework abstract
+
+DocType docs, ___Pattern 34___ 
+
+side programming logic functional (lazy)
+
+DocType docs, ___Pattern 35___ 
+
+scheme matching robustness regional global
+
+DocType docs, ___Pattern 36___ 
+
+uncertainty systems modeling engineering complex
+
+DocType docs, ___Pattern 37___ 
+
+protection pad one-time environments distributed data cipher based
+
+DocType docs, ___Pattern 38___ 
+
+robot novelty neotaxis detection
+
+DocType docs, ___Pattern 39___ 
+
+programming p-time notation nets logic light correctness completeness) affine (proof
+
+DocType docs, ___Pattern 40___ 
+
+waveguide online meshes error dispersion correction 2d
+
+DocType docs, ___Pattern 41___ 
+
+wireless resource networks multimedia decision-theoretic approach allocation
+
+DocType docs, ___Pattern 42___ 
+
+statistics algorithmic
+
+DocType docs, ___Pattern 43___ 
+
+time o(13289^n) 3-coloring
+
+DocType docs, ___Pattern 44___ 
+
+solving planning motion interval control constraint camera

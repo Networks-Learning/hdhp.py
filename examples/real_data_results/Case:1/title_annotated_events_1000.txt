@@ -1,0 +1,1000 @@
+1.69e+03 pattern= 56 task=  0 (u=73)  {'docs': u'classification symbolic transition systems'}
+2.91e+03 pattern=188 task=  0 (u=120)  {'docs': u'high-level networking mobile code first order and-continuations'}
+3.23e+03 pattern=241 task=  0 (u=134)  {'docs': u'average coset weight distribution combined ldpc matrix ensemble'}
+2.75e+03 pattern=113 task=  0 (u=171)  {'docs': u'theory probabilistic deductive databases'}
+2.1e+03 pattern= 29 task=  0 (u=173)  {'docs': u'two results proiritized logic programming'}
+2.19e+03 pattern=117 task=  1 (u=173)  {'docs': u'handling defeasibilities action domains'}
+2.27e+03 pattern= 56 task=  0 (u=195)  {'docs': u'coloring random graphs'}
+3e+03 pattern=212 task=  0 (u=207)  {'docs': u'cauchy annealing schedule annealing schedule boltzmann selection scheme evolutionary algorithms'}
+1.02e+03 pattern= 15 task=  0 (u=297)  {'docs': u'numerically invariant signature curves'}
+2.7e+03 pattern=106 task=  0 (u=320)  {'docs': u'finding communities linear time physics approach'}
+2.86e+03 pattern= 56 task=  0 (u=343)  {'docs': u'threshold values stability analysis high-q asymptotics coloring problem random graphs'}
+1.85e+03 pattern= 27 task=  0 (u=366)  {'docs': u'randomized two-process wait-free test-and-set'}
+3.18e+03 pattern= 29 task=  1 (u=366)  {'docs': u'limits rush hour logic complexity'}
+2e+03 pattern= 66 task=  0 (u=367)  {'docs': u'meaningful information'}
+1.85e+03 pattern= 29 task=  0 (u=373)  {'docs': u'classes terminating logic programs'}
+1.8e+03 pattern= 29 task=  0 (u=375)  {'docs': u'analysis polymorphically typed logic programs using aci-unification'}
+1.85e+03 pattern= 29 task=  0 (u=376)  {'docs': u'acceptability general orderings'}
+1.63e+03 pattern= 29 task=  0 (u=377)  {'docs': u'termination analysis logic programs using acceptability general term orders'}
+1.85e+03 pattern= 90 task=  1 (u=377)  {'docs': u'inference termination conditions numerical loops'}
+1.96e+03 pattern= 90 task=  2 (u=377)  {'docs': u'inference termination conditions numerical loops prolog'}
+1.96e+03 pattern= 90 task=  2 (u=377)  {'docs': u'termination meta-programs'}
+2.42e+03 pattern= 58 task=  0 (u=379)  {'docs': u'comparisons computation well-founded semantics disjunctive logic programs'}
+2.87e+03 pattern= 58 task=  0 (u=488)  {'docs': u'propagation selective initialization application numerical constraint satisfaction problems'}
+1.54e+03 pattern= 57 task=  0 (u=491)  {'docs': u'phutball endgames hard'}
+3.18e+03 pattern=236 task=  1 (u=491)  {'docs': u'bidimensionality map graphs grid minors'}
+1.95e+03 pattern= 36 task=  0 (u=498)  {'docs': u'algorithmic self-assembly dna tiles application cryptanalysis'}
+1.17e+03 pattern= 36 task=  0 (u=500)  {'docs': u'quadrilateral meshing circle packing'}
+1.19e+03 pattern= 37 task=  1 (u=500)  {'docs': u'emerging challenges computational topology'}
+1.3e+03 pattern= 46 task=  2 (u=500)  {'docs': u'multivariate regression depth'}
+1.58e+03 pattern= 46 task=  3 (u=500)  {'docs': u'computing depth flat'}
+1.68e+03 pattern= 36 task=  4 (u=500)  {'docs': u'optimal moebius transformations information visualization meshing'}
+1.91e+03 pattern= 55 task=  5 (u=500)  {'docs': u'flipping cubical meshes'}
+2.38e+03 pattern=132 task=  6 (u=500)  {'docs': u'optimized color gamuts tiled displays'}
+  845 pattern=  6 task=  0 (u=501)  {'docs': u'linear complexity hexahedral mesh generation'}
+1.12e+03 pattern= 25 task=  1 (u=501)  {'docs': u'setting parameters example'}
+1.14e+03 pattern= 31 task=  2 (u=501)  {'docs': u'algorithms coloring quadtrees'}
+1.14e+03 pattern= 32 task=  3 (u=501)  {'docs': u'beta-skeletons unbounded dilation'}
+1.25e+03 pattern= 44 task=  4 (u=501)  {'docs': u'subgraph isomorphism planar graphs related problems'}
+1.56e+03 pattern=  9 task=  5 (u=501)  {'docs': u'fast approximation centrality'}
+1.56e+03 pattern=  9 task=  5 (u=501)  {'docs': u'improved algorithms 3-coloring 3-edge-coloring constraint satisfaction'}
+1.62e+03 pattern=  8 task=  6 (u=501)  {'docs': u'small maximal independent sets faster exact graph coloring'}
+1.84e+03 pattern= 88 task=  7 (u=501)  {'docs': u'hinged kite mirror dissection'}
+1.94e+03 pattern= 96 task=  8 (u=501)  {'docs': u'separating geometric thickness book thickness'}
+1.95e+03 pattern= 83 task=  9 (u=501)  {'docs': u'minimum expectation selection problem'}
+2.13e+03 pattern= 69 task= 10 (u=501)  {'docs': u'steady state model graph power laws'}
+2.15e+03 pattern= 96 task= 11 (u=501)  {'docs': u'separating thickness geometric thickness'}
+2.21e+03 pattern= 25 task= 12 (u=501)  {'docs': u'algorithms media'}
+2.24e+03 pattern= 65 task= 13 (u=501)  {'docs': u'dynamic generators topologically embedded graphs'}
+2.45e+03 pattern= 37 task= 14 (u=501)  {'docs': u'traveling salesman problem cubic graphs'}
+2.5e+03 pattern= 77 task= 15 (u=501)  {'docs': u'quasiconvex analysis backtracking algorithms'}
+2.59e+03 pattern= 37 task= 16 (u=501)  {'docs': u'testing bipartiteness geometric intersection graphs'}
+2.81e+03 pattern=  8 task= 17 (u=501)  {'docs': u'lattice dimension graph'}
+2.93e+03 pattern= 25 task= 18 (u=501)  {'docs': u'algorithms drawing media'}
+2.96e+03 pattern=  8 task= 19 (u=501)  {'docs': u'maximal independent sets dynamic dominance sparse graphs'}
+3.11e+03 pattern= 30 task= 20 (u=501)  {'docs': u'quasiconvex programming'}
+3.27e+03 pattern= 63 task= 21 (u=501)  {'docs': u'improved combinatorial group testing algorithms real-world problem sizes'}
+  844 pattern=  6 task=  0 (u=503)  {'docs': u'optimal point placement mesh smoothing'}
+1.95e+03 pattern=  3 task=  0 (u=520)  {'docs': u'two-way quantum one-counter automata'}
+1.72e+03 pattern=  5 task=  0 (u=521)  {'docs': u'quantum multi-prover interactive proof systems limited prior entanglement'}
+1.95e+03 pattern= 97 task=  1 (u=521)  {'docs': u'quantum certificate verification single versus multiple quantum certificates'}
+1.95e+03 pattern= 58 task=  0 (u=523)  {'docs': u'variable value ordering solving balanced academic curriculum problems'}
+2.5e+03 pattern=120 task=  0 (u=544)  {'docs': u'direct sum theorem communication complexity message compression'}
+2.61e+03 pattern=160 task=  0 (u=649)  {'docs': u'symbolic stochastic dynamical systems viewed binary n-step markov chains'}
+3.18e+03 pattern=156 task=  0 (u=728)  {'docs': u'note burrows-wheeler transformation'}
+2.37e+03 pattern=  1 task=  0 (u=814)  {'docs': u'database repairs analytic tableaux'}
+2.71e+03 pattern= 37 task=  0 (u=873)  {'docs': u'phase transitions random boolean networks different updating schemes'}
+2.86e+03 pattern=191 task=  1 (u=873)  {'docs': u'protocol requirements self-organizing artifacts towards ambient intelligence'}
+3.26e+03 pattern=141 task=  2 (u=873)  {'docs': u'general methodology designing self-organizing systems'}
+1.82e+03 pattern= 34 task=  0 (u=1035)  {'docs': u'area hypercube layouts'}
+3.13e+03 pattern= 36 task=  0 (u=1045)  {'docs': u'chosen-plaintext cryptanalysis clipped-neural-network-based chaotic cipher'}
+2.46e+03 pattern= 83 task=  0 (u=1048)  {'docs': u'phase diagram constrained integer partitioning problem'}
+2.38e+03 pattern=114 task=  0 (u=1049)  {'docs': u'survey propagation algorithm satisfiability'}
+2.39e+03 pattern= 58 task=  1 (u=1049)  {'docs': u'constraint satisfaction survey propagation'}
+2.75e+03 pattern=130 task=  2 (u=1049)  {'docs': u'survey propagation local equilibrium equations'}
+2.91e+03 pattern= 29 task=  0 (u=1125)  {'docs': u'propositional defeasible logic linear complexity'}
+2.08e+03 pattern= 99 task=  0 (u=1130)  {'docs': u'non-negative sparse coding'}
+1.9e+03 pattern= 30 task=  0 (u=1163)  {'docs': u'using methods declarative logic programming intelligent information agents'}
+1.92e+03 pattern= 53 task=  1 (u=1163)  {'docs': u'properties update sequences based causal rejection'}
+2.3e+03 pattern=127 task=  2 (u=1163)  {'docs': u'reasoning evolving nonmonotonic knowledge bases'}
+1.92e+03 pattern= 29 task=  0 (u=1169)  {'docs': u'probabilistic asynchronous pi-calculus'}
+2.79e+03 pattern= 77 task=  0 (u=1354)  {'docs': u'enhanced sharing analysis techniques comprehensive evaluation'}
+  984 pattern= 12 task=  0 (u=1379)  {'docs': u'efficient mean field approach set covering problem'}
+2.63e+03 pattern=165 task=  0 (u=1490)  {'docs': u'compact routing internet-like graphs'}
+2.08e+03 pattern= 99 task=  0 (u=1542)  {'docs': u'small strictly convex quadrilateral meshes point sets'}
+2.12e+03 pattern= 66 task=  1 (u=1542)  {'docs': u'sufficiently fat polyhedra 2-castable'}
+1.15e+03 pattern= 35 task=  0 (u=1559)  {'docs': u'characterizations existence partial total one-way permutations'}
+2.19e+03 pattern=119 task=  0 (u=1666)  {'docs': u'common transversals tangents two lines two quadrics p^3'}
+2.51e+03 pattern=146 task=  1 (u=1666)  {'docs': u'envelope lines meeting fixed line tangent two spheres'}
+1.19e+03 pattern= 20 task=  0 (u=1861)  {'docs': u'computing largest circles separating two sets segments'}
+1.19e+03 pattern= 38 task=  1 (u=1861)  {'docs': u'circular separability polygons'}
+1.19e+03 pattern= 39 task=  2 (u=1861)  {'docs': u'convex tours bounded curvature'}
+2.23e+03 pattern=123 task=  0 (u=1977)  {'docs': u'architecture making object-oriented systems available prolog'}
+3.21e+03 pattern=194 task=  0 (u=1992)  {'docs': u'stopping distance stopping redundancy codes'}
+2.94e+03 pattern= 55 task=  0 (u=2057)  {'docs': u'online companion caching'}
+2.01e+03 pattern= 83 task=  0 (u=2162)  {'docs': u'boosting search rare events'}
+2.62e+03 pattern= 56 task=  1 (u=2162)  {'docs': u'instability one-step replica-symmetry-broken phase satisfiability problems'}
+2.97e+03 pattern=194 task=  2 (u=2162)  {'docs': u'tight bounds ldpc ldgm codes map decoding'}
+1.14e+03 pattern= 30 task=  0 (u=2176)  {'docs': u'alma project first-order logic help us imperative programming'}
+1.39e+03 pattern=  8 task=  1 (u=2176)  {'docs': u'constraint programming viewed rule-based programming'}
+2.84e+03 pattern= 18 task=  2 (u=2176)  {'docs': u'comparative study arithmetic constraints integer intervals'}
+2.84e+03 pattern=188 task=  3 (u=2176)  {'docs': u'uniform proofs order independence various strategy elimination procedures'}
+1.7e+03 pattern= 78 task=  0 (u=2178)  {'docs': u'open archives initiative protocol development implementation arxiv'}
+1.85e+03 pattern= 91 task=  1 (u=2178)  {'docs': u'exposing harvesting metadata using oai metadata harvesting protocol tutorial'}
+2.59e+03 pattern= 78 task=  2 (u=2178)  {'docs': u'eprints open archives initiative'}
+2.6e+03 pattern=159 task=  0 (u=2322)  {'docs': u'new analytical radial distortion model camera calibration'}
+2.6e+03 pattern=159 task=  0 (u=2322)  {'docs': u'rational radial distortion models analytical undistortion formulae'}
+2.6e+03 pattern=159 task=  0 (u=2322)  {'docs': u'analytical piecewise radial distortion model precision camera calibration'}
+2.62e+03 pattern=159 task=  1 (u=2322)  {'docs': u'family simplified geometric distortion models camera calibration'}
+2.91e+03 pattern=152 task=  2 (u=2322)  {'docs': u'blind detection compensation camera lens geometric distortions'}
+2.73e+03 pattern=153 task=  0 (u=2415)  {'docs': u'hierarchical clustering using mutual information'}
+2.73e+03 pattern=153 task=  0 (u=2415)  {'docs': u'hierarchical clustering based mutual information'}
+2.56e+03 pattern= 62 task=  0 (u=2472)  {'docs': u'relational databases data management phenix'}
+2.56e+03 pattern=152 task=  0 (u=2474)  {'docs': u'graxml - modular geometric modeler'}
+2.56e+03 pattern= 58 task=  0 (u=2483)  {'docs': u'minimum model semantics logic programs negation-as-failure'}
+2.56e+03 pattern=151 task=  0 (u=2486)  {'docs': u'computing sharp scalable bounds errors approximate zeros univariate polynomials'}
+2.94e+03 pattern= 28 task=  0 (u=2490)  {'docs': u'combinatorial approach studying locc transformations multipartite states'}
+2.98e+03 pattern=  4 task=  1 (u=2490)  {'docs': u'assisted quantum secret sharing'}
+2.1e+03 pattern=106 task=  0 (u=2757)  {'docs': u'generalized cores'}
+2.62e+03 pattern=161 task=  1 (u=2757)  {'docs': u'short cycles connectivity'}
+2.7e+03 pattern=106 task=  2 (u=2757)  {'docs': u'o(m) algorithm cores decomposition networks'}
+1.86e+03 pattern= 41 task=  0 (u=2814)  {'docs': u'algorithms boolean function query properties'}
+2.29e+03 pattern=  3 task=  1 (u=2814)  {'docs': u'quantum lower bound recursive fourier sampling'}
+2.71e+03 pattern= 47 task=  2 (u=2814)  {'docs': u'multilinear formulas skepticism quantum computing'}
+2.81e+03 pattern= 53 task=  3 (u=2814)  {'docs': u'limitations quantum advice one-way communication'}
+2.94e+03 pattern= 27 task=  4 (u=2814)  {'docs': u'improved simulation stabilizer circuits'}
+2.95e+03 pattern=185 task=  5 (u=2814)  {'docs': u'complexity agreement'}
+3.12e+03 pattern= 61 task=  6 (u=2814)  {'docs': u'limits efficient computation physical world'}
+3.13e+03 pattern= 47 task=  7 (u=2814)  {'docs': u'quantum computing postselection probabilistic polynomial-time'}
+3.18e+03 pattern=126 task=  8 (u=2814)  {'docs': u'np-complete problems physical reality'}
+3.24e+03 pattern=169 task=  9 (u=2814)  {'docs': u'oracles subtle malicious'}
+1.91e+03 pattern= 75 task=  0 (u=2876)  {'docs': u'classes functions free lunch results hold'}
+2.49e+03 pattern=143 task=  1 (u=2876)  {'docs': u'recent results no-free-lunch theorems optimization'}
+2.14e+03 pattern= 94 task=  0 (u=2877)  {'docs': u'neutrality necessity self-adaptation'}
+2.49e+03 pattern=142 task=  0 (u=2878)  {'docs': u"bird's eye view matrix distributed processing"}
+3.26e+03 pattern=142 task=  1 (u=2878)  {'docs': u'parallel programming matrix distributed processing'}
+1.75e+03 pattern= 81 task=  0 (u=2896)  {'docs': u'fitness uniform selection preserve genetic diversity'}
+2.2e+03 pattern=  7 task=  1 (u=2896)  {'docs': u'fastest shortest algorithm well-defined problems'}
+2.58e+03 pattern=153 task=  2 (u=2896)  {'docs': u'bayesian treatment incomplete discrete data applied mutual information feature selection'}
+2.84e+03 pattern=153 task=  3 (u=2896)  {'docs': u'distribution mutual information complete incomplete data'}
+3.1e+03 pattern=220 task=  4 (u=2896)  {'docs': u'fast non-parametric bayesian inference infinite trees'}
+3.09e+03 pattern=175 task=  0 (u=2909)  {'docs': u'lower-stretch spanning trees'}
+1.03e+03 pattern= 18 task=  0 (u=2999)  {'docs': u'tiling bars tomographic constraints'}
+1.11e+03 pattern= 23 task=  1 (u=2999)  {'docs': u'reconstructing polyatomic structures discrete x-rays np-completeness proof three atoms'}
+1.11e+03 pattern= 23 task=  1 (u=2999)  {'docs': u'reconstructing hv-convex polyominoes orthogonal projections'}
+2.32e+03 pattern= 53 task=  2 (u=2999)  {'docs': u'cellular automata communication complexity'}
+1.91e+03 pattern= 18 task=  0 (u=3000)  {'docs': u'note tiling tomographic constraints'}
+3.06e+03 pattern=156 task=  1 (u=3000)  {'docs': u'note scheduling equal-length jobs maximize throughput'}
+3.25e+03 pattern=244 task=  2 (u=3000)  {'docs': u'oblivious medians online bidding'}
+3.25e+03 pattern=214 task=  3 (u=3000)  {'docs': u'reverse greedy algorithm metric k-median problem'}
+1.15e+03 pattern=  3 task=  0 (u=3081)  {'docs': u'raising np lower bounds parallel np lower bounds'}
+1.22e+03 pattern= 33 task=  1 (u=3081)  {'docs': u"what's downward collapse using easy-hard technique link boolean polynomial hierarchy collapses"}
+1.22e+03 pattern= 41 task=  2 (u=3081)  {'docs': u'translating equality downwards'}
+1.22e+03 pattern= 41 task=  2 (u=3081)  {'docs': u'introduction query order'}
+1.96e+03 pattern=  3 task=  3 (u=3081)  {'docs': u'recognizing heuristics approximate minimum vertex covers complete parallel access np'}
+2.58e+03 pattern= 44 task=  4 (u=3081)  {'docs': u'complexity cycle length modularity problems graphs'}
+2.43e+03 pattern=139 task=  0 (u=3082)  {'docs': u'integration systems linear pdes using conservation laws syzygies'}
+2.43e+03 pattern=139 task=  0 (u=3082)  {'docs': u'size reduction partial decoupling systems equations'}
+2.82e+03 pattern=186 task=  0 (u=3087)  {'docs': u'parameter-less optimization extended compact genetic algorithm iterated local search'}
+2.82e+03 pattern= 31 task=  0 (u=3088)  {'docs': u'philosophical essay life connections genetic algorithms'}
+2.82e+03 pattern=186 task=  1 (u=3088)  {'docs': u'architecture massive parallelization compact genetic algorithm'}
+3.21e+03 pattern=238 task=  0 (u=3105)  {'docs': u'zeta-dimension'}
+3.24e+03 pattern=  8 task=  1 (u=3105)  {'docs': u'pushdown dimension'}
+2.42e+03 pattern= 74 task=  0 (u=3141)  {'docs': u'binary trees fibred categories'}
+2.57e+03 pattern=120 task=  0 (u=3158)  {'docs': u'relationship strand spaces multi-agent systems'}
+2.61e+03 pattern= 19 task=  1 (u=3158)  {'docs': u'logic reasoning upper probabilities'}
+2.75e+03 pattern= 85 task=  2 (u=3158)  {'docs': u'characterizing reasoning probabilistic non-probabilistic expectation'}
+2.82e+03 pattern= 56 task=  3 (u=3158)  {'docs': u'anonymity information hiding multiagent systems'}
+2.91e+03 pattern= 19 task=  4 (u=3158)  {'docs': u'logic reasoning evidence'}
+3.06e+03 pattern= 21 task=  5 (u=3158)  {'docs': u'sleeping beauty reconsidered conditioning reflection asynchronous systems'}
+3.06e+03 pattern=126 task=  6 (u=3158)  {'docs': u'intransitivity vagueness'}
+3.13e+03 pattern=131 task=  0 (u=3199)  {'docs': u'negotiating bundles prices using aggregate knowledge'}
+3.05e+03 pattern=125 task=  0 (u=3202)  {'docs': u'normal forms answer sets programming'}
+3.13e+03 pattern= 58 task=  1 (u=3202)  {'docs': u'existence stable models non-stratified logic programs'}
+2.52e+03 pattern= 39 task=  0 (u=3381)  {'docs': u'$p \\ne np$ propositional proof complexity resolution lower bounds weak pigeonhole principle'}
+2.52e+03 pattern= 10 task=  0 (u=3382)  {'docs': u'hardness randomness survey universal derandomization'}
+2.62e+03 pattern=162 task=  1 (u=3382)  {'docs': u'constant-depth frege systems counting axioms polynomially simulate nullstellensatz refutations'}
+  981 pattern= 11 task=  0 (u=3387)  {'docs': u'multiparty computation unconditionally secure q^2 adversary structures'}
+3.27e+03 pattern=243 task=  0 (u=3710)  {'docs': u'relational reasoning region connection calculus'}
+2.07e+03 pattern= 11 task=  0 (u=3755)  {'docs': u'secure history preservation timeline entanglement'}
+2.33e+03 pattern=130 task=  1 (u=3755)  {'docs': u'historic name-trail service'}
+2.44e+03 pattern= 63 task=  2 (u=3755)  {'docs': u'authenticated append-only skip lists'}
+2.07e+03 pattern= 73 task=  0 (u=3768)  {'docs': u'deductive database system ldl++'}
+2.08e+03 pattern=105 task=  0 (u=3778)  {'docs': u'cup controlled update propagation peer-to-peer networks'}
+2.3e+03 pattern=105 task=  1 (u=3778)  {'docs': u'practical load balancing content requests peer-to-peer networks'}
+2.72e+03 pattern=174 task=  2 (u=3778)  {'docs': u'2 p2p 2 p2p'}
+2.86e+03 pattern=120 task=  0 (u=3853)  {'docs': u'mathematical analysis multi-agent systems'}
+2.96e+03 pattern=168 task=  0 (u=3877)  {'docs': u'multi-agent coordination using nearest neighbor rules revisiting vicsek model'}
+3.27e+03 pattern=232 task=  0 (u=3891)  {'docs': u'beyond hypertree width decomposition methods without decompositions'}
+2.75e+03 pattern= 34 task=  0 (u=3912)  {'docs': u'modeling object oriented constraint programs z'}
+2.42e+03 pattern=135 task=  0 (u=3999)  {'docs': u'relaxation metastability randomwalksat search procedure'}
+3.19e+03 pattern= 71 task=  0 (u=4068)  {'docs': u'self-organization speech sounds'}
+3.17e+03 pattern=134 task=  0 (u=4164)  {'docs': u'stability analysis regularized least squares regression'}
+3.24e+03 pattern= 12 task=  0 (u=4224)  {'docs': u'knowledge representation issues semantic graphs relationship detection'}
+  956 pattern= 10 task=  0 (u=4230)  {'docs': u'universal object oriented languages computer algebra'}
+2.94e+03 pattern= 53 task=  1 (u=4230)  {'docs': u'quantum cellular automata'}
+3.11e+03 pattern=208 task=  0 (u=4246)  {'docs': u'finite domain bounds consistency revisited'}
+2.72e+03 pattern=169 task=  0 (u=4249)  {'docs': u'chameleon type debugger (tool demonstration)'}
+2.23e+03 pattern=115 task=  0 (u=4263)  {'docs': u'greedy facility location algorithms analyzed using dual fitting factor-revealing lp'}
+3.16e+03 pattern=106 task=  0 (u=4287)  {'docs': u'statistical theory chord churn'}
+1.57e+03 pattern= 20 task=  0 (u=4443)  {'docs': u'computing crossing numbers quadratic time'}
+  442 pattern=  0 task=  0 (u=4696)  {'docs': u'similarity-based approaches natural language processing'}
+1.86e+03 pattern= 57 task=  0 (u=4741)  {'docs': u'distributed broadcast wireless networks unknown topology'}
+1.86e+03 pattern= 85 task=  0 (u=4748)  {'docs': u'neel npc colouring small worlds'}
+2.5e+03 pattern=103 task=  1 (u=4748)  {'docs': u'determining possible avenues approach using ants'}
+1.86e+03 pattern= 36 task=  0 (u=4749)  {'docs': u'transformations ccp programs'}
+3.22e+03 pattern=131 task=  1 (u=4749)  {'docs': u'integrity constraints trust management'}
+3.04e+03 pattern=215 task=  0 (u=4771)  {'docs': u'capacity random-coding exponents channel coding side information'}
+2.7e+03 pattern= 58 task=  0 (u=4777)  {'docs': u'rigorous design tracers experiment constraint logic programming'}
+2.87e+03 pattern= 37 task=  0 (u=4928)  {'docs': u'characterisations intersection graphs vertex orderings'}
+1.96e+03 pattern= 38 task=  0 (u=4943)  {'docs': u'coding distributive lattices edge firing games'}
+2.6e+03 pattern=158 task=  0 (u=5001)  {'docs': u'bridging gap modal temporal logics constraint-based qsr alc(d) spatio-temporalisation weakly cyclic tboxes'}
+2.6e+03 pattern=127 task=  1 (u=5001)  {'docs': u'integrating cardinal direction relations orientation relations qualitative spatial reasoning'}
+2.73e+03 pattern=127 task=  2 (u=5001)  {'docs': u'integrating existing cone-shaped projection-based cardinal direction relations tcsp-like decidable generalisation'}
+3.04e+03 pattern=213 task=  3 (u=5001)  {'docs': u'augmenting alc(d) (atemporal) roles (aspatial) concrete domain temporal roles spatial concrete domain -first results'}
+3.04e+03 pattern=213 task=  3 (u=5001)  {'docs': u'alc(d)-based combination temporal constraints spatial constraints suitable continuous (spatial) change'}
+3.04e+03 pattern=127 task=  4 (u=5001)  {'docs': u'tcsp-like decidable constraint language generalising existing cardinal direction relations'}
+3.09e+03 pattern= 56 task=  0 (u=5067)  {'docs': u'statistical mechanics characterization neuronal mosaics'}
+1.46e+03 pattern= 37 task=  0 (u=5075)  {'docs': u'computational complexity phase transitions'}
+2.35e+03 pattern= 37 task=  1 (u=5075)  {'docs': u'phase transitions'}
+3.22e+03 pattern= 37 task=  2 (u=5075)  {'docs': u'spines random constraint satisfaction problems definition connection computational complexity'}
+3.22e+03 pattern= 37 task=  2 (u=5075)  {'docs': u'coarse sharp thresholds boolean constraint satisfaction problems'}
+2.7e+03 pattern=106 task=  0 (u=5086)  {'docs': u'theory one tape linear time turing machines'}
+1.51e+03 pattern= 49 task=  0 (u=5096)  {'docs': u'theory normed simulations'}
+1.51e+03 pattern= 54 task=  0 (u=5103)  {'docs': u'language identification controlled systems modelling control anomaly detection'}
+1.58e+03 pattern= 59 task=  0 (u=5144)  {'docs': u'approach implementation overlapping rules standard ml'}
+2.9e+03 pattern=196 task=  1 (u=5144)  {'docs': u'deductive algorithmic knowledge'}
+2.91e+03 pattern= 19 task=  2 (u=5144)  {'docs': u'logic reasoning digital rights'}
+2.91e+03 pattern= 73 task=  3 (u=5144)  {'docs': u'higher-order concurrent win32 programming'}
+2.91e+03 pattern= 73 task=  3 (u=5144)  {'docs': u'design com-oriented module system'}
+2.91e+03 pattern= 59 task=  4 (u=5144)  {'docs': u'reactive programming standard ml'}
+2.91e+03 pattern=197 task=  5 (u=5144)  {'docs': u"aspects de la programmation d'applications win32 avec un langage fonctionnel"}
+2.91e+03 pattern=197 task=  5 (u=5144)  {'docs': u"analysis lambek's production machines"}
+2.91e+03 pattern= 41 task=  6 (u=5144)  {'docs': u'expressive power first-order boolean functions pcf'}
+2.51e+03 pattern=138 task=  0 (u=5162)  {'docs': u'new multilayered pcp hardness hypergraph vertex cover'}
+3.24e+03 pattern=  8 task=  1 (u=5162)  {'docs': u'conditional hardness approximate coloring'}
+2.95e+03 pattern= 14 task=  0 (u=5168)  {'docs': u'distance distribution binary codes error probability decoding'}
+3.02e+03 pattern= 14 task=  1 (u=5168)  {'docs': u'distance properties expander codes'}
+3.13e+03 pattern=182 task=  2 (u=5168)  {'docs': u'asymptotic accuracy union bound'}
+3.16e+03 pattern=215 task=  0 (u=5235)  {'docs': u'noncoherent rician fading channel -- part  structure capacity-achieving input'}
+3.21e+03 pattern=166 task=  0 (u=5346)  {'docs': u'characterization fibonacci cobweb poset odag'}
+1.15e+03 pattern= 33 task=  0 (u=5382)  {'docs': u'boolean operations joins extended low hierarchy'}
+1.15e+03 pattern= 34 task=  1 (u=5382)  {'docs': u"second step towards complexity-theoretic analogs rice's theorem"}
+1.33e+03 pattern=  6 task=  2 (u=5382)  {'docs': u'take-home complexity'}
+1.73e+03 pattern= 45 task=  3 (u=5382)  {'docs': u'p-immune sets holes lack self-reducibility properties'}
+2.68e+03 pattern=172 task=  0 (u=5426)  {'docs': u'graphics card streaming computer'}
+2.81e+03 pattern=100 task=  0 (u=5427)  {'docs': u'parameter-less hierarchical boa'}
+2.81e+03 pattern=185 task=  1 (u=5427)  {'docs': u'computational complexity simulation rare events ising spin glasses'}
+2.81e+03 pattern=186 task=  2 (u=5427)  {'docs': u'fitness inheritance bayesian optimization algorithm'}
+3.17e+03 pattern=130 task=  3 (u=5427)  {'docs': u'multiobjective hboa clustering scalability'}
+1.05e+03 pattern= 19 task=  0 (u=5493)  {'docs': u'transport level security proof using gong-needham-yahalom logic'}
+1.07e+03 pattern= 20 task=  1 (u=5493)  {'docs': u'collective choice theory collaborative computing'}
+1.47e+03 pattern= 55 task=  0 (u=5550)  {'docs': u'online correction dispersion error 2d waveguide meshes'}
+1.68e+03 pattern= 76 task=  1 (u=5550)  {'docs': u'signal-theoretic characterization waveguide mesh geometries models two--dimensional wave propagation elastic media'}
+1.59e+03 pattern= 67 task=  0 (u=5551)  {'docs': u'generalization 3-d resonator model simulation spherical enclosures'}
+2.66e+03 pattern=143 task=  0 (u=5615)  {'docs': u'results quantitative mu-calculus qmu'}
+1.5e+03 pattern= 53 task=  0 (u=5626)  {'docs': u'quantum complexity set membership'}
+1.96e+03 pattern=100 task=  1 (u=5626)  {'docs': u'depth-3 arithmetic circuits s^2_n(x) extensions graham-pollack theorem'}
+3.11e+03 pattern= 46 task=  0 (u=5689)  {'docs': u'computing fixed points generalized sandpiles'}
+3.02e+03 pattern= 99 task=  0 (u=5750)  {'docs': u'proximity inversion functions non-negative integers'}
+3.24e+03 pattern= 30 task=  0 (u=5798)  {'docs': u'mapping fusion synchronized hyperedge replacement logic programming'}
+  814 pattern=  4 task=  0 (u=5875)  {'docs': u'differentiated end-to-end internet services using weighted proportional fair sharing tcp'}
+2.74e+03 pattern=141 task=  0 (u=5887)  {'docs': u'partiality physics'}
+2.8e+03 pattern= 30 task=  1 (u=5887)  {'docs': u'logic entanglement'}
+1.95e+03 pattern= 12 task=  0 (u=5921)  {'docs': u'set unification'}
+  683 pattern=  3 task=  0 (u=6049)  {'docs': u'dense quantum coding lower bound 1-way quantum automata'}
+2.53e+03 pattern= 53 task=  1 (u=6049)  {'docs': u'polynomial degree vs quantum query complexity'}
+2.71e+03 pattern= 82 task=  2 (u=6049)  {'docs': u'quantum walk algorithm element distinctness'}
+2.83e+03 pattern=169 task=  3 (u=6049)  {'docs': u'quantum identification boolean oracles'}
+2.84e+03 pattern= 47 task=  4 (u=6049)  {'docs': u'quantum walks algorithmic applications'}
+2.84e+03 pattern= 92 task=  0 (u=6051)  {'docs': u'computational indistinguishability quantum states cryptographic application'}
+2.94e+03 pattern=123 task=  0 (u=6104)  {'docs': u'improving prolog programs refactoring prolog'}
+3.28e+03 pattern= 69 task=  1 (u=6104)  {'docs': u'improving parma trailing'}
+2.32e+03 pattern= 21 task=  0 (u=6132)  {'docs': u'sum-of-squares algorithm bin packing'}
+2.32e+03 pattern= 52 task=  0 (u=6137)  {'docs': u'random structure optimum cache size distributed hash table (dht) peer-to-peer design'}
+2.33e+03 pattern= 96 task=  0 (u=6139)  {'docs': u"new interpretation amdahl's law geometric scalability"}
+2.91e+03 pattern=196 task=  0 (u=6170)  {'docs': u'abductive framework computing knowledge base updates'}
+2.06e+03 pattern=103 task=  0 (u=6185)  {'docs': u'structure motion theoretical foundations novel approach using custom built invariants'}
+1.46e+03 pattern= 54 task=  0 (u=6238)  {'docs': u'novelty detection robot neotaxis'}
+2.86e+03 pattern=184 task=  0 (u=6466)  {'docs': u'efficient dot product word-size finite fields'}
+3.16e+03 pattern= 61 task=  1 (u=6466)  {'docs': u'efficient computation characteristic polynomial'}
+2.92e+03 pattern=201 task=  0 (u=6535)  {'docs': u'proposal design expert system calculations domain qft'}
+2.92e+03 pattern=198 task=  0 (u=6536)  {'docs': u'attrition defenses peer-to-peer digital preservation system'}
+3.09e+03 pattern=201 task=  0 (u=6537)  {'docs': u'notes design internet adversary'}
+2.54e+03 pattern=148 task=  0 (u=6611)  {'docs': u'power law distributions class relationships'}
+2.57e+03 pattern=123 task=  1 (u=6611)  {'docs': u'making refactoring decisions large-scale java systems empirical stance'}
+2.61e+03 pattern= 62 task=  2 (u=6611)  {'docs': u'search navigation relational databases'}
+2.54e+03 pattern=144 task=  0 (u=6627)  {'docs': u'mapping vacuum structure gauged maximal supergravities application high-performance symbolic algebra'}
+2.92e+03 pattern=144 task=  1 (u=6627)  {'docs': u'novel approach symbolic algebra'}
+2.52e+03 pattern= 25 task=  0 (u=6734)  {'docs': u'approximation thresholds combinatorial optimization problems'}
+2.25e+03 pattern= 83 task=  0 (u=6800)  {'docs': u'optimal ordered problem solver'}
+2.44e+03 pattern=141 task=  1 (u=6800)  {'docs': u'new ai general & sound & relevant physics'}
+2.1e+03 pattern= 31 task=  0 (u=6898)  {'docs': u'towards generic refactoring'}
+2.14e+03 pattern=106 task=  1 (u=6898)  {'docs': u'sketch polymorphic symphony'}
+2.17e+03 pattern=113 task=  2 (u=6898)  {'docs': u'typed generic traversal term rewriting strategies'}
+2.39e+03 pattern=119 task=  3 (u=6898)  {'docs': u'strategic polymorphism requires two combinators!'}
+2.38e+03 pattern=111 task=  0 (u=6900)  {'docs': u'survey-propagation equations random k-satisfiability problem'}
+2.39e+03 pattern=130 task=  1 (u=6900)  {'docs': u'local equilibrium equations clustering states'}
+2.42e+03 pattern=114 task=  2 (u=6900)  {'docs': u'remarks survey decimation algorithm k-satisfiability'}
+2.62e+03 pattern= 56 task=  3 (u=6900)  {'docs': u'probabilistic approach random satisfiability problem'}
+2.63e+03 pattern= 48 task=  0 (u=6909)  {'docs': u'bernstein-bezier sufficient condition invertibility polynomial mapping functions'}
+2.63e+03 pattern= 47 task=  0 (u=6914)  {'docs': u'relational grid monitoring architecture (r-gma)'}
+2.63e+03 pattern=149 task=  0 (u=6934)  {'docs': u'finding traitors secure networks using byzantine agreements'}
+2.66e+03 pattern=168 task=  0 (u=6935)  {'docs': u'using simulated annealing calculate trembles trembling hand perfection'}
+1.48e+03 pattern= 56 task=  0 (u=7202)  {'docs': u'statistical mechanics perspective phase transition vertex covering finite-connectivity random graphs'}
+3.04e+03 pattern=205 task=  0 (u=7340)  {'docs': u'better quasi-ordered transition systems'}
+2.66e+03 pattern=125 task=  0 (u=7420)  {'docs': u'timestamp based execution control c java programs'}
+2.66e+03 pattern= 73 task=  0 (u=7422)  {'docs': u'model-based debugging using multiple abstract models'}
+1.78e+03 pattern=  3 task=  0 (u=7424)  {'docs': u'lower bounds quantum cell probe model'}
+2.66e+03 pattern=  3 task=  1 (u=7424)  {'docs': u'lower bounds predecessor searching cell probe model'}
+1.79e+03 pattern= 14 task=  0 (u=7719)  {'docs': u'decoding method generalized algebraic geometry codes'}
+2.17e+03 pattern= 47 task=  0 (u=7745)  {'docs': u'overview grid architecture scientific computing'}
+2.17e+03 pattern=112 task=  0 (u=7746)  {'docs': u'performance evaluation gridftp within nordugrid project'}
+3.22e+03 pattern= 35 task=  0 (u=7774)  {'docs': u'noise stability functions low influences invariance optimality'}
+2.65e+03 pattern= 14 task=  0 (u=7783)  {'docs': u'error correcting codes algebraic surfaces'}
+2.95e+03 pattern= 92 task=  0 (u=7831)  {'docs': u'classically-controlled quantum computation'}
+3.16e+03 pattern=184 task=  0 (u=8000)  {'docs': u'primitive quantum bch codes finite fields'}
+1.37e+03 pattern= 21 task=  0 (u=8020)  {'docs': u'non-equilibrium surface growth scalability parallel algorithms large asynchronous systems'}
+2.24e+03 pattern=  9 task=  0 (u=8054)  {'docs': u'randomized approximation schemes cuts flows capacitated graphs'}
+  919 pattern=  9 task=  0 (u=8055)  {'docs': u'minimum cuts near-linear time'}
+3.26e+03 pattern= 34 task=  0 (u=8075)  {'docs': u'automatic verification timed concurrent constraint programs'}
+3.26e+03 pattern= 57 task=  0 (u=8082)  {'docs': u'collaborative beamforming distributed wireless ad hoc sensor networks'}
+3.26e+03 pattern=108 task=  0 (u=8085)  {'docs': u'state space computation analysis time petri nets'}
+2.57e+03 pattern= 75 task=  0 (u=8132)  {'docs': u'coalgebra based classes'}
+3.26e+03 pattern= 80 task=  0 (u=8145)  {'docs': u'characterizing self-developing biological neural networks first step towards application computing systems'}
+2.14e+03 pattern=104 task=  0 (u=8178)  {'docs': u'precongruence formats decorated trace semantics'}
+3.22e+03 pattern=122 task=  0 (u=8373)  {'docs': u'monotonic nonmonotonic preference revision'}
+3.22e+03 pattern= 92 task=  0 (u=8375)  {'docs': u'effects variations load distribution network performance'}
+2.53e+03 pattern=  3 task=  0 (u=8448)  {'docs': u'distance bounds convolutional codes optimal codes'}
+2.74e+03 pattern= 14 task=  1 (u=8448)  {'docs': u'parameters convolutional codes cyclic structure'}
+3.05e+03 pattern= 14 task=  2 (u=8448)  {'docs': u'doubly-cyclic convolutional codes'}
+3.12e+03 pattern= 14 task=  3 (u=8448)  {'docs': u'class one-dimensional mds convolutional codes'}
+3.14e+03 pattern= 14 task=  4 (u=8448)  {'docs': u'weight distribution convolutional codes'}
+2.19e+03 pattern=116 task=  0 (u=8524)  {'docs': u'scalable architecture harvest-based digital libraries - odu/southampton experiments'}
+3.18e+03 pattern=234 task=  1 (u=8524)  {'docs': u'co-authorship networks digital library research community'}
+3.18e+03 pattern=231 task=  0 (u=8525)  {'docs': u'decomposable problems niching scalability multiobjective estimation distribution algorithms'}
+3.17e+03 pattern= 41 task=  0 (u=8527)  {'docs': u'generalised bent criteria boolean functions (i)'}
+3.17e+03 pattern= 41 task=  0 (u=8527)  {'docs': u'generalised bent criteria boolean functions (ii)'}
+1.57e+03 pattern= 65 task=  0 (u=8558)  {'docs': u'rectilinear crossing number k_10 62'}
+2.43e+03 pattern=120 task=  1 (u=8558)  {'docs': u'complexity buffer allocation message passing systems'}
+2.45e+03 pattern= 41 task=  2 (u=8558)  {'docs': u'boolean functions computed random boolean formulas grow right function'}
+1.6e+03 pattern= 63 task=  0 (u=8792)  {'docs': u'opportunity cost algorithms combinatorial auctions'}
+1.71e+03 pattern= 79 task=  1 (u=8792)  {'docs': u'fast pricing european asian options provable accuracy single-stock basket options'}
+1.62e+03 pattern= 72 task=  0 (u=8793)  {'docs': u'designing proxies stock market indices computationally hard'}
+1.7e+03 pattern= 77 task=  1 (u=8793)  {'docs': u'optimal constructions hybrid algorithms'}
+1.86e+03 pattern= 12 task=  2 (u=8793)  {'docs': u'risk profile problem stock portfolio optimization'}
+2.01e+03 pattern= 36 task=  3 (u=8793)  {'docs': u'dna self-assembly constructing 3d boxes'}
+1.7e+03 pattern= 16 task=  0 (u=8795)  {'docs': u'benchmarking optimization software performance profiles'}
+1.68e+03 pattern= 16 task=  0 (u=8796)  {'docs': u'automatic differentiation tools optimization software'}
+2.99e+03 pattern=134 task=  0 (u=8846)  {'docs': u'tsnnls solver large sparse least squares problems non-negative variables'}
+2.99e+03 pattern= 85 task=  0 (u=8858)  {'docs': u'non-uniform information dissemination sensor networks'}
+3.22e+03 pattern=180 task=  1 (u=8858)  {'docs': u'file system abstraction sense respond systems'}
+2.99e+03 pattern= 59 task=  0 (u=8862)  {'docs': u'optimizing compilation constraint handling rules hal'}
+3.03e+03 pattern=158 task=  0 (u=8863)  {'docs': u'checking modes hal programs'}
+2.49e+03 pattern= 47 task=  0 (u=8982)  {'docs': u'quantum computation lattice problems'}
+2.67e+03 pattern=125 task=  1 (u=8982)  {'docs': u'new lattice based cryptographic constructions'}
+2.94e+03 pattern=204 task=  0 (u=9017)  {'docs': u'ramsey-type theorems metric spaces applications online problems'}
+3.15e+03 pattern= 50 task=  0 (u=9100)  {'docs': u'introduction linear logic ludics part'}
+3.15e+03 pattern= 50 task=  0 (u=9100)  {'docs': u'introduction linear logic ludics part ii'}
+3.15e+03 pattern=  2 task=  0 (u=9102)  {'docs': u'enabling agents dynamically select protocols interactions'}
+2.37e+03 pattern= 56 task=  0 (u=9116)  {'docs': u'typical random 3-sat formulae satisfiability threshold'}
+1.34e+03 pattern= 47 task=  0 (u=9209)  {'docs': u'computing large small stable models'}
+  918 pattern=  8 task=  0 (u=9225)  {'docs': u'approximate graph coloring semidefinite programming'}
+3.05e+03 pattern= 73 task=  0 (u=9347)  {'docs': u'hep@home - distributed computing system based boinc'}
+  969 pattern=  5 task=  0 (u=9404)  {'docs': u'pspace 2-round quantum interactive proof systems'}
+2.46e+03 pattern=130 task=  0 (u=9461)  {'docs': u'kalman-filtering using local interactions'}
+2.6e+03 pattern=157 task=  0 (u=9500)  {'docs': u'range mode range median queries lists trees'}
+1.94e+03 pattern= 95 task=  0 (u=9515)  {'docs': u'higher-order pattern complement strict lambda-calculus'}
+3.23e+03 pattern=221 task=  0 (u=9588)  {'docs': u'reversible fault-tolerant logic'}
+2.89e+03 pattern= 31 task=  0 (u=9641)  {'docs': u'lambda calculus quantum computation classical control'}
+2.24e+03 pattern= 87 task=  0 (u=9644)  {'docs': u'answer sets consistent query answering inconsistent databases'}
+3.03e+03 pattern= 57 task=  0 (u=9664)  {'docs': u'topology biological networks reliability information processing'}
+2.83e+03 pattern= 31 task=  0 (u=9752)  {'docs': u'genetic algorithms quantum computation'}
+2.23e+03 pattern= 12 task=  0 (u=9807)  {'docs': u'domain-dependent knowledge answer set planning'}
+2.22e+03 pattern= 37 task=  0 (u=9812)  {'docs': u'computational complexity arising degree correlations networks'}
+3.17e+03 pattern=211 task=  0 (u=10190)  {'docs': u'shawn new approach simulating wireless sensor networks'}
+2.69e+03 pattern=126 task=  0 (u=10191)  {'docs': u'combinatorial characterization higher-dimensional orthogonal packing'}
+2.82e+03 pattern=126 task=  1 (u=10191)  {'docs': u'general framework bounds higher-dimensional orthogonal packing problems'}
+2.52e+03 pattern=140 task=  0 (u=10214)  {'docs': u'np got new definition survey probabilistically checkable proofs'}
+2.66e+03 pattern= 77 task=  0 (u=10239)  {'docs': u'efficient algorithms citation network analysis'}
+2.95e+03 pattern=129 task=  0 (u=10282)  {'docs': u'competition adaptation internet evolution model'}
+1.73e+03 pattern= 21 task=  0 (u=10384)  {'docs': u'construction algorithm parallel fast fourier transform'}
+3.16e+03 pattern= 44 task=  0 (u=10578)  {'docs': u'bandit problems side observations'}
+2.5e+03 pattern=121 task=  0 (u=10645)  {'docs': u'hidden polynomial(s) cryptosystems'}
+2.54e+03 pattern= 36 task=  1 (u=10645)  {'docs': u'cryptanalysis hfe'}
+3.23e+03 pattern=210 task=  0 (u=10747)  {'docs': u'correlation clustering fixed number clusters'}
+ 58.3 pattern=  2 task=  0 (u=10823)  {'docs': u'completeness compositional translation context-free grammars'}
+ 57.1 pattern=  1 task=  0 (u=10827)  {'docs': u'lexical semantic database verbmobil'}
+2.92e+03 pattern=202 task=  0 (u=10892)  {'docs': u'tutorial introduction minimum description length principle'}
+3.04e+03 pattern= 53 task=  1 (u=10892)  {'docs': u'shannon information kolmogorov complexity'}
+3.17e+03 pattern=153 task=  2 (u=10892)  {'docs': u'asymptotic log-loss prequential maximum likelihood codes'}
+2.96e+03 pattern=202 task=  0 (u=10938)  {'docs': u'minimum enclosing polytope high dimensions'}
+2.95e+03 pattern=206 task=  0 (u=10966)  {'docs': u'proofs zero knowledge'}
+3.15e+03 pattern=217 task=  0 (u=10974)  {'docs': u'impact channel estimation errors multiuser detection replica method'}
+3.15e+03 pattern=217 task=  0 (u=10974)  {'docs': u'low complexity joint iterative equalization multiuser detection dispersive ds-cdma channels'}
+2.66e+03 pattern= 90 task=  0 (u=11484)  {'docs': u'cti constraint-based termination inference tool iso-prolog'}
+2.38e+03 pattern= 30 task=  0 (u=11485)  {'docs': u'generalization lifting lemma logic programming'}
+3.06e+03 pattern=118 task=  0 (u=11582)  {'docs': u'frequent knot discovery'}
+3.1e+03 pattern=  8 task=  0 (u=11585)  {'docs': u'fully sparse implementation primal-dual interior-point potential reduction method semidefinite programming'}
+1.12e+03 pattern=  8 task=  0 (u=11806)  {'docs': u'foundation programming multi-tape quantum turing machine'}
+2.63e+03 pattern= 53 task=  1 (u=11806)  {'docs': u'computational complexity measures multipartite quantum entanglement'}
+2.64e+03 pattern= 82 task=  2 (u=11806)  {'docs': u'quantum np quantum hierarchy'}
+3.05e+03 pattern= 33 task=  0 (u=11837)  {'docs': u'balanced boolean functions evaluated every input bit unlikely read'}
+  333 pattern=  2 task=  0 (u=11881)  {'docs': u'sloppy identity'}
+3.07e+03 pattern= 56 task=  0 (u=11883)  {'docs': u'synchronization categorical perspective'}
+2.13e+03 pattern= 80 task=  0 (u=11984)  {'docs': u'accelerated growth networks'}
+3.25e+03 pattern=223 task=  1 (u=11984)  {'docs': u'frequency occurrence numbers world wide web'}
+3.26e+03 pattern=149 task=  2 (u=11984)  {'docs': u'organization complex networks without multiple connections'}
+3.2e+03 pattern= 16 task=  0 (u=12060)  {'docs': u'adf95 tool automatic differentiation fortran code designed large numbers independent variables'}
+2.89e+03 pattern=194 task=  0 (u=12132)  {'docs': u'list bounded distance decodibility reed-solomon codes'}
+  834 pattern=  5 task=  0 (u=12134)  {'docs': u'solving degenerate sparse polynomial systems faster'}
+3.16e+03 pattern=228 task=  1 (u=12134)  {'docs': u'efficiently detecting torsion points subtori'}
+1.76e+03 pattern= 82 task=  0 (u=12163)  {'docs': u'quantum clock synchronization one qubit'}
+1.97e+03 pattern=  1 task=  0 (u=12311)  {'docs': u'machine learning automated text categorization'}
+2e+03 pattern= 48 task=  0 (u=12319)  {'docs': u'smoothed analysis algorithms simplex algorithm usually takes polynomial time'}
+2.42e+03 pattern= 48 task=  1 (u=12319)  {'docs': u'smoothed analysis interior-point algorithms termination'}
+2.69e+03 pattern=  5 task=  2 (u=12319)  {'docs': u'solving sparse symmetric diagonally-dominant linear systems time $o (m^{131})$'}
+2.85e+03 pattern=190 task=  0 (u=12366)  {'docs': u'phantom types subtyping'}
+2.85e+03 pattern= 81 task=  0 (u=12369)  {'docs': u'tournament versus fitness uniform selection'}
+2.82e+03 pattern=183 task=  0 (u=12466)  {'docs': u'freeze-tag problem wake swarm robots'}
+3.23e+03 pattern=  3 task=  0 (u=12475)  {'docs': u'approximating restricted cycle covers'}
+2.26e+03 pattern= 32 task=  0 (u=12517)  {'docs': u'quantum circuits unbounded fan-out'}
+2.97e+03 pattern=181 task=  0 (u=12829)  {'docs': u'm@th desktop md tools - mathematics mathematica made easy students'}
+2.47e+03 pattern= 47 task=  0 (u=12919)  {'docs': u'quantum random walks - introductory overview'}
+2.94e+03 pattern= 37 task=  1 (u=12919)  {'docs': u'complexity local hamiltonian problem'}
+3.02e+03 pattern= 89 task=  0 (u=12970)  {'docs': u'crocopat 21 introduction reference manual'}
+2.06e+03 pattern=102 task=  0 (u=13046)  {'docs': u'collusion unrepeated first-price auctions uncertain number participants'}
+2.89e+03 pattern=195 task=  0 (u=13080)  {'docs': u'encryption schemes using finite frames hadamard arrays'}
+2.89e+03 pattern= 55 task=  0 (u=13093)  {'docs': u'new computational framework 2d shape-enclosing contours'}
+1.77e+03 pattern= 81 task=  0 (u=13398)  {'docs': u'event indexing systems efficient selection analysis hera data'}
+1.76e+03 pattern= 81 task=  0 (u=13411)  {'docs': u'replica selection globus data grid'}
+1.32e+03 pattern= 49 task=  0 (u=13493)  {'docs': u'predicting expected behavior agents learn agents clri framework'}
+2.63e+03 pattern= 56 task=  1 (u=13493)  {'docs': u'learning multiagent systems introduction game-theoretic perspective'}
+2.94e+03 pattern= 82 task=  0 (u=13540)  {'docs': u'possible hypercomputational quantum algorithm'}
+3.23e+03 pattern= 82 task=  1 (u=13540)  {'docs': u'numerical simulations possible hypercomputational quantum algorithm'}
+2.8e+03 pattern= 68 task=  0 (u=13593)  {'docs': u'accurately modeling internet topology'}
+2.96e+03 pattern= 35 task=  0 (u=13648)  {'docs': u'modal logics partial recursive functions'}
+1.93e+03 pattern= 78 task=  0 (u=13848)  {'docs': u'routing permutations partitioned optical passive star networks'}
+3.15e+03 pattern=145 task=  0 (u=13922)  {'docs': u'symmetric group defies strong fourier sampling part'}
+3.05e+03 pattern=  5 task=  0 (u=13949)  {'docs': u'application quantum finite automata interactive proof systems'}
+3.18e+03 pattern=237 task=  0 (u=13981)  {'docs': u'achievable information rates finite-state input two-dimensional channels memory'}
+3.08e+03 pattern=215 task=  0 (u=14185)  {'docs': u'feedback capacity first-order moving average gaussian channel'}
+2.36e+03 pattern=109 task=  0 (u=14268)  {'docs': u'multiresolution structure internet traffic traces'}
+3.24e+03 pattern=147 task=  0 (u=14329)  {'docs': u'compatibility discrete relations'}
+2.95e+03 pattern=164 task=  0 (u=14386)  {'docs': u'annotating predicate-argument structure parallel treebank'}
+3.02e+03 pattern=121 task=  1 (u=14386)  {'docs': u'model fine-grained alignment multilingual texts'}
+1.42e+03 pattern= 50 task=  0 (u=14396)  {'docs': u'introduction ginac framework symbolic computation within c++ programming language'}
+2.43e+03 pattern=140 task=  0 (u=14414)  {'docs': u'subclassing errors oop practically checkable rules prevent'}
+2.56e+03 pattern= 73 task=  0 (u=14432)  {'docs': u'abstract programming system'}
+2.67e+03 pattern=100 task=  1 (u=14432)  {'docs': u'hierarchical situation calculus'}
+1.61e+03 pattern= 24 task=  0 (u=14462)  {'docs': u'relationship fuzzy logic four-valued relevance logic'}
+2.7e+03 pattern= 29 task=  0 (u=14605)  {'docs': u'abductive logic programs penalization semantics complexity implementation'}
+3.08e+03 pattern=218 task=  0 (u=14804)  {'docs': u'generating functions kernels digraphs (enumeration & asymptotics nim games)'}
+3.1e+03 pattern=149 task=  0 (u=14806)  {'docs': u'forbidden subgraphs connected graphs'}
+2.44e+03 pattern= 43 task=  0 (u=14821)  {'docs': u'unique pattern matching strings'}
+2.7e+03 pattern= 16 task=  0 (u=14827)  {'docs': u'introduction using software tools automatic differentiation'}
+2.87e+03 pattern= 73 task=  0 (u=14844)  {'docs': u'treatment higher-order features logic programming'}
+2.49e+03 pattern=130 task=  0 (u=15183)  {'docs': u'algorithmic clustering music'}
+2.76e+03 pattern=130 task=  1 (u=15183)  {'docs': u'clustering compression'}
+3.12e+03 pattern=194 task=  2 (u=15183)  {'docs': u'google similarity distance'}
+1.72e+03 pattern= 53 task=  0 (u=15184)  {'docs': u'quantum kolmogorov complexity based classical descriptions'}
+2.09e+03 pattern= 13 task=  0 (u=15247)  {'docs': u'efficient generation unstructured control volumes 2d 3d'}
+2.09e+03 pattern= 40 task=  1 (u=15247)  {'docs': u'numerical method solution ordinary differential equations fractional order'}
+2.09e+03 pattern=  9 task=  0 (u=15249)  {'docs': u'equivalence isomorphism boolean constraint satisfaction'}
+3.29e+03 pattern= 59 task=  0 (u=15339)  {'docs': u'programming finite-domain constraint propagators action rules'}
+3.06e+03 pattern= 29 task=  0 (u=15340)  {'docs': u'nondeterministic linear logic'}
+3.06e+03 pattern= 34 task=  1 (u=15340)  {'docs': u'weak typed boehm theorem imll'}
+3.06e+03 pattern= 30 task=  2 (u=15340)  {'docs': u'p-time completeness light linear logic nondeterministic extension'}
+3.04e+03 pattern=209 task=  0 (u=15534)  {'docs': u'fast construction nets low dimensional metrics applications'}
+2.9e+03 pattern= 32 task=  0 (u=15743)  {'docs': u'chaos meets computers'}
+2.97e+03 pattern= 11 task=  1 (u=15743)  {'docs': u'breaking chaos-noise-based secure communication scheme'}
+3.14e+03 pattern=208 task=  2 (u=15743)  {'docs': u'return-map cryptanalysis revisited'}
+1.84e+03 pattern= 87 task=  0 (u=16059)  {'docs': u'event driven computations relational query language'}
+1.49e+03 pattern= 58 task=  0 (u=16233)  {'docs': u'interval constraint solving camera control motion planning'}
+1.6e+03 pattern= 68 task=  0 (u=16599)  {'docs': u'hot-pressing process modeling medium density fiberboard (mdf)'}
+1.46e+03 pattern= 30 task=  0 (u=16636)  {'docs': u'light affine logic (proof nets programming notation p-time correctness completeness)'}
+2.17e+03 pattern=111 task=  0 (u=16685)  {'docs': u'on-line paging adversarially biased random inputs'}
+2.17e+03 pattern=111 task=  1 (u=16685)  {'docs': u'on-line file caching'}
+2.18e+03 pattern= 21 task=  2 (u=16685)  {'docs': u'sequential parallel algorithms mixed packing covering'}
+2.18e+03 pattern=  6 task=  3 (u=16685)  {'docs': u'randomized rounding without solving linear program'}
+2.18e+03 pattern=115 task=  4 (u=16685)  {'docs': u'k-medians facility location chernoff-wald bound'}
+2.2e+03 pattern=  9 task=  0 (u=16870)  {'docs': u'fast deterministic consensus noisy environment'}
+2.29e+03 pattern=  9 task=  1 (u=16870)  {'docs': u'randomized protocols asynchronous consensus'}
+2.29e+03 pattern=110 task=  0 (u=16872)  {'docs': u'sorting forklift'}
+2.93e+03 pattern=149 task=  0 (u=16882)  {'docs': u'structure labelled enumeration k_{33}-subdivision-free projective-planar graphs'}
+3.09e+03 pattern=165 task=  1 (u=16882)  {'docs': u"obstructions toroidal graphs $k_{33}$'s"}
+1.61e+03 pattern= 71 task=  0 (u=17062)  {'docs': u'lattice structure convergence game cards'}
+2.95e+03 pattern= 92 task=  0 (u=17113)  {'docs': u'numerical simulations mixed states quantum computation'}
+2.76e+03 pattern= 58 task=  0 (u=17120)  {'docs': u'expressibility stable logic programming'}
+2.76e+03 pattern= 58 task=  0 (u=17122)  {'docs': u'abduction well-founded semantics generalized stable models'}
+2.34e+03 pattern= 29 task=  0 (u=17132)  {'docs': u'uniform approach logic programming semantics'}
+2.34e+03 pattern=107 task=  0 (u=17134)  {'docs': u'encoding taxonomy web attacks different-length vectors'}
+2.75e+03 pattern=  4 task=  1 (u=17134)  {'docs': u'sharing secret color images using cellular automata memory'}
+2.5e+03 pattern=107 task=  0 (u=17135)  {'docs': u'method clustering web attacks using edit distance'}
+2.34e+03 pattern=121 task=  0 (u=17136)  {'docs': u'algorithm pattern discovery time series'}
+1.14e+03 pattern= 27 task=  0 (u=17243)  {'docs': u'improved incremental randomized delaunay triangulation'}
+1.14e+03 pattern= 27 task=  0 (u=17243)  {'docs': u'deletion delaunay triangulation'}
+1.14e+03 pattern= 29 task=  1 (u=17243)  {'docs': u'results arithmetic filters geometric predicates'}
+1.14e+03 pattern= 29 task=  1 (u=17243)  {'docs': u'probabilistic analysis power arithmetic filters'}
+1.21e+03 pattern= 40 task=  2 (u=17243)  {'docs': u'finding ordinary conic ordinary hyperplane'}
+1.14e+03 pattern= 28 task=  0 (u=17270)  {'docs': u'mixing representation levels hybrid approach automatic text generation'}
+1.14e+03 pattern= 26 task=  0 (u=17273)  {'docs': u'union unit balls quadratic complexity even contain origin'}
+2.59e+03 pattern=149 task=  0 (u=17303)  {'docs': u'finding "truncated" polynomial closest function'}
+2.82e+03 pattern=153 task=  0 (u=17305)  {'docs': u'dictionary based methods information extraction'}
+2.05e+03 pattern= 98 task=  0 (u=17449)  {'docs': u'analysis non-gaussian nature network traffic'}
+2.28e+03 pattern= 98 task=  1 (u=17449)  {'docs': u'analysis non-gaussian nature network traffic implication network performance'}
+3.16e+03 pattern=212 task=  0 (u=17547)  {'docs': u'optimal suboptimal finger selection algorithms mmse rake receivers impulse radio ultra-wideband systems'}
+2.06e+03 pattern= 85 task=  0 (u=17563)  {'docs': u'learning play games extensive form valuation'}
+2.07e+03 pattern=104 task=  0 (u=17767)  {'docs': u'witness properties semantics prolog cut'}
+1.3e+03 pattern= 47 task=  0 (u=17980)  {'docs': u'quantum computing np-complete problems chaotic dynamics'}
+2.38e+03 pattern=109 task=  0 (u=18095)  {'docs': u'computing conformal structure surfaces'}
+2.5e+03 pattern= 61 task=  0 (u=18106)  {'docs': u'efficient linear feedback shift registers maximal period'}
+2.5e+03 pattern=144 task=  0 (u=18108)  {'docs': u'embedded reflection mapping'}
+2.92e+03 pattern=199 task=  0 (u=18239)  {'docs': u'atlas tile calorimeter test beam monitoring program'}
+2.07e+03 pattern= 94 task=  0 (u=18366)  {'docs': u'qualitative dynamical modelling approach capital accumulation unregulated fisheries'}
+2.07e+03 pattern= 29 task=  0 (u=18384)  {'docs': u'refinement calculus logic programs'}
+2.23e+03 pattern=125 task=  0 (u=18441)  {'docs': u'tracing explaining execution clp(fd) programs'}
+2.23e+03 pattern= 24 task=  0 (u=18448)  {'docs': u'precise yet efficient type inference logic programs'}
+3.15e+03 pattern=215 task=  0 (u=18483)  {'docs': u'capacity multiple antenna systems rician fading'}
+1.64e+03 pattern= 75 task=  0 (u=18489)  {'docs': u'available stabilizing 2-3 trees'}
+2.24e+03 pattern= 19 task=  0 (u=18589)  {'docs': u'paraconsistent higher order logic'}
+2.78e+03 pattern= 80 task=  0 (u=18731)  {'docs': u'cost participating peer-to-peer network'}
+2.53e+03 pattern=110 task=  0 (u=18764)  {'docs': u'in-place sorting o(n log n) comparisons o(n) moves'}
+3e+03 pattern=112 task=  0 (u=19160)  {'docs': u'scalable xslt evaluation'}
+3e+03 pattern= 62 task=  0 (u=19165)  {'docs': u'providing authentic long-term archival access complex relational data'}
+2.14e+03 pattern= 37 task=  0 (u=19200)  {'docs': u'geometric maximum traveling salesman problem'}
+3.02e+03 pattern=130 task=  0 (u=19273)  {'docs': u'new look survey propagation generalizations'}
+3.02e+03 pattern= 78 task=  0 (u=19275)  {'docs': u'near optimal routing small-world networks augmented local awareness'}
+3.07e+03 pattern= 52 task=  1 (u=19275)  {'docs': u'record distributed hash table recursive structure'}
+3.15e+03 pattern=221 task=  0 (u=19337)  {'docs': u'logic non-monotone inductive definitions'}
+3.15e+03 pattern=195 task=  0 (u=19351)  {'docs': u'estimation number sources unbalanced arrays information theoretic criteria'}
+3.16e+03 pattern=  0 task=  1 (u=19351)  {'docs': u'tradeoff two types processing gain'}
+3.16e+03 pattern=229 task=  0 (u=19359)  {'docs': u'learning automatically detect features mobile robots using second-order hidden markov models'}
+3.26e+03 pattern=229 task=  0 (u=19360)  {'docs': u'temporal spatial data mining second-order hidden models'}
+1.26e+03 pattern=  2 task=  0 (u=19494)  {'docs': u'one-level prosodic morphology'}
+1.59e+03 pattern= 66 task=  0 (u=19515)  {'docs': u'public-key based information management model mobile agents'}
+1.45e+03 pattern= 52 task=  0 (u=19516)  {'docs': u'one-time pad based cipher data protection distributed environments'}
+1.44e+03 pattern= 49 task=  0 (u=19526)  {'docs': u'reasoning axioms theory pratice'}
+2.55e+03 pattern=150 task=  0 (u=19540)  {'docs': u'periodicity unbordered words proof extended duval conjecture'}
+3.26e+03 pattern=  6 task=  0 (u=19589)  {'docs': u'theories tc0 small complexity classes'}
+2.43e+03 pattern= 12 task=  0 (u=19741)  {'docs': u'semantic framework preference handling answer set programming'}
+1.78e+03 pattern= 83 task=  0 (u=19843)  {'docs': u'local search techniques constrained portfolio selection problems'}
+2.42e+03 pattern=137 task=  0 (u=19869)  {'docs': u'phorma perfectly hashable order restricted multidimensional arrays'}
+2.43e+03 pattern=137 task=  1 (u=19869)  {'docs': u'phorma perfectly hashed order restricted multidimensional array'}
+2.35e+03 pattern=108 task=  0 (u=19924)  {'docs': u'maximing margin input space'}
+2.35e+03 pattern=114 task=  0 (u=19925)  {'docs': u'approximating incomplete kernel matrices em algorithm'}
+3.06e+03 pattern=153 task=  0 (u=20032)  {'docs': u'maximum mutual information space-time block codes symbolwise decodability'}
+1.01e+03 pattern= 14 task=  0 (u=20269)  {'docs': u'remarks geometry grammar'}
+1.01e+03 pattern= 13 task=  0 (u=20271)  {'docs': u'empirically evaluating adaptable spoken dialogue system'}
+3.11e+03 pattern= 76 task=  0 (u=20352)  {'docs': u'multidimensional data classification artificial neural networks'}
+3.05e+03 pattern=182 task=  0 (u=20483)  {'docs': u'accuracy scaling phenomena internet mapping'}
+1.06e+03 pattern=  3 task=  0 (u=20528)  {'docs': u'optimal lower bounds quantum automata random access codes'}
+1.45e+03 pattern= 53 task=  1 (u=20528)  {'docs': u'interaction quantum communication complexity'}
+1.63e+03 pattern= 58 task=  0 (u=20532)  {'docs': u'logic programming approaches representing solving constraint satisfaction problems comparison'}
+2.71e+03 pattern= 82 task=  0 (u=20533)  {'docs': u'enhancing search algorithm perform intelligent backtracking'}
+2.38e+03 pattern= 37 task=  0 (u=20657)  {'docs': u'complexity exact domatic number problem exact conveyor flow shop problem'}
+1.93e+03 pattern= 37 task=  0 (u=20658)  {'docs': u'exact complexity exact-four-colorability'}
+2.03e+03 pattern= 37 task=  1 (u=20658)  {'docs': u'exact complexity winner problem young elections'}
+2.38e+03 pattern=133 task=  0 (u=20663)  {'docs': u'real numbers ultimately periodic representations abstract numeration systems'}
+2.73e+03 pattern= 41 task=  0 (u=20672)  {'docs': u'extremal properties random structures'}
+2.84e+03 pattern= 56 task=  1 (u=20672)  {'docs': u'unicyclic components random graphs'}
+2.2e+03 pattern= 56 task=  0 (u=20673)  {'docs': u'statistical physics perspective web growth'}
+2.11e+03 pattern= 69 task=  0 (u=20779)  {'docs': u'improving table compression combinatorial optimization'}
+2.17e+03 pattern=114 task=  0 (u=20795)  {'docs': u'codebook generation algorithm document image compression'}
+1.49e+03 pattern= 36 task=  0 (u=21258)  {'docs': u'algorithmic statistics'}
+1.24e+03 pattern= 21 task=  0 (u=21465)  {'docs': u'finite-resolution hidden surface removal'}
+1.96e+03 pattern= 99 task=  1 (u=21465)  {'docs': u'dense point sets sparse delaunay triangulations'}
+2.19e+03 pattern=117 task=  2 (u=21465)  {'docs': u'building space-time meshes arbitrary spatial domains'}
+2.22e+03 pattern=122 task=  3 (u=21465)  {'docs': u'optimally cutting surface disk'}
+2.73e+03 pattern=178 task=  0 (u=21479)  {'docs': u'great expectations part ii generalized expected utility universal decision rule'}
+2.73e+03 pattern=178 task=  0 (u=21479)  {'docs': u'great expectations part i customizability generalized expected utility'}
+2.72e+03 pattern=158 task=  0 (u=21483)  {'docs': u'temporalized logics automata time granularity'}
+2.72e+03 pattern=176 task=  0 (u=21485)  {'docs': u'lcg-1 deployment usage experience'}
+3.28e+03 pattern=131 task=  0 (u=21532)  {'docs': u'consistent query answers numerical databases aggregate constraints'}
+1.54e+03 pattern= 64 task=  0 (u=21675)  {'docs': u'pairs shortest paths using bridging sets rectangular matrix multiplication'}
+3.21e+03 pattern= 34 task=  0 (u=21723)  {'docs': u'contextual constraint modeling grid application workflows'}
+3.17e+03 pattern=194 task=  0 (u=21844)  {'docs': u'idempotents mattson-solomon polynomials binary ldpc codes'}
+3.17e+03 pattern=232 task=  0 (u=21851)  {'docs': u'oiling wheels change role adaptive automatic problem decomposition non--stationary environments'}
+3.17e+03 pattern=231 task=  0 (u=21852)  {'docs': u'sub-structural niching estimation distribution algorithms'}
+3.17e+03 pattern=231 task=  0 (u=21852)  {'docs': u'sub-structural niching non-stationary environments'}
+3.17e+03 pattern=233 task=  1 (u=21852)  {'docs': u'population sizing genetic programming based upon decision making'}
+2.94e+03 pattern=205 task=  0 (u=21907)  {'docs': u'better algorithms unfair metrical task systems applications'}
+2.84e+03 pattern= 15 task=  0 (u=22050)  {'docs': u"demolishing searle's chinese room"}
+2.83e+03 pattern= 20 task=  0 (u=22051)  {'docs': u'polynomial-time computing quadratic maps i sampling real algebraic sets'}
+2.87e+03 pattern= 54 task=  0 (u=22200)  {'docs': u'dab content annotation receiver hardware control xml'}
+2.96e+03 pattern=198 task=  1 (u=22200)  {'docs': u'exposing software defined radio functionality native operating system applications virtual devices'}
+3.09e+03 pattern=219 task=  2 (u=22200)  {'docs': u'utilizing reconfigurable hardware processors grid services'}
+2.8e+03 pattern=105 task=  0 (u=22396)  {'docs': u'encapsulation practical simplification procedures'}
+1.84e+03 pattern= 89 task=  0 (u=22397)  {'docs': u'mace 20 reference manual guide'}
+2.96e+03 pattern=208 task=  0 (u=22400)  {'docs': u'static versus dynamic arbitrage bounds multivariate option prices'}
+3.23e+03 pattern= 53 task=  0 (u=22509)  {'docs': u'rule-based logic quantum information'}
+1.63e+03 pattern=  8 task=  0 (u=22652)  {'docs': u'faster evaluation multidimensional integrals'}
+3.25e+03 pattern= 47 task=  0 (u=22688)  {'docs': u'computing finite-dimensional bipartite quantum separability'}
+2.94e+03 pattern=133 task=  0 (u=22727)  {'docs': u'abstract canonical inference'}
+1.55e+03 pattern= 43 task=  0 (u=22959)  {'docs': u'critical behavior lossy source coding'}
+1.23e+03 pattern= 43 task=  0 (u=22960)  {'docs': u'efficient sphere-covering converse measure concentration generalized coding theorems'}
+2.84e+03 pattern=189 task=  0 (u=22983)  {'docs': u'intelligent encoding economical communication visual stream'}
+2.01e+03 pattern=  6 task=  0 (u=23012)  {'docs': u'program schemes binary write-once arrays complexity classes capture'}
+2.17e+03 pattern=  9 task=  0 (u=23018)  {'docs': u'approximation algorithms covering/packing integer programs'}
+3.14e+03 pattern=225 task=  0 (u=23178)  {'docs': u'enhancing histograms tree-like bucket indices'}
+3.15e+03 pattern=131 task=  1 (u=23178)  {'docs': u'estimating range queries using aggregate data integrity constraints probabilistic approach'}
+3.14e+03 pattern=226 task=  0 (u=23187)  {'docs': u'large-scale lattice boltzmann simulations complex fluids advances advent computational grids'}
+2.12e+03 pattern= 82 task=  0 (u=23191)  {'docs': u'capacity hybrid quantum memory'}
+3.28e+03 pattern=229 task=  0 (u=23637)  {'docs': u'summarization techniques pattern collections data mining'}
+2.42e+03 pattern= 39 task=  0 (u=23663)  {'docs': u'lower bounds bounded coefficient complexity bilinear maps'}
+3.17e+03 pattern=224 task=  1 (u=23663)  {'docs': u'complexity computing hilbert polynomial smooth equidimensional complex projective varieties'}
+2.46e+03 pattern= 29 task=  0 (u=23735)  {'docs': u'tight logic programs'}
+1.93e+03 pattern= 94 task=  0 (u=23750)  {'docs': u'modelling semantic association conceptual inheritance semantic analysis'}
+1.53e+03 pattern= 63 task=  0 (u=24025)  {'docs': u'algorithms analysing firewall router access lists'}
+1.95e+03 pattern= 63 task=  1 (u=24025)  {'docs': u'proposal dynamic access lists tcp/ip packet filering'}
+1.95e+03 pattern= 74 task=  0 (u=24037)  {'docs': u'pushdown timed automata binary reachability characterization safety verification'}
+1.91e+03 pattern= 71 task=  0 (u=24050)  {'docs': u'portability syntactic structure language modeling'}
+1.95e+03 pattern= 71 task=  1 (u=24050)  {'docs': u'richer syntactic dependencies structured language modeling'}
+2.68e+03 pattern= 77 task=  0 (u=24072)  {'docs': u'event-based program analysis dewiz'}
+2.68e+03 pattern=109 task=  0 (u=24075)  {'docs': u'using artificial intelligence model selection'}
+2.74e+03 pattern= 50 task=  0 (u=24109)  {'docs': u'soft lambda-calculus language polynomial time computation'}
+2.83e+03 pattern= 80 task=  0 (u=24124)  {'docs': u'memorization neural network adjustable transfer function conditional gating'}
+2.16e+03 pattern=110 task=  0 (u=24249)  {'docs': u'asymptotic complexity partial sorting -- learn large posets pairwise comparisons'}
+1.58e+03 pattern= 31 task=  0 (u=24391)  {'docs': u'towards theory cache-efficient algorithms'}
+2.8e+03 pattern=100 task=  0 (u=24551)  {'docs': u'deciding disjunctive linear arithmetic sat'}
+3.07e+03 pattern=185 task=  0 (u=24573)  {'docs': u'using image partitions 4th dimension'}
+2.51e+03 pattern= 31 task=  0 (u=24787)  {'docs': u'whitehead method genetic algorithms'}
+2.51e+03 pattern=145 task=  1 (u=24787)  {'docs': u'balanced presentations trivial group two generators andrews-curtis conjecture'}
+3.09e+03 pattern=153 task=  0 (u=24905)  {'docs': u'cdn content distribution network'}
+2.33e+03 pattern=129 task=  0 (u=24908)  {'docs': u'simple model dynamics correlations evolution economic entities varying economic conditions'}
+2.43e+03 pattern=138 task=  0 (u=24919)  {'docs': u'existence new family diophantine equations $\\bf \\omega$'}
+2.79e+03 pattern= 64 task=  1 (u=24919)  {'docs': u'using biased coins oracles'}
+1.22e+03 pattern= 42 task=  0 (u=24934)  {'docs': u'fixed-parameter tractability definability model checking'}
+3.17e+03 pattern=230 task=  1 (u=24934)  {'docs': u'model-checking problems basis parameterized intractability'}
+1.95e+03 pattern= 81 task=  0 (u=25159)  {'docs': u'structuring business metadata data warehouse systems effective business support'}
+1.96e+03 pattern= 78 task=  0 (u=25160)  {'docs': u'pretty-simple password-authenticated key-exchange protocol'}
+2.91e+03 pattern=113 task=  0 (u=25201)  {'docs': u'reduction strategies lambda term normalization effects heap usage'}
+1.8e+03 pattern= 84 task=  0 (u=25430)  {'docs': u'http cookies standards privacy politics'}
+1.49e+03 pattern= 45 task=  0 (u=25545)  {'docs': u'security policy consistency'}
+1.49e+03 pattern=  9 task=  0 (u=25549)  {'docs': u'3-coloring time o(13289^n)'}
+1.73e+03 pattern= 29 task=  0 (u=25599)  {'docs': u'effective fixpoint semantics linear logic programs'}
+2.74e+03 pattern= 86 task=  0 (u=25887)  {'docs': u'concept strong weak virtual reality'}
+3.11e+03 pattern= 97 task=  0 (u=25956)  {'docs': u'efficient quantum algorithms hidden subgroup problem class semi-direct product groups'}
+1.92e+03 pattern= 71 task=  0 (u=25973)  {'docs': u'anaphora discourse structure'}
+2.6e+03 pattern= 62 task=  0 (u=26079)  {'docs': u'data management mining astrophysical databases'}
+2.31e+03 pattern= 52 task=  0 (u=26081)  {'docs': u'locating data (small-world) peer-to-peer scientific collaborations'}
+2.6e+03 pattern=148 task=  1 (u=26081)  {'docs': u'small-world file-sharing communities'}
+2.76e+03 pattern=181 task=  0 (u=26098)  {'docs': u'weight constraints nested expressions'}
+2.4e+03 pattern=134 task=  0 (u=26356)  {'docs': u'least squares fitting circles lines'}
+2.48e+03 pattern=115 task=  1 (u=26356)  {'docs': u'statistical efficiency curve fitting algorithms'}
+2.48e+03 pattern= 21 task=  0 (u=26358)  {'docs': u'fast parallel i/o cluster computers'}
+3.08e+03 pattern= 53 task=  0 (u=26420)  {'docs': u'basic properties sand automata'}
+2.75e+03 pattern= 19 task=  0 (u=26426)  {'docs': u'diagnostic reasoning a-prolog'}
+2.62e+03 pattern=164 task=  0 (u=26575)  {'docs': u'parallel implementation lattice-gauge-theory code studying quark confinement pc clusters'}
+3.13e+03 pattern=133 task=  0 (u=26586)  {'docs': u'survey fault-tolerance fault-recovery techniques parallel systems'}
+3.13e+03 pattern=224 task=  1 (u=26586)  {'docs': u'distributed economics-based infrastructure utility computing'}
+2.18e+03 pattern= 25 task=  0 (u=26830)  {'docs': u'number iterations dantzig-wolfe optimization packing-covering approximation algorithms'}
+2.45e+03 pattern=105 task=  0 (u=26996)  {'docs': u'analytical formulations peer-to-peer connection efficiency'}
+3.28e+03 pattern=157 task=  0 (u=27045)  {'docs': u'ancestral compatibility two phylogenetic trees nested taxa'}
+3.28e+03 pattern=165 task=  0 (u=27052)  {'docs': u'6-cycle double covers cubic graphs'}
+2.15e+03 pattern= 64 task=  0 (u=27077)  {'docs': u'computing homotopic shortest paths efficiently'}
+1.12e+03 pattern= 25 task=  0 (u=27089)  {'docs': u'formal modeling commercial setting case study'}
+3.23e+03 pattern=243 task=  0 (u=27139)  {'docs': u'linear datalog bounded path duality relational structures'}
+3.23e+03 pattern=242 task=  0 (u=27140)  {'docs': u'searching monotone multi-dimensional arrays'}
+1.87e+03 pattern= 92 task=  0 (u=27389)  {'docs': u'reconciliation quantum-distributed gaussian key'}
+3.25e+03 pattern=177 task=  0 (u=27468)  {'docs': u'optimality condition complex systems computational evidence'}
+3.02e+03 pattern= 66 task=  0 (u=27534)  {'docs': u'generalized disjunctive paraconsistent data model negative disjunctive information'}
+3.06e+03 pattern= 66 task=  1 (u=27534)  {'docs': u'extended generalized disjunctive paraconsistent data model disjunctive information'}
+3.26e+03 pattern= 20 task=  2 (u=27534)  {'docs': u'interval neutrosophic sets logic theory applications computing'}
+3.06e+03 pattern= 66 task=  0 (u=27536)  {'docs': u'paraconsistent intuitionistic fuzzy relational data model'}
+3.03e+03 pattern= 20 task=  0 (u=27540)  {'docs': u'efficient polynomial time algorithms computing industrial-strength primitive roots'}
+3.16e+03 pattern=223 task=  0 (u=27654)  {'docs': u'transforming enriching documents semantic web'}
+3.16e+03 pattern= 30 task=  0 (u=27657)  {'docs': u'multi-vehicle cooperative control using mixed integer linear programming'}
+2.41e+03 pattern= 85 task=  0 (u=27740)  {'docs': u'kalman filter control reinforcement learning framework'}
+2.14e+03 pattern= 29 task=  0 (u=27794)  {'docs': u'dynamic approach characterizing termination general logic programs'}
+1.44e+03 pattern=  5 task=  0 (u=27810)  {'docs': u'modeling uncertainty complex engineering systems'}
+2.84e+03 pattern= 92 task=  0 (u=28212)  {'docs': u'quantum key distribution using polarized coherent states'}
+2.57e+03 pattern= 57 task=  0 (u=28250)  {'docs': u'method solving distributed service allocation problems'}
+3.23e+03 pattern=240 task=  0 (u=28460)  {'docs': u'let cyberalter ego share information manage spam'}
+1.75e+03 pattern= 57 task=  0 (u=28486)  {'docs': u'search power-law networks'}
+3.27e+03 pattern=100 task=  0 (u=28532)  {'docs': u'essential incompleteness arithmetic verified coq'}
+2.44e+03 pattern=103 task=  0 (u=28772)  {'docs': u'data structure time-based bandwidth reservations problem'}
+2.64e+03 pattern=103 task=  1 (u=28772)  {'docs': u'static data structure discrete advance bandwidth reservations internet'}
+2.64e+03 pattern=166 task=  0 (u=28774)  {'docs': u'open source software peer review'}
+2.12e+03 pattern=107 task=  0 (u=28808)  {'docs': u'structure broad topics web'}
+2.05e+03 pattern= 81 task=  0 (u=28811)  {'docs': u'efficient groundness analysis prolog'}
+2.11e+03 pattern=  4 task=  1 (u=28811)  {'docs': u'three optimisations sharing'}
+2.05e+03 pattern= 29 task=  0 (u=28812)  {'docs': u'backward analysis constraint logic programs'}
+3.1e+03 pattern= 49 task=  0 (u=28821)  {'docs': u'exploring networks traceroute-like probes theory simulations'}
+3.28e+03 pattern=206 task=  0 (u=28962)  {'docs': u"thompson's group public key cryptography"}
+2.53e+03 pattern=133 task=  0 (u=28982)  {'docs': u'ramsey numbers bipartite multigraphs'}
+2.67e+03 pattern=109 task=  0 (u=29050)  {'docs': u'active internet traffic filtering real-time response denial service attacks'}
+2.86e+03 pattern=142 task=  1 (u=29050)  {'docs': u'protecting public-access sites distributed denial-of-service attacks'}
+3.15e+03 pattern= 55 task=  0 (u=29155)  {'docs': u'spike timing precision neural error correction local behavior'}
+2.59e+03 pattern= 85 task=  0 (u=29203)  {'docs': u'probabilistic reasoning information compression multiple alignment unification search introduction overview'}
+2.59e+03 pattern= 85 task=  0 (u=29203)  {'docs': u"'computing' information compression multiple alignment unification search"}
+2.79e+03 pattern= 28 task=  0 (u=29334)  {'docs': u'surface triangulation -- metric approach'}
+2.65e+03 pattern= 97 task=  0 (u=29335)  {'docs': u'digital version green`s theorem application coverage problem formal verification'}
+2.23e+03 pattern= 30 task=  0 (u=29399)  {'docs': u'enhancing usefulness declarative programming frameworks complete integration'}
+3.18e+03 pattern= 82 task=  0 (u=29404)  {'docs': u'far walk find shortcut space efficient synopsis construction algorithms'}
+1.6e+03 pattern= 69 task=  0 (u=29629)  {'docs': u'optimization extremal dynamics'}
+1.77e+03 pattern= 69 task=  1 (u=29629)  {'docs': u'extremal optimization graph partitioning'}
+1.95e+03 pattern= 69 task=  2 (u=29629)  {'docs': u'jamming model extremal optimization heuristic'}
+2.21e+03 pattern=120 task=  0 (u=29665)  {'docs': u'mpich-g2 grid-enabled implementation message passing interface'}
+2.98e+03 pattern=199 task=  0 (u=30124)  {'docs': u'parform parallel version symbolic manipulation program form'}
+2.88e+03 pattern= 58 task=  0 (u=30234)  {'docs': u'constraint logic programming hereditary harrop formula'}
+2.88e+03 pattern=120 task=  0 (u=30237)  {'docs': u'multi-threading message communication qu-prolog'}
+3.06e+03 pattern= 22 task=  0 (u=30367)  {'docs': u'state complexity l^2 l^k'}
+2.07e+03 pattern= 80 task=  0 (u=30405)  {'docs': u'neural networks c-not gated nodes'}
+2.07e+03 pattern= 80 task=  0 (u=30405)  {'docs': u'semiclassical neural network'}
+2.78e+03 pattern= 80 task=  1 (u=30405)  {'docs': u'chaos annealing social networks'}
+2e+03 pattern= 99 task=  0 (u=30412)  {'docs': u'towards characterization star-free sets integers'}
+1.99e+03 pattern= 56 task=  0 (u=30710)  {'docs': u'hiding solutions random satisfiability problems statistical mechanics approach'}
+3.01e+03 pattern=172 task=  0 (u=30834)  {'docs': u'sharing computer network logs security privacy motivation new methodologies anonymization'}
+1.39e+03 pattern= 30 task=  0 (u=30988)  {'docs': u'(lazy) functional side logic programming'}
+3e+03 pattern=185 task=  0 (u=31649)  {'docs': u'arithmetical complexity dimension randomness'}
+2.89e+03 pattern= 29 task=  0 (u=31657)  {'docs': u'splitting operator algebraic modularity results logics fixpoint semantics'}
+2.69e+03 pattern=174 task=  0 (u=31857)  {'docs': u'game theoretic framework incentives p2p systems'}
+3.13e+03 pattern=211 task=  1 (u=31857)  {'docs': u'power aware routing sensor databases'}
+2.17e+03 pattern=  4 task=  0 (u=32060)  {'docs': u'on-line end-to-end congestion control'}
+3.21e+03 pattern=131 task=  0 (u=32201)  {'docs': u'complexity approximation fixing numerical attributes databases integrity constraints'}
+2.67e+03 pattern=148 task=  0 (u=32269)  {'docs': u'causes effects computer programs'}
+3.06e+03 pattern=188 task=  0 (u=32292)  {'docs': u"strategy ulam's game tree code give error-resistant protocols"}
+2.66e+03 pattern= 34 task=  0 (u=32391)  {'docs': u'towards declarative diagnosis constraint programs finite domains'}
+2.23e+03 pattern=124 task=  0 (u=32392)  {'docs': u'value withdrawal explanations theoretical tool programming environments'}
+2.67e+03 pattern=169 task=  0 (u=32400)  {'docs': u'postmortem object type identification'}
+2.75e+03 pattern=115 task=  0 (u=32403)  {'docs': u'greedy algorithms datalog'}
+2.55e+03 pattern= 12 task=  0 (u=32440)  {'docs': u'applications intuitionistic logic answer set programming'}
+2.79e+03 pattern=184 task=  0 (u=32616)  {'docs': u'correct precise efficient integration set-sharing freeness linearity analysis finite rational tree languages'}
+1.84e+03 pattern= 46 task=  0 (u=32777)  {'docs': u'computing complete graph isomorphisms hamiltonian cycles partial ones'}
+3.27e+03 pattern=246 task=  0 (u=32812)  {'docs': u'internalising modified realisability constructive type theory'}
+1.95e+03 pattern= 98 task=  0 (u=32829)  {'docs': u'new approach network monitoring intrusion detection'}
+2.2e+03 pattern= 98 task=  1 (u=32829)  {'docs': u'multidimensional network monitoring intrusion detection'}
+2.28e+03 pattern=126 task=  2 (u=32829)  {'docs': u'graph equivalence characterization continuous evolution physical analog'}
+2.28e+03 pattern= 98 task=  3 (u=32829)  {'docs': u'approaches network classification'}
+2.3e+03 pattern=103 task=  4 (u=32829)  {'docs': u'novel approach applied largest clique problem'}
+2.17e+03 pattern= 71 task=  0 (u=33264)  {'docs': u'bootstrapping structure language alignment-based learning'}
+2.61e+03 pattern=151 task=  0 (u=33574)  {'docs': u'augernome & xtremweb monte carlos computation global computing platform'}
+3.22e+03 pattern= 42 task=  0 (u=33689)  {'docs': u'point process model 1/f noise versus sum lorentzians'}
+1.11e+03 pattern=  0 task=  0 (u=33927)  {'docs': u'temporal meaning representations natural language front-end'}
+1.12e+03 pattern= 24 task=  0 (u=33930)  {'docs': u'human-computer conversation'}
+3.13e+03 pattern=223 task=  0 (u=34026)  {'docs': u'thematic annotation extracting concepts documents'}
+2.95e+03 pattern=207 task=  0 (u=34155)  {'docs': u'predicate abstraction indexed predicates'}
+2.08e+03 pattern= 50 task=  0 (u=34291)  {'docs': u'linear programming helps solving large multi-unit combinatorial auctions'}
+2.14e+03 pattern=109 task=  0 (u=34819)  {'docs': u"kolmogorov's structure functions model selection"}
+3.24e+03 pattern=126 task=  0 (u=34884)  {'docs': u'bounds entropy patterns iid sequences'}
+3.15e+03 pattern=227 task=  0 (u=35046)  {'docs': u'split-2 bisimilarity finite axiomatization ccs with<br> hennessy&#39s merge'}
+1.49e+03 pattern= 57 task=  0 (u=35126)  {'docs': u'decision-theoretic approach resource allocation wireless multimedia networks'}
+3.11e+03 pattern= 53 task=  0 (u=35339)  {'docs': u'signals cellular automata dimension 2 higher'}
+2.57e+03 pattern=155 task=  0 (u=35661)  {'docs': u'on-line integrated bookkeeping electronic run log book meta-data repository atlas'}
+2.06e+03 pattern= 24 task=  0 (u=35715)  {'docs': u'modal logic framework multi-agent belief fusion'}
+2.06e+03 pattern= 31 task=  0 (u=35716)  {'docs': u'theory experiment'}
+2.62e+03 pattern=163 task=  0 (u=35902)  {'docs': u'rethinking openpgp pki openpgp public keyserver'}
+2.65e+03 pattern= 42 task=  0 (u=36150)  {'docs': u'model checking linear logic specifications'}
+3.29e+03 pattern= 93 task=  0 (u=36194)  {'docs': u'diagnosis weaknesses modern error correction codes physics approach'}
+2.23e+03 pattern=123 task=  0 (u=36377)  {'docs': u'declarative program development prolog gupu'}
+3.27e+03 pattern=245 task=  0 (u=36484)  {'docs': u'general recursion coinductive types'}
+3.27e+03 pattern= 62 task=  0 (u=36487)  {'docs': u'efficient management short-lived data'}
+3.24e+03 pattern= 43 task=  0 (u=36561)  {'docs': u'prediction large alphabet processes application adaptive source coding'}
+2.57e+03 pattern= 93 task=  0 (u=36582)  {'docs': u'bug propagation debugging asymmetric software structures'}
+2.42e+03 pattern= 83 task=  0 (u=36756)  {'docs': u'solving satisfiability problems fluctuations dynamics stochastic local search algorithms'}
+3.17e+03 pattern=235 task=  0 (u=36757)  {'docs': u'proof obligations specification refinement liveness properties weak fairness'}
+3.13e+03 pattern= 40 task=  0 (u=36759)  {'docs': u'estimate accuracy interpolant numerical solutions pde problem'}
+3.17e+03 pattern=234 task=  1 (u=36759)  {'docs': u'adaptive grids parametrized scale-free networks'}
+3.17e+03 pattern= 99 task=  0 (u=36760)  {'docs': u'compatible triangulations point partitions series-triangular graphs'}
+3e+03 pattern=211 task=  0 (u=36921)  {'docs': u'medians beyond new aggregation techniques sensor networks'}
+2.99e+03 pattern=210 task=  0 (u=36925)  {'docs': u'fast tuning intra-cluster collective communications'}
+2.99e+03 pattern=210 task=  0 (u=36925)  {'docs': u'identifying logical homogeneous clusters efficient wide-area communications'}
+2.86e+03 pattern=148 task=  0 (u=36986)  {'docs': u'enhancing expressive power u-datalog language'}
+2.86e+03 pattern=192 task=  0 (u=36988)  {'docs': u'practicality intrinsic reconfiguration fault recovery method analog systems'}
+2.36e+03 pattern=113 task=  0 (u=36995)  {'docs': u'probabilistic parsing strategies'}
+2.86e+03 pattern=113 task=  1 (u=36995)  {'docs': u'tabular parsing'}
+3.15e+03 pattern=  9 task=  0 (u=37077)  {'docs': u'improved approximation algorithms geometric set cover'}
+2.69e+03 pattern=173 task=  0 (u=37357)  {'docs': u'fuzzy relational modeling cost affordability advanced technology manufacturing environment'}
+2.69e+03 pattern=173 task=  0 (u=37357)  {'docs': u'defining homomorphisms generalized morphisms fuzzy relations monoidal fuzzy logics means bk-products'}
+1.63e+03 pattern= 73 task=  0 (u=37427)  {'docs': u'extended abstract - model-based debugging java programs'}
+3.22e+03 pattern= 57 task=  0 (u=38074)  {'docs': u'distributed learning wireless sensor networks'}
+1.5e+03 pattern= 61 task=  0 (u=38159)  {'docs': u'efficient cache use stencil operations structured discretization grids'}
+2.71e+03 pattern= 46 task=  0 (u=38544)  {'docs': u'computing convex hulls linear solver'}
+1.73e+03 pattern= 43 task=  0 (u=38651)  {'docs': u'source coding large deviations approximate pattern matching'}
+3.22e+03 pattern=239 task=  0 (u=38803)  {'docs': u'multi-dimensional hash chains application micropayment schemes'}
+2.52e+03 pattern=147 task=  0 (u=39005)  {'docs': u'harmonic inversion helps beat time-energy uncertainty relations'}
+1.21e+03 pattern= 26 task=  0 (u=39160)  {'docs': u'self-stabilizing mutual exclusion ring even k=n'}
+2.97e+03 pattern=125 task=  0 (u=39287)  {'docs': u'preferred answer sets ordered logic programs'}
+2.92e+03 pattern=186 task=  0 (u=39295)  {'docs': u'parallel mixed bayesian optimization algorithm scaleup analysis'}
+1.96e+03 pattern= 66 task=  0 (u=39378)  {'docs': u'architecture security privacy mobile communications'}
+1.98e+03 pattern= 13 task=  0 (u=39466)  {'docs': u'distributed control system test interferometer alma project'}
+2.95e+03 pattern=179 task=  0 (u=39537)  {'docs': u'building linguistic corpus bee dance data'}
+2.57e+03 pattern=154 task=  0 (u=40280)  {'docs': u'twelve ways build cms crossings root files'}
+2.93e+03 pattern=161 task=  0 (u=40297)  {'docs': u'o(1) reversible tree navigation without cycles'}
+2.71e+03 pattern=116 task=  0 (u=40519)  {'docs': u'wsat(cc) - fast local-search asp solver'}
+2.35e+03 pattern= 82 task=  0 (u=40520)  {'docs': u'efficient tree layout multilevel memory hierarchy'}
+2.71e+03 pattern=175 task=  1 (u=40520)  {'docs': u'maintaining information fully-dynamic trees top trees'}
+2.21e+03 pattern=121 task=  0 (u=40742)  {'docs': u'hidden markov model segmentation hydrological enviromental time series'}
+3.05e+03 pattern=200 task=  0 (u=40897)  {'docs': u'fibonacci connection huffman codes wythoff array'}
+3.05e+03 pattern=205 task=  0 (u=40898)  {'docs': u'l1 regularization better l2 learning predicting chaotic systems'}
+2.75e+03 pattern= 21 task=  0 (u=41012)  {'docs': u'verification recursive parallel systems'}
+3.12e+03 pattern= 74 task=  0 (u=41052)  {'docs': u'complete characterization equivalent mimo channel quasi-orthogonal space-time codes'}
+3.12e+03 pattern= 98 task=  0 (u=41059)  {'docs': u'isomorphic implication'}
+3.23e+03 pattern= 52 task=  0 (u=41741)  {'docs': u'scientific impact quantity quality analysis two sources bibliographic data'}
+2.22e+03 pattern= 44 task=  0 (u=41748)  {'docs': u'alternative solutions diluted p-spin models xorsat problems'}
+2.75e+03 pattern=181 task=  0 (u=41912)  {'docs': u'strong equivalence made easy nested expressions weight constraints'}
+1.84e+03 pattern= 87 task=  0 (u=41915)  {'docs': u'event driven objects'}
+1.91e+03 pattern= 21 task=  0 (u=42400)  {'docs': u'scalable unix commands parallel processors high-performance implementation'}
+2.9e+03 pattern= 27 task=  0 (u=42529)  {'docs': u'single-strip triangulation manifolds arbitrary topology'}
+2.96e+03 pattern= 85 task=  0 (u=42616)  {'docs': u'learning adaptive real-time search'}
+2.58e+03 pattern=148 task=  0 (u=42822)  {'docs': u'signatures small-world scale-free properties large computer programs'}
+3.22e+03 pattern=112 task=  0 (u=42923)  {'docs': u'effect fading ad hoc networking'}
+3.09e+03 pattern= 73 task=  0 (u=42945)  {'docs': u'using ldap directories management pki processes'}
+3.01e+03 pattern= 29 task=  0 (u=43205)  {'docs': u'probabilistic analysis rule 2'}
+3.01e+03 pattern= 85 task=  0 (u=43274)  {'docs': u'probabilistic heuristics disseminating information networks'}
+3.1e+03 pattern=149 task=  1 (u=43274)  {'docs': u'local heuristics emergence spanning subgraphs complex networks'}
+2.87e+03 pattern=193 task=  0 (u=43276)  {'docs': u'differences matter on-line feature extraction cognitive economy'}
+1.58e+03 pattern= 35 task=  0 (u=43421)  {'docs': u'low ambiguity strong total associative one-way functions'}
+1.43e+03 pattern= 51 task=  0 (u=43440)  {'docs': u'robustness regional matching scheme global matching scheme'}
+1.72e+03 pattern= 80 task=  0 (u=44123)  {'docs': u'predictability rainfall kerala- application abf neural network'}
+2.1e+03 pattern= 24 task=  0 (u=44251)  {'docs': u'framework compiling preferences logic programs'}
+2.99e+03 pattern= 47 task=  0 (u=44571)  {'docs': u'logical interpretation reversible measurement quantum computing'}
+3.13e+03 pattern=221 task=  1 (u=44571)  {'docs': u"internal logic bell's states"}
+  248 pattern=  1 task=  0 (u=44682)  {'docs': u'robust text processing technique applied lexical error recovery'}
+2.84e+03 pattern=187 task=  0 (u=44718)  {'docs': u'polymorphic lemmas definitions lambda prolog twelf'}
+1.12e+03 pattern= 17 task=  0 (u=44748)  {'docs': u'events linear-time properties'}
+3.28e+03 pattern= 85 task=  0 (u=44792)  {'docs': u'approximate reasoning real-time probabilistic processes'}
+3.28e+03 pattern=189 task=  0 (u=44794)  {'docs': u'multi-modal human-machine communication instructing robot grasping tasks'}
+3.24e+03 pattern= 30 task=  0 (u=44869)  {'docs': u'decomposition approach multi-vehicle cooperative control'}
+3.27e+03 pattern=230 task=  1 (u=44869)  {'docs': u'iterative milp methods vehicle control problems'}
+3.24e+03 pattern=206 task=  0 (u=44870)  {'docs': u'unicity distance stego key'}
+2.21e+03 pattern= 23 task=  0 (u=44925)  {'docs': u'correct proof heuristic gcd algorithm'}
+3.21e+03 pattern=192 task=  0 (u=44965)  {'docs': u'systematic method path-complete white box testing'}
+2.69e+03 pattern=171 task=  0 (u=44993)  {'docs': u'automated fault localization using potential invariants'}
+1.66e+03 pattern= 58 task=  0 (u=45038)  {'docs': u'slicing constraint logic programs'}
+2.19e+03 pattern=118 task=  0 (u=45387)  {'docs': u'mining non-derivable frequent itemsets'}
+1.94e+03 pattern= 58 task=  0 (u=45765)  {'docs': u'branching essence constraint solving'}
+2.02e+03 pattern= 65 task=  0 (u=45787)  {'docs': u'guaranteeing diversity number generators'}
+2.02e+03 pattern=101 task=  0 (u=45788)  {'docs': u'computing average parallelism trace monoids'}
+2.73e+03 pattern= 77 task=  0 (u=45903)  {'docs': u'toward attribute efficient learning algorithms'}
+2.55e+03 pattern=149 task=  0 (u=45990)  {'docs': u'software systems complex networks structure function evolvability software collaboration graphs'}
+1.61e+03 pattern= 29 task=  0 (u=46139)  {'docs': u'super logic programs'}
+2.72e+03 pattern=177 task=  0 (u=46175)  {'docs': u'replay debugging complex real-time systems experiences two industrial case studies'}
+2.69e+03 pattern= 48 task=  0 (u=46304)  {'docs': u'complex independent component analysis frequency-domain electroencephalographic data'}
+1.24e+03 pattern= 29 task=  0 (u=46387)  {'docs': u'probabilistic agent programs'}
+2.68e+03 pattern= 73 task=  0 (u=46495)  {'docs': u'debugging tool localizing faulty processes message passing programs'}
+2.12e+03 pattern=108 task=  0 (u=46498)  {'docs': u'conformal geometry euclidean space geometric algebra'}
+2.68e+03 pattern=108 task=  1 (u=46498)  {'docs': u'circle sphere blending conformal geometric algebra'}
+2.68e+03 pattern= 93 task=  0 (u=46499)  {'docs': u'debugging backwards time'}
+1.25e+03 pattern= 31 task=  0 (u=46605)  {'docs': u'genetic algorithms time-dependent environments'}
+3.07e+03 pattern=216 task=  0 (u=46864)  {'docs': u'fast query processing distributing index cpu caches'}
+3.07e+03 pattern=165 task=  0 (u=46865)  {'docs': u'selfish peering routing internet'}
+3.07e+03 pattern= 98 task=  0 (u=46867)  {'docs': u'analyzing improving performance class anomaly-based intrusion detectors'}
+3.19e+03 pattern=116 task=  0 (u=46871)  {'docs': u'unicore - project results production grids'}
+3.19e+03 pattern= 24 task=  0 (u=46881)  {'docs': u'audit logic accountability'}
+3.19e+03 pattern=238 task=  0 (u=46885)  {'docs': u'divergence-free wavelets navier-stokes'}
+1.23e+03 pattern= 19 task=  0 (u=46952)  {'docs': u'processor verification using efficient reductions logic uninterpreted functions propositional logic'}
+1.52e+03 pattern= 18 task=  1 (u=46952)  {'docs': u'boolean satisfiability transitivity constraints'}
+1.69e+03 pattern= 17 task=  0 (u=47023)  {'docs': u'checking properties within fairness behavior abstractions'}
+1.69e+03 pattern= 25 task=  0 (u=47028)  {'docs': u'gpcg case study performance scalability optimization algorithms'}
+3.09e+03 pattern= 16 task=  0 (u=47114)  {'docs': u'self-reconfigurable computing platform hardware architecture'}
+2.77e+03 pattern=183 task=  0 (u=47123)  {'docs': u'initial experiences re-exporting duplicate similarity computation oai-pmh aggregator'}
+2.78e+03 pattern= 41 task=  0 (u=47127)  {'docs': u'algorithm xxx modified bessel functions imaginary order positive argument'}
+2.86e+03 pattern= 40 task=  0 (u=47160)  {'docs': u'probabilistic solutions equations braid group'}
+1.9e+03 pattern= 93 task=  0 (u=47208)  {'docs': u'artificial neurons arbitrarily complex internal structures'}
+1.96e+03 pattern= 62 task=  0 (u=47341)  {'docs': u'logic-based approach data integration'}
+2.91e+03 pattern=118 task=  0 (u=47358)  {'docs': u'mining frequent itemsets secondary memory'}
+1.52e+03 pattern= 62 task=  0 (u=47402)  {'docs': u'managing periodically updated data relational databases stochastic modeling approach'}
+3.2e+03 pattern=135 task=  0 (u=47447)  {'docs': u'shuffling stacked deck case partially randomized ranking search engine results'}
+1.81e+03 pattern= 58 task=  0 (u=47515)  {'docs': u'constraint propagation presence arrays'}
+1.08e+03 pattern=  4 task=  0 (u=47535)  {'docs': u'restart strategies internet congestion'}
+2.74e+03 pattern= 49 task=  0 (u=47827)  {'docs': u'logical characterizations heap abstractions'}
+1.1e+03 pattern= 22 task=  0 (u=48219)  {'docs': u'mso definable string transductions two-way finite state transducers'}
+2.79e+03 pattern=132 task=  0 (u=48339)  {'docs': u'backward optimized orthogonal matching pursuit'}
+3.08e+03 pattern=107 task=  0 (u=48528)  {'docs': u'search relevancy tuning method using expert results content evaluation'}
+3.04e+03 pattern=214 task=  0 (u=49055)  {'docs': u'approximation algorithm stackelberg network pricing'}
+1.38e+03 pattern= 49 task=  0 (u=49284)  {'docs': u'reasoning higher-order abstract syntax logical framework'}
+2.91e+03 pattern= 58 task=  0 (u=49647)  {'docs': u'typing constraint logic programs'}
+2.91e+03 pattern= 33 task=  0 (u=49649)  {'docs': u'worst-case groundness analysis using definite boolean functions'}
+2.91e+03 pattern= 30 task=  0 (u=49650)  {'docs': u'proof theoretic approach failure functional logic programming'}
+2.91e+03 pattern= 42 task=  0 (u=49652)  {'docs': u'model checking data-independent systems arrays without reset'}
+2.37e+03 pattern= 37 task=  0 (u=49833)  {'docs': u'mathematical foundations modern cryptography computational complexity perspective'}
+2.37e+03 pattern= 95 task=  1 (u=49833)  {'docs': u'work madhu sudan 2002 nevalinna prize winner'}
+2.65e+03 pattern= 32 task=  0 (u=49982)  {'docs': u'treatment sound quantum computers'}
+ 1.89 pattern=  0 task=  0 (u=50010)  {'docs': u'clustered language models context-equivalent states'}
+2.54e+03 pattern= 85 task=  0 (u=50031)  {'docs': u'npc framework building information dissemination networks'}
+1.5e+03 pattern= 60 task=  0 (u=50048)  {'docs': u'naive bayes exemplar-based approaches word sense disambiguation revisited'}
+1.5e+03 pattern= 60 task=  0 (u=50048)  {'docs': u'boosting applied word sense disambiguation'}
+1.6e+03 pattern= 70 task=  0 (u=50173)  {'docs': u'reduction intermediate alphabets finite-state transducer cascades'}
+2.98e+03 pattern=100 task=  0 (u=50189)  {'docs': u'sequent calculus theorem prover standard conditional logics'}
+2.23e+03 pattern=  5 task=  0 (u=50319)  {'docs': u'coins constraint-based interactive solving system'}
+3.26e+03 pattern= 99 task=  0 (u=50342)  {'docs': u'point set stratification delaunay depth'}
+3.18e+03 pattern=129 task=  0 (u=50568)  {'docs': u'geographic directed preferential internet topology model'}
+1.72e+03 pattern= 73 task=  0 (u=50684)  {'docs': u'components interfaces process management system parallel programs'}
+2.86e+03 pattern= 91 task=  0 (u=50712)  {'docs': u'scalable probabilistic models 80211 protocol verification'}
+2.56e+03 pattern= 21 task=  0 (u=51013)  {'docs': u'update statistics conservative parallel discrete event simulations asynchronous systems'}
+2.84e+03 pattern=122 task=  1 (u=51013)  {'docs': u'roughening (1+1) interfaces two-component surface growth admixture random deposition'}
+3.03e+03 pattern= 21 task=  2 (u=51013)  {'docs': u'desynchronization speedup asynchronous conservative parallel update protocol'}
+1.99e+03 pattern= 73 task=  0 (u=51017)  {'docs': u'design tool supporting construction logic programs'}
+1.63e+03 pattern=  2 task=  0 (u=51363)  {'docs': u'systematic debugging attribute grammars'}
+1.77e+03 pattern= 77 task=  0 (u=51510)  {'docs': u'evaluating recommendation algorithms graph analysis'}
+3e+03 pattern= 19 task=  0 (u=51575)  {'docs': u'flux logic programming method reasoning agents'}
+3.07e+03 pattern=217 task=  0 (u=51639)  {'docs': u'method discern complexity two-dimensional patterns generated coupled map lattices'}
+2.98e+03 pattern=209 task=  0 (u=52085)  {'docs': u'construction single-valued solutions nonintegrable systems help painleve test'}
+2.58e+03 pattern= 22 task=  0 (u=52089)  {'docs': u'reachability problems communicating finite state machines'}
+3.2e+03 pattern=236 task=  0 (u=52100)  {'docs': u'minimal chordal sense direction circulant graphs'}
+2.58e+03 pattern= 99 task=  0 (u=52209)  {'docs': u'coding tiling julia sets subhyperbolic rational maps'}
+2.47e+03 pattern= 42 task=  0 (u=53140)  {'docs': u'multiplicative point process model trading activity'}
+3.13e+03 pattern=222 task=  1 (u=53140)  {'docs': u'modelling financial markets multiplicative sequence trades'}
+2.56e+03 pattern=153 task=  0 (u=53349)  {'docs': u'bayesian information extraction network'}
+2.36e+03 pattern=101 task=  0 (u=53460)  {'docs': u'algebraic methods computing smallest enclosing circumscribing cylinders simplices'}
+3.08e+03 pattern=196 task=  0 (u=53592)  {'docs': u'first steps algorithmic fewnomial theory'}
+2.45e+03 pattern= 85 task=  0 (u=53607)  {'docs': u'unsupervised learning framework information compression multiple alignment unification search'}
+2.44e+03 pattern= 48 task=  0 (u=53609)  {'docs': u'smoothed analysis interior-point algorithms condition number'}
+2.7e+03 pattern=121 task=  0 (u=53619)  {'docs': u'dynamic programming algorithm segmentation greek texts'}
+3.09e+03 pattern=211 task=  0 (u=54125)  {'docs': u'geographic routing limited information sensor networks'}
+2.92e+03 pattern=200 task=  0 (u=54296)  {'docs': u'fibonacci q-gaussian sequences'}
+2.93e+03 pattern=190 task=  1 (u=54296)  {'docs': u'logarithmic fibbinomial formula'}
+1.5e+03 pattern= 59 task=  0 (u=54443)  {'docs': u'applying constraint handling rules hpsg'}
+1.5e+03 pattern= 43 task=  0 (u=54444)  {'docs': u'sound manifesto'}
+2.3e+03 pattern=128 task=  0 (u=54722)  {'docs': u'remarks d-dimensional tsp optimal tour length behaviour'}
+1.02e+03 pattern= 16 task=  0 (u=55040)  {'docs': u'perpetual adaptation software hardware extensible architecture providing code optimization central system service'}
+2.62e+03 pattern=  2 task=  0 (u=55233)  {'docs': u'quantifying visualizing attribute interactions'}
+2.65e+03 pattern= 93 task=  0 (u=55404)  {'docs': u'indexing tables referencing complex structures'}
+2.16e+03 pattern= 58 task=  0 (u=55545)  {'docs': u'pspace-completeness sliding-block puzzles problems nondeterministic constraint logic model computation'}
+2.24e+03 pattern= 76 task=  0 (u=55688)  {'docs': u'packet delay models data networks'}
+3.24e+03 pattern=109 task=  0 (u=55776)  {'docs': u'selection scale-free small world'}
+2.76e+03 pattern=182 task=  0 (u=55927)  {'docs': u'mapping weblog communities'}
+2.51e+03 pattern= 42 task=  0 (u=56010)  {'docs': u'model checking class weighted automata'}
+3e+03 pattern=206 task=  0 (u=56051)  {'docs': u'authenticated tree parity machine key exchange'}
+2.87e+03 pattern= 64 task=  0 (u=56099)  {'docs': u'exploring tradeoffs pleiotropy redundancy using evolutionary computing'}
+2.87e+03 pattern=186 task=  1 (u=56099)  {'docs': u'optimizing genetic algorithm strategies evolving networks'}
+2.86e+03 pattern= 51 task=  0 (u=56103)  {'docs': u'universality rank distributions website popularity'}
+1.81e+03 pattern= 85 task=  0 (u=56124)  {'docs': u'market-based reinforcement learning partially observable worlds'}
+2e+03 pattern= 98 task=  1 (u=56124)  {'docs': u'gradient-based reinforcement planning policy-search methods'}
+1.26e+03 pattern= 45 task=  0 (u=56201)  {'docs': u'one-way functions worst-case cryptography algebraic security properties'}
+2.35e+03 pattern= 14 task=  0 (u=56318)  {'docs': u'cyclic convolutional codes'}
+1.63e+03 pattern= 74 task=  0 (u=56449)  {'docs': u'complete characterization complete intersection-type theories'}
+3.27e+03 pattern= 92 task=  0 (u=56564)  {'docs': u'quantum key distribution trusted quantum relay'}
+1.03e+03 pattern= 17 task=  0 (u=56681)  {'docs': u'simmune tool simulating analyzing immune system behavior'}
+2.42e+03 pattern=136 task=  0 (u=56762)  {'docs': u'completeness decidability properties functional dependencies xml'}
+3.07e+03 pattern=185 task=  0 (u=56797)  {'docs': u'generalized counters reversal complexity'}
+2.5e+03 pattern= 72 task=  0 (u=56801)  {'docs': u'stochastic volatility quantitative model stock market returns'}
+2.71e+03 pattern= 58 task=  0 (u=56972)  {'docs': u'parameterised hierarchy argumentation semantics extended logic programming application well-founded semantics'}
+2.71e+03 pattern= 93 task=  0 (u=56981)  {'docs': u'modeling state software debugging vhdl-rtl designs -- model-based diagnosis approach'}
+1.31e+03 pattern= 48 task=  0 (u=57166)  {'docs': u'multiplicative algorithm orthgonal groups independent component analysis'}
+2.73e+03 pattern=179 task=  0 (u=57339)  {'docs': u'xpath-logic xpathlog logic-programming style xml data manipulation language'}
+2.65e+03 pattern=167 task=  0 (u=57362)  {'docs': u'indexing schemes similarity search datasets short protein fragments'}
+3.22e+03 pattern=120 task=  0 (u=57525)  {'docs': u'improved message passing inference densely connected systems'}
+3.17e+03 pattern=  8 task=  0 (u=57576)  {'docs': u'dynamic range reporting one dimension'}
+2.84e+03 pattern=125 task=  0 (u=57647)  {'docs': u'specialization functional logic programs based needed narrowing'}
+2.84e+03 pattern= 16 task=  0 (u=57649)  {'docs': u'predictable software -- shortcut dependable computing '}
+2.84e+03 pattern=167 task=  0 (u=57650)  {'docs': u'search efficiency indexing structures similarity searching'}
+3.29e+03 pattern= 92 task=  0 (u=57838)  {'docs': u'authentication routing simple quantum key distribution networks'}
+2.59e+03 pattern=109 task=  0 (u=57855)  {'docs': u'quaternionic computing'}
+1.97e+03 pattern= 29 task=  0 (u=57883)  {'docs': u'probabilistic analysis differential equation linear programming'}
+  863 pattern=  7 task=  0 (u=57912)  {'docs': u'early experience asdl lcc'}
+3.25e+03 pattern=192 task=  0 (u=57999)  {'docs': u'prototype fault adaptive embedded software large-scale real-time systems'}
+2.41e+03 pattern= 69 task=  0 (u=58168)  {'docs': u'scaling universality continuous length combinatorial optimization'}
+2.56e+03 pattern= 21 task=  0 (u=58576)  {'docs': u'parallel netcdf scientific high-performance i/o interface'}
+3.03e+03 pattern=191 task=  0 (u=58921)  {'docs': u'field geology wearable computer first results cyborg astrobiologist system'}
+3.08e+03 pattern= 59 task=  0 (u=59364)  {'docs': u'intelligent search strategies based adaptive constraint handling rules'}
+3.08e+03 pattern=185 task=  0 (u=59365)  {'docs': u'rate distortion denoising individual data using kolmogorov complexity'}
+3.08e+03 pattern=204 task=  0 (u=59366)  {'docs': u'programmable ethernet switches applications'}
+2.87e+03 pattern= 38 task=  0 (u=59776)  {'docs': u"parrondo's games chaotic switching"}
+2.96e+03 pattern=114 task=  0 (u=59915)  {'docs': u'algorithm two-dimensional mesh generation based pinwheel tiling'}
+2.78e+03 pattern=164 task=  0 (u=59948)  {'docs': u'evolution time horizons parallel grid simulations'}
+1.84e+03 pattern= 86 task=  0 (u=59985)  {'docs': u'pricing virtual paths quality-of-service guarantees bundle derivatives'}
+2.75e+03 pattern= 77 task=  0 (u=60037)  {'docs': u'learning compiler minsat algorithms'}
+2.75e+03 pattern=180 task=  0 (u=60040)  {'docs': u'causes system satisfy specification'}
+3.22e+03 pattern=211 task=  0 (u=60537)  {'docs': u'space-time databases modeling global semantic networks'}
+2.21e+03 pattern= 83 task=  0 (u=60651)  {'docs': u'optimal network topologies local search congestion'}
+3.16e+03 pattern= 92 task=  0 (u=60813)  {'docs': u'structuring quantum effects superoperators arrows'}
+2.67e+03 pattern=171 task=  0 (u=60848)  {'docs': u'mathematical framework automated bug localization'}
+3.11e+03 pattern=124 task=  0 (u=60914)  {'docs': u'jartege tool random generation unit tests java classes'}
+3.11e+03 pattern= 91 task=  0 (u=60921)  {'docs': u'tutorial expectation-maximization algorithm including maximum-likelihood estimation em training probabilistic context-free grammars'}
+3.1e+03 pattern=221 task=  0 (u=60988)  {'docs': u'deterministic bayesian logic'}
+3.1e+03 pattern=149 task=  0 (u=60989)  {'docs': u'inter-package dependency networks open-source software'}
+3.09e+03 pattern=216 task=  0 (u=61158)  {'docs': u'data path processing fast programmable routers'}
+1.15e+03 pattern=  7 task=  0 (u=61492)  {'docs': u'restrictive acceptance suffices equivalence problems'}
+2.41e+03 pattern=128 task=  0 (u=61514)  {'docs': u'temporal plannability variance episode length'}
+2.41e+03 pattern= 54 task=  0 (u=61515)  {'docs': u'flavor language media representation'}
+1.09e+03 pattern= 21 task=  0 (u=61726)  {'docs': u'implementation bestvina-handel algorithm surface homeomorphisms'}
+2.5e+03 pattern= 72 task=  0 (u=61776)  {'docs': u'causalities taiwan stock market'}
+2.67e+03 pattern=170 task=  0 (u=62141)  {'docs': u'liar related paradoxes fuzzy truth value assignment collections self-referential sentences'}
+2.67e+03 pattern= 73 task=  0 (u=62142)  {'docs': u'control debugging distributed programs using fiddle'}
+2.23e+03 pattern=104 task=  0 (u=62329)  {'docs': u'exporting prolog source code'}
+2.23e+03 pattern= 20 task=  0 (u=62357)  {'docs': u'linear-time algorithms computing maximum-density sequence segments bioinformatics applications'}
+3.28e+03 pattern= 87 task=  0 (u=62383)  {'docs': u'instance-independent view serializability semistructured databases'}
+2.58e+03 pattern= 31 task=  0 (u=62445)  {'docs': u'classical nonextensive information theory'}
+2.58e+03 pattern=156 task=  0 (u=62446)  {'docs': u'pruning isomorphic structural sub-problems configuration'}
+2.21e+03 pattern= 71 task=  0 (u=62530)  {'docs': u'speech-driven text retrieval using target ir collections statistical language model adaptation speech recognition'}
+2.21e+03 pattern= 71 task=  0 (u=62531)  {'docs': u'language modeling multi-domain speech-driven text retrieval'}
+2.32e+03 pattern= 82 task=  0 (u=62762)  {'docs': u'quantum random walk search algorithm'}
+3.13e+03 pattern= 21 task=  0 (u=62777)  {'docs': u'implementation motzkin-burger algorithm maple'}
+2.95e+03 pattern= 10 task=  0 (u=62859)  {'docs': u'semijoin algebra guarded fragment'}
+1.65e+03 pattern= 73 task=  0 (u=62976)  {'docs': u'kima - automated error correction system concurrent logic programs'}
+2.34e+03 pattern=131 task=  0 (u=62985)  {'docs': u'equivalences among aggregate queries negation'}
+2.93e+03 pattern=203 task=  0 (u=63029)  {'docs': u'providing service guarantees high-speed switching systems feedback output queuing'}
+2.82e+03 pattern=109 task=  0 (u=63151)  {'docs': u'self-generated self-similar traffic'}
+1.7e+03 pattern= 29 task=  0 (u=63669)  {'docs': u'semantics termination simply-moded logic programs dynamic scheduling'}
+1.7e+03 pattern= 17 task=  1 (u=63669)  {'docs': u'properties input-consuming derivations'}
+2.69e+03 pattern= 59 task=  0 (u=63893)  {'docs': u'pure prolog execution 21 rules'}
+2.69e+03 pattern= 48 task=  0 (u=63896)  {'docs': u'smoothed analysis condition numbers growth factors matrices'}
+2.73e+03 pattern=180 task=  0 (u=63956)  {'docs': u's-topss semantic toronto publish/subscribe system'}
+2.73e+03 pattern=112 task=  1 (u=63956)  {'docs': u'performance tcp/udp ad hoc ieee80211'}
+2.73e+03 pattern=180 task=  0 (u=63958)  {'docs': u'know mean semantic issues internet-scale publish/subscribe systems'}
+3.21e+03 pattern= 30 task=  0 (u=64138)  {'docs': u'stabilization cooperative information agents unpredictable environment logic programming approach'}
+3.19e+03 pattern= 12 task=  0 (u=64208)  {'docs': u'graphs colorings answer set programming'}
+3.09e+03 pattern=105 task=  0 (u=64401)  {'docs': u'balanced overlay networks (bon) decentralized load balancing self-organized random networks'}

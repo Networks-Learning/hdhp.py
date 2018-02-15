@@ -1,0 +1,1010 @@
+DocType docs, ___Pattern 0___ 
+
+language processing natural types two tradeoff temporal states similarity-based representations models meaning gain front-end context-equivalent clustered approaches
+
+DocType docs, ___Pattern 1___ 
+
+text lexical database verbmobil technique tableaux semantic robust repairs recovery processing machine learning error categorization automated applied analytic
+
+DocType docs, ___Pattern 2___ 
+
+interactions grammars attribute visualizing translation systematic sloppy select quantifying protocols prosodic one-level morphology identity enabling dynamically debugging context-free compositional completeness agents
+
+DocType docs, ___Pattern 3___ 
+lower : 7
+quantum : 6
+bounds : 6
+np codes automata probe parallel optimal model covers cell bound access vertex two-way searching sampling restricted recursive recognizing random raising predecessor one-counter minimum heuristics fourier distance dense cycle convolutional complete coding approximating approximate 1-way
+
+DocType docs, ___Pattern 4___ 
+
+sharing using secret internet end-to-end congestion weighted three tcp strategies services restart quantum proportional optimisations on-line memory images fair differentiated control color cellular automata assisted
+
+DocType docs, ___Pattern 5___ 
+systems : 6
+interactive solving quantum proof sparse uncertainty time system symmetric pspace prior polynomial multi-prover modeling linear limited finite faster entanglement engineering diagonally-dominant degenerate constraint-based complex coins automata application 2-round (m^{131})$ $o
+
+DocType docs, ___Pattern 6___ 
+
+complexity program mesh linear classes write-once without theories tc0 take-home solving smoothing small schemes rounding randomized point placement optimal hexahedral generation capture binary arrays
+
+DocType docs, ___Pattern 7___ 
+
+problems well-defined suffices shortest restrictive lcc fastest experience equivalence early asdl algorithm acceptance
+
+DocType docs, ___Pattern 8___ 
+programming : 5
+graph dimension coloring sparse sets semidefinite maximal independent faster dynamic approximate viewed turing small rule-based reporting reduction range quantum pushdown primal-dual potential one multidimensional multi-tape method machine lattice interior-point integrals implementation hardness graphs fully foundation exact evaluation dominance constraint conditional
+
+DocType docs, ___Pattern 9___ 
+
+approximation algorithms time satisfaction randomized improved fast cuts constraint consensus 3-coloring set schemes protocols programs o(13289^n) noisy near-linear minimum isomorphism integer graphs geometric flows equivalence environment deterministic covering/packing cover centrality capacitated boolean asynchronous 3-edge-coloring
+
+DocType docs, ___Pattern 10___ 
+
+universal algebra survey semijoin randomness oriented object languages hardness guarded fragment derandomization computer
+
+DocType docs, ___Pattern 11___ 
+
+secure unconditionally timeline structures scheme q^2 preservation multiparty history entanglement computation communication chaos-noise-based breaking adversary
+
+DocType docs, ___Pattern 12___ 
+set : 6
+answer programming semantic problem knowledge graphs unification stock risk representation relationship profile preference portfolio planning optimization mean logic issues intuitionistic handling framework field efficient domain-dependent detection covering colorings approach applications
+
+DocType docs, ___Pattern 13___ 
+
+system control volumes unstructured test spoken project interferometer generation evaluating empirically efficient distributed dialogue alma adaptable 3d 2d
+
+DocType docs, ___Pattern 14___ 
+codes : 9
+convolutional : 5
+geometry error distribution distance decoding cyclic algebraic weight surfaces structure remarks properties probability parameters one-dimensional method mds grammar generalized expander doubly-cyclic correcting class binary
+
+DocType docs, ___Pattern 15___ 
+
+signature searle's room numerically invariant demolishing curves chinese
+
+DocType docs, ___Pattern 16___ 
+software : 5
+optimization differentiation automatic tools hardware computing code architecture variables using tool system shortcut service self-reconfigurable providing profiles predictable platform perpetual performance numbers large introduction independent fortran extensible designed dependable central benchmarking adf95 adaptation --
+
+DocType docs, ___Pattern 17___ 
+
+properties behavior within tool system simulating simmune linear-time input-consuming immune fairness events derivations checking analyzing abstractions
+
+DocType docs, ___Pattern 18___ 
+
+constraints tomographic tiling transitivity study satisfiability note intervals integer comparative boolean bars arithmetic
+
+DocType docs, ___Pattern 19___ 
+logic : 8
+reasoning : 5
+using verification upper uninterpreted transport security rights reductions propositional proof programming processor probabilities paraconsistent order method level higher gong-needham-yahalom functions flux evidence efficient digital diagnostic agents a-prolog
+
+DocType docs, ___Pattern 20___ 
+computing : 7
+sets time theory segments quadratic applications algorithms two sequence separating sampling roots real primitive polynomial-time polynomial numbers neutrosophic maximum-density maps logic linear-time largest interval industrial-strength i efficient crossing collective collaborative circles choice bioinformatics algebraic
+
+DocType docs, ___Pattern 21___ 
+parallel : 9
+systems asynchronous algorithm surface implementation update packing i/o high-performance fast conservative algorithms verification unix transform sum-of-squares statistics speedup sleeping simulations sequential scientific scalable scalability removal reflection recursive reconsidered protocol processors non-equilibrium netcdf motzkin-burger mixed maple large interface homeomorphisms hidden growth fourier finite-resolution event discrete desynchronization covering construction conditioning computers commands cluster bin bestvina-handel beauty
+
+DocType docs, ___Pattern 22___ 
+
+state finite two-way transductions transducers string reachability problems mso machines l^k l^2 definable complexity communicating
+
+DocType docs, ___Pattern 23___ 
+
+reconstructing proof x-rays three structures projections polyominoes polyatomic orthogonal np-completeness hv-convex heuristic gcd discrete correct atoms algorithm
+
+DocType docs, ___Pattern 24___ 
+logic : 6
+programs framework yet type relevance relationship preferences precise multi-agent modal inference human-computer fuzzy fusion four-valued efficient conversation compiling belief audit accountability
+
+DocType docs, ___Pattern 25___ 
+
+algorithms optimization study setting media case approximation thresholds scalability problems performance parameters packing-covering number modeling iterations gpcg formal example drawing dantzig-wolfe commercial combinatorial
+
+DocType docs, ___Pattern 26___ 
+
+even unit union self-stabilizing ring quadratic origin mutual k=n exclusion contain complexity balls
+
+DocType docs, ___Pattern 27___ 
+
+triangulation randomized improved delaunay wait-free two-process topology test-and-set stabilizer single-strip simulation manifolds incremental deletion circuits arbitrary
+
+DocType docs, ___Pattern 28___ 
+
+approach triangulation transformations text surface studying states representation multipartite mixing metric locc levels hybrid generation combinatorial automatic --
+
+DocType docs, ___Pattern 29___ 
+logic : 16
+programs : 12
+analysis : 6
+semantics : 5
+probabilistic : 5
+linear termination results programming general complexity using fixpoint filters dynamic arithmetic approach acceptability uniform typed two tight terminating term super splitting simply-moded scheduling rush rule refinement propositional proiritized predicates power polymorphically pi-calculus penalization orders orderings operator nondeterministic modularity logics limits implementation hour geometric equation effective differential defeasible constraint classes characterizing calculus backward asynchronous algebraic agent aci-unification abductive 2
+
+DocType docs, ___Pattern 30___ 
+programming : 11
+logic : 10
+cooperative approach using p-time multi-vehicle linear light information functional declarative control agents usefulness us unpredictable theoretic synchronized stabilization side replacement quasiconvex proof project notation nondeterministic nets mixed methods mapping lifting lemma intelligent integration integer imperative hyperedge help generalization fusion frameworks first-order failure extension environment entanglement enhancing decomposition correctness completeness) completeness complete alma affine (proof (lazy)
+
+DocType docs, ___Pattern 31___ 
+algorithms : 6
+genetic theory towards quantum computation classical whitehead time-dependent refactoring quadtrees philosophical nonextensive method life lambda information generic experiment essay environments control connections coloring calculus cache-efficient
+
+DocType docs, ___Pattern 32___ 
+
+unbounded quantum computers treatment sound meets fan-out dilation circuits chaos beta-skeletons
+
+DocType docs, ___Pattern 33___ 
+
+boolean using hierarchy functions worst-case what's unlikely technique read polynomial operations low link joins input groundness extended every evaluated easy-hard downward definite collapses collapse bit balanced analysis
+
+DocType docs, ___Pattern 34___ 
+
+constraint programs towards theorem modeling z workflows weak verification typed timed step second rice's oriented object layouts imll hypercube grid finite domains diagnosis declarative contextual concurrent complexity-theoretic boehm automatic area application analogs
+
+DocType docs, ___Pattern 35___ 
+
+functions total partial one-way low strong stability recursive permutations optimality noise modal logics invariance influences existence characterizations associative ambiguity
+
+DocType docs, ___Pattern 36___ 
+
+cryptanalysis transformations self-assembly meshing dna algorithmic visualization tiles statistics quadrilateral programs packing optimal moebius information hfe constructing clipped-neural-network-based circle cipher chosen-plaintext chaotic ccp boxes application 3d
+
+DocType docs, ___Pattern 37___ 
+complexity : 8
+problem : 6
+computational : 5
+exact transitions phase graphs traveling satisfaction salesman random problems networks intersection geometric constraint boolean young winner vertex updating topology thresholds testing spines shop sharp schemes perspective orderings number modern maximum mathematical local hamiltonian foundations flow exact-four-colorability emerging elections domatic different degree definition cubic cryptography correlations conveyor connection coarse characterisations challenges bipartiteness arising
+
+DocType docs, ___Pattern 38___ 
+
+games switching separability polygons parrondo's lattices firing edge distributive coding circular chaotic
+
+DocType docs, ___Pattern 39___ 
+
+lower complexity bounds bounded weak tours resolution propositional proof principle pigeonhole np$ maps curvature convex coefficient bilinear \ne $p
+
+DocType docs, ___Pattern 40___ 
+
+ordinary solutions numerical equations solution problem probabilistic pde order method interpolant hyperplane group fractional finding estimate differential conic braid accuracy
+
+DocType docs, ___Pattern 41___ 
+boolean : 6
+functions : 5
+random query properties order generalised function criteria bent xxx translating structures right power positive pcf modified introduction imaginary grow formulas first-order extremal expressive equality downwards computed bessel argument algorithms algorithm (ii) (i)
+
+DocType docs, ___Pattern 42___ 
+model : 6
+checking process point without weighted versus trading tractability systems sum specifications reset noise multiplicative lorentzians logic linear fixed-parameter definability data-independent class automata arrays activity 1/f
+
+DocType docs, ___Pattern 43___ 
+
+coding source pattern matching large unique theorems strings sphere-covering sound processes prediction measure manifesto lossy generalized efficient deviations critical converse concentration behavior approximate application alphabet adaptive
+
+DocType docs, ___Pattern 44___ 
+
+problems graphs xorsat subgraph solutions side related planar p-spin observations modularity models length isomorphism diluted cycle complexity bandit alternative
+
+DocType docs, ___Pattern 45___ 
+
+security properties worst-case sets self-reducibility policy p-immune one-way lack holes functions cryptography consistency algebraic
+
+DocType docs, ___Pattern 46___ 
+
+computing depth solver sandpiles regression points partial ones multivariate linear isomorphisms hulls hamiltonian graph generalized flat fixed cycles convex complete
+
+DocType docs, ___Pattern 47___ 
+quantum : 8
+computing : 7
+walks problems overview grid architecture stable small skepticism separability scientific reversible relational random probabilistic postselection polynomial-time np-complete multilinear monitoring models measurement logical lattice large introductory interpretation formulas finite-dimensional dynamics computation chaotic bipartite applications algorithmic - (r-gma)
+
+DocType docs, ___Pattern 48___ 
+analysis : 6
+smoothed condition algorithms polynomial interior-point independent component algorithm usually time termination takes sufficient simplex orthgonal numbers number multiplicative matrices mapping invertibility growth groups functions frequency-domain factors electroencephalographic data complex bernstein-bezier
+
+DocType docs, ___Pattern 49___ 
+
+theory simulations reasoning logical framework agents traceroute-like syntax probes predicting pratice normed networks learn higher-order heap exploring expected clri characterizations behavior axioms abstractions abstract
+
+DocType docs, ___Pattern 50___ 
+
+linear introduction programming part ludics logic language computation within time symbolic solving soft polynomial multi-unit large lambda-calculus ii helps ginac framework combinatorial c++ auctions
+
+DocType docs, ___Pattern 51___ 
+
+scheme matching website universality robustness regional rank popularity global distributions
+
+DocType docs, ___Pattern 52___ 
+
+distributed data table structure scientific peer-to-peer hash two sources size recursive record random quantity quality protection pad optimum one-time locating impact environments design collaborations cipher cache bibliographic based analysis (small-world) (dht)
+
+DocType docs, ___Pattern 53___ 
+quantum : 8
+complexity : 7
+automata communication cellular properties kolmogorov information based vs update signals shannon set sequences sand rule-based rejection query polynomial one-way multipartite membership measures logic limitations interaction higher entanglement dimension descriptions degree computational classical causal basic advice 2
+
+DocType docs, ___Pattern 54___ 
+
+language detection control xml systems robot representation receiver novelty neotaxis modelling media identification hardware flavor dab controlled content anomaly annotation
+
+DocType docs, ___Pattern 55___ 
+
+online meshes error correction 2d waveguide timing spike shape-enclosing precision new neural local framework flipping dispersion cubical contours computational companion caching behavior
+
+DocType docs, ___Pattern 56___ 
+random : 7
+statistical satisfiability perspective graphs systems mechanics transition threshold problems problem phase multiagent hiding coloring approach web vertex values unicyclic typical synchronization symbolic stability solutions replica-symmetry-broken probabilistic physics one-step neuronal mosaics learning introduction instability information high-q growth game-theoretic formulae finite-connectivity covering components classification characterization categorical asymptotics anonymity analysis 3-sat
+
+DocType docs, ___Pattern 57___ 
+networks : 6
+wireless distributed topology sensor allocation unknown solving service search resource reliability processing problems power-law phutball multimedia method learning information hoc hard endgames decision-theoretic collaborative broadcast biological beamforming approach ad
+
+DocType docs, ___Pattern 58___ 
+logic : 11
+constraint : 11
+semantics : 5
+programs : 5
+programming : 5
+solving problems well-founded stable satisfaction propagation models model computation application variable value typing tracers survey sliding-block slicing selective rigorous representing puzzles pspace-completeness presence planning parameterised ordering numerical nondeterministic non-stratified negation-as-failure motion minimum interval initialization hierarchy hereditary harrop generalized formula extended expressibility experiment existence essence disjunctive design curriculum control comparisons comparison camera branching balanced arrays argumentation approaches academic abduction
+
+DocType docs, ___Pattern 59___ 
+rules : 6
+constraint handling standard programming ml strategies search reactive pure propagators prolog overlapping optimizing intelligent implementation hpsg hal finite-domain execution compilation based approach applying adaptive action 21
+
+DocType docs, ___Pattern 60___ 
+
+word sense disambiguation revisited naive exemplar-based boosting bayes approaches applied
+
+DocType docs, ___Pattern 61___ 
+
+efficient computation world use structured stencil shift registers polynomial physical period operations maximal linear limits grids feedback discretization characteristic cache
+
+DocType docs, ___Pattern 62___ 
+data : 6
+relational databases management approach updated stochastic short-lived search providing phenix periodically navigation modeling mining managing long-term logic-based integration efficient complex authentic astrophysical archival access
+
+DocType docs, ___Pattern 63___ 
+
+lists algorithms combinatorial access testing tcp/ip skip sizes router real-world proposal problem packet opportunity improved group firewall filering dynamic cost authenticated auctions append-only analysing
+
+DocType docs, ___Pattern 64___ 
+
+using shortest paths computing tradeoffs sets redundancy rectangular pleiotropy pairs oracles multiplication matrix homotopic exploring evolutionary efficiently coins bridging biased
+
+DocType docs, ___Pattern 65___ 
+
+number generators topologically rectilinear k_10 guaranteeing graphs embedded dynamic diversity crossing 62
+
+DocType docs, ___Pattern 66___ 
+
+model information disjunctive paraconsistent data mobile generalized sufficiently security relational public-key privacy polyhedra negative meaningful management intuitionistic fuzzy fat extended communications based architecture agents 2-castable
+
+DocType docs, ___Pattern 67___ 
+
+spherical simulation resonator model generalization enclosures 3-d
+
+DocType docs, ___Pattern 68___ 
+
+modeling topology process medium internet hot-pressing fiberboard density accurately (mdf)
+
+DocType docs, ___Pattern 69___ 
+optimization : 5
+extremal model improving graph combinatorial universality trailing table steady state scaling power partitioning parma length laws jamming heuristic dynamics continuous compression
+
+DocType docs, ___Pattern 70___ 
+
+transducer reduction intermediate finite-state cascades alphabets
+
+DocType docs, ___Pattern 71___ 
+language : 5
+structure modeling text syntactic speech-driven speech retrieval using target structured statistical sounds self-organization richer recognition portability multi-domain model learning lattice ir game discourse dependencies convergence collections cards bootstrapping anaphora alignment-based adaptation
+
+DocType docs, ___Pattern 72___ 
+
+stock market volatility taiwan stochastic returns quantitative proxies model indices hard designing computationally causalities
+
+DocType docs, ___Pattern 73___ 
+system : 6
+programs : 6
+debugging using programming logic abstract - tool processes model-based management higher-order distributed design concurrent win32 treatment supporting process pki passing parallel multiple module models message localizing ldl++ ldap kima java interfaces hep@home fiddle features faulty extended error directories deductive database correction control construction computing components com-oriented boinc based automated
+
+DocType docs, ___Pattern 74___ 
+
+complete characterization binary verification trees timed theories space-time safety reachability quasi-orthogonal pushdown mimo intersection-type fibred equivalent codes channel categories automata
+
+DocType docs, ___Pattern 75___ 
+
+classes trees stabilizing results lunch hold functions free coalgebra based available 2-3
+
+DocType docs, ___Pattern 76___ 
+
+networks models data waveguide wave two--dimensional signal-theoretic propagation packet neural multidimensional mesh media geometries elastic delay classification characterization artificial
+
+DocType docs, ___Pattern 77___ 
+algorithms : 6
+analysis : 5
+learning efficient toward techniques sharing recommendation quasiconvex program optimal network minsat hybrid graph event-based evaluation evaluating enhanced dewiz constructions comprehensive compiler citation backtracking attribute
+
+DocType docs, ___Pattern 78___ 
+
+routing protocol open networks initiative archives star small-world pretty-simple permutations password-authenticated passive partitioned optimal optical near local key-exchange implementation eprints development awareness augmented arxiv
+
+DocType docs, ___Pattern 79___ 
+
+options single-stock provable pricing fast european basket asian accuracy
+
+DocType docs, ___Pattern 80___ 
+neural : 5
+networks network application transfer towards systems step social semiclassical self-developing rainfall predictability peer-to-peer participating nodes memorization kerala- growth gating gated function first cost conditional computing characterizing chaos c-not biological annealing adjustable accelerated abf
+
+DocType docs, ___Pattern 81___ 
+
+selection data uniform systems fitness efficient business analysis warehouse versus tournament support structuring replica prolog preserve metadata indexing hera groundness grid globus genetic event effective diversity
+
+DocType docs, ___Pattern 82___ 
+quantum : 8
+algorithm : 5
+walk search possible memory hypercomputational hierarchy efficient tree synopsis synchronization space simulations shortcut random qubit perform one numerical np multilevel layout intelligent hybrid find far enhancing element distinctness construction clock capacity backtracking algorithms
+
+DocType docs, ___Pattern 83___ 
+
+search problem local selection problems optimal constrained topologies techniques stochastic solving solver satisfiability rare portfolio phase partitioning ordered network minimum integer fluctuations expectation events dynamics diagram congestion boosting algorithms
+
+DocType docs, ___Pattern 84___ 
+
+standards privacy politics http cookies
+
+DocType docs, ___Pattern 85___ 
+information : 6
+learning : 5
+search probabilistic unification reasoning networks multiple framework compression alignment worlds reinforcement real-time npc dissemination valuation unsupervised small sensor processes play partially overview observable non-uniform non-probabilistic neel market-based kalman introduction heuristics games form filter extensive expectation disseminating control colouring characterizing building approximate adaptive 'computing'
+
+DocType docs, ___Pattern 86___ 
+
+virtual weak strong reality quality-of-service pricing paths guarantees derivatives concept bundle
+
+DocType docs, ___Pattern 87___ 
+
+query event driven databases view sets serializability semistructured relational objects language instance-independent inconsistent consistent computations answering answer
+
+DocType docs, ___Pattern 88___ 
+
+mirror kite hinged dissection
+
+DocType docs, ___Pattern 89___ 
+
+reference manual mace introduction guide crocopat 21 20
+
+DocType docs, ___Pattern 90___ 
+
+termination inference numerical loops conditions tool prolog meta-programs iso-prolog cti constraint-based
+
+DocType docs, ___Pattern 91___ 
+
+tutorial protocol probabilistic metadata harvesting verification using training scalable oai models maximum-likelihood including grammars exposing expectation-maximization estimation em context-free algorithm 80211
+
+DocType docs, ___Pattern 92___ 
+quantum : 8
+key distribution states effects computation variations using trusted superoperators structuring simulations simple routing relay reconciliation quantum-distributed polarized performance numerical networks network mixed load indistinguishability gaussian cryptographic computational coherent classically-controlled authentication arrows application
+
+DocType docs, ___Pattern 93___ 
+
+structures debugging software diagnosis complex approach weaknesses vhdl-rtl time tables state referencing propagation physics neurons modern modeling model-based internal indexing error designs correction codes bug backwards asymmetric artificial arbitrarily --
+
+DocType docs, ___Pattern 94___ 
+
+semantic modelling unregulated self-adaptation qualitative neutrality necessity inheritance fisheries dynamical conceptual capital association approach analysis accumulation
+
+DocType docs, ___Pattern 95___ 
+
+work winner sudan strict prize pattern nevalinna madhu lambda-calculus higher-order complement 2002
+
+DocType docs, ___Pattern 96___ 
+
+thickness geometric separating scalability new law interpretation book amdahl's
+
+DocType docs, ___Pattern 97___ 
+
+quantum verification problem versus version theorem subgroup single semi-direct product multiple hidden groups green`s formal efficient digital coverage class certificates certificate application algorithms
+
+DocType docs, ___Pattern 98___ 
+network : 6
+intrusion traffic performance non-gaussian nature monitoring implication detection analysis reinforcement policy-search planning new multidimensional methods isomorphic improving gradient-based detectors classification class approaches approach anomaly-based analyzing
+
+DocType docs, ___Pattern 99___ 
+
+sets point triangulations sparse non-negative integers delaunay coding towards tiling subhyperbolic strictly stratification star-free small set series-triangular rational quadrilateral proximity partitions meshes maps julia inversion graphs functions depth dense convex compatible characterization
+
+DocType docs, ___Pattern 100___ 
+
+arithmetic theorem hierarchical calculus verified standard situation sequent sat s^2_n(x) prover parameter-less logics linear incompleteness graham-pollack extensions essential disjunctive depth-3 deciding coq conditional circuits boa
+
+DocType docs, ___Pattern 101___ 
+
+computing trace smallest simplices parallelism monoids methods enclosing cylinders circumscribing average algebraic
+
+DocType docs, ___Pattern 102___ 
+
+unrepeated uncertain participants number first-price collusion auctions
+
+DocType docs, ___Pattern 103___ 
+
+structure approach using reservations problem novel data bandwidth time-based theoretical static possible motion largest invariants internet foundations discrete determining custom clique built avenues applied ants advance
+
+DocType docs, ___Pattern 104___ 
+
+semantics prolog witness trace source properties precongruence formats exporting decorated cut code
+
+DocType docs, ___Pattern 105___ 
+
+networks peer-to-peer practical load balancing update simplification self-organized requests random propagation procedures overlay formulations encapsulation efficiency decentralized cup controlled content connection balanced analytical (bon)
+
+DocType docs, ___Pattern 106___ 
+
+time theory linear cores turing tape symphony statistical sketch polymorphic physics one o(m) networks machines generalized finding decomposition communities churn chord approach algorithm
+
+DocType docs, ___Pattern 107___ 
+
+web using method attacks vectors tuning topics taxonomy structure search results relevancy expert evaluation encoding edit distance different-length content clustering broad
+
+DocType docs, ___Pattern 108___ 
+
+space geometric conformal algebra time state sphere petri nets maximing margin input geometry euclidean computation circle blending analysis
+
+DocType docs, ___Pattern 109___ 
+
+traffic structure selection model internet computing world using traces surfaces small service self-similar self-generated scale-free response real-time quaternionic multiresolution kolmogorov's intelligence functions filtering denial conformal attacks artificial active
+
+DocType docs, ___Pattern 110___ 
+
+sorting comparisons posets partial pairwise o(n) o(n n) moves log learn large in-place forklift complexity asymptotic --
+
+DocType docs, ___Pattern 111___ 
+
+random on-line survey-propagation problem paging k-satisfiability inputs file equations caching biased adversarially
+
+DocType docs, ___Pattern 112___ 
+
+performance hoc evaluation ad xslt within tcp/udp scalable project nordugrid networking ieee80211 gridftp fading effect
+
+DocType docs, ___Pattern 113___ 
+
+strategies term probabilistic parsing usage typed traversal theory tabular rewriting reduction normalization lambda heap generic effects deductive databases
+
+DocType docs, ___Pattern 114___ 
+algorithm : 5
+survey generation two-dimensional tiling satisfiability remarks propagation pinwheel mesh matrices kernel k-satisfiability incomplete image em document decimation compression codebook based approximating
+
+DocType docs, ___Pattern 115___ 
+
+algorithms location greedy fitting facility using statistical lp k-medians factor-revealing efficiency dual datalog curve chernoff-wald bound analyzed
+
+DocType docs, ___Pattern 116___ 
+
+- wsat(cc) unicore solver scalable results project production odu/southampton local-search libraries harvest-based grids fast experiments digital asp architecture
+
+DocType docs, ___Pattern 117___ 
+
+domains spatial space-time meshes handling defeasibilities building arbitrary action
+
+DocType docs, ___Pattern 118___ 
+
+frequent mining itemsets secondary non-derivable memory knot discovery
+
+DocType docs, ___Pattern 119___ 
+
+two transversals tangents strategic requires quadrics polymorphism p^3 lines common combinators!
+
+DocType docs, ___Pattern 120___ 
+message : 5
+systems passing multi-agent complexity communication theorem sum strand spaces relationship qu-prolog multi-threading mpich-g2 mathematical interface inference improved implementation grid-enabled direct densely connected compression buffer analysis allocation
+
+DocType docs, ___Pattern 121___ 
+
+time texts series segmentation model hidden algorithm programming polynomial(s) pattern multilingual markov hydrological greek fine-grained enviromental dynamic discovery cryptosystems alignment
+
+DocType docs, ___Pattern 122___ 
+
+surface two-component roughening revision random preference optimally nonmonotonic monotonic interfaces growth disk deposition cutting admixture (1+1)
+
+DocType docs, ___Pattern 123___ 
+
+prolog systems refactoring making stance programs program object-oriented large-scale java improving gupu empirical development declarative decisions available architecture
+
+DocType docs, ___Pattern 124___ 
+
+tool withdrawal value unit theoretical tests random programming java jartege generation explanations environments classes
+
+DocType docs, ___Pattern 125___ 
+
+programs based sets logic execution answer tracing timestamp specialization programming preferred ordered normal new needed narrowing lattice java functional forms explaining cryptographic control constructions clp(fd) c
+
+DocType docs, ___Pattern 126___ 
+
+problems physical packing orthogonal higher-dimensional characterization bounds vagueness sequences reality patterns np-complete intransitivity iid graph general framework evolution equivalence entropy continuous combinatorial analog
+
+DocType docs, ___Pattern 127___ 
+
+relations direction cardinal tcsp-like reasoning integrating existing decidable spatial qualitative projection-based orientation nonmonotonic language knowledge generalising generalisation evolving constraint cone-shaped bases
+
+DocType docs, ___Pattern 128___ 
+
+length variance tsp tour temporal remarks plannability optimal episode d-dimensional behaviour
+
+DocType docs, ___Pattern 129___ 
+
+model internet evolution economic varying topology simple preferential geographic entities dynamics directed correlations conditions competition adaptation
+
+DocType docs, ___Pattern 130___ 
+
+clustering local survey propagation equilibrium equations using states service scalability new name-trail music multiobjective look kalman-filtering interactions historic hboa generalizations compression algorithmic
+
+DocType docs, ___Pattern 131___ 
+
+constraints aggregate integrity using queries numerical databases trust range query probabilistic prices negotiating negation management knowledge fixing estimating equivalences data consistent complexity bundles attributes approximation approach answers among
+
+DocType docs, ___Pattern 132___ 
+
+optimized tiled pursuit orthogonal matching gamuts displays color backward
+
+DocType docs, ___Pattern 133___ 
+
+systems numbers abstract ultimately techniques survey representations real ramsey periodic parallel numeration multigraphs inference fault-tolerance fault-recovery canonical bipartite
+
+DocType docs, ___Pattern 134___ 
+
+squares least variables tsnnls stability sparse solver regularized regression problems non-negative lines large fitting circles analysis
+
+DocType docs, ___Pattern 135___ 
+
+search stacked shuffling results relaxation ranking randomwalksat randomized procedure partially metastability engine deck case
+
+DocType docs, ___Pattern 136___ 
+
+xml properties functional dependencies decidability completeness
+
+DocType docs, ___Pattern 137___ 
+
+restricted phorma perfectly order multidimensional hashed hashable arrays array
+
+DocType docs, ___Pattern 138___ 
+
+new vertex pcp multilayered hypergraph hardness family existence equations diophantine cover \omega$ $\bf
+
+DocType docs, ___Pattern 139___ 
+
+systems using syzygies size reduction pdes partial linear laws integration equations decoupling conservation
+
+DocType docs, ___Pattern 140___ 
+
+checkable survey subclassing rules proofs probabilistically prevent practically oop np new got errors definition
+
+DocType docs, ___Pattern 141___ 
+
+physics general & systems sound self-organizing relevant partiality new methodology designing ai
+
+DocType docs, ___Pattern 142___ 
+
+distributed processing matrix view sites public-access protecting programming parallel eye denial-of-service bird's attacks
+
+DocType docs, ___Pattern 143___ 
+
+results theorems recent quantitative qmu optimization no-free-lunch mu-calculus
+
+DocType docs, ___Pattern 144___ 
+
+symbolic mapping algebra vacuum supergravities structure reflection novel maximal high-performance gauged embedded approach application
+
+DocType docs, ___Pattern 145___ 
+
+group two trivial symmetric strong sampling presentations part generators fourier defies conjecture balanced andrews-curtis
+
+DocType docs, ___Pattern 146___ 
+
+two tangent spheres meeting lines line fixed envelope
+
+DocType docs, ___Pattern 147___ 
+
+relations uncertainty time-energy inversion helps harmonic discrete compatibility beat
+
+DocType docs, ___Pattern 148___ 
+
+small-world programs power computer u-datalog signatures scale-free relationships properties law large language file-sharing expressive enhancing effects distributions communities class causes
+
+DocType docs, ___Pattern 149___ 
+networks : 5
+software graphs complex subgraphs structure function finding without using traitors systems spanning secure projective-planar polynomial organization open-source multiple local labelled k_{33}-subdivision-free inter-package heuristics forbidden evolvability enumeration emergence dependency connections connected collaboration closest byzantine agreements "truncated"
+
+DocType docs, ___Pattern 150___ 
+
+words unbordered proof periodicity extended duval conjecture
+
+DocType docs, ___Pattern 151___ 
+
+computing zeros xtremweb univariate sharp scalable polynomials platform monte global errors computation carlos bounds augernome approximate &
+
+DocType docs, ___Pattern 152___ 
+
+geometric modular modeler lens graxml distortions detection compensation camera blind -
+
+DocType docs, ___Pattern 153___ 
+information : 7
+mutual : 5
+network maximum incomplete hierarchical extraction distribution data codes clustering bayesian based using treatment symbolwise space-time selection prequential methods log-loss likelihood feature discrete dictionary decodability content complete cdn block asymptotic applied
+
+DocType docs, ___Pattern 154___ 
+
+ways twelve root files crossings cms build
+
+DocType docs, ___Pattern 155___ 
+
+run repository on-line meta-data log integrated electronic bookkeeping book atlas
+
+DocType docs, ___Pattern 156___ 
+
+note transformation throughput sub-problems structural scheduling pruning maximize jobs isomorphic equal-length configuration burrows-wheeler
+
+DocType docs, ___Pattern 157___ 
+
+trees range two taxa queries phylogenetic nested mode median lists compatibility ancestral
+
+DocType docs, ___Pattern 158___ 
+
+logics weakly time temporalized temporal tboxes spatio-temporalisation qsr programs modes modal hal granularity gap cyclic constraint-based checking bridging automata alc(d)
+
+DocType docs, ___Pattern 159___ 
+
+distortion radial camera calibration analytical models model undistortion simplified rational precision piecewise new geometric formulae family
+
+DocType docs, ___Pattern 160___ 
+
+viewed systems symbolic stochastic n-step markov dynamical chains binary
+
+DocType docs, ___Pattern 161___ 
+
+cycles without tree short reversible o(1) navigation connectivity
+
+DocType docs, ___Pattern 162___ 
+
+systems simulate refutations polynomially nullstellensatz frege counting constant-depth axioms
+
+DocType docs, ___Pattern 163___ 
+
+openpgp rethinking public pki keyserver
+
+DocType docs, ___Pattern 164___ 
+
+parallel treebank time studying structure simulations quark predicate-argument pc lattice-gauge-theory implementation horizons grid evolution confinement code clusters annotating
+
+DocType docs, ___Pattern 165___ 
+
+graphs routing toroidal selfish peering obstructions internet-like internet double cubic covers compact 6-cycle $k_{33}$'s
+
+DocType docs, ___Pattern 166___ 
+
+source software review poset peer open odag fibonacci cobweb characterization
+
+DocType docs, ___Pattern 167___ 
+
+similarity search indexing structures short searching schemes protein fragments efficiency datasets
+
+DocType docs, ___Pattern 168___ 
+
+using vicsek trembling trembles simulated rules revisiting perfection neighbor nearest multi-agent model hand coordination calculate annealing
+
+DocType docs, ___Pattern 169___ 
+
+type oracles identification subtle quantum postmortem object malicious demonstration) debugger chameleon boolean (tool
+
+DocType docs, ___Pattern 170___ 
+
+value truth sentences self-referential related paradoxes liar fuzzy collections assignment
+
+DocType docs, ___Pattern 171___ 
+
+localization automated using potential mathematical invariants framework fault bug
+
+DocType docs, ___Pattern 172___ 
+
+computer streaming sharing security privacy new network motivation methodologies logs graphics card anonymization
+
+DocType docs, ___Pattern 173___ 
+
+fuzzy technology relations relational morphisms monoidal modeling means manufacturing logics homomorphisms generalized environment defining cost bk-products affordability advanced
+
+DocType docs, ___Pattern 174___ 
+
+p2p 2 theoretic systems incentives game framework
+
+DocType docs, ___Pattern 175___ 
+
+trees top spanning maintaining lower-stretch information fully-dynamic
+
+DocType docs, ___Pattern 176___ 
+
+usage lcg-1 experience deployment
+
+DocType docs, ___Pattern 177___ 
+
+systems complex two studies replay real-time optimality industrial experiences evidence debugging condition computational case
+
+DocType docs, ___Pattern 178___ 
+
+utility part great generalized expected expectations universal rule ii i decision customizability
+
+DocType docs, ___Pattern 179___ 
+
+data xpathlog xpath-logic xml style manipulation logic-programming linguistic language dance corpus building bee
+
+DocType docs, ___Pattern 180___ 
+
+system systems semantic publish/subscribe toronto specification sense satisfy s-topss respond mean know issues internet-scale file causes abstraction
+
+DocType docs, ___Pattern 181___ 
+
+weight nested made expressions easy constraints tools students strong md mathematics mathematica m@th equivalence desktop -
+
+DocType docs, ___Pattern 182___ 
+
+mapping accuracy weblog union scaling phenomena internet communities bound asymptotic
+
+DocType docs, ___Pattern 183___ 
+
+wake swarm similarity robots re-exporting problem oai-pmh initial freeze-tag experiences duplicate computation aggregator
+
+DocType docs, ___Pattern 184___ 
+
+finite fields efficient word-size tree set-sharing rational quantum product primitive precise linearity languages integration freeness dot correct codes bch analysis
+
+DocType docs, ___Pattern 185___ 
+complexity : 5
+using dimension spin simulation reversal rate rare randomness partitions kolmogorov ising individual image glasses generalized events distortion denoising data counters computational arithmetical agreement 4th
+
+DocType docs, ___Pattern 186___ 
+algorithm : 5
+optimization genetic compact bayesian strategies search scaleup parameter-less parallelization parallel optimizing networks mixed massive local iterated inheritance fitness extended evolving architecture analysis
+
+DocType docs, ___Pattern 187___ 
+
+twelf prolog polymorphic lemmas lambda definitions
+
+DocType docs, ___Pattern 188___ 
+
+strategy order code various uniform ulam's tree protocols proofs procedures networking mobile independence high-level give game first error-resistant elimination and-continuations
+
+DocType docs, ___Pattern 189___ 
+
+communication visual tasks stream robot multi-modal intelligent instructing human-machine grasping encoding economical
+
+DocType docs, ___Pattern 190___ 
+
+types subtyping phantom logarithmic formula fibbinomial
+
+DocType docs, ___Pattern 191___ 
+
+wearable towards system self-organizing results requirements protocol intelligence geology first field cyborg computer astrobiologist artifacts ambient
+
+DocType docs, ___Pattern 192___ 
+
+systems method fault white testing systematic software recovery reconfiguration real-time prototype practicality path-complete large-scale intrinsic embedded box analog adaptive
+
+DocType docs, ___Pattern 193___ 
+
+on-line matter feature extraction economy differences cognitive
+
+DocType docs, ___Pattern 194___ 
+
+codes distance stopping ldpc tight similarity reed-solomon redundancy polynomials mattson-solomon map list ldgm idempotents google decoding decodibility bounds bounded binary
+
+DocType docs, ___Pattern 195___ 
+
+arrays using unbalanced theoretic sources schemes number information hadamard frames finite estimation encryption criteria
+
+DocType docs, ___Pattern 196___ 
+
+knowledge algorithmic updates theory steps framework first fewnomial deductive computing base abductive
+
+DocType docs, ___Pattern 197___ 
+
+win32 un programmation production machines langage lambek's la fonctionnel de d'applications avec aspects analysis
+
+DocType docs, ___Pattern 198___ 
+
+system virtual software radio preservation peer-to-peer operating native functionality exposing digital devices defined defenses attrition applications
+
+DocType docs, ___Pattern 199___ 
+
+program version tile test symbolic parform parallel monitoring manipulation form calorimeter beam atlas
+
+DocType docs, ___Pattern 200___ 
+
+fibonacci wythoff sequences q-gaussian huffman connection codes array
+
+DocType docs, ___Pattern 201___ 
+
+design system qft proposal notes internet expert domain calculations adversary
+
+DocType docs, ___Pattern 202___ 
+
+minimum tutorial principle polytope length introduction high enclosing dimensions description
+
+DocType docs, ___Pattern 203___ 
+
+systems switching service queuing providing output high-speed guarantees feedback
+
+DocType docs, ___Pattern 204___ 
+
+applications theorems switches spaces ramsey-type programmable problems online metric ethernet
+
+DocType docs, ___Pattern 205___ 
+
+systems better unfair transition task regularization quasi-ordered predicting metrical learning l2 l1 chaotic applications algorithms
+
+DocType docs, ___Pattern 206___ 
+
+key zero unicity tree thompson's stego public proofs parity machine knowledge group exchange distance cryptography authenticated
+
+DocType docs, ___Pattern 207___ 
+
+predicates predicate indexed abstraction
+
+DocType docs, ___Pattern 208___ 
+
+revisited bounds versus static return-map prices option multivariate finite dynamic domain cryptanalysis consistency arbitrage
+
+DocType docs, ___Pattern 209___ 
+
+construction test systems solutions single-valued painleve nonintegrable nets metrics low help fast dimensional applications
+
+DocType docs, ___Pattern 210___ 
+
+communications clusters wide-area tuning number logical intra-cluster identifying homogeneous fixed fast efficient correlation collective clustering
+
+DocType docs, ___Pattern 211___ 
+
+sensor networks routing new databases wireless techniques space-time simulating shawn semantic power modeling medians limited information global geographic beyond aware approach aggregation
+
+DocType docs, ___Pattern 212___ 
+
+selection schedule annealing algorithms ultra-wideband systems suboptimal scheme receivers rake radio optimal mmse impulse finger evolutionary cauchy boltzmann
+
+DocType docs, ___Pattern 213___ 
+
+temporal spatial roles domain constraints concrete suitable results continuous combination change augmenting alc(d)-based alc(d) -first (spatial) (atemporal) (aspatial)
+
+DocType docs, ___Pattern 214___ 
+
+algorithm stackelberg reverse problem pricing network metric k-median greedy approximation
+
+DocType docs, ___Pattern 215___ 
+
+channel capacity rician fading systems structure side random-coding part noncoherent multiple moving input information gaussian first-order feedback exponents coding capacity-achieving average antenna --
+
+DocType docs, ___Pattern 216___ 
+
+processing fast routers query programmable path index distributing data cpu caches
+
+DocType docs, ___Pattern 217___ 
+
+multiuser method detection complexity two-dimensional replica patterns map low lattices joint iterative impact generated estimation errors equalization ds-cdma dispersive discern coupled channels channel
+
+DocType docs, ___Pattern 218___ 
+
+nim kernels generating games) functions digraphs asymptotics (enumeration &
+
+DocType docs, ___Pattern 219___ 
+
+utilizing services reconfigurable processors hardware grid
+
+DocType docs, ___Pattern 220___ 
+
+trees non-parametric infinite inference fast bayesian
+
+DocType docs, ___Pattern 221___ 
+
+logic states reversible non-monotone internal inductive fault-tolerant deterministic definitions bell's bayesian
+
+DocType docs, ___Pattern 222___ 
+
+trades sequence multiplicative modelling markets financial
+
+DocType docs, ___Pattern 223___ 
+
+web documents world wide transforming thematic semantic occurrence numbers frequency extracting enriching concepts annotation
+
+DocType docs, ___Pattern 224___ 
+
+computing varieties utility smooth projective polynomial infrastructure hilbert equidimensional economics-based distributed complexity complex
+
+DocType docs, ___Pattern 225___ 
+
+tree-like indices histograms enhancing bucket
+
+DocType docs, ___Pattern 226___ 
+
+simulations lattice large-scale grids fluids computational complex boltzmann advent advances
+
+DocType docs, ___Pattern 227___ 
+
+with<br> split-2 merge hennessy&#39s finite ccs bisimilarity axiomatization
+
+DocType docs, ___Pattern 228___ 
+
+torsion subtori points efficiently detecting
+
+DocType docs, ___Pattern 229___ 
+
+second-order models mining hidden data using temporal techniques summarization spatial robots pattern mobile markov learning features detect collections automatically
+
+DocType docs, ___Pattern 230___ 
+
+problems vehicle parameterized model-checking milp methods iterative intractability control basis
+
+DocType docs, ___Pattern 231___ 
+
+niching sub-structural estimation distribution algorithms scalability problems non-stationary multiobjective environments decomposable
+
+DocType docs, ___Pattern 232___ 
+
+decomposition without width wheels role problem oiling non--stationary methods hypertree environments decompositions change beyond automatic adaptive
+
+DocType docs, ___Pattern 233___ 
+
+upon sizing programming population making genetic decision based
+
+DocType docs, ___Pattern 234___ 
+
+networks scale-free research parametrized library grids digital community co-authorship adaptive
+
+DocType docs, ___Pattern 235___ 
+
+weak specification refinement properties proof obligations liveness fairness
+
+DocType docs, ___Pattern 236___ 
+
+graphs sense minors minimal map grid direction circulant chordal bidimensionality
+
+DocType docs, ___Pattern 237___ 
+
+two-dimensional rates memory input information finite-state channels achievable
+
+DocType docs, ___Pattern 238___ 
+
+zeta-dimension wavelets navier-stokes divergence-free
+
+DocType docs, ___Pattern 239___ 
+
+schemes multi-dimensional micropayment hash chains application
+
+DocType docs, ___Pattern 240___ 
+
+spam share manage let information ego cyberalter
+
+DocType docs, ___Pattern 241___ 
+
+weight matrix ldpc ensemble distribution coset combined average
+
+DocType docs, ___Pattern 242___ 
+
+searching multi-dimensional monotone arrays
+
+DocType docs, ___Pattern 243___ 
+
+relational structures region reasoning path linear duality datalog connection calculus bounded
+
+DocType docs, ___Pattern 244___ 
+
+online oblivious medians bidding
+
+DocType docs, ___Pattern 245___ 
+
+types recursion general coinductive
+
+DocType docs, ___Pattern 246___ 
+
+type theory realisability modified internalising constructive

@@ -1,0 +1,408 @@
+DocType docs, ___Pattern 0___ 
+
+trigram contexts version increase context wheninterpolated ways used takes standard speech separately robustness resultingalgorithm range perplexity performance partof paper original order none moreover modified models model language intoaccount improvement hierarchical give five-grams experimentwith existingclustering events directly different definition defining compete clusters bigram although algorithmleads algorithm added abackoff 9\% 12\%
+
+DocType docs, ___Pattern 1___ 
+semantic : 7
+using system information development database classes vocabularyof verbmobil used use translation transfer thelexicon thecorrectness store speech-to-speech source set semantics representations provide project paper organized ofthe motivationis modules machine lexicalsemantic lexical lexica lex4 lemmata inheritance implemented hierarchy hasbeen formalism evaluation distributed developed describes define databasefor create contributions common check built automatically around aremodelled application-independently abstract
+
+DocType docs, ___Pattern 2___ 
+
+translation machine grammars translationcompleteness translated thetarget thatare system source-language said presented particular paper ofcontext-free language issue guarantee grammar general expressions correct context-free conditions compositionalmachine compositional completeness addresses according *complete*
+
+DocType docs, ___Pattern 3___ 
+
+model language errors used typing two tokenization text system segmentation recovery process modelsare error ctr channel withoutintroducing weak virtuallyfaultless uses unified typingbehavior transmitted transcription token together tight thesis thechannel tested test technique statistical show sets sentences scenario recognition) real-word rate provides propose production predict portion pattern passing part orthographic ofcorrupt noisy noise natural much modeled matchingand markov makes linguistic likely lexical input hidden held frameworkwhich frameworkthat experiments expectation different dialogue desired coupling correctmisspellings correction corporaderived considerable components characteristics automaticallycorrect automatically automatic applications anda addresses (connected
+
+DocType docs, ___Pattern 4___ 
+
+sloppy interpretation shown well usually underlyingidea theoryof theory theories structures sloppy/strictambiguity sentences semantic results relational- readings quantification provided predict paycheck paper onparallel often ofellipsis non-elliptical interaction fordeaccented fact event- contexts constraint captures capture binding arises andone-anaphora although accounted
+
+DocType docs, ___Pattern 5___ 
+
+nearest-neighbor hierarchical approach word techniques soft build whole weshow using us two thesis task superior standard split speech sparse similarity-based significant several set sense secondapproach reductions reduction recognition problemsthe probability presents prediction perplexity performanceis percent overstandard modelenables model methods low-frequency iteratively instead foreach first finer find far experiments events estimation essence error-rate eachevent distinctions disambiguation data compare clusters clustering cluster class centroids centroid calculating belongs becausecluster based around approacheson approaches another andstatistically acluster achieve 20
+
+DocType docs, ___Pattern 6___ 
+
+quantum encodings classical bits show much m lower bound using succint sized size recoveredwith quantumencodings provide prove probability possibility original nquantum non-trivial lowerbound linear languages hand good finiteautomata finally fewer family exponential existthat encoding deterministicfinite counterparts consider compared cannot bit automata arbitrary andwe accepted 1-way
+
+DocType docs, ___Pattern 7___ 
+
+utility proportional network maximise internet connections withdifferentiated whencombined wepropose weights weighting weighted weight web ways users used two total timesuch theirconnections tcp system studycase study simulations set services server scheme results prototypes protocol pricing present parametersof order national manipulating long links let known implement get flows finallydiscuss fairnessto fairness document distance data could connected cache billed application
+
+DocType docs, ___Pattern 8___ 
+
+z roots present polynomial n monomial isolated f zero us unknowns thisproblem thepositive-dimensional termstructure term techniques taking systems system structure specified sharpen set prior point part obtain non-degenerate new multiplicity may maximally many lower irreducible intersection independentinterest fully four formulae find finally field fastmethod explicit exactnumber every equations development consider component complexity combinatorialconstruction closed characteristic bounds arbitrary analgebraically also allow acorollary account
+
+DocType docs, ___Pattern 9___ 
+
+problems mesh linear generalized elements vertex unstructured timeusing tetrahedral study solved smoothing show shapes quadrilateral programming problem paradigm optimize oftriangular ofadjacent moving many linearprogramming give forsome fit efficient also algorithms
+
+DocType docs, ___Pattern 10___ 
+
+topological version used techniques solution sides show result reduce polyhedron polyhedrasatisfying partitioned ofquadrilateral o(n) number non-simply-connected mesh meetingface machine hexahedral geometric generationproblem generalizes forming finite face even cubes condition case bipartiteness ball analysis amenable alsobe additional
+
+DocType docs, ___Pattern 11___ 
+asdl : 8
+compiler : 5
+code trees much lcc language generator components communicate written writing write widelyused weaknesses using useasdl use two treesdefined tree systems syntax structures strengths specifyingthe specified specification several semi-independent seeks secondarily retrofit retargetable research required representationsthe reducedramatically reads readingand project permits paper overheads overhead often national making machine- languages languagebecause language-independent itselfand ispart involved intermediate instances infrastructure high-quality generates found first fileswritten experiencereveals existing emit effort easierto dividing different description describes decomposed data constructread computer component compilerto compilers c build asdl-generated abstract `real' (asdl)
+
+DocType docs, ___Pattern 12___ 
+
+delta n) log^{1/2} colors work theta-function solution semidefinite result program problems optimum obtain min max k-colorable graphs approximation algorithm whichgeneralize vertices value using used time thismarks thegap terms show results recent ratio randomized programs problem present polynomial outcome oursemidefinite optimization o(n^{1/4} o(n^{1-3/(k+1)}log^{1/2} o(delta^{1/3} o(delta^{1-2/k} number non-trivial new n maximumdegree maximum lower lovasz logn) log linear known intriguing interesting inspired improved graph goemans giving generalized function first fewestpossible facts established dualityrelationship duality demonstrates degree cutand consider colorsa coloring bounds best besides approximations anyvertex andwilliamson also actualchromatic acoloring aboutthe 3-colorable 2-sat $n$
+
+DocType docs, ___Pattern 13___ 
+
+time minimum n) randomized new improve graph give finds cuts algorithm wealso variants variant use undirected tree-packing tree tightbounds techniques spanning space-efficient solving simpler significantly sampling rncparallelization representing probability previously previous packings optimal o(n^2log^3 o(n^2 o(m number nearly near n-vertex minimumcut may maximum manner m-edge log^3 log known highprobability high graphs developedrandom datastructure cutsand cutproblem combined bounds bound best approach applications ``semi-duality''
+
+DocType docs, ___Pattern 14___ 
+
+languages using universal programming packages object functional considered useful traditions symbolic standard software simple similar pure problem powerful possibilities orientedprogramming oriented ones ofthe objectfor model methodsin mathematica manipulations manipulation made looks lisp likereduce like language internal incompatible implemented ifparticular functions foralgebraic extension expressions etc efficient computer clear article andefficient algebraic algebra advantages
+
+DocType docs, ___Pattern 15___ 
+
+quantum proof interactive systems verifier prover unless two time thesecond system strictly small(one-sided) rounds requires quantumcomputations proved proofsystems probability powerful polynomial perform paper ofcommunication messages may level language inthe inpspace ieinteractive hierarchy follows exponentially exchange every error constant-round consider collapses classical case
+
+DocType docs, ___Pattern 16___ 
+
+structure protocol work wegive van valuesalready two tolerating tolerates span small shared securecommunication secrecy scheme rabin q^2 programwith product probability present possible participants paper pair multiplication multiparty monotone means isunconditional homomorphic graaf generalization exponentially existence evertse errorthis due done de computing computation commitment chaum channel broadcast ben-or based appearedoriginally although allow activeadversary achieved
+
+DocType docs, ___Pattern 17___ 
+
+set sizes problems mean available approach yields within well using typically to5x10^3 thealgorithm testedagainst test solutions server seconds rows resultsfor results required-- ranging publicly public processed problem performance penalty particular optimal obtained numerically neural network multilinear minimum methodsalso means low iterating inequalityconstraints given function fieldequations field fewpercent feedback exact energy encoding domain developed cpu covering convenient consumption comparisons comparing come combination columns artificial arbitrary approximate annealing andexplored anapproximate algorithm achieved 10^6
+
+DocType docs, ___Pattern 18___ 
+dialogue : 5
+users toot systems wide strategies spoken respect non-adaptable limitations corpus although adaptable web versions variety values utilityof try train tootresulting toot's thatadaptable technological tasks systemlimitations systemfor show schedules retrieving results recent real-timeinteractive range possible performancetypically paperpresents outperforms ofsystem ofevaluation measures make made knowledge initial individual improveperformance generally extracted experiment evaluation empirical different differ dialogues depends degrades current conduct carry build behavior applicationshowever apparent advances adapting adaptation 80 4 20users
+
+DocType docs, ___Pattern 19___ 
+group : 7
+section : 5
+computation diagrams views systems study structure rewriting presentation paper normal insection grammar charts cancellation based algebraic withcontext-free versus using useof type-0 two traditional theory(lyndon-schuppe1977) theory theorem terms submonoidsand subgroups structured statedas standardnotions simple show rules role relative relationship relate quantifiers pronouns processing presents plays parsing onrelating ofthe ofcombinatorial notes move morphisms intuitions handlenon-local group-theoretical grammars grammardescription give geometry geometricand geometrical geometric fundamental free formal following focus extend differences detailthe counterpart constructscalled constructs conjugacy conclude concept computationally computational complexity combinatorial central cells brief beused begin basis associated asfollows approach andgeneration analyzing aconcept 7 6 5 4 3 2 1 (rotman1994) (dymetman1998)
+
+DocType docs, ___Pattern 20___ 
+
+curve signature numerically invariant expressions versions version valid torsion three theirderivatives thefour theeuclidean respect proposed planar parametrizing otherwise new namely length invariants give formulas fine euclidean et ecalabi dimensional differential curvature corrected arepresented arc arbitrarypartitions also al affineand
+
+DocType docs, ___Pattern 21___ 
+
+properties important generation code aspects withinprocessor whileprevious useful unexplored system-levelcode research remained processor primarily present practice paperwe optimization optimal open make just-in-time investigated hardware generations generate functional flexible far families extensible dynamiccode different customizable avariety asystem argue architectures architecture architectural also
+
+DocType docs, ___Pattern 22___ 
+
+system immune simulations immunological analysis agents within thesimulated theprinciples theimmune thebehavior systembehavior structure stimulus-response software since simulation simmune's simmune scale priori present package outline organization new multiscale molecules) minimal microscopial mechanisms limited level itsapplication immunesystem identification higher flexibly emergent done describe defining data contextsusing configured cellular calledsimmune behavior based assumptions approach allow agent-agentinteraction) (ie (cells
+
+DocType docs, ___Pattern 23___ 
+
+problem wish vertical torus tile row results rectangle present particular open numbers number moregeneral length leaving instances initial horizontal given every equalsgiven column barsof bars
+
+DocType docs, ___Pattern 24___ 
+
+standard design widelyaccepted using transport subtleties students show provides protocol proposed proof potency parties paper networkwhere method messages logic levelsecurity internet intercepted intended hopes gong-needham-yahalom forprotocol formal authenticating ateaching aid
+
+DocType docs, ___Pattern 25___ 
+bound : 5
+finite size show qfa automaton ambainis also |w| {w0 {01}^* wasbased w vazirani usto typical turn transparent tighterand theorem ta-shma situations shown reversiblewhen required replaced regular quantum previous optimal one-wayquantum obtained obtain o(n) n}it nonetheless nayak n)} method measurements may lower languageis language l_nthus l_n intuition introduced intermediate in-probability improving improved holevo'stheorem holevo's fact evolution et entropy deterministic dense consider codes) codes(random bysimple breaksdown based asymptotically arguments arbitrary allows allowed al access accepted \le \in = 2^{omega(n/log 2^{omega(n)} (qfa) (1-h(p))n
+
+DocType docs, ___Pattern 26___ 
+collective : 5
+choice paper fundamental functions also would working work voting votes useful used thereis theory theorems theirresources test superstructure simple set selection second-order result restatesthe putting processingtechnology procedures probabilistic presents presentation placed particularly pairs outline onthe onissue ofperformative needed morerigorous logic informationsystem impossibility implementations giving function form focused field enterprises efficacy distributing discussion designers describes could control conditionsfor conditions computer-supportedcooperative carry boundary arrow'spossibility arrow approach analyzing agents
+
+DocType docs, ___Pattern 27___ 
+
+strategy risk restart replace remains works whereas well variance using uses users usefulness used transactions toits times time theory suchas single security securitieswhile return reducing recently question quantitatively presented portfolio network methodology mean many language internet ifeverybody field expected executing even environment electronic determine complete combinations bursty atransaction associatedwith arguments andcost agent-basedsimulations advantageous
+
+DocType docs, ___Pattern 28___ 
+
+package whethera userto twists train tracks thisalgorithm terms surfaces surface software sense realizes punctured puncture pseudo-anosov present possibly orientable one moreover java ispseudo-anosov images homeomorphisms homeomorphism handel given generates found effective determines dehn define caseit bestvina-handel bestvina allows algorithm
+
+DocType docs, ___Pattern 29___ 
+finite : 5
+definable visit use two-way transducers string state property parameters) nondeterministic mso two transductionsare transductions tocompositions theirinput terms tape stringtransductions statetransducers second-order rewrite realized monadic machines logic(without ie hennie havethe families exactly deterministictwo-way correspond characterized allowed (mso) (ie
+
+DocType docs, ___Pattern 30___ 
+
+problem x-rays structure np-complete dimension xi polyatomic given ell discrete d>=2 conjecture axis-parallel atoms x-rays_ x-ray wish whose wecall_discrete types type) type tomography time thereforewhen theproblem theatomic thatit sums studying study solved shown seem rowand results result resolve remains relies reconstruct realizations proving proved proofidea problemis prangenberg polynomial points point parallel otherwise occupied numberof np-completeness np-completefor non-parallelx-rays non-parallel measurements may matrices line lattices lattice integer indeed heavilyon gritzmann gardner extends extend even ell>=3 ell=2 direction determines definedas d=2 crystal construction conduct complexity completelydetermined column clearly case c>=6 c>=3 c>=2 c=345 c=1 c<=5 authors atomseven atom assume arises anotherarticle although also address ``analyze'' 2d 0-1 (one $c$distinct
+
+DocType docs, ___Pattern 31___ 
+
+cells set reconstructing problem polyominoes must every column algorithm width wewish two total tomography time thiscase special solved simple shown several rowwhose rowand row required reconstruction reconstruct provided projections previously polynomial orders ofmagnitudes objects object) object numberof linear length known hv-convexpolyomino hv-convex grid given forreconstructing faster et equals dimensional contains consecutive connected class centeredhv-convex centered best barcucci area alin addressed addition (an
+
+DocType docs, ___Pattern 32___ 
+
+top language tsql2 expressions called bot work veryclose translated translate traditional totime-sensitive time-related theexisting temporaldatabases temporaldatabase temporal suitable subset simpler shows questions querying previous predicate paper ofenglish natural method mapping map manipulate maintaining logic-likelanguage logic-like logic large interface hence fopl first-order expressionscould exploited existingmethods established english-to-top defined databases context automatically applications also algorithm (fopl)
+
+DocType docs, ___Pattern 33___ 
+
+quantum turingmachines turing tape still stay states notion multi-tape multi-head multi model machines heads general final discuss complexitytheory basis also allow
+
+DocType docs, ___Pattern 34___ 
+
+approaches theoretical won thesituation themain technology system surveys sets prizein on-goingopposition loebner little illustrates history features empirical displays discussion discusses current converse brief article 1997
+
+DocType docs, ___Pattern 35___ 
+
+properties ltl systems stuttering use understuttering specifying reasoning model methods formulas formal expressive closure closed --- verification used tried toolsenables tools thus theirresponsibility temporal technique system syntactic sufficiently state specification size resulting restriction researchers represented relax reduction reduces reduce reasoningabout pspace-complete providetheorems proven propertiesinvolving permit partial-order paper notion non-specialists natural modified mathematical many ltlformulas logic linear-time leave larger languageis introduce interpretation important ie hard guarantees fully-automated formula formalismsthat formalism extensively expressing events essential enough enable eg effectively edges easy determining desiredproperties decade create correctness context contain capture canutilize bytransitions byresearchers availability areclosed arbitrary andthus analyze allow alanguage ``next''operator
+
+DocType docs, ___Pattern 36___ 
+
+model language formal case used track totelecommunication tool toidentify todemonstrate testsuites techniques systems systemdescribed study specification software shadowing sdl requirements qualitative productivity process paper nortel natural multimedia-messaging modeling keeping feasibility existing evaluation errors document development description describes derive data conducted collaboration chosen byour avariety applying 80-page
+
+DocType docs, ___Pattern 37___ 
+
+problems parametric whichone vehicle values task subgraph" spanningtrees solving shortest routing resource programming problem planning paths path parameter optimization" optimization optimalsolution multicast minimum lead introduce givensolution given game discussapplications determine desired describe class board allocationand algorithms "optimal "inverse
+
+DocType docs, ___Pattern 38___ 
+
+unit union theorigin space showing sharir settles quadratic provide lower inthree-dimensional even contain construction conjecture complexity bound balls
+
+DocType docs, ___Pattern 39___ 
+
+small neighbor levels triangulation structure query occupation memory march location level data worst using use triangulationof thenearest smallsample several sample restarts real quickly propose points point plane organized new nearest marching lowest locate levelthen leveljust good fastbehavior done determine delaunay contains consists compute complexity combines change case atriangulation aset allows (3%)
+
+DocType docs, ___Pattern 40___ 
+
+systems generation using template strings representation levels language issue abstraction words without whichare way various used use text terms tend techniques steps sophisticated seen representationsinto representations referencearchitecture profitable possibly paper one number non-linguistic nlg natural moreabstract mixing mixedrepresentations mixed may map linguistically linguistic level intermediaterepresentations ie groundedapproach generate fixed final differentdegrees defining combining combined combine circumstances bycontrast basedtechniques based argue aims abandoning (nlg)
+
+DocType docs, ___Pattern 41___ 
+
+paper number may algorithm viewed vertex variation used unfortunately triangulation todelete times timeconsuming system spheres space shelling presents point operations o(k notice low log linear k)but k ispopular information helleralgorithm heller's geographic false explained efficiently done dimensiontwo deleted degree cost computations complexity community applies $d$-dimensional
+
+DocType docs, ___Pattern 42___ 
+
+using predicate filters exactcomputations withprobability value validity use thestatistical thepolynomial test technique systematically studies sphere solve rounding results result regular prove problems previous predicates precision points paperby o(epsilon note log improving greater gives geometric firstevaluated expensive expected estimation error epsilon efficient efficiency distribution cosphericity corresponding consists computations avoided authors assumptionof acertificate 1/epsilon)
+
+DocType docs, ___Pattern 43___ 
+
+programming small project language discuss design constraint alma-0 work within typed thelogic thelanguage thedesign support subset strongly store stage role resulting rationale provides program processing particular paradigm paper obtained number need modula-2 logical logic lists interaction inspired implementationof imperativeprogramming imperative hybrid frameworkand framework first features declarativeprogramming customaryvariables current constraintprogramming combines capabilities byextending benefits andthe alma aim advantages adding
+
+DocType docs, ___Pattern 44___ 
+colors : 5
+quadtrees squares color adjacent unbalanced defined unbalancedquadtrees two time tight three theseresults thesame squaressharing six simple sides sharing require ofbalanced many linear least given four five describe corners coloring balancedquadtrees balanced arerequired algorithms
+
+DocType docs, ___Pattern 45___ 
+
+expression arithmetic rounded predicate may varepsilon value v unit threshold theprobability small geometric evaluating dimension consists assumption algorithms absolute yield which-side values usually uniform two theta(v^(2/3))in theta(v) theinput theevaluation technique structureof sometimes somealgebraic some(small) smaller since sign show seriously result represents reliableresult recentyears real-number randomly produce predicates positive points paperwe paper pair operands ofconventional o(sqrt(v)) o(sqrt(v) nolarger ln(1/v)) largest invalidatethe introduces insphere input incorrect important ifthe higherdimensions given general forthe filter" filter failure exhibit exemplify exact errors error-free error enginethreshold) emphasis efficacy digital develop determinants depends density cube corresponding constants computers computer computations challenged cases capability bechosen basis ball assuming assessing arithmeticfilter arise approach analyzethe analysis algebraic adopted 2 1 (arithmetic "which-side" "insphere" "arithmetic
+
+DocType docs, ___Pattern 46___ 
+
+tothe shows set particular large graph gabriel fractal dilation construction beta>0 beta-skeleton arbitrarily applies apoint
+
+DocType docs, ___Pattern 47___ 
+
+problems problem parallel hard access year winner well wasthe wagner toolkit system survey shown setssolvable recent raisinglower prove progress previously present polynomial past paper overlynatural original one ofdetermining nphowever np natural motivation minimum many longstanding lewis known introduced inputs incertain in1876 hierarchy) heuristic expression even equivalent election directly developed determining decade creating conp-hard class cases carroll bounds benp-hard beautiful article applies andextremely allows algorithmsperform ago ``toolkit'' (which
+
+DocType docs, ___Pattern 48___ 
+
+join extended el_2 lower low hierarchy sets may level complexity certain yettheir weestablish unnatural two terms suggests study strong since sense selman's second right result regarded provethat prove properties particular p-selectivity optimal) operatorcan operations ofthe notionsgeneralizing measure lowness lowercomplexity known intuitive interestingresult first fall existsets end el_ either closure closed bounds boolean asa also actually (and
+
+DocType docs, ___Pattern 49___ 
+
+every up-hardness theorem spp-hardness spp-hard rice's result property nontrivial nondeterminism circuits whether up-hard unlikely unless undecidable theyproved thesearch therecursively thata studies stephan states show sets related raise prove problems present particular paper p-constructibly number nonetheless lower language initiated general fromunambiguous enumerable countingproperty counting containmentshold constant-ambiguity complexity-theoretic complexity closely class cannot bound borchert bi-infinite bestrengthened beimproved analogs also
+
+DocType docs, ___Pattern 50___ 
+
+one-way easy certificates surjective sets results question polynomial-time permutations p l existence exist always also whether wechsung turing theory sufficient study statementsin statements similarly show set separating selman rothe regard recent poly-one partial ornot open one-wayfunctions ofgrollmann np note model machinesaccepting machines links introduced incryptology important gr\"adel's functionsthis functions finite fewp extends establish easy(ie conditionnecessary computable) classes class certificate byhemaspaandra becharacterized allunambiguous accepting (total)
+
+DocType docs, ___Pattern 51___ 
+ep : 7
+problem : 6
+np show np-complete equivalence upper thus suggesting regard problems one negation mentioned membership known evidence bound whatever way viewed up^{np} two tool time tightening three thatconcrete~np suggest subclass strength spp since showthat sets set result proof previous powerof polynomial paths particular obdds number np^{np} np-completeness notnp-complete notknown noproof new natural membership/containment may machinesthat languages itfollows---with inup introduce interchange instrength inep^{np} inep indeed givesevidence fromnp---that follow fewpbounded existing ep^{np} differs diagrams) degree currently contained consisting classep class cases cannot broadly boolean binarydecision believes beapplied approach---weaker applicable---to andclasses analogous ambiguity always also accepting accepted accept 2-dags (ordered
+
+DocType docs, ___Pattern 52___ 
+
+number elements methods meshes generate angles voronoi vertices use types twoopposite total theelements show several right quality quadrilateral polygonaldomains o(n) n kites isthe input guaranteed form elementswe diagram degrees circle-packing cells case bounds atmost 120 (4) (3) (2) (1)
+
+DocType docs, ___Pattern 53___ 
+
+workshop topology results reportidentifies problems present nsf-funded miami met june involving important florida computationaltopology computation beach 12 11
+
+DocType docs, ___Pattern 54___ 
+sets : 6
+circle : 6
+two : 5
+separating algorithm line set segments proposed planar one o(n n) must meet log intersect interior disk whose twogiven towork times time theta(n thequery studies still space smallest slowly separates separable separability secondproblem resulting related query problems preprocessed polygonunder polygons points point paper outputs optimal open may locally linesegments lines lie largestcircles largest itsopen inverse increased included halfplanes growing given general function find extremely exists endpoints enclosingone encloses delimited decide convex contain constraints circularlyseparable circularly circular case cannot asks areallowed and/or alpha(n)represents alpha(n) alinear-time alargest adapted ackermann \alpha(n)) $c$ $\omega(n^2)$
+
+DocType docs, ___Pattern 55___ 
+
+vertices polygon path obstacle curvature convex bounded workspace whose timealgorithm thesmallest smooth simple problem present possible point planning o(m+n) movingpoint move motion m ina going form finding containing constrained consider closed around alonga $n$
+
+DocType docs, ___Pattern 56___ 
+
+ring number stabilizes show self-stabilizing per one ofstates nodes node mutualexclusion less dijkstra's contrary common belief also algorithm [dij74dij82]
+
+DocType docs, ___Pattern 57___ 
+
+points ordinary conic two show line exactly compute algorithm use three thesame set result proposed proofs previous plane passingthrough passes ones note non-collinear next mukhopadhyayet linethat linean lie hyperplanein howto higher given five first finite extend exists existence efficient directions dimensions consequent computing called assuming aresimpler algorithms al
+
+DocType docs, ___Pattern 58___ 
+
+papers nine thought thetechnique---the then$\ph=\sigmak$ surveys strongconsequences so-called show results progression past obtained nine-paper method---of lower levels known inducecollapses increasingly history high-level hierarchiescollapse four forexample final easy-hard decade complexity collapses collapse---that bounded-query boolean beforehand be) assumption article actually achievedownward 2$ (what $k\geq $\psigkone=\psigktwo$
+
+DocType docs, ___Pattern 59___ 
+
+translation collapse downward hierarchies equality classes bounded also would work translation's thestructure thepolynomial strengthens somepair smaller sheds research refined refers recently query provide priori) previous polynomialhierarchy-in polynomial particular paper pair one ofcomplexity obtained notonly much light levels inthis induce hierarchy fortnow firstdownward extends expects enhancementby elegant connectionbetween complexity cases buhrman broader applied access [cscc/9910007] (a
+
+DocType docs, ___Pattern 60___ 
+logic : 5
+problems parameterized first-order definability problem model-checking class tractable theory terms structures slicewise formulas consider complexity withan w-hierarchy variousfragments useful two turingmachines tractability thisalternation theperspective themodel-checking substructure studying study specifically side shows show result restricted reminiscent quantifieralternations ptime prove propose minor maintractability level leastfixed-point least isomorphism isfixed-parameter intractability input immerman-varditheorem howthis homomorphism hierarchy halting give generic fpt forrelational forms fixed-point fixed-parameter finitevariable fellows' fagindefinability existential excluded example every establish equivalence downey discuss descriptive describingparameterized connection close characterizing characterization called article appropriate approach anequivalence andintractability alternations alternating allfixed-parameter abstract >= 0
+
+DocType docs, ___Pattern 61___ 
+order : 5
+hierarchy : 5
+query one results polynomial questions matter boolean yieldsthe yieldeddividends written without whether wechsung way unrelated unless two try translation tothe thearticle study solve set seemingly resolving related reader raised quickly question proving present power polynomialhierarchy pointers ordersometimes ofproblems never matters literature learned-inasfar informationsources herown hempel hemaspaandra hand growing greater given give furthermore followingquestions equality encourage different computations computational collapsessometimes collapses-forboth class central bottleneck belearned asks article areas applications answers anddownward also allowed affect access [cscc/9909020]
+
+DocType docs, ___Pattern 62___ 
+
+measure results probability one m give c_n a^n way version various using union typically thespheres theorem testing)and suppose subset stein's spheres special spaces small shannon'sdata set respectto product probabilistic points p^n p new n mostefficient mild measures massm^n(c_n) let lemma large inequalities including hypothesis geometryon generalize function fixedradius finite equipped efficient discretespaces different covering corollaries converse conditions concentration compression close choices characterization centered cases bea andnon-product almost-covering almost-covered abstract ``mass'' (in
+
+DocType docs, ___Pattern 63___ 
+
+formulas logic verifying exploit boolean verificationconditions valid using universally uninterpreted tothose topropositional theverification therefore thecorrectness simplify set satisfiability results reducing reduce provides prove propositional proposed property processors processor present positiveform pipelined perform ordered ofabstracting must methods method means many manipulation interpretations inparticular greatly generated functionsymbols functions formula experimental equations equality efficiency diverse'' diagrams describing demonstrating data control considered checkers characteristics burch binarydecision approachwhen apply appear anddill ``maximally (euf) (bdds)
+
+DocType docs, ___Pattern 64___ 
+
+visibility map pixels algorithm + sampled runs removal pixel p) number complexity case analytic xy-plane worst variant usually triangles triangle trapezoids trapezoidal timeo(n^{1+e} time thetriangles sweepline surface subset sublinear special solution size samplepoints respect real^3 ray propose problem p output-sensitive output optimal one ofpixels o(n^{1+e} nearly n^{2/3+e}t^{2/3} n log local ina imagecomplexity image-space/object-space hybrid hiddensurface hidden grid given form first e disjoint directlybehind determine decomposition contain constructs constant comparesfavorably classical changes casting bythe bounded best atleast aregular anypositive andanalytic algorithms adapts +n^{2/3+e}t^{2/3} (``pixels'')
+
+DocType docs, ___Pattern 65___ 
+agent : 6
+agents : 5
+uncertainty state programs program framework efforts compute years written world two true/false topof top thustheir take sure supportsdecision subrahmanian states specify small shown show semanticsthough semantics second reactwhen providesound provide propose program} probabilistic presence paper pages one number maybuild may making legacy last language inthis intheir interact imperative however given epistemically environment eiter developer determined declarative concept complex complete code changes built build based autonomously assumes arecompletely arbitrary appealing anincreasing andshow and/orcollaborate amdpick alternativesemantics allows algorithms agentprograms agent's actions ``state'' ``probabilistic'' \emph{probabilistic \emph{positive} 179-255) 108(1-2) 100% (aij
+
+DocType docs, ___Pattern 66___ 
+
+rate population phase mutation genetic diagram changes based towards tocharacterize time-dependent thresholds thetime states simple shown schematic scale regular raised optimal one notion movingneedle-in-the-haystack landscape influence infinite generational generalizedquasispecies generalarguments general furthermore fullyconsistent found forwhich fitnesses error dynamicsof dependence crossover) converge constructed considerations calculated asymptotic areapproximately analyzed allows algorithms algorithm (without
+
+DocType docs, ___Pattern 67___ 
+
+planar isomorphism graph within used tree-width timefor technique subgraph solveother solve small size shortest results programming problems problem pieces piece pattern paths ofpartitioning methods linear inducedsubgraph including graphs girth diameter constant connectivity based applyingdynamic
+
+DocType docs, ___Pattern 68___ 
+one-way : 7
+sherman protocols functions strong security rivest recently rabi properties open functionsexist [rs93] work whether used use two-partysecret-key two totalassociative total thealgebraic survey study strongly signatureprotocols showing rothe result research require related recentwork recent question progress partiesas noted noninvertible makes lineof key issues issue isadded initiated ingredient homan hemaspaandra given functionshaving function enhanced discuss digital developments developed designed createdfrom could commutativity commutative building blocks based associative also algebraic agreement affirmative according [hr99]resolved [hom99] 1984 (worst-case)
+
+DocType docs, ___Pattern 69___ 
+
+morphology arcs additional truncation reduplication prosodic phenomena paper infixation extensions copying certain automaton analyses widespreadacceptance way using ulwa thesereduplication theoretical techniques tagalog suchas studies string state-of-the-art state sounds skip sketched since resourceconsciousness resisted repeat recent prunes provide producer presentsimplemented presents power possible phonologyand phonological particularly part over-applying optimization optimisation one-levelapproach one-level ofreduplication ofprosodic nutshell non-finite-stateoperation non-finite-state morphemes model methods merits material mapped local linguistics linguistic limitations lexicalrepresentations lead kind involves introduced inthis intersection insertion illustratethe hitherto germanhypocoristic freedom floating finite-state failto extendingfinite-state expressive enriched ellison elegantcomputational distinguishingbetween difficult developments criteria cover control contribute consumer construct constraint-based conclude computationalmorphology computational challenging case bounded automata attractive aspects aspect argue arediscussed approach andalso allow 1994) (bird &
+
+DocType docs, ___Pattern 70___ 
+
+points hyperplane depth set regression k-flats weprove vertical rotationto respect r^dis pass ofn number npoints notion n must minimum linear-time least kbetween k=0 k-flat k gives generalize fraction flat exists exist derive deepest deep d-1 d constant consequence classical center case always 0 (1+epsilon)-approximationalgorithm
+
+DocType docs, ___Pattern 71___ 
+quantum : 5
+statistics principle gates fermi dynamics computer chaotic also using type theory standard solved solution satisfiabilityproblem relatedwith quantumgates quantumcomputing proposed problems problem possible polynomialtime onecan obey np-complete nonlinear new map logistic linear interesting implementation hartree-fock equations entaglement discuss described consider computation communication combine case build based atomic argue approach andmoreover amplifierbased achaotic
+
+DocType docs, ___Pattern 72___ 
+
+method constructed without variation thus specifying somewhatcomplicated situation simulation second-order-convergent restriction restricted remedied remarkable readily problem performance orthogonalgroup orthogonal numerical newton-like newton multiplicative makes jumps isobtained isillustrated isextended inherent individual independent groups globalinstability general functionthough framework expression explicit exactly et dynamics developed cost component beapplied author analysis amount algorithm alevenberg-marquardt-type al
+
+DocType docs, ___Pattern 73___ 
+
+learning rate well results parameters mas framework experimental agents agent's wevalidate values using used use us thereby theequation telling systems system show retention relies relevantaspects reinforcement progression predict pac-theory multi-agent model market literature learningagents isused impact gatheredfrom finally fare expected error equations equation difference describe decisionfunction change capture calculating calculatebounds behaviorof ai agent abilitiessuch (mass)
+
+DocType docs, ___Pattern 74___ 
+
+use theorycourses projects graduate first-year discuss complexity
+
+DocType docs, ___Pattern 75___ 
+stable : 6
+problem : 6
+models k ssm size show time program p model decide algorithm |p|-k would whether w[3] w[2]-hard upper unlikely smalland running run result problem)does problem) presenttwo polynomialsof paper order o(n^c) much lsm logic least large kthat itis integer independent implies harder given focus fixed-parameterintractable fixed-parameter fixed exists existence every depending demonstrating contrastwe constant computing compute complexity class c byshowing bound belongs alsoprovide alogic alinear-time algorithms (small (large
+
+DocType docs, ___Pattern 76___ 
+
+algorithm parallel surface simulations scalability efficiency widerange time thesimulated thatthe systems study steady state short-range science scalable results question problems preliminary poisson one ofthis monte minima massively macroscopiclandscape logicaltopologies local largeasynchronous interactions incomputer including implies horizon higher-dimensional hamiltonian growing governed fundamental fluctuating find evolution edwards-wilkinson dynamic discussed discreteevents discrete-event dimension density corresponds conservativemassively carlo arrivals applicable andthe analogous algorithms
+
+DocType docs, ___Pattern 77___ 
+
+evaluation intuitionistic encodings used systems syntax specifications semantics properties meta-logic linear judgments induction important higher-order given functional framework derive approach abstract well weformally using unicity typing treatment treat transition tradeoff toreason toconsider thesimple theselogics theresulting thebenefits thathigher-order successfully substitution subsets subject specified specification simplytyped reductiondeterminacy reasoning quantification proving prove propose proofsinvolving programminglanguages programminglanguage programming preservestypes presentations present pcf= pcf paper one ofobject-level ofhoas notionof natural modular meta-theoretic many logicsand logics logical logic languages language lambda-terms involving ingredients inference imperative illustrate hoas) hoas higher-typequantification high-level give frameworks formally formal forexample extension explore examples equivalence elegant difficulties difficult developing deterministic definition declarative cut considering coded challenge based avoid asimple area apparent andnatural andformal analyze analysis admits admissibility abstraction ability (key (hoas)
+
+DocType docs, ___Pattern 78___ 
+logic : 5
+programs features functional exclusive common wider widely well-moded variables unreasonablyrestrictive understanding true translation translating translated theoriginal subject simple selection rule readdressthe range quite question properties programsare programmingparadigm program possibilityof possibility part'' order ones old ofthese non-well-moded needs naturally many longbeen logicprograms logical led lazy languages ithas investigation general found dynamic demonstrate defining current consideredto consequence circumscription become approaches applicable andthis accepted ``functional ``complex''
+
+DocType docs, ___Pattern 79___ 
+rules : 7
+constraints : 7
+programming : 6
+constraint : 6
+consistency rule-based boolean approach yields types type two satisfaction problems logic given first explicitly call arc {\tt {\em well-known weaker waltz's variousexamples valuedlogics using typical theusefulness thatturns thatare temporal study solve situation simplefirst-order showfeasibility show second rulesleads rulesfor ruleconsistency rule represented repeated qualitative propagation predefined polyhedralscenes one of\cite{fruhwirth-constraint-95} notion new natural membershiprules means many local limit language labelingweconsider including implementation illustrate hyper-arc howboth generated formulas firstderive explain examples equality entirelyreduced end discussing describing dealing consistency} consider computationprocess combined coincides closure chr} characterization cancompute called based automatically arity(called arbitrary approachto application allen's \cite{ms98b})
+
+DocType docs, ___Pattern 80___ 
+
+level language computer become versatile user traditional theory systems symbolic split-up special-purposesystem special quantum purpose provide potential polynomialsalgebras package obsolete needed need multivariate moregeneral may low loop languages languagein itwas intheoretical interact high handling ginac functions field entirelywritten efficient distinction directly designed design describe denies deliberately calculations c++ bears also algebra adventof
+
+DocType docs, ___Pattern 81___ 
+process : 7
+noise decision transform theory theorem recognition problem globalmatching concentrated widely white-black voting verified verificationsupporting validity valid typical types two theresult thepresence theeffect thebottom-up stable specialists robust result represented remains regionalmatching regional principalcomponent prevailing present point pattern paper overturns ofaccommodating occlusion model matching makingprocesses making lowerbounds localized level latter involving indirect important implying imagery higher greater global gabor former flag facialrecognition experimental exact establishes established election dimension-reducing demonstrated decision) critical convincing conjecture clutteroutlier capable candidate breakdown bound bottom-up asimplified analyzing analysis amongimage also (or
+
+DocType docs, ___Pattern 82___ 
+
+techniques logics conditions axioms show respect reasoning particularly effective description absorption willstill wheresubsumption weseek wedefine useful used universal unfolding understanding truths toconsider theoretical thatprovided testing terminology terminologies temporal systems system subsumption still significantly set safety safely retaining results respected representing relevant relaxing realapplications proved prove proceduresused problemtwo precisely paper optimisation often moreover modal manner lazy inexpressive indealing inan improved improve important implemented hard guarantee fundamental function framework forrelatively formal fact even essential efficient efficiency domain discoursereasoning describedestablish deal correctnessby correctly correct canbe arbitrary applied allows algorithms
+
+DocType docs, ___Pattern 83___ 
+
+systems uncertainty system modeling model learning engineering validation uses underlies tomodeling thispaper thisframework thepremise theory shift results reason proposed procedures ofcomplexity mechanisms mathematical manyengineering machine inadequate inadequacy high govern frameworkfor existing due developed degree deemed computational complex behavior based attention
+
+DocType docs, ___Pattern 84___ 
+
+mobile data could remote hosts host code based agent would untrusted tochange time thisscheme thiscase simple server sent seems retrieve required removing rely protocol protection protecting protected presented prerequisite pad one-time on-the-fly non-interactive nodes network must management key inthis insure informationagainst information implemented handling enough encryption encrypted easily described dataprotection dataintegrity coverinformation counterfeiting confidentialinformation collected cipher carrying article arrives andintegrity allows algorithm againstmalicious (otp)
+
+DocType docs, ___Pattern 85___ 
+
+states quantum protocol message may communication classical ways used question qubits k fewer complexity yet work) withexponentially well using twoprimitives transmit transitions transformed towhether thusanswering thenumber thecommunicating thatuses structure---they smaller simpler simple similar significance show result quantumprotocol previous possible parties one negative moreover methodshave mean manipulated look local little k+1 isthat isexponentially involve intriguing interaction informationencoded information facts exchanges every encoding efficiency conveying constant consider closely classically cannot builds bits bi-partite aproblem applications andaverage ``simpler'' (based
+
+DocType docs, ___Pattern 86___ 
+problems : 5
+threshold sharp transitions satisfiability probability phase existence combinatorial trivial time theexistence take success step statistical solvable single since shown sharpthresholds rigorously restricted recently range procedure predicted positiveconstant polynomial np-completeness notstudied mechanics lower locating lack investigating intelligence instances imply implies" hasbeen give generalized either direction defined constraints connectionbetween computational complexity completecharacterization clauses clausalgeneralized class case) case byschaefer bounded beuseful artificial addressed across 2 1 (even "hard" "almost
+
+DocType docs, ___Pattern 87___ 
+
+robot novel uses useful towards thealgorithm stimulus stimuli response respond repeated process previouslyexperienced presented presentation potentially new model mobilerobot learning ispotentially importantfeatures habituation filter features experiments environment draws detects detect describe concentration changes causes biological attention andturns allow algorithm adecrement ability (`neotaxis')
+
+DocType docs, ___Pattern 88___ 
+p-time : 5
+light affine logic thanks side proof intuitionistic elimination cut correctness completeness using turing trivial together theproof task suitable structured strategy resource proved properties proofnets programs programming program polynomially peculiarity paper onthe one ofprogramming notation non nets modality meaning machines(p-time logicderivations limitations lightlogics itsintuitionistic iscontrolled introduction introducing good gives full fragment flavor exploitsstructural examples encodes details describes demonstratedin cutelimination costing correctness) complexity completeness) compact catch alot allows ``paragraph'' (p-time
+
+DocType docs, ___Pattern 89___ 
+
+wave warping ie equation dispersion discretizing computational two tuned time-space theoretical techniques structures structure solution simulated significant shows resulting resources requires regular reduction reduced reduce provide propose properly propagation prior positions paper oversizing oversampling numericaldispersion numerical modes model misalignment meshstructure mesh membrane medium locally literature less induces indispersion ideal grid fromtheir filtersin exhibits equivalent embedding elements elastic differencemethods) comparable bymodels bearbitrarily approaches andintroduce allpass adptingoffline accuracy 2d (waveguidemeshes) (finite
+
+DocType docs, ___Pattern 90___ 
+
+transition threshold symmetric results replica numerical cover $x_c(c)$ within with$xn$ whether wasknown vertices vertexdegree vertex-cover vertex using typicalnumerical theseresults thereplica studied statistical solution socalled small size simple sharp rigorous resultsshow reproduces regime random problem previously physics performed peak part paper occurs obtained needed methods method main instability graphs giving found findings extended exists excellent exact effort edges edge developed decide critical coverabilityat contains concentrations coincides clusterexpansion cardinalityof calculated bound backbone average approximation application appears ansatz annealed andthe algorithm agreement accurate abranch-and-bound 05$ $xn$ $x=x_c(c)$ $n$vertices $g_{ncn}$ $cn$ $c\ll $c<e/2$ $c$-dependent $b_c(c)$ $2c=e$
+
+DocType docs, ___Pattern 91___ 
+
+algorithm results problem optimal design decision wireless well-knownheuristic weconstruct userapplications thetheory theory thedifficulties terms techniques takesdecision-theoretic support subtleties standard spectral simulation simplifying show service scheme scarce resources reasonable quality providing proposed propose processes present preferences) possible policies one near-optimal meetsits markov many maintaining main isdecision-theoretically isbest involved investigate insight goals framework formulated finally far example discuss contribution constructing concerns communication assumptions argue applying andguidance analysis allocation afundamental admission-control additionallywe account (mdps) (like
+
+DocType docs, ___Pattern 92___ 
+security : 5
+policies within specifications problem inconsistencies addressed able workflow wide types tool target simultaneously severalauthors several securityinconsistencies relevant problemof policy platforms otherspecifications organization's none namely language knowledge harder global general express detectseveral definitions defined conflicts comprising chr become based although allthe advent
+
+DocType docs, ___Pattern 93___ 
+individual : 6
+theory : 5
+data : 5
+statistic algorithmic sample relation probabilistic objects absolute sufficient statistical relations models model information finite contrast code based typically two-part thestatistical thesituation theexplicit thealgorithmic thatsummarize thatdeals summarizing sufficientstatistic sufficiency structure strengthen statistics) statistics simplest similarly set samples relevant relationbetween regularity rare ones of(minimal) objects''--those object notions notion neededfor modes--in modelsummarizing model-to-data mode minimalsufficient minimal measure meaningfulinformation kolmogorov informationcontent implicit give function'' forthe explicit example ensembles elaborate earlierresults distribution) distinguish develop descriptionsof description demonstrate data) constraints consisting complexity complex codes close classical characterizations came becalled atleast andthe also accepted ``kolmogorov ``absolutelynon-stochastic (the (orprobability (minimal (kolmogorov)
+
+DocType docs, ___Pattern 94___ 
+
+problems bounds based worst use transformation to(ba)-csp time thetime techniques special sophisticated solving satisfaction of(32)-csp np-complete network natural mixture matchingand listed isequivalent involvea including improve ideas give formulation flow fast duality davis-putnam-style consider cases case backtracking also algorithms algorithm aconstraint 3-sat3-coloring 3-sat 3-list-coloring 3-edge-coloring (csp) (ab)-csp (32)-csp (23)-csp
+
+DocType docs, ___Pattern 95___ 
+
+tuning vector using space sound set problems motion methods inequalities whichsatisfies whenever walter verified values value use theperturbation systems strong soundness soundly someperturbation solving solve solution search robust requirement reported reduced quantifierelimination prune prototype procedure problem'' problem presented possible planning parametersuch paperas one ofnonlinear numerical nonlinearinequalities much method many localconsistency language involves investigated interval guaranteed finding faster express experiments enforcement eitherfind dimension determined defined decompositionsymbolic declarativemodeller cylindrical control collins' classical cinematic cameracontrol camera byjaulin arithmetic approximation approach andcommented amounts alternatives algebraic addressing ``guaranteed
+
+DocType docs, ___Pattern 96___ 
+
+problem model classical bounds using table show scheme queries quantum n) lower yet x wherelower wasconsidered venkatesh upperbounds upper universe tradeoff touse tight thequantum techniques study store storage static speaking space small size similar shown set s' roughly results recently randomized radhakrishnan query problemin paper ofbits models model" miltersen membership m linear less isquantumwe imply hold goal given formulate form even complexity classicaldeterministic case buhrman bitprobes bitprobe asubset areproved answered answer andtimein algebraic `is \leq \in \gg (|s| (m "quantum
+
+DocType docs, ___Pattern 97___ 
+
+feature chr grammar constraint typed system structures logic check applied working whentheir when/2 way variables valuesthat using used type tools toextend theory thatuses support subsumption study structure statements specifically solution simulate simply sicstus sake rulesare rules relations recursive realistic providing provided provide properly prologpreprocessor prolog programming problems problem primitive popular phrasestructure paper otherbenefits non-termination necessary means many made logicprogramming linguists linguistic latter language itsextension interpret instantiated includerelations implementation hpsg head-driven haveprovided handling grammardevelopment functions functionality former form focuses fields exist engine development design descriptions declarative deal coroutining context constraintswith constraintswhile constraints constraint-based consider computational complex complete combine co-occurrence case bound bestdifficult avoiding attribute assicstus antecedents anover-arching also (hpsg) (chr) (ale)
+
+DocType docs, ___Pattern 98___ 
+
+methods several learning comparison approach appearing algorithms wsd wordsresults word withsymbolic varying using used twofold two tothe thework thefeature superior standardsupervised specific space show sets sense-taggedcorpus sense secondly relatedliterature proposed problem positive performed paper namely naive modifications modification metric loss largest large inorder information includingtesting inaccuracy improvement improve greatly generally frequent firstly explored experiments experimental exemplar-basedclassification exemplar-based examplesallows especially english efficiency disambiguation directions describes dealing deal contribute containing confusinginformation clarify bayesian bayes basicallyconsists basic available attributes attribute attempts ambiguous aim (wsd)

@@ -1,0 +1,283 @@
+DocType docs, ___Pattern 0___ 
+
+models states stable small large language context-equivalent computing clustered
+
+DocType docs, ___Pattern 1___ 
+
+verbmobil semantic lexical database
+
+DocType docs, ___Pattern 2___ 
+
+translation grammars context-free compositional completeness
+
+DocType docs, ___Pattern 3___ 
+
+text technique robust recovery processing lexical error applied
+
+DocType docs, ___Pattern 4___ 
+
+sloppy identity
+
+DocType docs, ___Pattern 5___ 
+
+natural language temporal similarity-based representations processing meaning front-end approaches
+
+DocType docs, ___Pattern 6___ 
+
+lower quantum bounds np automata random raising parallel optimal dense coding codes bound access 1-way
+
+DocType docs, ___Pattern 7___ 
+
+weighted using tcp sharing services proportional internet fair end-to-end differentiated
+
+DocType docs, ___Pattern 8___ 
+
+systems sparse solving polynomial faster degenerate
+
+DocType docs, ___Pattern 9___ 
+
+mesh smoothing point placement optimal linear hexahedral generation complexity
+
+DocType docs, ___Pattern 10___ 
+
+theory lcc experience early computing collective collaborative choice asdl
+
+DocType docs, ___Pattern 11___ 
+
+coloring semidefinite quadtrees programming graph approximate algorithms
+
+DocType docs, ___Pattern 12___ 
+
+time o(13289^n) near-linear minimum cuts 3-coloring
+
+DocType docs, ___Pattern 13___ 
+
+universal properties oriented object linear-time languages events computer algebra
+
+DocType docs, ___Pattern 14___ 
+
+systems uncertainty quantum pspace proof modeling interactive engineering complex 2-round
+
+DocType docs, ___Pattern 15___ 
+
+unconditionally structures secure q^2 multiparty computation adversary
+
+DocType docs, ___Pattern 16___ 
+
+set problem mean field efficient covering approach
+
+DocType docs, ___Pattern 17___ 
+
+system spoken evaluating empirically dialogue adaptable
+
+DocType docs, ___Pattern 18___ 
+
+remarks grammar geometry
+
+DocType docs, ___Pattern 19___ 
+
+signature numerically invariant curves
+
+DocType docs, ___Pattern 20___ 
+
+system software service providing perpetual optimization hardware extensible code central architecture adaptation
+
+DocType docs, ___Pattern 21___ 
+
+tool system simulating simmune immune behavior analyzing
+
+DocType docs, ___Pattern 22___ 
+
+tomographic tiling quadrilateral packing meshing constraints circle bars
+
+DocType docs, ___Pattern 23___ 
+
+logic using security functions worst-case verification uninterpreted transport reductions propositional properties proof processor one-way level gong-needham-yahalom efficient cryptography algebraic
+
+DocType docs, ___Pattern 24___ 
+
+strategies restart internet congestion
+
+DocType docs, ___Pattern 25___ 
+
+surface removal implementation homeomorphisms hidden finite-resolution bestvina-handel algorithm
+
+DocType docs, ___Pattern 26___ 
+
+two-way transductions transducers string state mso finite definable
+
+DocType docs, ___Pattern 27___ 
+
+reconstructing x-rays three structures proof projections polyominoes polyatomic orthogonal np-completeness hv-convex discrete atoms
+
+DocType docs, ___Pattern 28___ 
+
+programming viewed turing rule-based quantum multi-tape machine foundation constraint
+
+DocType docs, ___Pattern 29___ 
+
+separability polygons human-computer conversation circular
+
+DocType docs, ___Pattern 30___ 
+
+setting study parameters modeling formal example commercial case
+
+DocType docs, ___Pattern 31___ 
+
+complexity unit union take-home quadratic origin even contain balls
+
+DocType docs, ___Pattern 32___ 
+
+triangulation delaunay randomized incremental improved deletion
+
+DocType docs, ___Pattern 33___ 
+
+text representation mixing levels hybrid generation automatic approach
+
+DocType docs, ___Pattern 34___ 
+
+probabilistic filters arithmetic results programs predicates power geometric analysis agent
+
+DocType docs, ___Pattern 35___ 
+
+programming logic us side project imperative help functional first-order alma (lazy)
+
+DocType docs, ___Pattern 36___ 
+
+unbounded dilation beta-skeletons
+
+DocType docs, ___Pattern 37___ 
+
+hierarchy boolean what's using technique polynomial operations low link joins extended easy-hard downward collapses collapse
+
+DocType docs, ___Pattern 38___ 
+
+towards theorem step second rice's complexity-theoretic analogs
+
+DocType docs, ___Pattern 39___ 
+
+total statistics permutations partial one-way existence characterizations algorithmic
+
+DocType docs, ___Pattern 40___ 
+
+suffices restrictive problems equivalence acceptance
+
+DocType docs, ___Pattern 41___ 
+
+computational transitions topology phase emerging complexity challenges
+
+DocType docs, ___Pattern 42___ 
+
+two sets separating segments largest computing circles
+
+DocType docs, ___Pattern 43___ 
+
+tours curvature convex bounded
+
+DocType docs, ___Pattern 44___ 
+
+self-stabilizing ring mutual k=n exclusion even
+
+DocType docs, ___Pattern 45___ 
+
+ordinary hyperplane finding conic
+
+DocType docs, ___Pattern 46___ 
+
+translating equality downwards
+
+DocType docs, ___Pattern 47___ 
+
+tractability model fixed-parameter definability checking
+
+DocType docs, ___Pattern 48___ 
+
+query order introduction
+
+DocType docs, ___Pattern 49___ 
+
+theorems sphere-covering measure generalized efficient converse concentration coding
+
+DocType docs, ___Pattern 50___ 
+
+time-dependent prosodic one-level morphology genetic environments algorithms
+
+DocType docs, ___Pattern 51___ 
+
+subgraph related problems planar isomorphism graphs
+
+DocType docs, ___Pattern 52___ 
+
+quantum complexity set regression multivariate membership interaction depth communication
+
+DocType docs, ___Pattern 53___ 
+
+quantum problems np-complete dynamics computing chaotic
+
+DocType docs, ___Pattern 54___ 
+
+orthgonal multiplicative independent groups component analysis algorithm
+
+DocType docs, ___Pattern 55___ 
+
+agents predicting learn framework expected clri behavior
+
+DocType docs, ___Pattern 56___ 
+
+systems surface scalability parallel non-equilibrium large growth asynchronous algorithms
+
+DocType docs, ___Pattern 57___ 
+
+syntax reasoning logical higher-order framework abstract
+
+DocType docs, ___Pattern 58___ 
+
+within symbolic programming language introduction ginac framework computation c++
+
+DocType docs, ___Pattern 59___ 
+
+scheme matching robustness regional global
+
+DocType docs, ___Pattern 60___ 
+
+theory reasoning pratice axioms
+
+DocType docs, ___Pattern 61___ 
+
+protection pad one-time environments distributed data cipher based
+
+DocType docs, ___Pattern 62___ 
+
+robot novelty neotaxis detection
+
+DocType docs, ___Pattern 63___ 
+
+programming p-time notation nets logic light correctness completeness) affine (proof
+
+DocType docs, ___Pattern 64___ 
+
+waveguide online meshes error dispersion correction 2d
+
+DocType docs, ___Pattern 65___ 
+
+vertex transition statistical random phase perspective mechanics graphs finite-connectivity covering
+
+DocType docs, ___Pattern 66___ 
+
+wireless resource networks multimedia decision-theoretic approach allocation
+
+DocType docs, ___Pattern 67___ 
+
+security policy consistency
+
+DocType docs, ___Pattern 68___ 
+
+solving planning motion interval control constraint camera
+
+DocType docs, ___Pattern 69___ 
+
+rules hpsg handling constraint applying
+
+DocType docs, ___Pattern 70___ 
+
+word sense revisited naive exemplar-based disambiguation bayes approaches

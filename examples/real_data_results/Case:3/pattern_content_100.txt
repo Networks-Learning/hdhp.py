@@ -1,0 +1,876 @@
+DocType auths, ___Pattern 0___ 
+
+Ney H. Wessel Ute Ueberla S. Rosenfeld Reinhard R. P. Martin M. Liermann Kneser Joerg J. Hermann Generet F. Essen E. Brill
+
+DocType auths, ___Pattern 1___ 
+
+M. Y. U. Schiehlen Reyle Mori, Kamp, J. H. Emele Egg Dorna, C. Bos,
+
+DocType auths, ___Pattern 2___ 
+
+M. T. o V. Stuart Shieber Rosetta Pereira N. Janssen Herman Hendriks Fern C.
+
+DocType auths, ___Pattern 3___ 
+W. : 9
+R. : 9
+K. : 9
+L. : 8
+J. : 8
+A. : 8
+G. : 7
+M. : 6
+E. : 6
+S. : 5
+H. : 5
+T. P. Gale D. Church N. John Heidorn Y. Vosse Rabiner Miller Kukich Jensen Ingels C. van de Zamora Young Willett Wilks Weischedel Thornton Tanaka Stock Sondhi Sondheimer Smedt S Russel Roger Richardson Ravin Proakis Pollock Okuda O. Mercer McIlroy Levinson Lavelli Ǩ{u}cera Koskenniemi Koenraad Kernighan Kempen Kasai Karen Jelinek Ibm I. Hayes Hansen Granger Good Garside Freund Francis Flexner Fass F. Deller Corporation Chodorow Carbonell Byrd, Brigitte Braden-Harder Berkel Bahl B. Angell
+
+DocType auths, ___Pattern 4___ 
+Claire : 5
+Michael Kohlhase Gardent van Robert o har den Tancredi Suresh Stuart Shieber Scha Rooth Robin R. Prüst Pereira Noor Noam Moens Melvin May Mats Mary Marc Man M. Leusen Lasnik Kehler Jerry Hutter Howard Hobbs Hardt H. Grover Fitting Fiengo Fern Dieter Daniel Dalrymple Cooper Christopher Chris Chomsky Brew Berg Andrew
+
+DocType auths, ___Pattern 5___ 
+
+R. Peter Kenneth John Donald A. W. Robert Mercer M. L. Jelinek, J. Frederick David Church, B. of Yarowsky, William Will Volker Ute Tukey Taylor Stutz Steven Steinbiss Society Slava Self Salton, Salim Rubin Rousseeuw Roukos Rose, Ronald Resnik, Pinker, Philip Pedersen Paul, P. O. North Nan Michael Matthew Leonard Laird Knuth, Kelly Kaufman, Katz, Karger Jan James Irving Hindle, Hartigan, Gurewitz Good, Gerard Geoffrey Gale Freeman Fox Fisher, Essen, Eitan E. Douglass Douglas Don Dempster, Cutting, Classification Cheeseman, C. Brucker, Arthur Anderberg, America
+
+DocType auths, ___Pattern 6___ 
+A. : 36
+J. : 17
+L. : 13
+H. : 13
+U. : 11
+S. : 11
+R. : 11
+M. : 11
+Vazirani : 10
+C. : 10
+Wigderson : 8
+E. : 8
+D. : 8
+Ambainis : 7
+P. : 6
+G. : 6
+Buhrman : 6
+de : 5
+Nisan : 5
+Brassard : 5
+Bernstein : 5
+Bennett : 5
+Yao T. N. Cleve Wolf Ta-Shma Sipser Schulman Miltersen Mayers Goldwasser Fortnow Babai van Watrous Venkatesh Thomas Shor Safra Radhakrishnan Noam Nayak Lund Kondacs I. Graaf Freivalds DiVincenzo Cover Barenco B. Avi Zvi Weinfurter T\mbox{a-S}hma Szemerédi Stephen Smolin Sleator Shmuel Shamir Schnitger Ronald Rompel Raz Ran Rackoff Rabin Ponzio Peter Pavol Papert Papadimitriou Pagh O. Mosca Mor Moore Minsky Michael Micali Margolus Lovász Lo Kushilevitz Kremer Komlós Klauck Kitaev Kilian Kholevo Karloff Jozsa Jeroen Jaikumar Huang Holevo Hartmut Harry Grover Georg Galil Fuchs Fredman Frankl Feldman Feige Duris Deutsch Demarrais Crutchfield Condon Cohen Chuang Christos Christopher Chau Cai C.-c. C-c. Bro Boyer Biham Berthiaume Ben-Or Beals Arora Aharonov Adleman
+
+DocType auths, ___Pattern 7___ 
+
+Vern Varma Tan Paxson Maulloo Lampros Kelly Kalampoukas Frank David Anujan Aman
+
+DocType auths, ___Pattern 8___ 
+M. : 5
+John A. Z. Ioannis F. Emiris, Canny, Zelevinsky, Victor V. Rojas, L. J. Gritzmann, D. van der Zalgaller, Yu. Yu Yinyun Ye, Y. Xiaoshen Weyman, Wang, Wampler, Waerden, W. Sturmfels, Serge Schneider, Rolf Peter Pan, P. N. Maurice Lang, Klee, Khovanskii, Kapranov, Jerzy I. Hufnagel, G̈unter Grigoriev, Gel'f G. Ewald, Dyer, Dima Dalbec, Chistov, Charles Burago, Bernshtein, Bernd B. Askold Andrei ,
+
+DocType auths, ___Pattern 9___ 
+M. : 25
+S. : 17
+D. : 17
+E. : 15
+A. : 14
+L. : 13
+K. : 13
+B. : 13
+R. : 12
+J. : 12
+T. : 11
+P. : 10
+Bern : 10
+W. : 9
+N. : 8
+Eppstein : 8
+G. : 7
+C. : 7
+H. Weihe Rippa Ramos Plassmann Müller-Hannemann Mitchell I. Freitag V. Toussaint Teng Talmor Stephenson S.-h. Ruppert Rodin Ramaswami Miller Meiser Mehlhorn Megiddo Klein Jones Goodrich F. Clarkson Chazelle Blacker Benzley Aziz Z.-x. Z. Welzl Weiszfeld Wang Walkington Thurston Tautges Tarjan Sullivan Strang Stanback Srinivasan Sjaardema Simpson Shouraboura Shimada Sharir Shamir Schrijver Schneiders Schiff Rogers Rauch Ramsden Rafferty Perry Peleg Pavley Palios Orlin Ollivier-Gooch O'Dunlaing Nackman Murdoch Montague Mine Mihályffy Merkley Melzak Matoušek Matou{š}ek Magnanti Lovász Lingas Levin Levcopoulos Langley Lang Kutten Krznaric King Katoh Joag-Dev Ibaraki Hoffman Hetyei He Hayes G̈artner Grötschel Grosse Gossard Gold Gilbert Garay Frieze Fix Eriksson Dyn Dyer Doyle Dixon Dickerson Dharmadhikari Demaine D'Azevedo Cockayne Clark Chew Charters Bunton Baker Bajaj Babuška Babu{š}ka Amenta Amato Ahuja Adler
+
+DocType auths, ___Pattern 10___ 
+S. : 7
+R. : 6
+C. : 6
+W. : 5
+P. D. M. L. J. Hanson Wilson T. Fraser A. ard Wang Va. Tseng Tjiang The Steele Steel, St Snodgrass Serra S.-w. Proebsting Prescod Performance Open Manassas, Ma. Liao Lam Korn K. Hennessy Harbison Hall Group Goldfarb G. French F. Evaluation Corp. Cambridge, C.-w. B. Appel Anderson Amarasinghe A
+
+DocType auths, ___Pattern 11___ 
+M. : 14
+S. : 7
+A. : 7
+R. : 6
+N. : 6
+J. : 6
+C. : 6
+L. : 5
+P. Lovász U. Szegedy Motwani K. Feige E. David D. Alon Schrijver Safra Lund Kahale Johnson Gr̈otschel G. F. Chaitin Blum ra er Yannakakis X. Wood Williamson Wigderson W. Van Torczon Sudan Raghavan Naor Milner Michel Michael Markstein Loan Linial Knuth Kilian Khanna Kennedy Karger Jerrum Håstad Hopkins Halldórsson Halldorsson H. Golub Goldwasser Goemans Gene Garey Frieze Donald Cooper Cocke Ch Briggs Boppana Berge B. Avrim Ausl Arora Alizadeh
+
+DocType auths, ___Pattern 12___ 
+R. : 6
+David : 5
+Karger Toshihide Nagamochi Ibaraki Hiroshi C. A. network flows Williamson T. Stein St. Shmoys Serge Rajeev Raghavan Prabhakar Plotkin P. Nishimura Nash-Williams N. Multi-terminal Motwani Monika Kazuhiro Jack J. Hu. Henzinger Harold Gomory Gabow Fulkerson Ford Edmonds E. D. Clifford Béla Bollobás Benczúr András
+
+DocType auths, ___Pattern 13___ 
+
+A. Y. Wolfram Wirth Vlasov Tournier Stroustrup Siret S. P. Naughton N. J. E. Davenport B. Akritas
+
+DocType auths, ___Pattern 14___ 
+
+Tal Silvio Rabin Micali Maurer Wigderson Ueli U. Shafi Ronald Ran Oded Michael M. Ivan Hirt Goldwasser Goldreich Gabriel Damgård Cramer Chor Canetti Bracha Benny Ben-Or Baruch Awerbuch Avi
+
+DocType auths, ___Pattern 15___ 
+J. : 5
+S̈oderberg Peterson M. C. B. Ohlsson Lagerholm E. Beasley W. Tank Pi Parisi Ḧakkinen Hopfield H. G. D.
+
+DocType auths, ___Pattern 16___ 
+
+R. van Zanten, Walker, W. V. Smith, S. Pieraccini, Narayanan, M. Levin, J. G. Fromer, E.
+
+DocType auths, ___Pattern 17___ 
+
+Rotman Joseph J. Colmerauer C. Berge Alain
+
+DocType auths, ___Pattern 18___ 
+
+Tannenbaum Shakiban S. P. Olver Haker E. Calabi C. A.
+
+DocType auths, ___Pattern 19___ 
+M. : 11
+T. : 9
+J. : 8
+R. : 5
+D. : 5
+C. : 5
+A. : 5
+E. W. U. S. N. Kistler, K. Hölzle, Franz, Dean, B. Waldspurger, P. L. Chen, Ball, is, evoorde, Zhang, Z. Y. X. Weihl, Wegman, Wang, Wall, V Ungar, Srivastava, Sites, S.-t. Rosen, Pettis, Monroe, Menezes, Mahlke, Lindholm, Leung, Krintz, Johnson, John, Ingalls, Hicks, Henzinger, Helm, Hansen, Grove, Gloy, Ghemawat, Gamma, G. Ferrante, Fernández, F. Eustace, Deutsch, Cytron, Conte, Cohn, Click, Chilimbi, Chang, Chambers, Calder, Br Berc, Anderson,
+
+DocType auths, ___Pattern 20___ 
+
+R. I. Cohen Z. Weissbuch Segel S. Ruth Perelson M. Lev L. Jenkins H. Grossman G. Bar-Or Atlan A.
+
+DocType auths, ___Pattern 21___ 
+A. : 14
+R. : 11
+M. : 10
+J. : 7
+P. : 6
+H. : 6
+D. : 6
+C. : 5
+F. er Y. Schw S. Ryser Prangenberg Ourmazd Kisielowski Kim Gritzmann Gardner E. Baumann all Sinclair Shamir Seibt R Pinzani Nivat Lungo Itai Even Del Brualdi Barcucci Woeginger W. Tarjan Seigt S.-k. Plass Picouleau Mathematics Luby Kuba Kenyon Johnson Jerrum Irving Garey G. Dürr Combinatorial Chrobak Christophe Chang B. Aspvall
+
+DocType auths, ___Pattern 22___ 
+
+Yahalom Tim Sacco S. Roscheisen Roger Raphael R. Postel Philip Paul O. Needham Martin M. Lowe Li Kocher Karlton Jon Gong Gavin Freier E. Dierks Denning D. Christopher C. Allen Alan
+
+DocType auths, ___Pattern 23___ 
+
+B. Peter Hubermann Fishburn C. A. model: Zalman Usiskin T. Schobbens Ryan Robin Reference Pierre-Yves Neuman Miller Medvinsky Mark M. Lai Kaminsky John Iso. Hogg Hajnal H. Grady Gennady Farquharson Duncan Clifford Charlie Booch Black Architecture Andréka (10)
+
+DocType auths, ___Pattern 24___ 
+Huberman : 8
+Bernardo : 8
+A. : 8
+M. Tad S. Rajan Natalie Lukose Hogg Glance William Societies, Sheldon Sharpe Russell Ross O. Kephart Jeffrey Hardin Growing F. Collective Artificial Action :
+
+DocType auths, ___Pattern 25___ 
+
+J. el W. T. Peter Mladen Michael H Brinkmann Bestvina White V. Ringl Poenaru Misiurewicz Menasco Martin M. Lustig Los Lickorish Laudenbach Hall Franks Fathi F. A.
+
+DocType auths, ___Pattern 26___ 
+J. : 10
+V. : 5
+Engelfriet : 5
+D. : 5
+A. : 5
+Ullman S. Greibach Courcelle B. Hopcroft G. E. Aho van Slutzki Seese Rozenberg Rajlich P. Oostrom M. Kiel Jákl Hennie F. Chytil C.
+
+DocType auths, ___Pattern 27___ 
+A. : 9
+S. : 8
+J. : 8
+R. : 6
+M. : 6
+I. : 5
+T. G. C. Snodgrass F. D. B. Sag Pollard P. K. H. Comrie Clifford Androutsopoulos Allen van Z. Wiederhold Whinston Vendler V. U. Tsotras Thanisch Tansel Steiner Steedman Sergot Segev Ritchie Reynolds Reyle Reichenbach Pulman Prior Parsons Pan Moens McDermott McCarthy Lucas Kumar Kowalski Kamp Jensen Jajodia Hodkinson Hayes Gottlob Gadia Gabbay Draxler De Crouch Ceri Boehlen Benthem
+
+DocType auths, ___Pattern 28___ 
+J. : 7
+C. : 6
+A. : 6
+R. : 5
+H. B. Y. Wilks P. N. M. K. E. D. Allen et al. S. Reithinger Maier L. Grosz F. Colby ersson Winograd Whittaker Weizenbaum Webber Turing Traum Test T. Stenton Sidner Searle Schubert Schank Results Poesio Perrault Pallett Morris Martin Levy Lee Krotov Kobsa Hwang Heeman Charniak Catizone Carletta Bunt Bench-mark Battacharia Ballim Atis Anderson Alex Abelson
+
+DocType auths, ___Pattern 29___ 
+M. : 6
+L. : 6
+B. : 6
+R. : 5
+J. : 5
+C. : 5
+S. D. A. Matthew K. James Heitmeyer George G. Dwyer Corbett Avrunin Yoko Wong Thomas Steve Robyn Richard Pnueli P. O. Lutz Lamport Kelly John Holzmann Hamilton Easterbrook E. David Covington Chechik Andre Ampo Zave Z. Wolper Wing Wilke Weber-Wulff Vito Uml Trakhtenbrot Steffen Stefan Shtull-Trauring Sherman Rosenblum Rance Ramesh Păun Politi Pierre Peter Peled Paul Partners Parrow Parnas Pamela Naamad Moataz McMillan Mats Mataga Marsha Manna Lindner Lewerentz Leue Leslie Lachover Labaw Kupferman Kitchenham Kamel Jones Jonathan Joannou Joachim Jeffords Jeannette Jackson Hoare Heninger Heimdahl Hehner Harel Hall H. Gannon Feather Eric Doron Dimitrie Di Debora Davis Danielson Daniel Crow Constance Consortium Connie Cliff Cleavel Claus Biechelle Bharadwaj Bernhard Bernd Barbara Atlee Anthony Ann Abadi
+
+DocType auths, ___Pattern 30___ 
+
+Yvinec Olivier Mariette Jean-Daniel Jacqueline Heppes Duquesne Devillers Cérézo Boissonnat André A.
+
+DocType auths, ___Pattern 31___ 
+P. : 9
+R. : 6
+J. : 5
+Teillaud Monique L. Devillers Zhu Stefan Saias Olivier Mücke Meiser M. Leonidas Lemaire Jean-Daniel Isaac Guibas F. Ernst Devroye D. C. Boissonnat Binhai Yao W. T. Sugihara Su Sibson Shor Shewchuk Sharir Seidel Saxe S. Raghavan Pedoe Paterson Okabe O. Mulmuley Motwani Moreau Midtbø Micha Mani Kokichi Knuth K. J.-m. Heller H. Green E. Drysdale Chew Bruggesser Bose Boots Barry Atsuyuki Aggarwal A.
+
+DocType auths, ___Pattern 32___ 
+Reiter : 5
+Ehud : 5
+Stephan Pianta Mellish Emanuele Chris Busemann de Walter Velde Van Tovena Sabine Robert Reape Pietrosanti Paiva Nicola Mike M. Lynne Lucia Levine Kamstrup John Horacek Helmut Gjertrud Geldof Ettore Daniel Dale Cancedda Cahill
+
+DocType auths, ___Pattern 33___ 
+
+Preparata O. F. Devillers
+
+DocType auths, ___Pattern 34___ 
+
+K. A. R. J. Apt Y. V. Tretkoff Tourbier Schaerf Partington P. Oplobedu McAloon Marcovitch M. Klint C. Brunekreef Bezem
+
+DocType auths, ___Pattern 35___ 
+
+M. S. Krishnamoorthy J. Flaherty E. Benantar U. Samet H. Dōgrus̈oz
+
+DocType auths, ___Pattern 36___ 
+
+S. Mehlhorn C. Stefan Schirra Näher K. Burnikel {Van {Efficient title geometry for exact computational arithmetic Yap Wyk}, Uhrig Tamassia Roberto Preparata P. Liotta Könnemann Kurt Jochen J. Giuseppe Franco Fortune Christoph Christian =
+
+DocType auths, ___Pattern 37___ 
+D. : 16
+J. : 14
+M. : 11
+S. : 10
+R. : 8
+H. : 8
+G. : 8
+P. : 7
+K. : 7
+C. : 6
+T. : 5
+L. : 5
+Kirkpatrick : 5
+B. : 5
+Suri O'Rourke N. Megiddo Joseph Edelsbrunner Subhash Dobkin Das A. Yvinec Yap Sharir Preparata O. Mount Mitchell Kosaraju Kim Keil Guibas Goodrich Fisk F. E. Devillers Czyzowicz Chew Brönnimann Booth Boissonnat Bhattacharya Anderson Aggarwal {III} {Drysdale}, title de Yang Y. Xu. Veltkamp U. Tompa T.-h. Supowit Su Sokal Snoeyink Schwarzkopf Robert Radke R.-c. Olivier Mariette Manber Lee Lay Jurek Jean-Marc Jean-Daniel J.-d. Gutwin Gabriel Friedman Eppstein Dobrindt Cheng Chazelle Chang Berg B.-t. =
+
+DocType auths, ___Pattern 38___ 
+J. : 93
+L. : 75
+ra : 56
+R. : 41
+Hemaspa : 37
+M. : 36
+S. : 28
+K. : 28
+A. : 24
+Wagner : 21
+H. : 20
+E. : 20
+Hemach : 19
+G. : 17
+U. : 16
+Wechsung : 15
+T. : 15
+Hartmanis : 15
+V. : 14
+Schöning : 14
+Beigel : 12
+Rothe : 11
+Kadin : 11
+Fortnow : 11
+D. : 11
+Cai : 11
+N. : 10
+Chang : 10
+Selman : 9
+K{ö}bler : 9
+Hempel : 9
+Sewelson : 8
+Gundermann : 8
+Stockmeyer : 7
+C. : 7
+Allender : 7
+Y. : 6
+Watanabe : 6
+Valiant : 6
+Ogiwara : 6
+O. : 6
+Papadimitriou : 5
+P. : 5
+Buhrman : 5
+Balcázar : 5
+Thierauf Selivanov Lynch F. Borchert B. Zachos Young Toda Stephan Sipser Rubinstein Rogers Ogihara Meyer Ladner Kurtz Ko. Joseph Impagliazzo Grollmann Goldsmith Fenner Agrawal Z. Yannakakis Yacobi W. Vyskoč Vollmer Torán Torenvliet Simon Sheu Rudich Rice Regan Rao Naik Long Lipton Johnson Jiang Immerman Håstad Hopcroft Gurevich Gill Gasarch Garey Gabarró Fischer Even Díaz Crescenzi Book Biswas Berman Amir de Zim Yesha Yao Yamazaki Yamakami Yajima Wilson Viswanathan Vereshchagin Vazirani Vardi Thilikos Tarsi Tankus Takenaga Sitharam Silvestri Scḧoning Schuler Schmidt Savage Royer Rompel Reith Ranjan Radhakrishnan Protasi Nouzoe Nasser Naor Mahaney Luby Levin Krentel Koblitz Ko Karp Kari Kannan Jha Jain Hertrampf Heller Hay Hausdorff Harrison Halldorsson Gr{ä}del Goldberg Furst Fortune Fellows Feigenbaum Dodgson Demers D'Atri Caritat Buss Bryant Bruschi Bovet Borodin Bodlaender Blass Black Bertoni Benford Ausiello Arvind
+
+DocType auths, ___Pattern 39___ 
+
+Information {Ž}ivaljevi{ć} Yao Wolfgang William W. Vegter Technology T. Sedgwick Rade President's Peter Ko. Kneser Ker-I Karol Jones Joel Jaco Hellmuth Hass Haken Gert Eric Chi-Chih Borsuk Björner Andrew Anders
+
+DocType auths, ___Pattern 40___ 
+M. : 23
+J. : 23
+S. : 19
+D. : 11
+H. : 10
+P. : 9
+E. : 8
+Overmars : 7
+T. : 6
+R. : 6
+K. : 6
+F. : 6
+G. : 5
+Sharir C. Teller Reif N. L. Halperin Agarwal A. van de Wilfong W. Suri Matoušek Lee Kirkpatrick Hershberger Har-Peled Greene Fortune Erickson Chang Canny Berg B. Zhang Zadicario Yao Xavier Weiler Warnock Swokowski Sutherl Sproull Snoeyink Sillion Sen Schwartz Schumacker Ruppert Puech Paterson Nishizeki Murali Miller McKenna Manocha Luebke Lin Latombe Kreveld Kavraki Katz Kass Kannan Kanamaru Jacobs J.-c. I. Hughes Hudson Hoff Heckbert Harvey Hanrahan Goodrich Glassner Georges Foley Fibich Feit Feiner Dévai Dubins Dorward Donald Dobkin Desikan Dam Coorg Cohen-Or Cohen Catmull Bern Bentley Atherton Atallah Asano Aronov Alex
+
+DocType auths, ___Pattern 41___ 
+
+E. Dijkstra,
+
+DocType auths, ___Pattern 42___ 
+
+J. T. R. P. Wiseman Wilson W. Sylvester Steinberg Seidel Motzkin Moser Lozano-Pérez Leonidas L. Kelly Jean-Daniel Guibas Gallai Francis Erdős Boissonnat Avnaim A.
+
+DocType auths, ___Pattern 43___ 
+M. : 13
+R. : 8
+N. : 6
+G. : 5
+Y. Vardi J. Kolaitis Fellows Downey Ph.G. P. L. K. Immerman Grohe Frick Flum D. Chen Cai A. ra Zwick Yuster U. Thakur Seymour Seese Scarcello Robertson Regan Rajaraman Ph. Merlin Leone H.-d. Gottlob Fagin F. Ebbinghaus Courcelle Chekuri Ch. Ch B. Alon
+
+DocType auths, ___Pattern 44___ 
+
+J. A. R. C. T. McDiarmid M. E. Bucklew Zeitouni V. Thomas Talagr Strassen Shannon Petersen O. L. K{ö}rner K. I. Harper H. Dembo Csisz{á}r Cover Blahut Berger Bahadur
+
+DocType auths, ___Pattern 45___ 
+R. : 11
+A. : 7
+M. : 6
+E. : 6
+J. : 5
+Velev N. D. Bryant S. L. Burch Y. W. Pnueli K. G. Dill Zhu Zhou V. Singhal Siegel Shtrichman Shostak Sajid Ruah Rodeh Patterson Oppen O. Nelson Kuehlmann Kane Jones Hojati Hennessy Heinrich H. Goel German Damm Clarke C. Brayton Biere Berezin B. Aziz Ackermann
+
+DocType auths, ___Pattern 46___ 
+S. : 13
+V. : 12
+Subrahmanian : 10
+R. : 8
+T. : 5
+J. : 5
+G. Eiter, A. Y. Ross Pick Ng, N. M. K. D. (1999 Tuttle Subrahmanian, Siegal, Ross, Rogers P. Ozcan Morgenstern, Moore, Megiddo Lloyd, Leone Lehmann Lakshmanan, L. Kraus, Kraus Koller, Kifer, Halpern, Halpern Haddawy, Goodwin Fagin, F. Eiter Doan, Doan Dix, Dekhtyar, Cattell, Arisha, Apt, (1997 (1990 (1987 (1984
+
+DocType auths, ___Pattern 47___ 
+M. : 7
+J. : 7
+E. Rowe P. Eigen Schuster C. A. van Wilke Vose T. Snoad Sarma Ronnewinkel Rogers Pr̈ugel-Bennett O. Nimwegen Nilsson N. Mitchell McCaskill Martinetz K. H. Dold DeJong D. Cutaia Crutchfield Branke
+
+DocType auths, ___Pattern 48___ 
+D. : 19
+A. : 16
+M. : 14
+R. : 11
+N. : 11
+B. : 9
+G. : 8
+T. : 7
+P. : 6
+J. : 6
+H. : 6
+Eppstein : 5
+S. Peleg L. Frederickson F. W. Lingas C. Awerbuch Y. Wong Sysło Nishizeki K. Janardan Cowen Berger Zwick Z. Yuster Yannakakis X. Wu Willett Wild Wahl Voigt U. Turán Thorner Thomas Taylor Tamassia Takamizawa Stahs Spencer Smith Seymour Saito Sairam Rodeh Robertson Richards Rice Proskurowski Poirrette Plehn Pepperrell Peck Papadimitriou Levinson Lawler Laumond Langston Lang Koza Kortsarz Klein Keil Kanevsky J.-p. Italiano Itai Hong Guha Grindley Galil Gabow Fellows Even Eisenbud E. Ding Dillencourt Di Chrobak Chiba Chen Bui Brown Brecht Bern Bennett Bayer Battista Bath Bar-Yehuda Baker Artymiuk Alon Allen
+
+DocType auths, ___Pattern 49___ 
+
+A. Selman J. ra Sherman S. Rothe Rabi M. L. Ko. Kleene K. Homan Hemaspa Grollmann C.
+
+DocType auths, ___Pattern 50___ 
+
+M. J. C. A. van W. T. Sproat Smolensky Sag Riley R. Prince, Prince Pollard, P. Noord, N. Mohri, McCarthy, L. Kisseberth, Karttunen, I. Halle Goldsmith, G. Ellison, Chomsky,
+
+DocType auths, ___Pattern 51___ 
+J. : 12
+P. : 7
+Rousseeuw : 6
+M. : 6
+S. R. Hubert Yao W. Tverberg Steiger H. F. B. A. {Ž}ivaljevi{ć} van Z. Y. Wenger Vre{ć}ica V. T. Struyf Speckmann Snoeyink Sharir Radon Rado N. Mitchell Matou{š}ek Magill Liu Lasry Langerman L. Kreveld Kalai J.-m. Husseini G. Dol'nikov C. Alon
+
+DocType auths, ___Pattern 52___ 
+I. : 5
+P. M. A. Zoller R. Ohya J. D. Cirac W. Vazirani U. Sobelman Shor Schack S. N. L. Jozsa Johnson Gershenfeld Garey Gardiner Ekert E. Deutsch Chuang Bernstein
+
+DocType auths, ___Pattern 53___ 
+
+J. H. W. S̈alel̈a, Press, P. Hyv̈arinen, Hurri, G̈avert, Flannery B. A.
+
+DocType auths, ___Pattern 54___ 
+P. : 6
+Michael : 5
+J. David Wellman Peter M. Junling Hu H. A. ip Vidal Stone Sen S Pines Matarić Manuela Maja L. José Edmund Durfee Daniel Zlotkin William Weiß Watkins Victor Veloso Velos Vazirani V. Umesh Tom Tad Sycara Shaul Sekaran S. Rosenschein R. Oren O. Mitchell Meltzer Markovitch Mahendra Maes Liu Littman Lesser Kiskis Kephart Ken Kearns Katia Jyi-Shane John Jeffrey Jeffery Hübler Huberman Holl Hogg Gilad Gerhard George Etzioni Dayan D. Craig Cowan Corkill Claus Christopher Chavez Caroline Carmel Boutilier Birmingham Binmore Bernardo Alfred
+
+DocType auths, ___Pattern 55___ 
+M. : 10
+A. : 7
+R. : 6
+W. : 5
+Truszczyński, : 5
+Marek, : 5
+Niemelä, I. G. F. C. V. Scarcello, P. N. Kowalski, K. J. H. Dix, {Van {The well-founded van title semantics programs} logic general for Z. Walker, Truszczy{\ŉ}ski, Toni, T. Stefan Simons, Sideri, Schlipf, S.}, Ross, Pfeifer, Mateis, Lonc, Lifschitz, Leone, Jürgen Gottlob, Gelfond, Gelder}, Froidevaux, Fellows, Emden, Eiter, Downey, Dechter, Cholewi\ŉski, Brass, Bondarenko, Blair, Bidoit, Ben-Eliyahu, Aravindan, Apt, =
+
+DocType auths, ___Pattern 56___ 
+A. : 7
+G. : 6
+M. : 5
+D. : 5
+S. P. R. Lubachevsky Korniss B. Z. Toroczkai Novotny J. Greenberg Comput Zia Zhang Y.-c. Wright Wilkinson V. Stolyar Shenker Sarma Roy, Rikvold, Rikvold Privman Parisi Nicol L. Kardar K. Fujimoto F. Edwards E. Das C.
+
+DocType auths, ___Pattern 57___ 
+D. : 7
+Miller, S. J. F. Pfenning, L.-h. G. Eriksson, A. Wajs, Scott, Rohwedder, R. Nadathur, Matthews, J.-y. I. Huet, Howe, Honsell, Harper, Gunter, Girard, E. Church, Chirimar, Cervesato, C. Abramsky,
+
+DocType auths, ___Pattern 58___ 
+S. : 9
+R. : 7
+M. : 6
+K. : 6
+P. Marchiori J. Etalle D. Apt van Wadler U. Raamsdonk F. Debray Waldmann W. Shyamasundar Ruggieri Rosenblueth Reddy Rao Pedreschi Maluszynski Lüttringhaus-Kappel López-García Lloyd Krishna Kapur Hermenegildo H. Giacobazzi Ganzinger Gabbrielli E. Dembinski Codish Boye Bird A.
+
+DocType auths, ___Pattern 59___ 
+
+R. J. D. Waltz, Ullman, P. Muth, Mohr, Masini, Mackworth, L. K. G. Fleming, Apt, A.
+
+DocType auths, ___Pattern 60___ 
+
+Wester, R. M. Rademakers, Lewis, L. Kreimer, J. H. Franzkowski, F. D. Brücher, Brun,
+
+DocType auths, ___Pattern 61___ 
+
+
+
+DocType auths, ___Pattern 62___ 
+A. : 9
+F. : 8
+B. : 8
+Hollunder : 6
+W. : 5
+Baader : 5
+M. I. Horrocks Nutt J. H.-j. E. D. Y. U. Profitlich P. Nebel Franconi Donini Calvanese Buchheit Woods Wolper Vardi Tobies Tarski Schmolze Schmidt Schild Schaerf Sattler S. Rector R. Patel-Schneider Nowlan Muller McGuinness L. K. Hustadt Heinsohn Halpern Glowinski G. Emerson Borgida
+
+DocType auths, ___Pattern 63___ 
+
+
+
+DocType auths, ___Pattern 64___ 
+
+
+
+DocType auths, ___Pattern 65___ 
+B. : 6
+R. J. T. S. P. C. Bollobás A. use Zecchina Y. Wilson W. V. Troyansky Thomason The Taylor Selman Schaefer Rényi Reed Papadimitriou Monasson Mertens Ladner L. Kirkpatrick Kim Kanefsky Istrate H. G. Fu. Friedgut Erdős E. D. Chvátal Cheeseman Chayes Borgs
+
+DocType auths, ___Pattern 66___ 
+
+
+
+DocType auths, ___Pattern 67___ 
+
+J.-y. Roversi L. Girard A. S. Leivant D. Asperti Y. Taylor Scedrov P. Mitchell Marion Lafont J. J-y. Girard, Cook C. Bellantoni
+
+DocType auths, ___Pattern 68___ 
+
+J. A. Savioja Rocchesso M. L. Ḧarm̈a Fontana Davide {Van {The {2-D} waveguide title mesh digital V̈alim̈aki V. U. Strikwerda Smith}, Scott Scalcon Roc­chesso O. Moorer Laird Laine Karjalainen K. Julius James Huopaniemi Francesco Fitch Federico F. Duyne D. Aird =
+
+DocType auths, ___Pattern 69___ 
+R. : 5
+S. M. B. Zecchina Selman P. Monasson G. D. A. Troyansky Rényi Parisi Mitchell Mézard Mertens Levesque L. Kirkpatrick Johnson Hayes H. Gazmuri Garey Frieze Erd̈os
+
+DocType auths, ___Pattern 70___ 
+M. : 12
+S. : 10
+D. : 7
+Choi : 6
+C. : 5
+Tse K. Grossglauser A. Shin R. Kwon G. Yener Yanghee Y. Taekyoung T. Sajal Rose P. Naghshineh McCanne L. F. Das Zhang Yoon Yates Vetterli Vecchi V. Un. Towsley Tekinary Shenker Schwartz Saquib Ramjee Puterman Park Ng., Nagarajan Mansour M.l Lu Laguna Kirkpatrick Keshav Kearn Jihyuk Jamin Jabbari Ilkyu H. Goldberg Glover Gelatt E. Danzig Bisdikian Bharghavan B. Amir Abdelzaher A
+
+DocType auths, ___Pattern 71___ 
+S. : 5
+E. : 5
+V. T. P. J. Bertino N. Ferrari C. Andersson Y. Woo Widén W.-k. Subrahmanian Sjöl Samarati Rullo Ribeiro Nilsson M. Li Lam K. Jajodia Huang H. Guedes Grosof Frühwirth Feigenbaum F. Carlsson Buccafurri Boortz B. Atluri Alturi
+
+DocType auths, ___Pattern 72___ 
+M. : 9
+P. : 8
+A. : 8
+Vitányi : 5
+V. : 5
+J. : 5
+B. : 5
+R. N. Li L. Kolmogorov V'yugin T. Gács Cover Yu Uspensky Tromp Thomas Solomonoff Rissanen Q. Martin-L̈of Levin Gao G. Fortnow Fisher Chaitin Barron Antunes
+
+DocType auths, ___Pattern 73___ 
+
+V. U. Schöning Kumar
+
+DocType auths, ___Pattern 74___ 
+J. : 9
+F. : 7
+S. : 6
+L. : 6
+A. : 6
+T. : 5
+M. : 5
+R. P. E. Benhamou, W. K. H. G. D. Shary, Puget, Jaulin, J.-f. Granvilliers, Drucker, C. Yang, Wilkinson, Ward, Waltz, Veh\́i, V. Turing, Travé-Massuyès, Tarabanis, Sunaga, Stoer, Snyder, Smith, Sam, Pau, Older, Neumaier, Muller, Moore, Meintjes, McAllester, Markov, Mackworth, Lozano-Pérez, Liska, Lefèvre, Kutsia, Kaucher, Jirstr Jardillier, J.-m. I. Hong, Haroud, Hansen, Goualard, Gleicher, Garloff, Galyean, Farouki, Emiris, Ebers, Dorato, Delobel, Davenport, Collins, Collavizza, Blinn, Armengol, Alefeld, Abrams, Abdallah, ,
+
+DocType auths, ___Pattern 75___ 
+
+G. T. Richter Penn P. M. King J. F. W. Smolka Sailer Sag Pollard Nakazawa Meurers I. Ḧohfeld Hinrichs Goetz E. D. Carpenter C. B.
+
+DocType auths, ___Pattern 76___ 
+T. : 6
+H. : 5
+R. G. Ng Miller K. D. A. Yarowsky W. M. J. I. C. Voorhees Véronis Towell Tokunaga Tanaka S. Pedersen P. N. Mooney Moldovan Mihalcea Lee Leacock Inui Ide Gross Gale Fujii Fellbaum Engelson E. Dietterich Dagan Church Chodorow Bruce Beckwith B.
+
+DocType docs, ___Pattern 0___ 
+
+trigram contexts version increase context wheninterpolated ways used takes standard speech separately robustness resultingalgorithm range perplexity performance partof paper original order none moreover modified models model language intoaccount improvement hierarchical give five-grams experimentwith existingclustering events directly different definition defining compete clusters bigram although algorithmleads algorithm added abackoff 9\% 12\%
+
+DocType docs, ___Pattern 1___ 
+semantic : 7
+using system information development database classes vocabularyof verbmobil used use translation transfer thelexicon thecorrectness store speech-to-speech source set semantics representations provide project paper organized ofthe motivationis modules machine lexicalsemantic lexical lexica lex4 lemmata inheritance implemented hierarchy hasbeen formalism evaluation distributed developed describes define databasefor create contributions common check built automatically around aremodelled application-independently abstract
+
+DocType docs, ___Pattern 2___ 
+
+translation machine grammars translationcompleteness translated thetarget thatare system source-language said presented particular paper ofcontext-free language issue guarantee grammar general expressions correct context-free conditions compositionalmachine compositional completeness addresses according *complete*
+
+DocType docs, ___Pattern 3___ 
+
+model language errors used typing two tokenization text system segmentation recovery process modelsare error ctr channel withoutintroducing weak virtuallyfaultless uses unified typingbehavior transmitted transcription token together tight thesis thechannel tested test technique statistical show sets sentences scenario recognition) real-word rate provides propose production predict portion pattern passing part orthographic ofcorrupt noisy noise natural much modeled matchingand markov makes linguistic likely lexical input hidden held frameworkwhich frameworkthat experiments expectation different dialogue desired coupling correctmisspellings correction corporaderived considerable components characteristics automaticallycorrect automatically automatic applications anda addresses (connected
+
+DocType docs, ___Pattern 4___ 
+
+sloppy interpretation shown well usually underlyingidea theoryof theory theories structures sloppy/strictambiguity sentences semantic results relational- readings quantification provided predict paycheck paper onparallel often ofellipsis non-elliptical interaction fordeaccented fact event- contexts constraint captures capture binding arises andone-anaphora although accounted
+
+DocType docs, ___Pattern 5___ 
+
+nearest-neighbor hierarchical approach word techniques soft build whole weshow using us two thesis task superior standard split speech sparse similarity-based significant several set sense secondapproach reductions reduction recognition problemsthe probability presents prediction perplexity performanceis percent overstandard modelenables model methods low-frequency iteratively instead foreach first finer find far experiments events estimation essence error-rate eachevent distinctions disambiguation data compare clusters clustering cluster class centroids centroid calculating belongs becausecluster based around approacheson approaches another andstatistically acluster achieve 20
+
+DocType docs, ___Pattern 6___ 
+quantum : 16
+classical : 10
+show : 7
+bound : 7
+states : 5
+may : 5
+lower : 5
+using size proof model interactive consider bits systems protocol problem message m finite fewer encodings complexity communication bounds also yet ways verifier used table similar shown scheme question queries qubits qfa prover probability previous paper n) much linear language k every encoding case cannot automaton arbitrary ambainis accepted \in |w| {w0 {01}^* x work) withexponentially wherelower well wasconsidered wasbased w venkatesh vazirani usto upperbounds upper unless universe typical twoprimitives two turn turingmachines turing transparent transmit transitions transformed tradeoff towhether touse time tighterand tight thusanswering thesecond thequantum theorem thenumber thecommunicating thatuses techniques tape ta-shma system succint study structure---they strictly store storage still stay static speaking space smaller small(one-sided) small sized situations simpler simple significance set s' rounds roughly reversiblewhen results result requires required replaced regular recoveredwith recently randomized radhakrishnan query quantumprotocol quantumencodings quantumcomputations provide proved prove proofsystems problemin powerful possible possibility polynomial perform parties original optimal one-wayquantum one ofcommunication ofbits obtained obtain o(n) n}it nquantum notion nonetheless non-trivial negative nayak n)} multi-tape multi-head multi moreover models model" miltersen methodshave method messages membership measurements mean manipulated machines lowerbound look local little level less languages languageis l_nthus l_n k+1 isthat isquantumwe isexponentially involve intuition introduced intriguing inthe intermediate interaction inpspace informationencoded information in-probability improving improved imply ieinteractive holevo'stheorem holevo's hold hierarchy heads hand good goal given general formulate form follows finiteautomata finally final family facts fact exponentially exponential existthat exchanges exchange evolution even et error entropy efficiency discuss deterministicfinite deterministic dense counterparts conveying constant-round constant complexitytheory compared collapses codes) codes(random closely classically classicaldeterministic bysimple builds buhrman breaksdown bitprobes bitprobe bit bi-partite basis based automata asymptotically asubset arguments areproved aproblem applications answered answer andwe andtimein andaverage allows allowed allow algebraic al access `is ``simpler'' \leq \le \gg = 2^{omega(n/log 2^{omega(n)} 1-way (|s| (qfa) (m (based (1-h(p))n "quantum
+
+DocType docs, ___Pattern 7___ 
+
+utility proportional network maximise internet connections withdifferentiated whencombined wepropose weights weighting weighted weight web ways users used two total timesuch theirconnections tcp system studycase study simulations set services server scheme results prototypes protocol pricing present parametersof order national manipulating long links let known implement get flows finallydiscuss fairnessto fairness document distance data could connected cache billed application
+
+DocType docs, ___Pattern 8___ 
+
+z roots present polynomial n monomial isolated f zero us unknowns thisproblem thepositive-dimensional termstructure term techniques taking systems system structure specified sharpen set prior point part obtain non-degenerate new multiplicity may maximally many lower irreducible intersection independentinterest fully four formulae find finally field fastmethod explicit exactnumber every equations development consider component complexity combinatorialconstruction closed characteristic bounds arbitrary analgebraically also allow acorollary account
+
+DocType docs, ___Pattern 9___ 
+problems : 5
+elements : 5
+number show mesh topological quadrilateral programming problem parametric o(n) methods meshes linear generate generalized case angles algorithms whichone voronoi vertices vertex version vehicle values used use unstructured types twoopposite total timeusing theelements tetrahedral techniques task subgraph" study spanningtrees solving solved solution smoothing sides shortest shapes several routing right result resource reduce quality polyhedron polyhedrasatisfying polygonaldomains planning paths path partitioned parameter paradigm optimize optimization" optimization optimalsolution oftriangular ofquadrilateral ofadjacent non-simply-connected n multicast moving minimum meetingface many machine linearprogramming lead kites isthe introduce input hexahedral guaranteed givensolution given give geometric generationproblem generalizes game forsome forming form fit finite face even elementswe efficient discussapplications diagram determine desired describe degrees cubes condition class circle-packing cells bounds board bipartiteness ball atmost analysis amenable alsobe also allocationand additional 120 (4) (3) (2) (1) "optimal "inverse
+
+DocType docs, ___Pattern 10___ 
+asdl : 8
+compiler : 5
+code trees much lcc language generator components communicate written writing write widelyused weaknesses using useasdl use two treesdefined tree systems syntax structures strengths specifyingthe specified specification several semi-independent seeks secondarily retrofit retargetable research required representationsthe reducedramatically reads readingand project permits paper overheads overhead often national making machine- languages languagebecause language-independent itselfand ispart involved intermediate instances infrastructure high-quality generates found first fileswritten experiencereveals existing emit effort easierto dividing different description describes decomposed data constructread computer component compilerto compilers c build asdl-generated abstract `real' (asdl)
+
+DocType docs, ___Pattern 11___ 
+
+delta n) log^{1/2} colors work theta-function solution semidefinite result program problems optimum obtain min max k-colorable graphs approximation algorithm whichgeneralize vertices value using used time thismarks thegap terms show results recent ratio randomized programs problem present polynomial outcome oursemidefinite optimization o(n^{1/4} o(n^{1-3/(k+1)}log^{1/2} o(delta^{1/3} o(delta^{1-2/k} number non-trivial new n maximumdegree maximum lower lovasz logn) log linear known intriguing interesting inspired improved graph goemans giving generalized function first fewestpossible facts established dualityrelationship duality demonstrates degree cutand consider colorsa coloring bounds best besides approximations anyvertex andwilliamson also actualchromatic acoloring aboutthe 3-colorable 2-sat $n$
+
+DocType docs, ___Pattern 12___ 
+
+time minimum n) randomized new improve graph give finds cuts algorithm wealso variants variant use undirected tree-packing tree tightbounds techniques spanning space-efficient solving simpler significantly sampling rncparallelization representing probability previously previous packings optimal o(n^2log^3 o(n^2 o(m number nearly near n-vertex minimumcut may maximum manner m-edge log^3 log known highprobability high graphs developedrandom datastructure cutsand cutproblem combined bounds bound best approach applications ``semi-duality''
+
+DocType docs, ___Pattern 13___ 
+
+languages using universal programming packages object functional considered useful traditions symbolic standard software simple similar pure problem powerful possibilities orientedprogramming oriented ones ofthe objectfor model methodsin mathematica manipulations manipulation made looks lisp likereduce like language internal incompatible implemented ifparticular functions foralgebraic extension expressions etc efficient computer clear article andefficient algebraic algebra advantages
+
+DocType docs, ___Pattern 14___ 
+
+structure protocol work wegive van valuesalready two tolerating tolerates span small shared securecommunication secrecy scheme rabin q^2 programwith product probability present possible participants paper pair multiplication multiparty monotone means isunconditional homomorphic graaf generalization exponentially existence evertse errorthis due done de computing computation commitment chaum channel broadcast ben-or based appearedoriginally although allow activeadversary achieved
+
+DocType docs, ___Pattern 15___ 
+
+set sizes problems mean available approach yields within well using typically to5x10^3 thealgorithm testedagainst test solutions server seconds rows resultsfor results required-- ranging publicly public processed problem performance penalty particular optimal obtained numerically neural network multilinear minimum methodsalso means low iterating inequalityconstraints given function fieldequations field fewpercent feedback exact energy encoding domain developed cpu covering convenient consumption comparisons comparing come combination columns artificial arbitrary approximate annealing andexplored anapproximate algorithm achieved 10^6
+
+DocType docs, ___Pattern 16___ 
+dialogue : 5
+users toot systems wide strategies spoken respect non-adaptable limitations corpus although adaptable web versions variety values utilityof try train tootresulting toot's thatadaptable technological tasks systemlimitations systemfor show schedules retrieving results recent real-timeinteractive range possible performancetypically paperpresents outperforms ofsystem ofevaluation measures make made knowledge initial individual improveperformance generally extracted experiment evaluation empirical different differ dialogues depends degrades current conduct carry build behavior applicationshowever apparent advances adapting adaptation 80 4 20users
+
+DocType docs, ___Pattern 17___ 
+group : 7
+section : 5
+computation diagrams views systems study structure rewriting presentation paper normal insection grammar charts cancellation based algebraic withcontext-free versus using useof type-0 two traditional theory(lyndon-schuppe1977) theory theorem terms submonoidsand subgroups structured statedas standardnotions simple show rules role relative relationship relate quantifiers pronouns processing presents plays parsing onrelating ofthe ofcombinatorial notes move morphisms intuitions handlenon-local group-theoretical grammars grammardescription give geometry geometricand geometrical geometric fundamental free formal following focus extend differences detailthe counterpart constructscalled constructs conjugacy conclude concept computationally computational complexity combinatorial central cells brief beused begin basis associated asfollows approach andgeneration analyzing aconcept 7 6 5 4 3 2 1 (rotman1994) (dymetman1998)
+
+DocType docs, ___Pattern 18___ 
+
+curve signature numerically invariant expressions versions version valid torsion three theirderivatives thefour theeuclidean respect proposed planar parametrizing otherwise new namely length invariants give formulas fine euclidean et ecalabi dimensional differential curvature corrected arepresented arc arbitrarypartitions also al affineand
+
+DocType docs, ___Pattern 19___ 
+
+properties important generation code aspects withinprocessor whileprevious useful unexplored system-levelcode research remained processor primarily present practice paperwe optimization optimal open make just-in-time investigated hardware generations generate functional flexible far families extensible dynamiccode different customizable avariety asystem argue architectures architecture architectural also
+
+DocType docs, ___Pattern 20___ 
+
+system immune simulations immunological analysis agents within thesimulated theprinciples theimmune thebehavior systembehavior structure stimulus-response software since simulation simmune's simmune scale priori present package outline organization new multiscale molecules) minimal microscopial mechanisms limited level itsapplication immunesystem identification higher flexibly emergent done describe defining data contextsusing configured cellular calledsimmune behavior based assumptions approach allow agent-agentinteraction) (ie (cells
+
+DocType docs, ___Pattern 21___ 
+problem : 8
+given column cells x-rays structure np-complete every dimension xi wish tomography time solved shown set rowand row results reconstructing reconstruct polyominoes polynomial polyatomic numberof must length ell discrete d>=2 conjecture axis-parallel atoms algorithm x-rays_ x-ray width whose wewish wecall_discrete vertical types type) type two total torus tile thiscase thereforewhen theproblem theatomic thatit sums studying study special simple several seem rowwhose result resolve required remains relies rectangle reconstruction realizations proving provided proved proofidea projections problemis previously present prangenberg points point particular parallel otherwise orders open ofmagnitudes occupied objects object) object numbers number np-completeness np-completefor non-parallelx-rays non-parallel moregeneral measurements may matrices linear line leaving lattices lattice known integer instances initial indeed hv-convexpolyomino hv-convex horizontal heavilyon gritzmann grid gardner forreconstructing faster extends extend even et equalsgiven equals ell>=3 ell=2 direction dimensional determines definedas d=2 crystal contains construction consecutive connected conduct complexity completelydetermined clearly class centeredhv-convex centered case c>=6 c>=3 c>=2 c=345 c=1 c<=5 best barsof bars barcucci authors atomseven atom assume arises area anotherarticle although also alin addressed address addition ``analyze'' 2d 0-1 (one (an $c$distinct
+
+DocType docs, ___Pattern 22___ 
+
+standard design widelyaccepted using transport subtleties students show provides protocol proposed proof potency parties paper networkwhere method messages logic levelsecurity internet intercepted intended hopes gong-needham-yahalom forprotocol formal authenticating ateaching aid
+
+DocType docs, ___Pattern 23___ 
+collective : 5
+choice paper fundamental functions also would working work voting votes useful used thereis theory theorems theirresources test superstructure simple set selection second-order result restatesthe putting processingtechnology procedures probabilistic presents presentation placed particularly pairs outline onthe onissue ofperformative needed morerigorous logic informationsystem impossibility implementations giving function form focused field enterprises efficacy distributing discussion designers describes could control conditionsfor conditions computer-supportedcooperative carry boundary arrow'spossibility arrow approach analyzing agents
+
+DocType docs, ___Pattern 24___ 
+
+strategy risk restart replace remains works whereas well variance using uses users usefulness used transactions toits times time theory suchas single security securitieswhile return reducing recently question quantitatively presented portfolio network methodology mean many language internet ifeverybody field expected executing even environment electronic determine complete combinations bursty atransaction associatedwith arguments andcost agent-basedsimulations advantageous
+
+DocType docs, ___Pattern 25___ 
+
+package whethera userto twists train tracks thisalgorithm terms surfaces surface software sense realizes punctured puncture pseudo-anosov present possibly orientable one moreover java ispseudo-anosov images homeomorphisms homeomorphism handel given generates found effective determines dehn define caseit bestvina-handel bestvina allows algorithm
+
+DocType docs, ___Pattern 26___ 
+finite : 5
+definable visit use two-way transducers string state property parameters) nondeterministic mso two transductionsare transductions tocompositions theirinput terms tape stringtransductions statetransducers second-order rewrite realized monadic machines logic(without ie hennie havethe families exactly deterministictwo-way correspond characterized allowed (mso) (ie
+
+DocType docs, ___Pattern 27___ 
+
+top language tsql2 expressions called bot work veryclose translated translate traditional totime-sensitive time-related theexisting temporaldatabases temporaldatabase temporal suitable subset simpler shows questions querying previous predicate paper ofenglish natural method mapping map manipulate maintaining logic-likelanguage logic-like logic large interface hence fopl first-order expressionscould exploited existingmethods established english-to-top defined databases context automatically applications also algorithm (fopl)
+
+DocType docs, ___Pattern 28___ 
+
+approaches theoretical won thesituation themain technology system surveys sets prizein on-goingopposition loebner little illustrates history features empirical displays discussion discusses current converse brief article 1997
+
+DocType docs, ___Pattern 29___ 
+
+systems properties model ltl formal stuttering used use understuttering specifying specification reasoning paper natural methods language formulas expressive closure closed case --- verification tried track totelecommunication toolsenables tools tool toidentify todemonstrate thus theirresponsibility testsuites temporal techniques technique systemdescribed system syntactic sufficiently study state software size shadowing sdl resulting restriction researchers requirements represented relax reduction reduces reduce reasoningabout qualitative pspace-complete providetheorems proven propertiesinvolving productivity process permit partial-order notion nortel non-specialists multimedia-messaging modified modeling mathematical many ltlformulas logic linear-time leave larger languageis keeping introduce interpretation important ie hard guarantees fully-automated formula formalismsthat formalism feasibility extensively expressing existing events evaluation essential errors enough enable eg effectively edges easy document development determining desiredproperties description describes derive decade data create correctness context contain conducted collaboration chosen capture canutilize bytransitions byresearchers byour avariety availability areclosed arbitrary applying andthus analyze allow alanguage ``next''operator 80-page
+
+DocType docs, ___Pattern 30___ 
+
+unit union theorigin space showing sharir settles quadratic provide lower inthree-dimensional even contain construction conjecture complexity bound balls
+
+DocType docs, ___Pattern 31___ 
+
+triangulation small neighbor levels structure query point paper occupation number memory may march location level done data complexity algorithm worst viewed vertex variation using used use unfortunately triangulationof todelete times timeconsuming thenearest system spheres space smallsample shelling several sample restarts real quickly propose presents points plane organized operations o(k notice new nearest marching lowest low log locate linear levelthen leveljust k)but k ispopular information helleralgorithm heller's good geographic fastbehavior false explained efficiently dimensiontwo determine deleted delaunay degree cost contains consists compute computations community combines change case atriangulation aset applies allows (3%) $d$-dimensional
+
+DocType docs, ___Pattern 32___ 
+
+systems generation using template strings representation levels language issue abstraction words without whichare way various used use text terms tend techniques steps sophisticated seen representationsinto representations referencearchitecture profitable possibly paper one number non-linguistic nlg natural moreabstract mixing mixedrepresentations mixed may map linguistically linguistic level intermediaterepresentations ie groundedapproach generate fixed final differentdegrees defining combining combined combine circumstances bycontrast basedtechniques based argue aims abandoning (nlg)
+
+DocType docs, ___Pattern 33___ 
+
+using predicate filters exactcomputations withprobability value validity use thestatistical thepolynomial test technique systematically studies sphere solve rounding results result regular prove problems previous predicates precision points paperby o(epsilon note log improving greater gives geometric firstevaluated expensive expected estimation error epsilon efficient efficiency distribution cosphericity corresponding consists computations avoided authors assumptionof acertificate 1/epsilon)
+
+DocType docs, ___Pattern 34___ 
+
+programming small project language discuss design constraint alma-0 work within typed thelogic thelanguage thedesign support subset strongly store stage role resulting rationale provides program processing particular paradigm paper obtained number need modula-2 logical logic lists interaction inspired implementationof imperativeprogramming imperative hybrid frameworkand framework first features declarativeprogramming customaryvariables current constraintprogramming combines capabilities byextending benefits andthe alma aim advantages adding
+
+DocType docs, ___Pattern 35___ 
+colors : 5
+quadtrees squares color adjacent unbalanced defined unbalancedquadtrees two time tight three theseresults thesame squaressharing six simple sides sharing require ofbalanced many linear least given four five describe corners coloring balancedquadtrees balanced arerequired algorithms
+
+DocType docs, ___Pattern 36___ 
+
+expression arithmetic rounded predicate may varepsilon value v unit threshold theprobability small geometric evaluating dimension consists assumption algorithms absolute yield which-side values usually uniform two theta(v^(2/3))in theta(v) theinput theevaluation technique structureof sometimes somealgebraic some(small) smaller since sign show seriously result represents reliableresult recentyears real-number randomly produce predicates positive points paperwe paper pair operands ofconventional o(sqrt(v)) o(sqrt(v) nolarger ln(1/v)) largest invalidatethe introduces insphere input incorrect important ifthe higherdimensions given general forthe filter" filter failure exhibit exemplify exact errors error-free error enginethreshold) emphasis efficacy digital develop determinants depends density cube corresponding constants computers computer computations challenged cases capability bechosen basis ball assuming assessing arithmeticfilter arise approach analyzethe analysis algebraic adopted 2 1 (arithmetic "which-side" "insphere" "arithmetic
+
+DocType docs, ___Pattern 37___ 
+sets : 6
+circle : 6
+two : 5
+separating algorithm set line segments proposed planar one o(n n) must meet log intersect interior disk whose twogiven towork tothe times time theta(n thequery studies still space smallest slowly shows separates separable separability secondproblem resulting related query problems preprocessed polygonunder polygons points point particular paper outputs optimal open may locally linesegments lines lie largestcircles largest large itsopen inverse increased included halfplanes growing graph given general gabriel function fractal find extremely exists endpoints enclosingone encloses dilation delimited decide convex contain construction constraints circularlyseparable circularly circular case cannot beta>0 beta-skeleton asks areallowed arbitrarily applies apoint and/or alpha(n)represents alpha(n) alinear-time alargest adapted ackermann \alpha(n)) $c$ $\omega(n^2)$
+
+DocType docs, ___Pattern 38___ 
+problem : 9
+hierarchy : 9
+one : 8
+also : 8
+problems : 7
+ep : 7
+show : 6
+sets : 6
+results : 6
+polynomial : 6
+np : 6
+complexity : 6
+translation : 5
+query : 5
+order : 5
+lower : 5
+known : 5
+class : 5
+boolean : 5
+result particular one-way join extended el_2 collapse access whether two study set regard question prove present papers paper np-complete may low every equivalence equality easy downward classes certificates cases bound article always wechsung way upper up-hardness unless thus theorem surjective suggesting spp-hardness spp-hard since rice's related recent questions property previous polynomial-time permutations past parallel p obtained number nontrivial nondeterminism nine negation natural mentioned membership matter levels level l introduced hierarchies hard extends existence exist evidence decade circuits certain cannot bounds bounded actually accepting yieldsthe yieldeddividends yettheir year written would work without winner whatever well weestablish wasthe wagner viewed use up^{np} up-hard unrelated unnatural unlikely undecidable turing try translation's tothe toolkit tool time tightening three thought theyproved thetechnique---the thestructure thesearch therecursively thepolynomial theorycourses theory then$\ph=\sigmak$ thearticle thatconcrete~np thata terms system surveys survey suggests suggest sufficient subclass studies strongconsequences strong strengthens strength stephan states statementsin statements spp somepair solve so-called smaller similarly showthat shown sheds setssolvable separating sense selman's selman seemingly second rothe right resolving research regarded refined refers recently reader raisinglower raised raise quickly proving provide provethat properties proof projects progression progress priori) previously powerof power polynomialhierarchy-in polynomialhierarchy poly-one pointers paths partial pair p-selectivity p-constructibly overlynatural ornot original ordersometimes optimal) operatorcan operations open one-wayfunctions ofthe ofproblems ofgrollmann ofdetermining ofcomplexity obdds nphowever np^{np} np-completeness notonly notnp-complete notknown notionsgeneralizing note noproof nonetheless nine-paper new never much motivation model minimum method---of membership/containment measure matters many machinesthat machinesaccepting machines lowness lowercomplexity longstanding literature links light lewis learned-inasfar languages language itfollows---with inup intuitive introduce inthis interestingresult interchange instrength inputs initiated informationsources inep^{np} inep inducecollapses induce indeed incryptology increasingly incertain in1876 important history high-level hierarchy) hierarchiescollapse heuristic herown hempel hemaspaandra hand growing greater graduate gr\"adel's givesevidence given give general furthermore functionsthis functions fromunambiguous fromnp---that four fortnow forexample followingquestions follow firstdownward first-year first finite final fewpbounded fewp fall expression expects existsets existing even establish equivalent ep^{np} enumerable enhancementby end encourage elegant election el_ either easy-hard easy(ie discuss directly differs different diagrams) developed determining degree currently creating countingproperty counting containmentshold contained constant-ambiguity consisting conp-hard connectionbetween conditionnecessary computations computational computable) complexity-theoretic collapsessometimes collapses-forboth collapses collapse---that closure closely closed classep certificate central carroll byhemaspaandra buhrman broadly broader bounded-query bottleneck borchert binarydecision bi-infinite bestrengthened benp-hard believes belearned beimproved beforehand becharacterized beautiful beapplied be) assumption asks asa areas approach---weaker applies applied applications applicable---to answers andextremely anddownward andclasses analogs analogous ambiguity allunambiguous allows allowed algorithmsperform ago affect achievedownward accepted accept ``toolkit'' [cscc/9910007] [cscc/9909020] 2-dags 2$ (which (what (total) (ordered (and (a $k\geq $\psigkone=\psigktwo$
+
+DocType docs, ___Pattern 39___ 
+
+workshop topology results reportidentifies problems present nsf-funded miami met june involving important florida computationaltopology computation beach 12 11
+
+DocType docs, ___Pattern 40___ 
+
+visibility map pixels bounded algorithm + vertices sampled runs removal problem polygon pixel path p) obstacle number ina form curvature convex complexity case analytic xy-plane worst workspace whose variant usually triangles triangle trapezoids trapezoidal timeo(n^{1+e} timealgorithm time thetriangles thesmallest sweepline surface subset sublinear special solution smooth size simple samplepoints respect real^3 ray propose present possible point planning p output-sensitive output optimal one ofpixels o(n^{1+e} o(m+n) nearly n^{2/3+e}t^{2/3} n movingpoint move motion m log local imagecomplexity image-space/object-space hybrid hiddensurface hidden grid going given first finding e disjoint directlybehind determine decomposition containing contain constructs constrained constant consider comparesfavorably closed classical changes casting bythe best atleast around aregular anypositive andanalytic alonga algorithms adapts +n^{2/3+e}t^{2/3} (``pixels'') $n$
+
+DocType docs, ___Pattern 41___ 
+
+ring number stabilizes show self-stabilizing per one ofstates nodes node mutualexclusion less dijkstra's contrary common belief also algorithm [dij74dij82]
+
+DocType docs, ___Pattern 42___ 
+
+points ordinary conic two show line exactly compute algorithm use three thesame set result proposed proofs previous plane passingthrough passes ones note non-collinear next mukhopadhyayet linethat linean lie hyperplanein howto higher given five first finite extend exists existence efficient directions dimensions consequent computing called assuming aresimpler algorithms al
+
+DocType docs, ___Pattern 43___ 
+logic : 5
+problems parameterized first-order definability problem model-checking class tractable theory terms structures slicewise formulas consider complexity withan w-hierarchy variousfragments useful two turingmachines tractability thisalternation theperspective themodel-checking substructure studying study specifically side shows show result restricted reminiscent quantifieralternations ptime prove propose minor maintractability level leastfixed-point least isomorphism isfixed-parameter intractability input immerman-varditheorem howthis homomorphism hierarchy halting give generic fpt forrelational forms fixed-point fixed-parameter finitevariable fellows' fagindefinability existential excluded example every establish equivalence downey discuss descriptive describingparameterized connection close characterizing characterization called article appropriate approach anequivalence andintractability alternations alternating allfixed-parameter abstract >= 0
+
+DocType docs, ___Pattern 44___ 
+
+measure results probability one m give c_n a^n way version various using union typically thespheres theorem testing)and suppose subset stein's spheres special spaces small shannon'sdata set respectto product probabilistic points p^n p new n mostefficient mild measures massm^n(c_n) let lemma large inequalities including hypothesis geometryon generalize function fixedradius finite equipped efficient discretespaces different covering corollaries converse conditions concentration compression close choices characterization centered cases bea andnon-product almost-covering almost-covered abstract ``mass'' (in
+
+DocType docs, ___Pattern 45___ 
+
+formulas logic verifying exploit boolean verificationconditions valid using universally uninterpreted tothose topropositional theverification therefore thecorrectness simplify set satisfiability results reducing reduce provides prove propositional proposed property processors processor present positiveform pipelined perform ordered ofabstracting must methods method means many manipulation interpretations inparticular greatly generated functionsymbols functions formula experimental equations equality efficiency diverse'' diagrams describing demonstrating data control considered checkers characteristics burch binarydecision approachwhen apply appear anddill ``maximally (euf) (bdds)
+
+DocType docs, ___Pattern 46___ 
+agent : 6
+agents : 5
+uncertainty state programs program framework efforts compute years written world two true/false topof top thustheir take sure supportsdecision subrahmanian states specify small shown show semanticsthough semantics second reactwhen providesound provide propose program} probabilistic presence paper pages one number maybuild may making legacy last language inthis intheir interact imperative however given epistemically environment eiter developer determined declarative concept complex complete code changes built build based autonomously assumes arecompletely arbitrary appealing anincreasing andshow and/orcollaborate amdpick alternativesemantics allows algorithms agentprograms agent's actions ``state'' ``probabilistic'' \emph{probabilistic \emph{positive} 179-255) 108(1-2) 100% (aij
+
+DocType docs, ___Pattern 47___ 
+
+rate population phase mutation genetic diagram changes based towards tocharacterize time-dependent thresholds thetime states simple shown schematic scale regular raised optimal one notion movingneedle-in-the-haystack landscape influence infinite generational generalizedquasispecies generalarguments general furthermore fullyconsistent found forwhich fitnesses error dynamicsof dependence crossover) converge constructed considerations calculated asymptotic areapproximately analyzed allows algorithms algorithm (without
+
+DocType docs, ___Pattern 48___ 
+
+planar isomorphism graph within used tree-width timefor technique subgraph solveother solve small size shortest results programming problems problem pieces piece pattern paths ofpartitioning methods linear inducedsubgraph including graphs girth diameter constant connectivity based applyingdynamic
+
+DocType docs, ___Pattern 49___ 
+one-way : 7
+sherman protocols functions strong security rivest recently rabi properties open functionsexist [rs93] work whether used use two-partysecret-key two totalassociative total thealgebraic survey study strongly signatureprotocols showing rothe result research require related recentwork recent question progress partiesas noted noninvertible makes lineof key issues issue isadded initiated ingredient homan hemaspaandra given functionshaving function enhanced discuss digital developments developed designed createdfrom could commutativity commutative building blocks based associative also algebraic agreement affirmative according [hr99]resolved [hom99] 1984 (worst-case)
+
+DocType docs, ___Pattern 50___ 
+
+morphology arcs additional truncation reduplication prosodic phenomena paper infixation extensions copying certain automaton analyses widespreadacceptance way using ulwa thesereduplication theoretical techniques tagalog suchas studies string state-of-the-art state sounds skip sketched since resourceconsciousness resisted repeat recent prunes provide producer presentsimplemented presents power possible phonologyand phonological particularly part over-applying optimization optimisation one-levelapproach one-level ofreduplication ofprosodic nutshell non-finite-stateoperation non-finite-state morphemes model methods merits material mapped local linguistics linguistic limitations lexicalrepresentations lead kind involves introduced inthis intersection insertion illustratethe hitherto germanhypocoristic freedom floating finite-state failto extendingfinite-state expressive enriched ellison elegantcomputational distinguishingbetween difficult developments criteria cover control contribute consumer construct constraint-based conclude computationalmorphology computational challenging case bounded automata attractive aspects aspect argue arediscussed approach andalso allow 1994) (bird &
+
+DocType docs, ___Pattern 51___ 
+
+points hyperplane depth set regression k-flats weprove vertical rotationto respect r^dis pass ofn number npoints notion n must minimum linear-time least kbetween k=0 k-flat k gives generalize fraction flat exists exist derive deepest deep d-1 d constant consequence classical center case always 0 (1+epsilon)-approximationalgorithm
+
+DocType docs, ___Pattern 52___ 
+quantum : 5
+statistics principle gates fermi dynamics computer chaotic also using type theory standard solved solution satisfiabilityproblem relatedwith quantumgates quantumcomputing proposed problems problem possible polynomialtime onecan obey np-complete nonlinear new map logistic linear interesting implementation hartree-fock equations entaglement discuss described consider computation communication combine case build based atomic argue approach andmoreover amplifierbased achaotic
+
+DocType docs, ___Pattern 53___ 
+
+method constructed without variation thus specifying somewhatcomplicated situation simulation second-order-convergent restriction restricted remedied remarkable readily problem performance orthogonalgroup orthogonal numerical newton-like newton multiplicative makes jumps isobtained isillustrated isextended inherent individual independent groups globalinstability general functionthough framework expression explicit exactly et dynamics developed cost component beapplied author analysis amount algorithm alevenberg-marquardt-type al
+
+DocType docs, ___Pattern 54___ 
+
+learning rate well results parameters mas framework experimental agents agent's wevalidate values using used use us thereby theequation telling systems system show retention relies relevantaspects reinforcement progression predict pac-theory multi-agent model market literature learningagents isused impact gatheredfrom finally fare expected error equations equation difference describe decisionfunction change capture calculating calculatebounds behaviorof ai agent abilitiessuch (mass)
+
+DocType docs, ___Pattern 55___ 
+stable : 6
+problem : 6
+models k ssm size show time program p model decide algorithm |p|-k would whether w[3] w[2]-hard upper unlikely smalland running run result problem)does problem) presenttwo polynomialsof paper order o(n^c) much lsm logic least large kthat itis integer independent implies harder given focus fixed-parameterintractable fixed-parameter fixed exists existence every depending demonstrating contrastwe constant computing compute complexity class c byshowing bound belongs alsoprovide alogic alinear-time algorithms (small (large
+
+DocType docs, ___Pattern 56___ 
+
+algorithm parallel surface simulations scalability efficiency widerange time thesimulated thatthe systems study steady state short-range science scalable results question problems preliminary poisson one ofthis monte minima massively macroscopiclandscape logicaltopologies local largeasynchronous interactions incomputer including implies horizon higher-dimensional hamiltonian growing governed fundamental fluctuating find evolution edwards-wilkinson dynamic discussed discreteevents discrete-event dimension density corresponds conservativemassively carlo arrivals applicable andthe analogous algorithms
+
+DocType docs, ___Pattern 57___ 
+
+evaluation intuitionistic encodings used systems syntax specifications semantics properties meta-logic linear judgments induction important higher-order given functional framework derive approach abstract well weformally using unicity typing treatment treat transition tradeoff toreason toconsider thesimple theselogics theresulting thebenefits thathigher-order successfully substitution subsets subject specified specification simplytyped reductiondeterminacy reasoning quantification proving prove propose proofsinvolving programminglanguages programminglanguage programming preservestypes presentations present pcf= pcf paper one ofobject-level ofhoas notionof natural modular meta-theoretic many logicsand logics logical logic languages language lambda-terms involving ingredients inference imperative illustrate hoas) hoas higher-typequantification high-level give frameworks formally formal forexample extension explore examples equivalence elegant difficulties difficult developing deterministic definition declarative cut considering coded challenge based avoid asimple area apparent andnatural andformal analyze analysis admits admissibility abstraction ability (key (hoas)
+
+DocType docs, ___Pattern 58___ 
+logic : 5
+programs features functional exclusive common wider widely well-moded variables unreasonablyrestrictive understanding true translation translating translated theoriginal subject simple selection rule readdressthe range quite question properties programsare programmingparadigm program possibilityof possibility part'' order ones old ofthese non-well-moded needs naturally many longbeen logicprograms logical led lazy languages ithas investigation general found dynamic demonstrate defining current consideredto consequence circumscription become approaches applicable andthis accepted ``functional ``complex''
+
+DocType docs, ___Pattern 59___ 
+rules : 7
+constraints : 7
+programming : 6
+constraint : 6
+consistency rule-based boolean approach yields types type two satisfaction problems logic given first explicitly call arc {\tt {\em well-known weaker waltz's variousexamples valuedlogics using typical theusefulness thatturns thatare temporal study solve situation simplefirst-order showfeasibility show second rulesleads rulesfor ruleconsistency rule represented repeated qualitative propagation predefined polyhedralscenes one of\cite{fruhwirth-constraint-95} notion new natural membershiprules means many local limit language labelingweconsider including implementation illustrate hyper-arc howboth generated formulas firstderive explain examples equality entirelyreduced end discussing describing dealing consistency} consider computationprocess combined coincides closure chr} characterization cancompute called based automatically arity(called arbitrary approachto application allen's \cite{ms98b})
+
+DocType docs, ___Pattern 60___ 
+
+level language computer become versatile user traditional theory systems symbolic split-up special-purposesystem special quantum purpose provide potential polynomialsalgebras package obsolete needed need multivariate moregeneral may low loop languages languagein itwas intheoretical interact high handling ginac functions field entirelywritten efficient distinction directly designed design describe denies deliberately calculations c++ bears also algebra adventof
+
+DocType docs, ___Pattern 61___ 
+process : 7
+noise decision transform theory theorem recognition problem globalmatching concentrated widely white-black voting verified verificationsupporting validity valid typical types two theresult thepresence theeffect thebottom-up stable specialists robust result represented remains regionalmatching regional principalcomponent prevailing present point pattern paper overturns ofaccommodating occlusion model matching makingprocesses making lowerbounds localized level latter involving indirect important implying imagery higher greater global gabor former flag facialrecognition experimental exact establishes established election dimension-reducing demonstrated decision) critical convincing conjecture clutteroutlier capable candidate breakdown bound bottom-up asimplified analyzing analysis amongimage also (or
+
+DocType docs, ___Pattern 62___ 
+
+techniques logics conditions axioms show respect reasoning particularly effective description absorption willstill wheresubsumption weseek wedefine useful used universal unfolding understanding truths toconsider theoretical thatprovided testing terminology terminologies temporal systems system subsumption still significantly set safety safely retaining results respected representing relevant relaxing realapplications proved prove proceduresused problemtwo precisely paper optimisation often moreover modal manner lazy inexpressive indealing inan improved improve important implemented hard guarantee fundamental function framework forrelatively formal fact even essential efficient efficiency domain discoursereasoning describedestablish deal correctnessby correctly correct canbe arbitrary applied allows algorithms
+
+DocType docs, ___Pattern 63___ 
+
+systems uncertainty system modeling model learning engineering validation uses underlies tomodeling thispaper thisframework thepremise theory shift results reason proposed procedures ofcomplexity mechanisms mathematical manyengineering machine inadequate inadequacy high govern frameworkfor existing due developed degree deemed computational complex behavior based attention
+
+DocType docs, ___Pattern 64___ 
+
+mobile data could remote hosts host code based agent would untrusted tochange time thisscheme thiscase simple server sent seems retrieve required removing rely protocol protection protecting protected presented prerequisite pad one-time on-the-fly non-interactive nodes network must management key inthis insure informationagainst information implemented handling enough encryption encrypted easily described dataprotection dataintegrity coverinformation counterfeiting confidentialinformation collected cipher carrying article arrives andintegrity allows algorithm againstmalicious (otp)
+
+DocType docs, ___Pattern 65___ 
+problems : 5
+threshold sharp transitions satisfiability probability phase existence combinatorial trivial time theexistence take success step statistical solvable single since shown sharpthresholds rigorously restricted recently range procedure predicted positiveconstant polynomial np-completeness notstudied mechanics lower locating lack investigating intelligence instances imply implies" hasbeen give generalized either direction defined constraints connectionbetween computational complexity completecharacterization clauses clausalgeneralized class case) case byschaefer bounded beuseful artificial addressed across 2 1 (even "hard" "almost
+
+DocType docs, ___Pattern 66___ 
+
+robot novel uses useful towards thealgorithm stimulus stimuli response respond repeated process previouslyexperienced presented presentation potentially new model mobilerobot learning ispotentially importantfeatures habituation filter features experiments environment draws detects detect describe concentration changes causes biological attention andturns allow algorithm adecrement ability (`neotaxis')
+
+DocType docs, ___Pattern 67___ 
+p-time : 5
+light affine logic thanks side proof intuitionistic elimination cut correctness completeness using turing trivial together theproof task suitable structured strategy resource proved properties proofnets programs programming program polynomially peculiarity paper onthe one ofprogramming notation non nets modality meaning machines(p-time logicderivations limitations lightlogics itsintuitionistic iscontrolled introduction introducing good gives full fragment flavor exploitsstructural examples encodes details describes demonstratedin cutelimination costing correctness) complexity completeness) compact catch alot allows ``paragraph'' (p-time
+
+DocType docs, ___Pattern 68___ 
+
+wave warping ie equation dispersion discretizing computational two tuned time-space theoretical techniques structures structure solution simulated significant shows resulting resources requires regular reduction reduced reduce provide propose properly propagation prior positions paper oversizing oversampling numericaldispersion numerical modes model misalignment meshstructure mesh membrane medium locally literature less induces indispersion ideal grid fromtheir filtersin exhibits equivalent embedding elements elastic differencemethods) comparable bymodels bearbitrarily approaches andintroduce allpass adptingoffline accuracy 2d (waveguidemeshes) (finite
+
+DocType docs, ___Pattern 69___ 
+
+transition threshold symmetric results replica numerical cover $x_c(c)$ within with$xn$ whether wasknown vertices vertexdegree vertex-cover vertex using typicalnumerical theseresults thereplica studied statistical solution socalled small size simple sharp rigorous resultsshow reproduces regime random problem previously physics performed peak part paper occurs obtained needed methods method main instability graphs giving found findings extended exists excellent exact effort edges edge developed decide critical coverabilityat contains concentrations coincides clusterexpansion cardinalityof calculated bound backbone average approximation application appears ansatz annealed andthe algorithm agreement accurate abranch-and-bound 05$ $xn$ $x=x_c(c)$ $n$vertices $g_{ncn}$ $cn$ $c\ll $c<e/2$ $c$-dependent $b_c(c)$ $2c=e$
+
+DocType docs, ___Pattern 70___ 
+
+algorithm results problem optimal design decision wireless well-knownheuristic weconstruct userapplications thetheory theory thedifficulties terms techniques takesdecision-theoretic support subtleties standard spectral simulation simplifying show service scheme scarce resources reasonable quality providing proposed propose processes present preferences) possible policies one near-optimal meetsits markov many maintaining main isdecision-theoretically isbest involved investigate insight goals framework formulated finally far example discuss contribution constructing concerns communication assumptions argue applying andguidance analysis allocation afundamental admission-control additionallywe account (mdps) (like
+
+DocType docs, ___Pattern 71___ 
+security : 5
+policies within specifications problem inconsistencies addressed able workflow wide types tool target simultaneously severalauthors several securityinconsistencies relevant problemof policy platforms otherspecifications organization's none namely language knowledge harder global general express detectseveral definitions defined conflicts comprising chr become based although allthe advent
+
+DocType docs, ___Pattern 72___ 
+individual : 6
+theory : 5
+data : 5
+statistic algorithmic sample relation probabilistic objects absolute sufficient statistical relations models model information finite contrast code based typically two-part thestatistical thesituation theexplicit thealgorithmic thatsummarize thatdeals summarizing sufficientstatistic sufficiency structure strengthen statistics) statistics simplest similarly set samples relevant relationbetween regularity rare ones of(minimal) objects''--those object notions notion neededfor modes--in modelsummarizing model-to-data mode minimalsufficient minimal measure meaningfulinformation kolmogorov informationcontent implicit give function'' forthe explicit example ensembles elaborate earlierresults distribution) distinguish develop descriptionsof description demonstrate data) constraints consisting complexity complex codes close classical characterizations came becalled atleast andthe also accepted ``kolmogorov ``absolutelynon-stochastic (the (orprobability (minimal (kolmogorov)
+
+DocType docs, ___Pattern 73___ 
+
+problems bounds based worst use transformation to(ba)-csp time thetime techniques special sophisticated solving satisfaction of(32)-csp np-complete network natural mixture matchingand listed isequivalent involvea including improve ideas give formulation flow fast duality davis-putnam-style consider cases case backtracking also algorithms algorithm aconstraint 3-sat3-coloring 3-sat 3-list-coloring 3-edge-coloring (csp) (ab)-csp (32)-csp (23)-csp
+
+DocType docs, ___Pattern 74___ 
+
+tuning vector using space sound set problems motion methods inequalities whichsatisfies whenever walter verified values value use theperturbation systems strong soundness soundly someperturbation solving solve solution search robust requirement reported reduced quantifierelimination prune prototype procedure problem'' problem presented possible planning parametersuch paperas one ofnonlinear numerical nonlinearinequalities much method many localconsistency language involves investigated interval guaranteed finding faster express experiments enforcement eitherfind dimension determined defined decompositionsymbolic declarativemodeller cylindrical control collins' classical cinematic cameracontrol camera byjaulin arithmetic approximation approach andcommented amounts alternatives algebraic addressing ``guaranteed
+
+DocType docs, ___Pattern 75___ 
+
+feature chr grammar constraint typed system structures logic check applied working whentheir when/2 way variables valuesthat using used type tools toextend theory thatuses support subsumption study structure statements specifically solution simulate simply sicstus sake rulesare rules relations recursive realistic providing provided provide properly prologpreprocessor prolog programming problems problem primitive popular phrasestructure paper otherbenefits non-termination necessary means many made logicprogramming linguists linguistic latter language itsextension interpret instantiated includerelations implementation hpsg head-driven haveprovided handling grammardevelopment functions functionality former form focuses fields exist engine development design descriptions declarative deal coroutining context constraintswith constraintswhile constraints constraint-based consider computational complex complete combine co-occurrence case bound bestdifficult avoiding attribute assicstus antecedents anover-arching also (hpsg) (chr) (ale)
+
+DocType docs, ___Pattern 76___ 
+
+methods several learning comparison approach appearing algorithms wsd wordsresults word withsymbolic varying using used twofold two tothe thework thefeature superior standardsupervised specific space show sets sense-taggedcorpus sense secondly relatedliterature proposed problem positive performed paper namely naive modifications modification metric loss largest large inorder information includingtesting inaccuracy improvement improve greatly generally frequent firstly explored experiments experimental exemplar-basedclassification exemplar-based examplesallows especially english efficiency disambiguation directions describes dealing deal contribute containing confusinginformation clarify bayesian bayes basicallyconsists basic available attributes attribute attempts ambiguous aim (wsd)
