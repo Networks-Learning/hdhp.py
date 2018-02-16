@@ -1,3 +1,6 @@
+import matplotlib
+matplotlib.use('Agg')
+
 import argparse
 import datetime
 import hdhp
@@ -9,6 +12,7 @@ import pickle
 import json
 import numpy as np
 import os
+import timeit
 
 def getArgs ():
     parser = argparse.ArgumentParser ()
@@ -40,23 +44,54 @@ def jsonFileToEvents (targetFile):
     return events
 
 def plotMuScatterPlot (xdict, ydict, outFile):
+
     keys = xdict.keys()
-    x = pd.Series([xdict[k] for k in keys], name="exact")
-    y = pd.Series([ydict[k] for k in keys], name="inferred")
-    ax = sns.regplot(x=x, y=y, marker="+")
+
+    x = pd.Series([xdict[k] for k in keys], name="True Value")
+    y = pd.Series([ydict[k] for k in keys], name="Inferred Value")
+
+    max_axis_value = max(max(x), max(y)) + 1
+    min_axis_value = min(min(x), min(y)) - 1
+
+    z = np.linspace(int(min_axis_value), 10)
+    sns.plt.plot(z, z + 0, linestyle='solid')
+
+    # ax = sns.regplot(x=x, y=x)
+    ax = sns.regplot(x=x, y=y, marker="+", fit_reg=False)
+    ax.set(title="Fig Title: Base Intensity")
+
+    sns.plt.ylim(min_axis_value, 10)
+    sns.plt.xlim(min_axis_value, 10)
+    
+
     fig = ax.get_figure ()
     fig.savefig (outFile)
+    fig.clf()
 
 def plotAlphaScatterPlot (xdict, ydict, outFile):
+    
     xkeys = xdict.keys()
     ykeys = ydict.keys()
 
     inter = set (xkeys) & set (ykeys)
-    x = pd.Series([xdict[k] for k in inter], name="exact")
-    y = pd.Series([ydict[k] for k in inter], name="inferred")
-    ax = sns.regplot (x=x, y=y, marker="+")
+    x = pd.Series([xdict[k] for k in inter], name="True Value")
+    y = pd.Series([ydict[k] for k in inter], name="Inferred Value")
+
+    max_axis_value = max(max(x), max(y)) + 1
+    min_axis_value = min(min(x), min(y)) - 1
+
+    z = np.linspace(int(min_axis_value), int(max_axis_value))
+    sns.plt.plot(z, z + 0, linestyle='solid')
+
+    ax = sns.regplot (x=x, y=y, marker="o", fit_reg=False)
+    ax.set(title="Fig Title: Kernel Parameter")
+
+    sns.plt.ylim(min_axis_value, max_axis_value)
+    sns.plt.xlim(min_axis_value, max_axis_value)
+
     fig = ax.get_figure () 
     fig.savefig (outFile)
+    fig.clf()
 
 
 def createTriDiagonalMatrix (n):
@@ -91,7 +126,7 @@ def generate (num_users, num_events, num_patterns, vocab_sizes, time_horizon, al
     wordsPerPattern = {vocabType: words_per_pattern[vocabType] for vocabType in for_vocabs}
 
     # create the process object
-    cousersMatrix = createTriDiagonalMatrix (numUsers)
+    cousersMatrix = createTriDiagonalMatrix (num_users)
     # numUsers = 200
 
     process = hdhp.HDHProcess(num_users = num_users,
@@ -160,7 +195,7 @@ def main ():
     #args = getArgs ()
     # Parameters to generate the data
     num_users = 200
-    num_events = 10000
+    num_events = 150000
     num_patterns = 50
     vocab_sizes = {"docs": 300, "auths": 50}
     time_horizon = 3000
@@ -170,7 +205,15 @@ def main ():
     expected_doc_lengths = {"docs": (100, 150), "auths": (20,25)}
     words_per_pattern = {"docs": 250, "auths": 40} # check again if this should be a parameter per dictionary.
     # generate the data
+
+    print("Generated Info:  ")
+    print("Number of Users: " + str(num_users))
+    print("Number of Events: " + str(num_events))
+    print("Number of Patterns: " + str(num_patterns))
+
     genHDHP = generate (num_users, num_events, num_patterns, vocab_sizes, time_horizon, alpha_0, mu_0, omega, expected_doc_lengths, words_per_pattern)
+
+    print("Generation is done!")
 
     num_particles = 20
 
@@ -179,7 +222,10 @@ def main ():
              3: ([0,1], True)}
 
     for case in [1, 2, 3]:
+
         print "Case: {0}".format (case)
+        start = timeit.default_timer()
+
         indices, use_cousers = cases[case]
         if not os.path.exists ("results/{0}".format (case)):
             os.makedirs ("results/{0}".format (case))
@@ -187,25 +233,23 @@ def main ():
         dirname = "results/{0}".format (case)
         # infer the parameters from the data
         infHDHP = infer (num_users, num_patterns, alpha_0, mu_0, omega, num_particles, indices, use_cousers)
+        print("Inference is done in " + str(timeit.default_timer() - start) + " seconds!")
 
-        # plot the base rates and the estimated alpha values
-        plotMuScatterPlot (genHDHP.mu_per_user, infHDHP.mu_per_user, "figs/U_" + str(num_users) + "_E_" + str(num_events) + "_base_rates.pdf")
-        plotAlphaScatterPlot (genHDHP.time_kernels, infHDHP.time_kernels, "figs/U_" + str(num_users) + "_E_" + str(num_events) + "_time_kernels.pdf")
 
-        # with open (os.path.join (dirname, "base_rates.tsv"), "w") as fout:
-        #     for key in genHDHP.mu_per_user:
-        #         fout.write ("\t".join ([str (key), str (genHDHP.mu_per_user[key]), str (infHDHP.mu_per_user[key])]) + "\n")
+        with open (os.path.join (dirname, "U_" + str(num_users) + "_E_" + str(num_events) + "_base_rates.tsv"), "w") as fout:
+            for key in genHDHP.mu_per_user:
+                fout.write ("\t".join ([str (key), str (genHDHP.mu_per_user[key]), str (infHDHP.mu_per_user[key])]) + "\n")
 
-        # with open (os.path.join (dirname, "set_time_kernels.tsv"), "w") as fout:
-        #     for key in genHDHP.time_kernels:
-        #         fout.write ("\t".join ([str (key), str (genHDHP.time_kernels[key])]) + "\n")
+        with open (os.path.join (dirname, "U_" + str(num_users) + "_E_" + str(num_events) + "_set_time_kernels.tsv"), "w") as fout:
+            for key in genHDHP.time_kernels:
+                fout.write ("\t".join ([str (key), str (genHDHP.time_kernels[key])]) + "\n")
 
-        # with open (os.path.join (dirname, "est_time_kernels.tsv"), "w") as fout:
-        #     for key in infHDHP.time_kernels:
-        #         fout.write ("\t".join ([str (key), str (infHDHP.time_kernels[key])]) + "\n")
+        with open (os.path.join (dirname, "U_" + str(num_users) + "_E_" + str(num_events) + "_est_time_kernels.tsv"), "w") as fout:
+            for key in infHDHP.time_kernels:
+                fout.write ("\t".join ([str (key), str (infHDHP.time_kernels[key])]) + "\n")
    
-        # trueLabs = [e[1] for e in genHDHP.annotatedEventsIter ()]
-        # predLabs = [e[1] for e in infHDHP.annotatedEventsIter ()] 
+        trueLabs = [e[1] for e in genHDHP.annotatedEventsIter ()]
+        predLabs = [e[1] for e in infHDHP.annotatedEventsIter ()] 
 
 
         with open (os.path.join (dirname, "patterns.tsv"), "w") as fout:
@@ -213,6 +257,10 @@ def main ():
                 fout.write ("\t".join ([str(trueLabs[i]), str (predLabs[i])]) + "\n")
 
         print (normalized_mutual_info_score (trueLabs, predLabs))
+
+        # plot the base rates and the estimated alpha values
+        plotMuScatterPlot (genHDHP.mu_per_user, infHDHP.mu_per_user, "figs/" + "Case:{0}".format(case) + "_U_" + str(num_users) + "_E_" + str(num_events) + "_base_rates.pdf")
+        plotAlphaScatterPlot (genHDHP.time_kernels, infHDHP.time_kernels, "figs/" + "Case:{0}".format(case) + "_U_" + str(num_users) + "_E_" + str(num_events) + "_time_kernels.pdf")
     
 if __name__ == "__main__":
     main ()
