@@ -94,29 +94,21 @@ def plotAlphaScatterPlot (xdict, ydict, outFile):
     fig.clf()
 
 
-def createTriDiagonalMatrix (n):
+def createTriDiagonalMatrix (n): # TODO: Think more about this distribution! ---> Symetric????
     ones = np.ones (n)
-    lessones = 0 * np.ones (n-1)
-    cousers = np.diag (ones, k=0) + np.diag (lessones, k=1) + np.diag (lessones, k=-1)
+    cousers = 0 * np.diag(ones)
+
+    for i in range(n):
+        probs = np.random.dirichlet(np.ones(n - 1),size=1)
+        probs = np.insert(probs, i, 1)
+        cousers[i, :] = probs
     return cousers
 
 def generate (num_users, num_events, num_patterns, vocab_sizes, time_horizon, alpha_0, mu_0, omega, expected_doc_lengths, words_per_pattern):
     # parameters of the model
     vocabTypes = ["docs", "auths"]
-    # vocabSizes = {"docs": 100, "auths": 20}
     vocabs = {vocabType: ["{0}_{1}".format (vocabType, i) for i in xrange (vocab_sizes[vocabType])] for vocabType in vocabTypes}
-    # alpha_0 = (2.5, 0.75) # prior for excitation
-    # mu_0 = (2, 0.5) # prior for base intensity
-    # omega = 3.5 # decay kernel
-
     targetFile = "examples/sample_events.jsonline"
-
-    # The following parameters are not really required but useful to give some
-    # structure to the generated data.
-    # numPatterns = 50
-
-    # expectedDocLengths = {"docs": (100, 150), "auths": (20,25)}
-    # words_per_pattern = {"docs": 250, "auths": 40} # check again if this should be a parameter per dictionary.
 
     # pass only the relevant parameters to the generative process
     for_vocabs = ["docs", "auths"]
@@ -127,7 +119,7 @@ def generate (num_users, num_events, num_patterns, vocab_sizes, time_horizon, al
 
     # create the process object
     cousersMatrix = createTriDiagonalMatrix (num_users)
-    # numUsers = 200
+    # print("cusers: " + str(cousersMatrix))
 
     process = hdhp.HDHProcess(num_users = num_users,
                               num_patterns=num_patterns, 
@@ -162,9 +154,6 @@ def infer (num_users, num_patterns, alpha_0, mu_0, omega, num_particles, indices
     # mu_0 = (8, 0.25) # prior for base intensity
     # o = 1.5 # decay kernel
 
-    # num_patterns = 10
-    # num_users = 10
-
     # Inference
     rawEvents = jsonFileToEvents (targetFile)
     types = [types[i] for i in indices]
@@ -196,14 +185,14 @@ def main ():
     # Parameters to generate the data
     num_users = 200
     num_events = 150000
-    num_patterns = 50
-    vocab_sizes = {"docs": 300, "auths": 50}
+    num_patterns = 10
+    vocab_sizes = {"docs": 100, "auths": 100}
     time_horizon = 3000
-    alpha_0 = (2.5, 0.75) # prior for excitation
-    mu_0 = (2, 0.5) # prior for base intensity
-    omega = 3.5 # decay kernel
+    alpha_0 = (8, 0.25) # prior for excitation
+    mu_0 = (10, 0.2) # prior for base intensity
+    omega = 5 # decay kernel
     expected_doc_lengths = {"docs": (100, 150), "auths": (20,25)}
-    words_per_pattern = {"docs": 250, "auths": 40} # check again if this should be a parameter per dictionary.
+    words_per_pattern = {"docs": 30, "auths": 30} # check again if this should be a parameter per dictionary.
     # generate the data
 
     print("Generated Info:  ")
@@ -248,19 +237,24 @@ def main ():
             for key in infHDHP.time_kernels:
                 fout.write ("\t".join ([str (key), str (infHDHP.time_kernels[key])]) + "\n")
    
-        trueLabs = [e[1] for e in genHDHP.annotatedEventsIter ()]
-        predLabs = [e[1] for e in infHDHP.annotatedEventsIter ()] 
-
-
-        with open (os.path.join (dirname, "patterns.tsv"), "w") as fout:
-            for i in xrange (len (trueLabs)):
-                fout.write ("\t".join ([str(trueLabs[i]), str (predLabs[i])]) + "\n")
-
-        print (normalized_mutual_info_score (trueLabs, predLabs))
 
         # plot the base rates and the estimated alpha values
         plotMuScatterPlot (genHDHP.mu_per_user, infHDHP.mu_per_user, "figs/" + "Case:{0}".format(case) + "_U_" + str(num_users) + "_E_" + str(num_events) + "_base_rates.pdf")
         plotAlphaScatterPlot (genHDHP.time_kernels, infHDHP.time_kernels, "figs/" + "Case:{0}".format(case) + "_U_" + str(num_users) + "_E_" + str(num_events) + "_time_kernels.pdf")
-    
+        
+        trueLabs = [e[1] for e in genHDHP.annotatedEventsIter ()]
+        predLabs = [e[1] for e in infHDHP.annotatedEventsIter ()]
+
+        print("True Labels Size: " + str(len(trueLabs)))
+        print("predected Lables Size: " + str(len(predLabs)))
+
+
+        with open (os.path.join (dirname, "U_" + str(num_users) + "_E_" + str(num_events) + "_patterns.tsv"), "w") as fout:
+            for i in xrange (len (trueLabs)):
+                fout.write ("\t".join ([str(trueLabs[i]), str (predLabs[i])]) + "\n")
+
+        print ("NMI = " + str(normalized_mutual_info_score (trueLabs, predLabs)))
+
+
 if __name__ == "__main__":
     main ()
