@@ -998,8 +998,10 @@ def infer(history, numUsers, docTypes, alpha_0, mu_0, omega=1, beta=1, theta_0=N
 
     vocabulary, extractedUsers = _extract_words_users (history, docTypes)
     users = set (range (numUsers))
-    print (vocabulary.keys(), map (len, vocabulary.values()), len (extractedUsers), len (users))
-    #return
+    print ("Vocab: " + str(vocabulary.keys()), ", Vocab Len: " + str(map (len, vocabulary.values())), ", Extracted Users: " + str(len (extractedUsers)), ", Num of Users: " + str(len (users)))
+    # print(history)
+    # return
+
     #print ("users: {0}".format (users))
     theta_0 = _initialize_document_distributions (vocabulary, docTypes, theta_0)
 

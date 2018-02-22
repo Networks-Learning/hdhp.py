@@ -325,15 +325,40 @@ class HDHProcess:
                 sum_kernels *= update_value
                 self.user_table_cache[user][table] = (t_n, sum_kernels)
                 for u in cousers:
-                    self.user_table_cache[u][table] = (t_n, sum_kernels)
+                    # Negar Added!
+                    if u not in self.user_table_cache:
+                        self.user_table_cache[u][table] = (t_n, 0)
+                    elif table not in self.user_table_cache[u]:
+                        self.user_table_cache[u][table] = (t_n, 0)
+                    else:
+                        t_last, sum_kernels = self.user_table_cache[u][table]
+                        update_value = self.kernel(t_n, t_last)
+                        sum_kernels += 1
+                        sum_kernels *= update_value
+                        self.user_table_cache[u][table] = (t_n, sum_kernels)
+                    # Negar Added!
+                    # self.user_table_cache[u][table] = (t_n, sum_kernels)
+
             else:
                 table = num_tables_user
                 self.total_tables += 1
                 self.total_tables_per_user[user] += 1
                 # Since this is a new table, initialize the cache accordingly
                 self.user_table_cache[user][table] = (t_n, 0)
+                # Negar modified!
                 for u in cousers:
-                    self.user_table_cache[u][table] = (t_n, 0)
+                    if u in self.user_table_cache and table in self.user_table_cache[u]:
+                        t_last, sum_kernels = self.user_table_cache[u][table]
+                        update_value = self.kernel(t_n, t_last)
+                        sum_kernels += 1
+                        sum_kernels *= update_value
+                        self.user_table_cache[u][table] = (t_n, sum_kernels)
+                    else:
+                        self.user_table_cache[u][table] = (t_n, 0)
+                    if u in self.dish_on_table_per_user and table in self.dish_on_table_per_user[u] and self.dish_on_table_per_user[u][table] == z_n:
+                        self.dish_counters[z_n] += 1
+                    self.dish_on_table_per_user[u][table] = z_n # ---> I'm not sure!
+
                 self.dish_on_table_per_user[user][table] = z_n # TODO: I'm not sure yet if this should be updated for every couser
 
             if z_n not in self.first_observed_time or\
