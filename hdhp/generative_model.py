@@ -221,6 +221,7 @@ class HDHProcess:
         if user in self.total_tables_per_user:
             # We have seen the user before
             num_tables = self.total_tables_per_user[user]
+
             pattern_tables = [table for table in range(num_tables)
                               if self.dish_on_table_per_user[user][table]
                               == pattern]
@@ -324,20 +325,19 @@ class HDHProcess:
                 sum_kernels += 1
                 sum_kernels *= update_value
                 self.user_table_cache[user][table] = (t_n, sum_kernels)
+
                 for u in cousers:
                     # Negar Added!
-                    if u not in self.user_table_cache:
-                        self.user_table_cache[u][table] = (t_n, 0)
-                    elif table not in self.user_table_cache[u]:
-                        self.user_table_cache[u][table] = (t_n, 0)
-                    else:
+                    if u in self.user_table_cache and table in self.user_table_cache[u]:
                         t_last, sum_kernels = self.user_table_cache[u][table]
                         update_value = self.kernel(t_n, t_last)
                         sum_kernels += 1
                         sum_kernels *= update_value
                         self.user_table_cache[u][table] = (t_n, sum_kernels)
+                    else:
+                        self.user_table_cache[u][table] = (t_n, 0)
                     # Negar Added!
-                    # self.user_table_cache[u][table] = (t_n, sum_kernels)
+                    # self.user_table_cache[u][table] = (t_n, sum_kernels) Negar Commented
 
             else:
                 table = num_tables_user
@@ -354,10 +354,8 @@ class HDHProcess:
                         sum_kernels *= update_value
                         self.user_table_cache[u][table] = (t_n, sum_kernels)
                     else:
+                        # self.dish_on_table_per_user[u][table] = z_n # ---> I'm not sure!
                         self.user_table_cache[u][table] = (t_n, 0)
-                    if u in self.dish_on_table_per_user and table in self.dish_on_table_per_user[u] and self.dish_on_table_per_user[u][table] == z_n:
-                        self.dish_counters[z_n] += 1
-                    self.dish_on_table_per_user[u][table] = z_n # ---> I'm not sure!
 
                 self.dish_on_table_per_user[user][table] = z_n # TODO: I'm not sure yet if this should be updated for every couser
 
@@ -378,8 +376,10 @@ class HDHProcess:
             self.time_history_per_user[user].append(t_n)
             self.couser_history_per_user[user].append (cousers)
             self.last_event_user_pattern[user][z_n] = t_n
+
             for u in cousers:
                 self.last_event_user_pattern[u][z_n] = t_n
+
 
             # Resample time for that pattern for the user and all its cousers
             next_time_per_pattern[(z_n, user)] = self.sample_next_time (z_n, user)
