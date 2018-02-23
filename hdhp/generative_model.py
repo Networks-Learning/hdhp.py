@@ -123,6 +123,8 @@ class HDHProcess:
         self.events = []
         self.per_pattern_word_counts = {docType: defaultdict(lambda: defaultdict(int)) for docType in self.vocabulary.iterkeys()}
         self.per_pattern_word_count_total = {docType: defaultdict(int) for docType in self.vocabulary.iterkeys()}
+        # Negar: To keep pattern times for each user ---> used to sample time
+        self.pattern_times_per_user = defaultdict(dict)
 
 
     def sample_couser_params (self):
@@ -267,6 +269,65 @@ class HDHProcess:
                 else:
                     lambda_star = lambda_s
 
+    def new_sample_next_time(self, pattern, user):
+        """Samples the time of the next event of a pattern for a given user.
+
+
+        Parameters
+        ----------
+        pattern : int
+            The pattern index that we want to sample the next event for.
+
+        user : int
+            The index of the user that we want to sample for.
+
+
+        Returns
+        -------
+        timestamp : float
+        """
+        U = self.prng.rand
+        mu_u = self.mu_per_user[user]
+        lambda_u_pattern = mu_u * self.pattern_popularity[pattern]
+        alpha = self.time_kernels[pattern]
+
+
+        if user not in self.pattern_times_per_user or pattern not in self.pattern_times_per_user[user]:
+            lambda_star = lambda_u_pattern
+            s = -1 / lambda_star * np.log(U())
+            return s
+        else:
+            s = self.last_event_user_pattern[user][pattern]
+            pattern_times = self.pattern_times_per_user[user][pattern]
+            pattern_intensity = 0
+
+            # print(str(pattern_times))
+
+            for i in range(len(pattern_times) - 1):
+                time = pattern_times[i]
+                update_value = self.kernel(s, time)
+                pattern_intensity += alpha * update_value
+
+            lambda_star = lambda_u_pattern + pattern_intensity
+
+            # New event
+            accepted = False
+            while not accepted:
+                s = s - 1 / lambda_star * np.log(U())
+                # Rejection test
+                pattern_intensity = 0
+
+                for time in pattern_times:
+                    update_value = self.kernel(s, time)
+                    pattern_intensity += alpha * update_value
+
+                lambda_s = lambda_u_pattern + pattern_intensity
+                if U() < lambda_s / lambda_star:
+                    return s
+                else:
+                    lambda_star = lambda_s
+
+
     def sample_cousers_for (self, user):
         counts = self.prng.multinomial (self.num_users, self.couser_params[user])
         others = list ()
@@ -279,7 +340,7 @@ class HDHProcess:
         """ generates events for given number of users """
         if reset: self.reset ()
 
-        next_time_per_pattern = {(pattern, user): self.sample_next_time (pattern, user) for pattern in xrange (self.num_patterns) for user in xrange (self.num_users)}
+        next_time_per_pattern = {(pattern, user): self.new_sample_next_time (pattern, user) for pattern in xrange (self.num_patterns) for user in xrange (self.num_users)}
         iteration = 0
         over_tmax = False
 
@@ -326,38 +387,30 @@ class HDHProcess:
                 sum_kernels *= update_value
                 self.user_table_cache[user][table] = (t_n, sum_kernels)
 
-                for u in cousers:
-                    # Negar Added!
-                    if u in self.user_table_cache and table in self.user_table_cache[u]:
-                        t_last, sum_kernels = self.user_table_cache[u][table]
-                        update_value = self.kernel(t_n, t_last)
-                        sum_kernels += 1
-                        sum_kernels *= update_value
-                        self.user_table_cache[u][table] = (t_n, sum_kernels)
-                    else:
-                        self.user_table_cache[u][table] = (t_n, 0)
-                    # Negar Added!
-                    # self.user_table_cache[u][table] = (t_n, sum_kernels) Negar Commented
-
             else:
                 table = num_tables_user
                 self.total_tables += 1
                 self.total_tables_per_user[user] += 1
                 # Since this is a new table, initialize the cache accordingly
                 self.user_table_cache[user][table] = (t_n, 0)
-                # Negar modified!
-                for u in cousers:
-                    if u in self.user_table_cache and table in self.user_table_cache[u]:
-                        t_last, sum_kernels = self.user_table_cache[u][table]
-                        update_value = self.kernel(t_n, t_last)
-                        sum_kernels += 1
-                        sum_kernels *= update_value
-                        self.user_table_cache[u][table] = (t_n, sum_kernels)
-                    else:
-                        # self.dish_on_table_per_user[u][table] = z_n # ---> I'm not sure!
-                        self.user_table_cache[u][table] = (t_n, 0)
+                self.dish_on_table_per_user[user][
+                    table] = z_n  # TODO: I'm not sure yet if this should be updated for every couser
 
-                self.dish_on_table_per_user[user][table] = z_n # TODO: I'm not sure yet if this should be updated for every couser
+
+            if user not in self.pattern_times_per_user or z_n not in self.pattern_times_per_user[user]:
+                self.pattern_times_per_user[user][z_n] = [t_n]
+            else:
+                self.pattern_times_per_user[user][z_n].append(t_n)
+
+
+            for u in cousers:
+                if u not in self.pattern_times_per_user[u] or z_n not in self.pattern_times_per_user[u]:
+                    self.pattern_times_per_user[u][z_n] = [t_n]
+                else:
+                    self.pattern_times_per_user[u][z_n].append(t_n)
+                    # t_last = self.last_event_user_pattern[u][z_n]
+                    # update_value = self.kernel(t_n, t_last)
+                    # self.pattern_intensity_per_user[u][z_n] += alpha * update_value
 
             if z_n not in self.first_observed_time or\
                     t_n < self.first_observed_time[z_n]:
@@ -380,13 +433,12 @@ class HDHProcess:
             for u in cousers:
                 self.last_event_user_pattern[u][z_n] = t_n
 
-
             # Resample time for that pattern for the user and all its cousers
-            next_time_per_pattern[(z_n, user)] = self.sample_next_time (z_n, user)
+            next_time_per_pattern[(z_n, user)] = self.new_sample_next_time (z_n, user)
             for u in cousers:
-                next_time_per_pattern[(z_n, u)] = self.sample_next_time (z_n, u)
-            z_n, user = min (next_time_per_pattern, key=next_time_per_pattern.get)
-            t_n = next_time_per_pattern[(z_n, user)]
+                next_time_per_pattern[(z_n, u)] = self.new_sample_next_time (z_n, u)
+            # z_n, user = min (next_time_per_pattern, key=next_time_per_pattern.get)
+            # t_n = next_time_per_pattern[(z_n, user)]
             iteration += 1
 
         for user in xrange (self.num_users):
@@ -513,7 +565,6 @@ class HDHProcess:
         events = [(self.time_history_per_user[user][i],
                    self.document_history_per_user[user][i], user, [])
                   for i in range(len(self.time_history_per_user[user]))]
-
 
         # Update the full history of events with the ones generated for the
         # current user and re-order everything so that the events are
