@@ -139,7 +139,7 @@ class Particle(object):
         self.time_elapsed = 0
         self.active_tables_per_user = {}
         # To keep track of pattern times per user
-        self.pattern_times_per_user = defaultdict(dict)
+        self.pattern_times_per_user = defaultdict(list)
 
     def reseed(self, seed=None, uid=None):
         self.seed = seed
@@ -164,6 +164,8 @@ class Particle(object):
                          logweight=self.logweight,
                          update_kernels=self.update_kernels,
                          keep_alpha_history=self.keep_alpha_history)
+
+        new_p.pattern_times_per_user = copy_dict(self.pattern_times_per_user)
         new_p.alpha_0 = copy(self.alpha_0)
         new_p.num_events = self.num_events
         new_p.topic_previous_event = self.topic_previous_event
@@ -305,13 +307,20 @@ class Particle(object):
             self.first_observed_user_time[u_n] = t_n
 
         # Negar added!
-        if u_n not in self.pattern_times_per_user or z_n not in self.pattern_times_per_user[u_n]:
+
+        if u_n not in self.pattern_times_per_user:
+            self.pattern_times_per_user[u_n] = {}
+            self.pattern_times_per_user[u_n][z_n] = []
+        elif z_n not in self.pattern_times_per_user[u_n]:
             self.pattern_times_per_user[u_n][z_n] = []
         self.pattern_times_per_user[u_n][z_n].append(t_n)
 
 
         for u in cousers:
-            if u not in self.pattern_times_per_user[u] or z_n not in self.pattern_times_per_user[u]:
+            if u not in self.pattern_times_per_user:
+                self.pattern_times_per_user[u] = {}
+                self.pattern_times_per_user[u][z_n] = []
+            elif z_n not in self.pattern_times_per_user[u]:
                 self.pattern_times_per_user[u][z_n] = []
             self.pattern_times_per_user[u][z_n].append(t_n)
 
