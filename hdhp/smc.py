@@ -16,6 +16,8 @@ from copy import copy, deepcopy
 from time import time
 
 from numpy import log as ln, array, exp
+import numpy as np
+import math
 from numpy.random import RandomState
 from scipy.misc import logsumexp
 from scipy.special import gammaln
@@ -136,6 +138,8 @@ class Particle(object):
         self.mu_per_user = {}
         self.time_elapsed = 0
         self.active_tables_per_user = {}
+        # To keep track of pattern times per user
+        self.pattern_times_per_user = defaultdict(dict)
 
     def reseed(self, seed=None, uid=None):
         self.seed = seed
@@ -242,9 +246,10 @@ class Particle(object):
         #print ("time previous user event", self.time_previous_user_event)
         #if self.num_events >= 1 and u_n in self.time_previous_user_event and \
                 #self.time_previous_user_event[u_n] > 0:
-        if self.num_events >= 1 and self.time_previous_user_event[u_n] > 0:
+        # if self.num_events >= 1 and self.time_previous_user_event[u_n] > 0:
+        if self.num_events >= 1 and u_n in self.pattern_times_per_user:
             #print ("log likelihood updated")
-            log_likelihood_tn = self.time_event_log_likelihood(t_n, u_n)
+            log_likelihood_tn = self.new_time_event_log_likelihood(t_n, u_n)
         else:
             #print ("log likelihood kept zero")
             log_likelihood_tn = 0 # I don't know why this is zero, should it not be the log of the base intensity?
@@ -253,7 +258,9 @@ class Particle(object):
         tables_before = self.total_tables_per_user[u_n]
         b_n, z_n, opened_table, log_likelihood_dn = \
             self.sample_table(t_n, d_n, u_n, cousers) # modified
+
         if self.total_tables_per_user[u_n] > tables_before and tables_before > 0:
+        # if u_n in self.first_observed_user_time:
             # opened a new table
             old_mu = self.mu_per_user[u_n]
             tables_num = tables_before + 1
@@ -289,12 +296,26 @@ class Particle(object):
         self.user_previous_event = u_n
         self.table_previous_event = b_n
         self.active_tables_per_user[u_n].add(b_n)
+
         if z_n not in self.dish_counters:
             self.dish_counters[z_n] = 1
         elif opened_table:
             self.dish_counters[z_n] += 1
         if u_n not in self.first_observed_user_time:
             self.first_observed_user_time[u_n] = t_n
+
+        # Negar added!
+        if u_n not in self.pattern_times_per_user or z_n not in self.pattern_times_per_user[u_n]:
+            self.pattern_times_per_user[u_n][z_n] = []
+        self.pattern_times_per_user[u_n][z_n].append(t_n)
+
+
+        for u in cousers:
+            if u not in self.pattern_times_per_user[u] or z_n not in self.pattern_times_per_user[u]:
+                self.pattern_times_per_user[u][z_n] = []
+            self.pattern_times_per_user[u][z_n].append(t_n)
+
+
         return b_n, z_n
 
     def sample_table(self, t_n, d_n, u_n, cousers):
@@ -332,12 +353,12 @@ class Particle(object):
             self.dish_on_table_per_user[u_n] = {} # do we need to update this for every co-user?
             self.user_table_cache[u_n] = {}
             self.time_previous_user_event[u_n] = 0
-        for c in cousers:
-            if self.total_tables_per_user[c] == 0:
-                # This is going to be the user's first table
-                self.dish_on_table_per_user[c] = {}
-                self.user_table_cache[c] = {}
-                self.time_previous_user_event[c] = 0
+        # for c in cousers:
+        #     if self.total_tables_per_user[c] == 0:
+        #         # This is going to be the user's first table
+        #         self.dish_on_table_per_user[c] = {}
+        #         self.user_table_cache[c] = {}
+        #         self.time_previous_user_event[c] = 0
 
         tables = range(self.total_tables_per_user[u_n])
         num_dishes = len(self.dish_counters)
@@ -414,17 +435,17 @@ class Particle(object):
             sum_kernels *= update_value
             self.user_table_cache[u_n][table] = (t_n, sum_kernels)
             # modified (update the history for all cousers)
-            for c in cousers:
-                if table not in self.user_table_cache[c]:
-                    self.user_table_cache[c][table] = (t_n, 0)
-                    self.dish_on_table_per_user[c][table] = dish
-                else:
-                    tl, s = self.user_table_cache[c][table]
-                    upval = self.kernel (t_n, tl)
-                    s += 1
-                    s *= upval
-                    self.user_table_cache[c][table] = (t_n, s)
-                    self.dish_on_table_per_user[c][table] = dish
+            # for c in cousers:
+            #     if table not in self.user_table_cache[c]:
+            #         self.user_table_cache[c][table] = (t_n, 0)
+            #         self.dish_on_table_per_user[c][table] = dish
+            #     else:
+            #         tl, s = self.user_table_cache[c][table]
+            #         upval = self.kernel (t_n, tl)
+            #         s += 1
+            #         s *= upval
+            #         self.user_table_cache[c][table] = (t_n, s)
+            #         self.dish_on_table_per_user[c][table] = dish
         else:
             k = k - len(tables)
             table = len(tables)
@@ -434,17 +455,17 @@ class Particle(object):
             # Since this is a new table, initialize the cache accordingly
             self.user_table_cache[u_n][table] = (t_n, 0)
             # modified (update the history for all cousers)
-            for c in cousers:
-                if table not in self.user_table_cache[c]:
-                    self.user_table_cache[c][table] = (t_n, 0)
-                    self.dish_on_table_per_user[c][table] = dish
-                else:
-                    tl, s = self.user_table_cache[c][table]
-                    upval = self.kernel (t_n, tl)
-                    s += 1
-                    s *= upval
-                    self.user_table_cache[c][table] = (t_n, s)
-                    self.dish_on_table_per_user[c][table] = dish
+            # for c in cousers:
+            #     if table not in self.user_table_cache[c]:
+            #         self.user_table_cache[c][table] = (t_n, 0)
+            #         self.dish_on_table_per_user[c][table] = dish
+            #     else:
+            #         tl, s = self.user_table_cache[c][table]
+            #         upval = self.kernel (t_n, tl)
+            #         s += 1
+            #         s *= upval
+            #         self.user_table_cache[c][table] = (t_n, s)
+            #         self.dish_on_table_per_user[c][table] = dish
 
             self.dish_on_table_per_user[u_n][table] = dish
             opened_table = True
@@ -568,10 +589,32 @@ class Particle(object):
                 dn_word_counts = {key: Counter (doc[key].split()) for key in doc}
                 count_dn = {key: len (doc[key].split()) for key in doc}
 
-                doc_log_likelihood += sum(self.document_log_likelihood(doc_word_counts,
-                                                                   count_doc,
+                doc_log_likelihood += sum(self.document_log_likelihood(dn_word_counts,
+                                                                   count_dn,
                                                                    dish).values())
         return doc_log_likelihood
+
+    def new_time_event_log_likelihood(self, t_n, u_n):
+        # looks like this just calculates the hawkes process likelihood (FIXME later)
+        mu = self.mu_per_user[u_n]
+        user_patterns = self.pattern_times_per_user[u_n]
+        total_log_likelihood = 0
+
+        for pattern in user_patterns:
+            alpha = self.time_kernels[pattern]
+            tlist = array(user_patterns[pattern])
+
+            r = np.zeros(len(tlist))
+            for i in xrange(1, len(tlist)):
+                r[i] = math.exp(-self.omega * (tlist[i] - tlist[i - 1])) * (1 + r[i - 1])
+
+            pattern_ll = -tlist[-1] * mu
+            pattern_ll = pattern_ll + alpha / self.omega * sum(np.exp(-self.omega * (tlist[-1] - tlist)) - 1)
+            pattern_ll = pattern_ll + np.sum(np.log(mu + alpha * r))
+            total_log_likelihood += pattern_ll
+
+        return  total_log_likelihood
+
 
     def time_event_log_likelihood(self, t_n, u_n):
         # looks like this just calculates the hawkes process likelihood (FIXME later)
