@@ -291,8 +291,9 @@ class HDHProcess:
         mu_u = self.mu_per_user[user]
         lambda_u_pattern = mu_u * self.pattern_popularity[pattern]
         alpha = self.time_kernels[pattern]
+        pattern_intensity = 0
 
-        if user not in self.user_dish_cache:
+        if user not in self.user_dish_cache or pattern not in self.user_dish_cache[user]:
             lambda_star = lambda_u_pattern
             s = -1 / lambda_star * np.log(U())
             return s
@@ -301,19 +302,21 @@ class HDHProcess:
             t_last, sum_kernels = self.user_dish_cache[user][pattern]
             update_value = self.kernel(s, t_last)
             pattern_intensity = alpha * sum_kernels * update_value
-            pattern_intensity += alpha * sum_kernels
+            pattern_intensity += alpha * update_value
             lambda_star = lambda_u_pattern + pattern_intensity
 
             # New Event
             accepted = False
             while not accepted:
                 s = s - 1 / lambda_star * np.log(U())
+                # print("p: " + str(pattern) + " , user: " + str(user) + "    " + str(s) + "   ---> " + str(lambda_star) + " sum: " + str(sum_kernels))
                 # Rejection test
                 t_last, sum_kernels = self.user_dish_cache[user][pattern]
                 update_value = self.kernel(s, t_last)
                 pattern_intensity = alpha * sum_kernels * update_value
                 pattern_intensity += alpha * update_value
                 lambda_s = lambda_u_pattern + pattern_intensity
+
                 if U() < lambda_s / lambda_star:
                     return s
                 else:
@@ -436,6 +439,7 @@ class HDHProcess:
             # t_n = next_time_per_pattern[(z_n, user)]
             iteration += 1
 
+
         for user in xrange(self.num_users):
             events = [(self.time_history_per_user[user][i],
                        self.document_history_per_user[user][i], [user] + self.couser_history_per_user[user][i],
@@ -448,6 +452,156 @@ class HDHProcess:
         # ordered by their timestamp
         self.events = sorted(self.events, key=lambda x: x[0])
         return self.events
+
+
+    def new_generate(self, min_num_events=100, max_num_events=None, t_max=None, reset=True):
+        """ generates events for given number of users """
+        if reset: self.reset()
+
+        for user in range(self.num_users):
+            next_time_per_pattern = [self.new_sample_next_time(pattern, user)
+                                     for pattern in range(self.num_patterns)]
+            next_time_per_pattern = asfortranarray(next_time_per_pattern)
+            iteration = 0
+            over_tmax = False
+
+            while iteration < min_num_events or not over_tmax:
+                if max_num_events is not None and iteration > max_num_events:
+                    break
+
+                z_n = next_time_per_pattern.argmin()
+                t_n = next_time_per_pattern[z_n]
+                cousers = self.sample_cousers_for(user)
+
+                if t_max is not None and t_n > t_max:
+                    over_tmax = True
+                    break
+                num_tables_user = self.total_tables_per_user[user] \
+                    if user in self.total_tables_per_user else 0
+                tables = range(num_tables_user)
+                tables = [table for table in tables
+                          if self.dish_on_table_per_user[user][table] == z_n]
+                intensities = []
+
+                alpha = self.time_kernels[z_n]
+                for table in tables:
+                    t_last, sum_kernels = self.user_table_cache[user][table]
+                    update_value = self.kernel(t_n, t_last)
+                    table_intensity = alpha * sum_kernels * update_value
+                    table_intensity += alpha * update_value
+                    intensities.append(table_intensity)
+                intensities.append(self.mu_per_user[user] * self.pattern_popularity[z_n])
+                log_intensities = [ln(inten_i)
+                                   if inten_i > 0 else -float('inf')
+                                   for inten_i in intensities]
+
+                normalizing_log_intensity = logsumexp(log_intensities)
+                intensities = [exp(log_intensity - normalizing_log_intensity)
+                               for log_intensity in log_intensities]
+                k = weighted_choice(intensities, self.prng)
+                if k < len(tables):
+                    # Assign to already existing table
+                    table = tables[k]
+                    # update cache for that table
+                    t_last, sum_kernels = self.user_table_cache[user][table]
+                    update_value = self.kernel(t_n, t_last)
+                    sum_kernels += 1
+                    sum_kernels *= update_value
+                    self.user_table_cache[user][table] = (t_n, sum_kernels)
+
+                else:
+                    table = num_tables_user
+                    self.total_tables += 1
+                    self.total_tables_per_user[user] += 1
+                    # Since this is a new table, initialize the cache accordingly
+                    self.user_table_cache[user][table] = (t_n, 0)
+                    self.dish_on_table_per_user[user][table] = z_n
+
+
+                # print(str(user) + "   :    " + str(z_n))
+                # Update dish cache for user and it's co-authors
+                if user not in self.user_dish_cache or z_n not in self.user_dish_cache[user]:
+                    self.user_dish_cache[user][z_n] = (t_n, 0)
+                    # print("Sum Kernels: 0")
+                else:
+                    t_last, sum_kernels = self.user_dish_cache[user][z_n]
+                    update_value = self.kernel(t_n, t_last)
+                    sum_kernels += 1
+                    sum_kernels *= update_value
+                    self.user_dish_cache[user][z_n] = (t_n, sum_kernels)
+                    # print("Before : " + str(before) + ", After: " + str(sum_kernels))
+                    if update_value == 1:
+                        print
+                    print("K: " + str(update_value))
+
+                #
+                for u in cousers:
+                    if u not in self.user_dish_cache or z_n not in self.user_dish_cache[u]:
+                        self.user_dish_cache[u][z_n] = (t_n, 0)
+                        # print("Sum Kernels: 0")
+                    else:
+                        t_last, sum_kernels = self.user_dish_cache[u][z_n]
+                        update_value = self.kernel(t_n, t_last)
+                        sum_kernels += 1
+                        sum_kernels *= update_value
+                        self.user_dish_cache[u][z_n] = (t_n, sum_kernels)
+                        if update_value == 1:
+                            print
+                        # print("u: " + str(u))
+                        # print("Before : " + str(before) + ", After: " + str(sum_kernels))
+
+                # print("*************************************************************")
+                if z_n not in self.first_observed_time or \
+                                t_n < self.first_observed_time[z_n]:
+                    self.first_observed_time[z_n] = t_n
+                self.dish_counters[z_n] += 1
+
+                docs_for_user_n = dict()
+                for docType in self.vocabulary.iterkeys():
+                    doc_n = self.sample_document(z_n, docType)
+                    self._update_word_counters(doc_n.split(), z_n, docType)
+                    docs_for_user_n[docType] = doc_n
+
+                self.document_history_per_user[user] \
+                    .append(docs_for_user_n)
+                self.table_history_per_user[user].append(table)
+                self.time_history_per_user[user].append(t_n)
+                self.couser_history_per_user[user].append(cousers)
+                self.last_event_user_pattern[user][z_n] = t_n
+
+                for u in cousers:
+                    self.last_event_user_pattern[u][z_n] = t_n
+
+                # Re-sample time for that pattern for the user and all its cousers
+                # print("Before")
+                next_time_per_pattern[z_n] = self.new_sample_next_time(z_n, user)
+                # print("After")
+                # for u in cousers:
+                #     next_time_per_pattern[z_n] = self.new_sample_next_time(z_n, u)
+                # z_n, user = min (next_time_per_pattern, key=next_time_per_pattern.get)
+                # t_n = next_time_per_pattern[(z_n, user)]
+                iteration += 1
+                # if t_n == next_time_per_pattern[z_n]:
+                #     print
+                # print(user, t_n, z_n, doc_n)
+            events = [(self.time_history_per_user[user][i],
+                       self.document_history_per_user[user][i], [user] + self.couser_history_per_user[user][i], [])
+                      for i in range(len(self.time_history_per_user[user]))]
+            self.events += events
+
+        # for user in xrange(self.num_users):
+        #     events = [(self.time_history_per_user[user][i],
+        #                self.document_history_per_user[user][i], [user] + self.couser_history_per_user[user][i],
+        #                [self.dish_on_table_per_user[user][self.table_history_per_user[user][i]]])
+        #               for i in xrange(len(self.time_history_per_user[user]))]
+        #     self.events.extend(events)
+
+        # Update the full history of events with the ones generated for the
+        # current user and re-order everything so that the events are
+        # ordered by their timestamp
+        self.events = sorted(self.events, key=lambda x: x[0])
+        return self.events
+
 
     def sample_user_events(self, min_num_events=100, max_num_events=None,
                            t_max=None):
@@ -1263,7 +1417,17 @@ class HDHProcess:
         return '\n\n'.join(text)
 
     def annotatedEventsIter(self, keep_sorted=True):
-        # print (self.table_history_per_user)
+
+        # events = []
+        #
+        # for u in xrange(self.num_users):
+        #     for i in xrange(len(self.time_history_per_user[u])):
+        #         table = self.table_history_per_user[u][i]
+        #         t = self.time_history_per_user[u][i]
+        #         doc = self.document_history_per_user[u][i]
+        #         event = (t, self.dish_on_table_per_user[u][table], table, doc)
+        #         events.append(event)
+
         events = [(t, dish, table, u, doc)
                   for u in xrange(self.num_users)
                   for ((t, doc), (table, dish)) in izip([(t, d)
