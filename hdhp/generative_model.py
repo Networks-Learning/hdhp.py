@@ -77,6 +77,8 @@ class HDHProcess:
         self.doc_prng = RandomState(self.prng.randint(200000000))
         self.time_kernel_prng = RandomState(self.prng.randint(2000000000))
         self.pattern_param_prng = RandomState(self.prng.randint(2000000000))
+        ######
+        self.cousers_param_prng = RandomState(self.prng.randint(2000000000))
 
         self.num_users = num_users
         self.num_patterns = num_patterns
@@ -132,7 +134,7 @@ class HDHProcess:
         """ Returns the co-authoring distributions for every user """
         couser_params = {}
         for user in xrange(self.num_users):
-            couser_params[user] = self.pattern_param_prng.dirichlet(self.cousers[user, :])
+            couser_params[user] = self.cousers_param_prng.dirichlet(self.cousers[user, :])
 
         return couser_params
 
@@ -291,7 +293,6 @@ class HDHProcess:
         mu_u = self.mu_per_user[user]
         lambda_u_pattern = mu_u * self.pattern_popularity[pattern]
         alpha = self.time_kernels[pattern]
-        pattern_intensity = 0
 
         if user not in self.user_dish_cache or pattern not in self.user_dish_cache[user]:
             lambda_star = lambda_u_pattern
@@ -309,7 +310,6 @@ class HDHProcess:
             accepted = False
             while not accepted:
                 s = s - 1 / lambda_star * np.log(U())
-                # print("p: " + str(pattern) + " , user: " + str(user) + "    " + str(s) + "   ---> " + str(lambda_star) + " sum: " + str(sum_kernels))
                 # Rejection test
                 t_last, sum_kernels = self.user_dish_cache[user][pattern]
                 update_value = self.kernel(s, t_last)
@@ -518,7 +518,6 @@ class HDHProcess:
                     self.dish_on_table_per_user[user][table] = z_n
 
 
-                # print(str(user) + "   :    " + str(z_n))
                 # Update dish cache for user and it's co-authors
                 if user not in self.user_dish_cache or z_n not in self.user_dish_cache[user]:
                     self.user_dish_cache[user][z_n] = (t_n, 0)
@@ -529,12 +528,7 @@ class HDHProcess:
                     sum_kernels += 1
                     sum_kernels *= update_value
                     self.user_dish_cache[user][z_n] = (t_n, sum_kernels)
-                    # print("Before : " + str(before) + ", After: " + str(sum_kernels))
-                    if update_value == 1:
-                        print
-                    print("K: " + str(update_value))
 
-                #
                 for u in cousers:
                     if u not in self.user_dish_cache or z_n not in self.user_dish_cache[u]:
                         self.user_dish_cache[u][z_n] = (t_n, 0)
@@ -547,10 +541,7 @@ class HDHProcess:
                         self.user_dish_cache[u][z_n] = (t_n, sum_kernels)
                         if update_value == 1:
                             print
-                        # print("u: " + str(u))
-                        # print("Before : " + str(before) + ", After: " + str(sum_kernels))
 
-                # print("*************************************************************")
                 if z_n not in self.first_observed_time or \
                                 t_n < self.first_observed_time[z_n]:
                     self.first_observed_time[z_n] = t_n
@@ -573,17 +564,13 @@ class HDHProcess:
                     self.last_event_user_pattern[u][z_n] = t_n
 
                 # Re-sample time for that pattern for the user and all its cousers
-                # print("Before")
                 next_time_per_pattern[z_n] = self.new_sample_next_time(z_n, user)
-                # print("After")
                 # for u in cousers:
                 #     next_time_per_pattern[z_n] = self.new_sample_next_time(z_n, u)
                 # z_n, user = min (next_time_per_pattern, key=next_time_per_pattern.get)
                 # t_n = next_time_per_pattern[(z_n, user)]
                 iteration += 1
-                # if t_n == next_time_per_pattern[z_n]:
-                #     print
-                # print(user, t_n, z_n, doc_n)
+
             events = [(self.time_history_per_user[user][i],
                        self.document_history_per_user[user][i], [user] + self.couser_history_per_user[user][i], [])
                       for i in range(len(self.time_history_per_user[user]))]

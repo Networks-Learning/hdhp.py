@@ -234,13 +234,11 @@ class Particle(object):
         # u_n : user of the n-th event
         # q_n : any metadata for the n-th event, e.g. the question id
         t_n, d_n, u_n, q_n = event
-        # print (t_n, d_n, u_n, q_n)
-        # print (type(d_n["docs"]))
         # modified (u_n is a list and the first item in the list is the leading author)
         cousers = u_n[1:]
         u_n = u_n[0]
-        # d_n = d_n.split()
 
+        # d_n = d_n.split()
         # the following conditional block can be removed and added to the initialization code.
 
         if self.num_events == 0:
@@ -256,23 +254,20 @@ class Particle(object):
         # if self.num_events >= 1 and self.time_previous_user_event[u_n] > 0:
         if self.num_events >= 1 and self.time_previous_user_event[u_n] > 0:
             # print ("log likelihood updated")
-            log_likelihood_tn = self.new_time_event_log_likelihood(t_n, u_n)
+            log_likelihood_tn = self.time_event_log_likelihood(t_n, u_n)
         else:
             # print ("log likelihood kept zero")
             log_likelihood_tn = 0  # I don't know why this is zero, should it not be the log of the base intensity?
 
-        # print (self.num_users, u_n, self.total_tables_per_user)
         tables_before = self.total_tables_per_user[u_n]
         b_n, z_n, opened_table, log_likelihood_dn = \
             self.sample_table(t_n, d_n, u_n, cousers)  # modified
 
         if self.total_tables_per_user[u_n] > tables_before and tables_before > 0:
-            # if u_n in self.first_observed_user_time:
             # opened a new table
             old_mu = self.mu_per_user[u_n]
             tables_num = tables_before + 1
             user_alive_time = t_n - self.first_observed_user_time[u_n]
-            # print (t_n, self.first_observed_user_time[u_n], user_alive_time)
             new_mu = (self.mu_rate * old_mu +
                       (1 - self.mu_rate) * tables_num / user_alive_time)
             self.mu_per_user[u_n] = new_mu
@@ -312,30 +307,31 @@ class Particle(object):
             self.first_observed_user_time[u_n] = t_n
 
         # Update dish cache for user and it's co-authors
-        if u_n not in self.user_dish_cache:
-            self.user_dish_cache[u_n] = {}
-            self.user_dish_cache[u_n][z_n] = (t_n, 0)
-        elif z_n not in self.user_dish_cache[u_n]:
-            self.user_dish_cache[u_n][z_n] = (t_n, 0)
-        else:
-            t_last, sum_kernels = self.user_dish_cache[u_n][z_n]
-            update_value = self.kernel(t_n, t_last)
-            sum_kernels += 1
-            sum_kernels *= update_value
-            self.user_dish_cache[u_n][z_n] = (t_n, sum_kernels)
-
-        for u in cousers:
-            if u not in self.user_dish_cache:
-                self.user_dish_cache[u] = {}
-                self.user_dish_cache[u][z_n] = (t_n, 0)
-            elif z_n not in self.user_dish_cache[u]:
-                self.user_dish_cache[u][z_n] = (t_n, 0)
-            else:
-                t_last, sum_kernels = self.user_dish_cache[u][z_n]
-                update_value = self.kernel(t_n, t_last)
-                sum_kernels += 1
-                sum_kernels *= update_value
-                self.user_dish_cache[u][z_n] = (t_n, sum_kernels)
+        # if u_n not in self.user_dish_cache:
+        #     self.user_dish_cache[u_n] = {}
+        #     self.user_dish_cache[u_n][z_n] = (t_n, 0)
+        # elif z_n not in self.user_dish_cache[u_n]:
+        #     self.user_dish_cache[u_n][z_n] = (t_n, 0)
+        # else:
+        #     t_last, sum_kernels = self.user_dish_cache[u_n][z_n]
+        #     update_value = self.kernel(t_n, t_last)
+        #     sum_kernels += 1
+        #     sum_kernels *= update_value
+        #     self.user_dish_cache[u_n][z_n] = (t_n, sum_kernels)
+        #
+        # for u in cousers:
+        #     self.time_previous_user_event[u] = t_n
+        #     if u not in self.user_dish_cache:
+        #         self.user_dish_cache[u] = {}
+        #         self.user_dish_cache[u][z_n] = (t_n, 0)
+        #     elif z_n not in self.user_dish_cache[u]:
+        #         self.user_dish_cache[u][z_n] = (t_n, 0)
+        #     else:
+        #         t_last, sum_kernels = self.user_dish_cache[u][z_n]
+        #         update_value = self.kernel(t_n, t_last)
+        #         sum_kernels += 1
+        #         sum_kernels *= update_value
+        #         self.user_dish_cache[u][z_n] = (t_n, sum_kernels)
         return b_n, z_n
 
     def sample_table(self, t_n, d_n, u_n, cousers):
@@ -373,12 +369,12 @@ class Particle(object):
             self.dish_on_table_per_user[u_n] = {}  # do we need to update this for every co-user?
             self.user_table_cache[u_n] = {}
             self.time_previous_user_event[u_n] = 0
-        # for c in cousers:
-        #     if self.total_tables_per_user[c] == 0:
-        #         # This is going to be the user's first table
-        #         self.dish_on_table_per_user[c] = {}
-        #         self.user_table_cache[c] = {}
-        #         self.time_previous_user_event[c] = 0
+        for c in cousers:
+            if self.total_tables_per_user[c] == 0:
+                # This is going to be the user's first table
+                # self.dish_on_table_per_user[c] = {}
+                # self.user_table_cache[c] = {}
+                self.time_previous_user_event[c] = 0
 
         tables = range(self.total_tables_per_user[u_n])
         num_dishes = len(self.dish_counters)
@@ -498,9 +494,9 @@ class Particle(object):
 
         self.table_history_with_user.append((u_n, table))
         self.time_previous_user_event[u_n] = t_n
-        # modified (update the history for all cousers)
-        for c in cousers:
-            self.time_previous_user_event[c] = t_n
+        # # modified (update the history for all cousers)
+        # for c in cousers:
+        #     self.time_previous_user_event[c] = t_n
         return table, dish, opened_table, dish_log_likelihood[dish]
 
     def kernel(self, t_i, t_j):
@@ -833,7 +829,7 @@ def _infer_single_thread(history, params):
         weights = []
         total = 0
         t_i, d_i, u_i, q_i = h_i
-        # print ("event:", h_i)
+
         u_i = u_i[0]
         if u_i not in time_history_per_user:
             time_history_per_user[u_i] = []
@@ -844,13 +840,9 @@ def _infer_single_thread(history, params):
         question_history_per_user[u_i].append(q_i)
 
         for p_i in particles:
-            start = timeit.default_timer()
             # Fit each particle to the next event
             b_i, z_i = p_i.update(h_i)
-            # print (t_i, u_i)
-            # print (p_i.uid, b_i, z_i)
             inferred_tables[p_i.uid].append((b_i, z_i))
-            # print("Time: " + str(timeit.default_timer() - start))
 
         if i > 0 and i % params.resample_every == 0:
             # Start resampling
@@ -866,7 +858,7 @@ def _infer_single_thread(history, params):
                     weights.append(exp(p_i.logweight - max_logweight))
                 total += weights[-1]
             normalized = [w / sum(weights) for w in weights]
-            # print ("normalized within loop", normalized)
+
             # Check if resampling is needed
             norm2 = sum([w ** 2 for w in normalized])
             square_norms.append(norm2)
@@ -887,13 +879,11 @@ def _infer_single_thread(history, params):
                         old_history = copy(table_history_with_user[index])
                     else:
                         old_history = []
-                    # print ("old history", old_history)
+
                     new_history = copy(particles[index].table_history_with_user)
-                    # print ("new history", new_history)
                     old_history.extend(new_history)
                     new_table_history_with_user.append(old_history)
-                    # print ("within if:", table_history_with_user, i)
-                    # print ("new table history with user", new_table_history_with_user)
+
                     if len(dish_on_table_per_user):
                         dish_table_user = copy_dict(dish_on_table_per_user[index])
                     else:
@@ -904,8 +894,7 @@ def _infer_single_thread(history, params):
                         if user not in dish_table_user:
                             dish_table_user[user] = {}
                         for t in dishes_toadd[user]:
-                            # print (dishes_toadd[user])
-                            # assert t not in dish_table_user[user]
+
                             dish_table_user[user][t] = dishes_toadd[user][t]
                     new_dish_on_table_per_user.append(dish_table_user)
 
@@ -968,7 +957,6 @@ def _infer_single_thread(history, params):
     table_history_with_user = table_history_with_user[final_particle_id]
     new_history = copy(final_particle.table_history_with_user)
     table_history_with_user.extend(new_history)
-    # print ("table history per user", table_history_with_user)
     final_particle.table_history_with_user = table_history_with_user
     dish_on_table_per_user = dish_on_table_per_user[final_particle_id]
     dishes_toadd = copy_dict(final_particle.dish_on_table_per_user)
@@ -987,7 +975,6 @@ def _infer_single_thread(history, params):
             dish_on_table_per_user[user][t] = \
                 final_particle.dish_on_table_todelete[user][t]
     final_particle.dish_on_table_per_user = dish_on_table_per_user
-    # print ("dish_table_per_user", final_particle.dish_on_table_per_user)
     final_particle.time_history_per_user = copy(time_history_per_user)
     final_particle.doc_history_per_user = copy(doc_history_per_user)
     final_particle.question_history_per_user = copy(question_history_per_user)
@@ -1060,7 +1047,7 @@ def infer(history, numUsers, docTypes, alpha_0, mu_0, omega=1, beta=1, theta_0=N
         number is in inference steps (number of events)
 
     update_kernels : bool, default is True
-        Controls wheter the time kernel parameter of each pattern will be
+        Controls whether the time kernel parameter of each pattern will be
         updated from the posterior, or not.
 
     mu_rate : float, default is 0.6
@@ -1085,10 +1072,8 @@ def infer(history, numUsers, docTypes, alpha_0, mu_0, omega=1, beta=1, theta_0=N
     users = set(range(numUsers))
     print("Vocab: " + str(vocabulary.keys()), ", Vocab Len: " + str(map(len, vocabulary.values())),
           ", Extracted Users: " + str(len(extractedUsers)), ", Num of Users: " + str(len(users)))
-    # print(history)
-    # return
 
-    # print ("users: {0}".format (users))
+
     theta_0 = _initialize_document_distributions(vocabulary, docTypes, theta_0)
 
     if progress_file is None:

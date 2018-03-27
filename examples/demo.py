@@ -1,10 +1,12 @@
 import matplotlib
 matplotlib.use('Agg')
 
+import notebook_helpers
+
 import argparse
 import datetime
 import hdhp
-import seaborn as sns; sns.set(color_codes=True) 
+import seaborn as sns; sns.set(color_codes=True)
 import pandas as pd
 from collections import Counter
 from sklearn.metrics import normalized_mutual_info_score
@@ -13,6 +15,8 @@ import json
 import numpy as np
 import os
 import timeit
+import itertools
+import NMI
 
 def getArgs ():
     parser = argparse.ArgumentParser ()
@@ -21,6 +25,29 @@ def getArgs ():
     parser.set_defaults (use_cousers=False)
     args = parser.parse_args ()
     return args
+
+def find_kernel_parameters_order(true_labels, estimated_labels, num_of_patterns):
+
+
+    patterns_list = range(0, num_of_patterns)
+    permutations =  itertools.permutations(patterns_list)
+    max_NMI = 0
+
+    for current_permutation in permutations:
+        new_labels = estimated_labels[:]
+
+        for j in range(len(new_labels)):
+            # print(str(new_labels[j]) + " ---> " + str(current_permutation[new_labels[j]]))
+            new_labels[j] = current_permutation[new_labels[j]]
+
+        NMI = normalized_mutual_info_score(true_labels, new_labels)
+        if NMI != 1:
+            print("NMI: " + str(NMI))
+
+        if NMI > max_NMI:
+            max_NMI = NMI
+    # print("MAX NMI: " + str(max_NMI))
+
 
 def eventsToJsonFile (events, filename):
     with open (filename, "w") as fout:
@@ -62,18 +89,19 @@ def plotMuScatterPlot (xdict, ydict, outFile):
 
     sns.plt.ylim(min_axis_value, 10)
     sns.plt.xlim(min_axis_value, 10)
-    
+
 
     fig = ax.get_figure ()
     fig.savefig (outFile)
     fig.clf()
 
 def plotAlphaScatterPlot (xdict, ydict, outFile):
-    
+
     xkeys = xdict.keys()
     ykeys = ydict.keys()
 
     inter = set (xkeys) & set (ykeys)
+
     x = pd.Series([xdict[k] for k in inter], name="True Value")
     y = pd.Series([ydict[k] for k in inter], name="Inferred Value")
 
@@ -86,15 +114,18 @@ def plotAlphaScatterPlot (xdict, ydict, outFile):
     ax = sns.regplot (x=x, y=y, marker="o", fit_reg=False)
     ax.set(title="Fig Title: Kernel Parameter")
 
+    sns.plt.ylim(min_axis_value, 10)
+    sns.plt.xlim(min_axis_value, 10)
+
     sns.plt.ylim(min_axis_value, max_axis_value)
     sns.plt.xlim(min_axis_value, max_axis_value)
 
-    fig = ax.get_figure () 
+    fig = ax.get_figure ()
     fig.savefig (outFile)
     fig.clf()
 
 
-def createTriDiagonalMatrix (n): # TODO: Think more about this distribution! ---> Symetric????
+def createTriDiagonalMatrix (n):
     ones = np.ones (n)
     cousers = 0 * np.diag(ones)
 
@@ -108,7 +139,7 @@ def generate (num_users, num_events, num_patterns, vocab_sizes, time_horizon, al
     # parameters of the model
     vocabTypes = ["docs", "auths"]
     vocabs = {vocabType: ["{0}_{1}".format (vocabType, i) for i in xrange (vocab_sizes[vocabType])] for vocabType in vocabTypes}
-    targetFile = "examples/sample_events.jsonline"
+    targetFile = "sample_events.jsonline"
 
     # pass only the relevant parameters to the generative process
     for_vocabs = ["docs", "auths"]
@@ -122,9 +153,9 @@ def generate (num_users, num_events, num_patterns, vocab_sizes, time_horizon, al
     # print("cusers: " + str(cousersMatrix))
 
     process = hdhp.HDHProcess(num_users = num_users,
-                              num_patterns=num_patterns, 
-                              alpha_0=alpha_0, 
-                              mu_0=mu_0, 
+                              num_patterns=num_patterns,
+                              alpha_0=alpha_0,
+                              mu_0=mu_0,
                               vocabulary=vocab,
                               omega=omega,
                               doc_lengths=docLen,
@@ -135,6 +166,26 @@ def generate (num_users, num_events, num_patterns, vocab_sizes, time_horizon, al
 
     # generate events from the process
     events = process.generate (min_num_events=20, max_num_events=num_events, t_max=time_horizon, reset=True)
+    # overlap = notebook_helpers.compute_pattern_overlap(process)
+
+    # for doc_type in overlap:
+    #     ax = sns.distplot(overlap[doc_type], kde=True, norm_hist=True, axlabel='Content overlap')
+    #     fig = ax.get_figure()
+    #     fig.savefig("figs/pattern_overlaps_" + doc_type + ".pdf")
+    #     fig.clf()
+
+    start_date = datetime.datetime(2015, 9, 15)
+    fig = process.plot(start_date=start_date, user_limit=5, num_samples=1000, time_unit='days', label_every=1, seed=5)
+    fig.savefig("figs/times.pdf")
+    fig.clf()
+    #
+    # for user_id in range(num_users):
+    #     print ("User :" + str(user_id) + " ---->" + str(process.user_patterns_set(user=user_id)))
+
+    # for user_id in range(num_users):
+    #     print process.user_pattern_history_str(user=user_id, show_time=True)
+    #     print("**********************************************************************************")
+    # print (process.pattern_content_str(patterns=[0, 1], show_words=10))
 
     # events is a list with the following fields
     # t: time of the event
@@ -146,7 +197,7 @@ def generate (num_users, num_events, num_patterns, vocab_sizes, time_horizon, al
     return process
 
 def infer (num_users, num_patterns, alpha_0, mu_0, omega, num_particles, indices, use_cousers=False):
-    targetFile = "examples/sample_events.jsonline"
+    targetFile = "sample_events.jsonline"
     types = ["docs", "auths"]
     # priors to control the time dynamics of the events
 
@@ -171,27 +222,27 @@ def infer (num_users, num_patterns, alpha_0, mu_0, omega, num_particles, indices
                                  alpha_0,
                                  mu_0,
                                  omega=omega,
-                                 beta=1, 
+                                 beta=1,
                                  threads=1,
-                                 num_particles=num_particles, 
+                                 num_particles=num_particles,
                                  keep_alpha_history=True,
                                  seed=512)
 
-    inf_process = particle.to_process ()
+    inf_process = particle.to_process()
     return inf_process
 
 def main ():
     #args = getArgs ()
     # Parameters to generate the data
-    num_users = 200
-    num_events = 150000
+    num_users = 20
+    num_events = 1000
     num_patterns = 10
-    vocab_sizes = {"docs": 100, "auths": 100}
-    time_horizon = 3000
+    vocab_sizes = {"docs": 300, "auths": 150}
+    time_horizon = 365
     alpha_0 = (8, 0.25) # prior for excitation
     mu_0 = (10, 0.2) # prior for base intensity
     omega = 5 # decay kernel
-    expected_doc_lengths = {"docs": (100, 150), "auths": (20,25)}
+    expected_doc_lengths = {"docs": (100, 150), "auths": (50,100)}
     words_per_pattern = {"docs": 30, "auths": 30} # check again if this should be a parameter per dictionary.
     # generate the data
 
@@ -200,9 +251,11 @@ def main ():
     print("Number of Events: " + str(num_events))
     print("Number of Patterns: " + str(num_patterns))
 
+    start = timeit.default_timer()
+
     genHDHP = generate (num_users, num_events, num_patterns, vocab_sizes, time_horizon, alpha_0, mu_0, omega, expected_doc_lengths, words_per_pattern)
 
-    print("Generation is done!")
+    print("Generation is done! in: " + str(timeit.default_timer() - start))
 
     num_particles = 20
 
@@ -221,7 +274,7 @@ def main ():
 
         dirname = "results/{0}".format (case)
         # infer the parameters from the data
-        infHDHP = infer (num_users, num_patterns, alpha_0, mu_0, omega, num_particles, indices, use_cousers)
+        infHDHP = infer(num_users, num_patterns, alpha_0, mu_0, omega, num_particles, indices, use_cousers)
         print("Inference is done in " + str(timeit.default_timer() - start) + " seconds!")
 
 
@@ -236,24 +289,33 @@ def main ():
         with open (os.path.join (dirname, "U_" + str(num_users) + "_E_" + str(num_events) + "_est_time_kernels.tsv"), "w") as fout:
             for key in infHDHP.time_kernels:
                 fout.write ("\t".join ([str (key), str (infHDHP.time_kernels[key])]) + "\n")
-   
+
 
         # plot the base rates and the estimated alpha values
         plotMuScatterPlot (genHDHP.mu_per_user, infHDHP.mu_per_user, "figs/" + "Case:{0}".format(case) + "_U_" + str(num_users) + "_E_" + str(num_events) + "_base_rates.pdf")
         plotAlphaScatterPlot (genHDHP.time_kernels, infHDHP.time_kernels, "figs/" + "Case:{0}".format(case) + "_U_" + str(num_users) + "_E_" + str(num_events) + "_time_kernels.pdf")
-        
+        #
+        # generated_events =[e for e in genHDHP.annotatedEventsIter ()]
+        # inferred_events = [e for e in infHDHP.annotatedEventsIter ()]
         trueLabs = [e[1] for e in genHDHP.annotatedEventsIter ()]
         predLabs = [e[1] for e in infHDHP.annotatedEventsIter ()]
 
+        # find_kernel_parameters_order(trueLabs, predLabs, len(infHDHP.time_kernels))
+
         print("True Labels Size: " + str(len(trueLabs)))
-        print("predected Lables Size: " + str(len(predLabs)))
+        print("predicted Labels Size: " + str(len(predLabs)))
 
 
         with open (os.path.join (dirname, "U_" + str(num_users) + "_E_" + str(num_events) + "_patterns.tsv"), "w") as fout:
             for i in xrange (len (trueLabs)):
                 fout.write ("\t".join ([str(trueLabs[i]), str (predLabs[i])]) + "\n")
 
-        print ("NMI = " + str(normalized_mutual_info_score (trueLabs, predLabs)))
+
+        # print (NMI.calculate_all_NMIs(trueLabs, predLabs, len(infHDHP.time_kernels)))
+
+        # print ("NMI = " + str( normalized_mutual_info_score(trueLabs, predLabs)))
+        max_NMI, order = NMI.calculate_all_NMIs(trueLabs, predLabs, num_patterns)
+        print ("Max NMI: " + str(max_NMI))
 
 
 if __name__ == "__main__":
