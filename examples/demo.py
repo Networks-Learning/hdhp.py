@@ -16,6 +16,7 @@ import numpy as np
 import os
 import timeit
 import itertools
+import operator
 import NMI
 
 def getArgs ():
@@ -25,6 +26,30 @@ def getArgs ():
     parser.set_defaults (use_cousers=False)
     args = parser.parse_args ()
     return args
+
+
+def find_kernel_mapping(true_labels, estimated_labels):
+
+    mappings = {}
+
+    for i in range(len(true_labels)):
+        true_label = true_labels[i]
+        pred_label = estimated_labels[i]
+
+        if true_label in mappings:
+            if pred_label in mappings[true_label]:
+                mappings[true_label][pred_label] += 1
+            else:
+                mappings[true_label][pred_label] = 1
+        else:
+            mappings[true_label] = {pred_label: 1}
+
+    best_mapping = {}
+
+    for true_label in mappings:
+        best_mapping[true_label] = max(mappings[true_label].iteritems(), key=operator.itemgetter(1))[0]
+
+    return best_mapping
 
 def find_kernel_parameters_order(true_labels, estimated_labels, num_of_patterns):
 
@@ -166,6 +191,17 @@ def generate (num_users, num_events, num_patterns, vocab_sizes, time_horizon, al
 
     # generate events from the process
     events = process.generate (min_num_events=20, max_num_events=num_events, t_max=time_horizon, reset=True)
+
+    # cluster_count = {}
+    # for event in events:
+    #     if event[3][0] in cluster_count:
+    #         cluster_count[event[3][0]] += 1
+    #     else:
+    #         cluster_count[event[3][0]] = 1
+
+    for cluster in process.cluster_count:
+        print("Cluster " + str(cluster) + " : " + str(process.cluster_count[cluster]))
+
     # overlap = notebook_helpers.compute_pattern_overlap(process)
 
     # for doc_type in overlap:
@@ -174,10 +210,10 @@ def generate (num_users, num_events, num_patterns, vocab_sizes, time_horizon, al
     #     fig.savefig("figs/pattern_overlaps_" + doc_type + ".pdf")
     #     fig.clf()
 
-    start_date = datetime.datetime(2015, 9, 15)
-    fig = process.plot(start_date=start_date, user_limit=5, num_samples=1000, time_unit='days', label_every=1, seed=5)
-    fig.savefig("figs/times.pdf")
-    fig.clf()
+    # start_date = datetime.datetime(2015, 9, 15)
+    # fig = process.plot(start_date=start_date, user_limit=5, num_samples=1000, time_unit='days', label_every=1, seed=5)
+    # fig.savefig("figs/times.pdf")
+    # fig.clf()
     #
     # for user_id in range(num_users):
     #     print ("User :" + str(user_id) + " ---->" + str(process.user_patterns_set(user=user_id)))
@@ -234,14 +270,14 @@ def infer (num_users, num_patterns, alpha_0, mu_0, omega, num_particles, indices
 def main ():
     #args = getArgs ()
     # Parameters to generate the data
-    num_users = 20
-    num_events = 1000
-    num_patterns = 10
+    num_users = 100
+    num_events = 30000
+    num_patterns = 40
     vocab_sizes = {"docs": 300, "auths": 150}
     time_horizon = 365
     alpha_0 = (8, 0.25) # prior for excitation
     mu_0 = (10, 0.2) # prior for base intensity
-    omega = 5 # decay kernel
+    omega = 4 # decay kernel
     expected_doc_lengths = {"docs": (100, 150), "auths": (50,100)}
     words_per_pattern = {"docs": 30, "auths": 30} # check again if this should be a parameter per dictionary.
     # generate the data
@@ -263,7 +299,7 @@ def main ():
              2: ([0,1], False),
              3: ([0,1], True)}
 
-    for case in [1, 2, 3]:
+    for case in [3, 1, 2]:
 
         print "Case: {0}".format (case)
         start = timeit.default_timer()
@@ -293,17 +329,29 @@ def main ():
 
         # plot the base rates and the estimated alpha values
         plotMuScatterPlot (genHDHP.mu_per_user, infHDHP.mu_per_user, "figs/" + "Case:{0}".format(case) + "_U_" + str(num_users) + "_E_" + str(num_events) + "_base_rates.pdf")
-        plotAlphaScatterPlot (genHDHP.time_kernels, infHDHP.time_kernels, "figs/" + "Case:{0}".format(case) + "_U_" + str(num_users) + "_E_" + str(num_events) + "_time_kernels.pdf")
+
         #
         # generated_events =[e for e in genHDHP.annotatedEventsIter ()]
         # inferred_events = [e for e in infHDHP.annotatedEventsIter ()]
         trueLabs = [e[1] for e in genHDHP.annotatedEventsIter ()]
         predLabs = [e[1] for e in infHDHP.annotatedEventsIter ()]
 
-        # find_kernel_parameters_order(trueLabs, predLabs, len(infHDHP.time_kernels))
-
         print("True Labels Size: " + str(len(trueLabs)))
         print("predicted Labels Size: " + str(len(predLabs)))
+
+        kernel_mappings = find_kernel_mapping(trueLabs, predLabs)
+
+        generated_time_kernels = genHDHP.time_kernels
+        inferred_time_kernels = infHDHP.time_kernels
+
+        new_inferred_time_kernels = {}
+
+        for key in kernel_mappings:
+            new_inferred_time_kernels[key] = inferred_time_kernels[kernel_mappings[key]]
+
+        plotAlphaScatterPlot(generated_time_kernels, new_inferred_time_kernels,
+                             "figs/" + "Case:{0}".format(case) + "_U_" + str(num_users) + "_E_" + str(
+                                 num_events) + "_time_kernels.pdf")
 
 
         with open (os.path.join (dirname, "U_" + str(num_users) + "_E_" + str(num_events) + "_patterns.tsv"), "w") as fout:
@@ -314,8 +362,8 @@ def main ():
         # print (NMI.calculate_all_NMIs(trueLabs, predLabs, len(infHDHP.time_kernels)))
 
         # print ("NMI = " + str( normalized_mutual_info_score(trueLabs, predLabs)))
-        max_NMI, order = NMI.calculate_all_NMIs(trueLabs, predLabs, num_patterns)
-        print ("Max NMI: " + str(max_NMI))
+        # max_NMI, order = NMI.calculate_all_NMIs(trueLabs, predLabs, num_patterns)
+        # print ("Max NMI: " + str(max_NMI))
 
 
 if __name__ == "__main__":

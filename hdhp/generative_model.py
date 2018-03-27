@@ -129,12 +129,14 @@ class HDHProcess:
         # Negar: To keep pattern times for each user ---> used to sample time
         self.pattern_times_per_user = defaultdict(dict)
         self.user_dish_cache = defaultdict(dict)
+        self.cluster_count = defaultdict(int)
 
     def sample_couser_params(self):
         """ Returns the co-authoring distributions for every user """
         couser_params = {}
         for user in xrange(self.num_users):
-            couser_params[user] = self.cousers_param_prng.dirichlet(self.cousers[user, :])
+            theta = [1.0 / self.num_users for i in range(self.num_users)]
+            couser_params[user] = self.cousers_param_prng.dirichlet(theta)
 
         return couser_params
 
@@ -346,6 +348,12 @@ class HDHProcess:
             z_n, user = min(next_time_per_pattern, key=next_time_per_pattern.get)
             cousers = self.sample_cousers_for(user)
             t_n = next_time_per_pattern[(z_n, user)]
+
+            if z_n not in self.cluster_count:
+                self.cluster_count[z_n] = 1
+            else:
+                self.cluster_count[z_n] += 1
+
             if t_max is not None and t_n > t_max:
                 over_tmax = True
                 break
@@ -472,6 +480,11 @@ class HDHProcess:
                 z_n = next_time_per_pattern.argmin()
                 t_n = next_time_per_pattern[z_n]
                 cousers = self.sample_cousers_for(user)
+
+                if z_n not in self.cluster_count:
+                    self.cluster_count[z_n] = 1
+                else:
+                    self.cluster_count[z_n] += 1
 
                 if t_max is not None and t_n > t_max:
                     over_tmax = True
