@@ -31,10 +31,10 @@ from itertools import izip
 
 
 class HDHProcess:
-
-    def __init__(self, num_patterns, alpha_0, mu_0, vocabulary, omega=1,
-                 doc_length=20, doc_min_length=5, words_per_pattern=10,
-                 random_state=None):
+    def __init__(self, num_patterns, alpha_0, mu_0, vocabulary, vocab_types, omega=1,
+                 doc_length={'docs': 20, 'auths': 20}, doc_min_length={'docs': 5, 'auths': 5},
+                 words_per_pattern={'docs': 10, 'auths': 10},
+                 random_state=None, generate=False):
         """
         Parameters
         ----------
@@ -84,9 +84,11 @@ class HDHProcess:
         self.document_min_length = doc_min_length
         self.omega = omega
         self.words_per_pattern = words_per_pattern
-        self.pattern_params = self.sample_pattern_params()
-        self.time_kernels = self.sample_time_kernels()
-        self.pattern_popularity = self.sample_pattern_popularity()
+        self.vocab_types = vocab_types
+        if generate:
+            self.pattern_params = self.sample_pattern_params()
+            self.time_kernels = self.sample_time_kernels()
+            self.pattern_popularity = self.sample_pattern_popularity()
 
         # Initialize all the counters etc.
         self.reset()
@@ -118,8 +120,8 @@ class HDHProcess:
         self.cache_per_user = defaultdict(dict)
         self.total_tables_per_user = defaultdict(int)
         self.events = []
-        self.per_pattern_word_counts = defaultdict(lambda: defaultdict(int))
-        self.per_pattern_word_count_total = defaultdict(int)
+        self.per_pattern_word_counts = {vocab_type: defaultdict(lambda: defaultdict(int)) for vocab_type in self.vocab_types}
+        self.per_pattern_word_count_total = {vocab_type: defaultdict(int) for vocab_type in self.vocab_types}
 
     def sample_pattern_params(self):
         """Returns the word distributions for each pattern.
@@ -130,16 +132,18 @@ class HDHProcess:
         parameters : list
             A list of word distributions, one for each pattern.
         """
-        sampled_params = {}
-        V = len(self.vocabulary)
-        for pattern in range(self.num_patterns):
-            custom_theta = [0] * V
-            words_in_pattern = self.prng.choice(V, size=self.words_per_pattern,
-                                                replace=False)
-            for word in words_in_pattern:
-                custom_theta[word] = 100. / self.words_per_pattern
-            sampled_params[pattern] = \
-                self.pattern_param_prng.dirichlet(custom_theta)
+        sampled_params = {vocab_type: dict() for vocab_type in self.vocab_types}
+        for vocab_type in self.vocab_types:
+            V = len(self.vocabulary[vocab_type])
+
+            for pattern in range(self.num_patterns):
+                custom_theta = [0] * V
+                words_in_pattern = self.prng.choice(V, size=self.words_per_pattern[vocab_type],
+                                                    replace=False)
+                for word in words_in_pattern:
+                    custom_theta[word] = 100. / self.words_per_pattern[vocab_type]
+                sampled_params[vocab_type][pattern] = \
+                    self.pattern_param_prng.dirichlet(custom_theta)
         return sampled_params
 
     def sample_time_kernels(self):
@@ -338,14 +342,14 @@ class HDHProcess:
                 self.user_table_cache[user][table] = (t_n, 0)
                 self.dish_on_table_per_user[user][table] = z_n
 
-            if z_n not in self.first_observed_time or\
-                    t_n < self.first_observed_time[z_n]:
+            if z_n not in self.first_observed_time or \
+                            t_n < self.first_observed_time[z_n]:
                 self.first_observed_time[z_n] = t_n
             self.dish_counters[z_n] += 1
 
             doc_n = self.sample_document(z_n)
-            self._update_word_counters(doc_n.split(), z_n)
-            self.document_history_per_user[user]\
+            self._update_word_counters(doc_n, z_n)
+            self.document_history_per_user[user] \
                 .append(doc_n)
             self.table_history_per_user[user].append(table)
             self.time_history_per_user[user].append(t_n)
@@ -403,12 +407,18 @@ class HDHProcess:
         str
             A space separeted string that contains all the sampled words.
         """
-        length = self.doc_prng.randint(self.document_length) + \
-            self.document_min_length
-        words = self.doc_prng.multinomial(length, self.pattern_params[pattern])
-        return ' '.join([self.vocabulary[i]
-                         for i, repeats in enumerate(words)
-                         for j in range(repeats)])
+        sampled_doc = {vocab_type: ' ' for vocab_type in self.vocab_types}
+
+        for vocab_type in sampled_doc:
+            length = self.doc_prng.randint(self.document_length[vocab_type]) + \
+                     self.document_min_length[vocab_type]
+            words = self.doc_prng.multinomial(length, self.pattern_params[vocab_type][pattern])
+
+            sampled_doc[vocab_type] = ' '.join([self.vocabulary[vocab_type][i]
+                                                for i, repeats in enumerate(words)
+                                                for j in range(repeats)])
+
+        return sampled_doc
 
     def _update_word_counters(self, doc, pattern):
         """Updates the word counters of the process for the particular document
@@ -422,9 +432,10 @@ class HDHProcess:
         pattern : int
             The index of the latent pattern that this document belongs to.
         """
-        for word in doc:
-            self.per_pattern_word_counts[pattern][word] += 1
-            self.per_pattern_word_count_total[pattern] += 1
+        for vocab_type in doc:
+            for word in doc[vocab_type].split():
+                self.per_pattern_word_counts[vocab_type][pattern][word] += 1
+                self.per_pattern_word_count_total[vocab_type][pattern] += 1
         return
 
     def pattern_content_str(self, patterns=None, show_words=-1,
@@ -654,8 +665,8 @@ class HDHProcess:
             if dish in dish_cache:
                 t_last_dish, sum_kernels_dish = dish_cache[dish]
                 update_value_dish = self.kernel(t, t_last_dish)
-                dish_intensity = lambda_uz + alpha * sum_kernels_dish *\
-                    update_value_dish
+                dish_intensity = lambda_uz + alpha * sum_kernels_dish * \
+                                             update_value_dish
                 dish_intensity += alpha * update_value_dish
             else:
                 dish_intensity = lambda_uz
@@ -663,8 +674,8 @@ class HDHProcess:
                 # table already exists
                 t_last_table, sum_kernels_table = table_cache[table]
                 update_value_table = self.kernel(t, t_last_table)
-                table_intensity = alpha * sum_kernels_table *\
-                    update_value_table
+                table_intensity = alpha * sum_kernels_table * \
+                                  update_value_table
                 table_intensity += alpha * update_value_table
             else:
                 # table does not exist yet
@@ -871,10 +882,11 @@ class HDHProcess:
             user_plt.set_xlim((T_min, T_max))
             if paper:
                 if start_date is None:
-                    raise ValueError('For paper-level quality plots, the actual datetime for t=0 must be provided as `start_date`')
+                    raise ValueError(
+                        'For paper-level quality plots, the actual datetime for t=0 must be provided as `start_date`')
                 if start_date.microsecond > 500000:
                     start_date = start_date.replace(microsecond=0) \
-                        + datetime.timedelta(seconds=1)
+                                 + datetime.timedelta(seconds=1)
                 else:
                     start_date = start_date.replace(microsecond=0)
                 if time_unit == 'days':
