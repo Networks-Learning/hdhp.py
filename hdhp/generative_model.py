@@ -27,6 +27,7 @@ from sklearn.utils import check_random_state
 from utils import (qualitative_cmap, weighted_choice, monthly_labels,
                    monthly_ticks_for_days, monthly_ticks_for_months,
                    month_add)
+from itertools import izip
 
 
 class HDHProcess:
@@ -1035,3 +1036,18 @@ class HDHProcess:
                    )
                 for pattern in self.per_pattern_word_counts if pattern in patterns]
         return '\n\n'.join(text)
+
+    def annotatedEventsIter(self, keep_sorted=True):
+
+        events = [(t, dish, table, u, doc)
+                  for u in xrange(self.num_users)
+                  for ((t, doc), (table, dish)) in izip([(t, d)
+                                                         for t, d in izip(self.time_history_per_user[u],
+                                                                          self.document_history_per_user[u])],
+                                                        [(table, self.dish_on_table_per_user[u][table])
+                                                         for table in self.table_history_per_user[u]])]
+
+        if keep_sorted: events = sorted(events, key=lambda x: x[0])
+
+        for event in events:
+            yield event
