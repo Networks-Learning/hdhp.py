@@ -23,6 +23,15 @@ import operator
 import NMI
 import matplotlib.pyplot as plt
 
+def createTriDiagonalMatrix (n):
+    ones = np.ones (n)
+    cousers = 0 * np.diag(ones)
+
+    for i in range(n):
+        probs = np.random.dirichlet(np.ones(n - 1),size=1)
+        probs = np.insert(probs, i, 1)
+        cousers[i, :] = probs
+    return cousers
 
 def find_kernel_mapping(true_labels, estimated_labels):
     mappings = {}
@@ -78,6 +87,9 @@ def plotAlphaScatterPlot(xdict, ydict, outFile):
 
     inter = set(xkeys) & set(ykeys)
 
+    for key in inter:
+        print(str(xdict[key]) + " : " + str(ydict[key]))
+
     x = pd.Series([xdict[k] for k in inter], name="True Value")
     y = pd.Series([ydict[k] for k in inter], name="Inferred Value")
 
@@ -105,10 +117,11 @@ def plotAlphaScatterPlot(xdict, ydict, outFile):
 def generate(num_users, num_patterns, alpha_0, mu_0, omega, vocab_size, doc_min_length, doc_length, words_per_pattern,
              num_samples, vocab_types):
     vocabulary = {doc_type: [doc_type + str(i) for i in range(vocab_size[doc_type])] for doc_type in vocab_size}
+    cousers = createTriDiagonalMatrix(num_users)
 
-    process = hdhp.HDHProcess(num_patterns=num_patterns, alpha_0=alpha_0, vocab_types=vocab_types,
+    process = hdhp.HDHProcess(num_patterns=num_patterns, alpha_0=alpha_0, vocab_types=vocab_types, total_user=num_users,
                               mu_0=mu_0, vocabulary=vocabulary, doc_length=doc_length, doc_min_length=doc_min_length,
-                              omega=omega, words_per_pattern=words_per_pattern,
+                              omega=omega, words_per_pattern=words_per_pattern, cousers=cousers,
                               random_state=12, generate=True)
 
     # overlap = notebook_helpers.compute_pattern_overlap(process)
@@ -119,10 +132,11 @@ def generate(num_users, num_patterns, alpha_0, mu_0, omega, vocab_size, doc_min_
     # plt.close(fig)
 
     process.reset()  # removes any previously generated data
-    for i in range(num_users):
-        _ = process.sample_user_events(min_num_events=100,
+
+    events = process.sample_user_events(min_num_events=100,
                                        max_num_events=num_samples,
                                        t_max=365)
+
     for cluster in process.dish_counters:
         print("Cluster " + str(cluster) + " : " + str(process.dish_counters[cluster]))
 
@@ -141,7 +155,7 @@ def generate(num_users, num_patterns, alpha_0, mu_0, omega, vocab_size, doc_min_
 
 def infer(generated_process, alpha_0, mu_0, omega, vocab_types):
     particle, norms = hdhp.infer(generated_process.events, vocab_types=vocab_types, alpha_0=alpha_0, mu_0=mu_0,
-                                 omega=omega, num_particles=10, seed=512)
+                                 omega=omega, num_particles=15, seed=512)
 
     inferred_process = particle.to_process()
 
@@ -168,11 +182,11 @@ def main():
 
     alpha_0 = (2.5, 0.75)
     mu_0 = (2, 0.5)
-    omega = 3.5
+    omega = 5
 
-    num_patterns = 20
-    num_users = 20
-    num_samples = 3000
+    num_patterns = 40
+    num_users = 100
+    num_samples = 50000
 
     start = timeit.default_timer()
     generated_process = generate(num_users, num_patterns, alpha_0, mu_0, omega, vocab_size, doc_min_length, doc_length,
@@ -218,6 +232,7 @@ def main():
 
     for key in kernel_mappings:
         new_inferred_time_kernels[key] = inferred_time_kernels[kernel_mappings[key]]
+
 
     plotAlphaScatterPlot(generated_time_kernels, new_inferred_time_kernels,
                          "Figs/U_" + str(num_users) + "_E_" + str(

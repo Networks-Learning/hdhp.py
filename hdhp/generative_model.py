@@ -31,7 +31,7 @@ from itertools import izip
 
 
 class HDHProcess:
-    def __init__(self, num_patterns, alpha_0, mu_0, vocabulary, vocab_types, omega=1,
+    def __init__(self, num_patterns, alpha_0, mu_0, vocabulary, vocab_types, total_user, cousers=None, omega=1,
                  doc_length={'docs': 20, 'auths': 20}, doc_min_length={'docs': 5, 'auths': 5},
                  words_per_pattern={'docs': 10, 'auths': 10},
                  random_state=None, generate=False):
@@ -75,6 +75,7 @@ class HDHProcess:
         self.doc_prng = RandomState(self.prng.randint(200000000))
         self.time_kernel_prng = RandomState(self.prng.randint(2000000000))
         self.pattern_param_prng = RandomState(self.prng.randint(2000000000))
+        self.cousers_param_prng = RandomState(self.prng.randint(2000000000))
 
         self.num_patterns = num_patterns
         self.alpha_0 = alpha_0
@@ -85,10 +86,15 @@ class HDHProcess:
         self.omega = omega
         self.words_per_pattern = words_per_pattern
         self.vocab_types = vocab_types
+        ######
+        self.cousers = cousers
+        self.total_users = total_user
+
         if generate:
             self.pattern_params = self.sample_pattern_params()
             self.time_kernels = self.sample_time_kernels()
             self.pattern_popularity = self.sample_pattern_popularity()
+            self.couser_params = self.sample_couser_params()
 
         # Initialize all the counters etc.
         self.reset()
@@ -102,7 +108,7 @@ class HDHProcess:
         It does not reseed the random number generator. It also retains the
         already sampled pattern parameters (word distributions and alphas)
         """
-        self.mu_per_user = {}
+        self.mu_per_user = {i: self.sample_mu() for i in xrange(self.total_users)}
         self.num_users = 0
         self.time_history = []
         self.time_history_per_user = {}
@@ -120,8 +126,21 @@ class HDHProcess:
         self.cache_per_user = defaultdict(dict)
         self.total_tables_per_user = defaultdict(int)
         self.events = []
-        self.per_pattern_word_counts = {vocab_type: defaultdict(lambda: defaultdict(int)) for vocab_type in self.vocab_types}
+        self.per_pattern_word_counts = {vocab_type: defaultdict(lambda: defaultdict(int)) for vocab_type in
+                                        self.vocab_types}
         self.per_pattern_word_count_total = {vocab_type: defaultdict(int) for vocab_type in self.vocab_types}
+        #####
+        self.user_dish_cache = defaultdict(dict)
+        self.cousers_history_per_user = defaultdict(list)
+
+    def sample_couser_params(self):
+        """ Returns the co-authoring distributions for every user """
+        couser_params = {}
+        for user in xrange(self.total_users):
+            # theta = [1.0 / self.num_users for i in range(self.num_users)]
+            couser_params[user] = self.cousers_param_prng.dirichlet(self.cousers[user, :])
+
+        return couser_params
 
     def sample_pattern_params(self):
         """Returns the word distributions for each pattern.
@@ -187,7 +206,15 @@ class HDHProcess:
         """
         return self.prng.gamma(self.mu_0[0], self.mu_0[1])
 
-    def sample_next_time(self, pattern, user):
+    def sample_cousers_for(self, user):
+        counts = self.prng.multinomial(self.total_users, self.couser_params[user])
+        others = list()
+        for i, count in enumerate(counts):
+            if count > 0 and not i == user:
+                others.append(i)
+        return others
+
+    def sample_next_time(self, pattern, user, reset=True):
         """Samples the time of the next event of a pattern for a given user.
 
 
@@ -208,32 +235,24 @@ class HDHProcess:
         mu_u = self.mu_per_user[user]
         lambda_u_pattern = mu_u * self.pattern_popularity[pattern]
 
-        if user in self.total_tables_per_user:
-            # We have seen the user before
-            num_tables = self.total_tables_per_user[user]
-            pattern_tables = [table for table in range(num_tables)
-                              if self.dish_on_table_per_user[user][table]
-                              == pattern]
-        else:
-            pattern_tables = []
-        alpha = self.time_kernels[pattern]
-        if not pattern_tables:
+        if user not in self.user_dish_cache or pattern not in self.user_dish_cache[user]:
             lambda_star = lambda_u_pattern
             s = -1 / lambda_star * np.log(U())
             return s
         else:
+
             # Add the \alpha of the most recent table (previous event) in the
             # user-pattern intensity
             s = self.last_event_user_pattern[user][pattern]
-            pattern_intensity = 0
-            for table in pattern_tables:
-                t_last, sum_kernels = self.user_table_cache[user][table]
-                update_value = self.kernel(s, t_last)
-                # update_value should be 1, so practically we are just adding
-                # \alpha to the intensity dt after the event
-                table_intensity = alpha * sum_kernels * update_value
-                table_intensity += alpha * update_value
-                pattern_intensity += table_intensity
+            alpha = self.time_kernels[pattern]
+
+            t_last, sum_kernels = self.user_dish_cache[user][pattern]
+            update_value = self.kernel(s, t_last)
+
+            # update_value should be 1, so practically we are just adding
+            # \alpha to the intensity dt after the event
+            pattern_intensity = alpha * sum_kernels * update_value
+            pattern_intensity += alpha * update_value
             lambda_star = lambda_u_pattern + pattern_intensity
 
             # New event
@@ -241,15 +260,13 @@ class HDHProcess:
             while not accepted:
                 s = s - 1 / lambda_star * np.log(U())
                 # Rejection test
-                pattern_intensity = 0
-                for table in pattern_tables:
-                    t_last, sum_kernels = self.user_table_cache[user][table]
-                    update_value = self.kernel(s, t_last)
-                    # update_value should be 1, so practically we are just adding
-                    # \alpha to the intensity dt after the event
-                    table_intensity = alpha * sum_kernels * update_value
-                    table_intensity += alpha * update_value
-                    pattern_intensity += table_intensity
+                t_last, sum_kernels = self.user_dish_cache[user][pattern]
+                update_value = self.kernel(s, t_last)
+                # update_value should be 1, so practically we are just adding
+                # \alpha to the intensity dt after the event
+                pattern_intensity = alpha * sum_kernels * update_value
+                pattern_intensity += alpha * update_value
+
                 lambda_s = lambda_u_pattern + pattern_intensity
                 if U() < lambda_s / lambda_star:
                     return s
@@ -282,25 +299,23 @@ class HDHProcess:
             that we want for doc_i, e.g. question_id. The generator will return
             an empty list for meta_i.
         """
-        user = len(self.mu_per_user)
-        mu_u = self.sample_mu()
-        self.mu_per_user[user] = mu_u
 
-        # Populate the list with the first event for each pattern
-        next_time_per_pattern = [self.sample_next_time(pattern, user)
-                                 for pattern in range(self.num_patterns)]
-        next_time_per_pattern = asfortranarray(next_time_per_pattern)
-
+        next_time_per_pattern = {(pattern, user): self.sample_next_time(pattern, user) for pattern in
+                                 xrange(self.num_patterns) for user in xrange(self.total_users)}
         iteration = 0
         over_tmax = False
+
         while iteration < min_num_events or not over_tmax:
             if max_num_events is not None and iteration > max_num_events:
                 break
-            z_n = next_time_per_pattern.argmin()
-            t_n = next_time_per_pattern[z_n]
+            z_n, user = min(next_time_per_pattern, key=next_time_per_pattern.get)
+            cousers = self.sample_cousers_for(user)
+            t_n = next_time_per_pattern[(z_n, user)]
+
             if t_max is not None and t_n > t_max:
                 over_tmax = True
                 break
+
             num_tables_user = self.total_tables_per_user[user] \
                 if user in self.total_tables_per_user else 0
             tables = range(num_tables_user)
@@ -315,7 +330,7 @@ class HDHProcess:
                 table_intensity = alpha * sum_kernels * update_value
                 table_intensity += alpha * update_value
                 intensities.append(table_intensity)
-            intensities.append(mu_u * self.pattern_popularity[z_n])
+            intensities.append(self.mu_per_user[user] * self.pattern_popularity[z_n])
             log_intensities = [ln(inten_i)
                                if inten_i > 0 else -float('inf')
                                for inten_i in intensities]
@@ -353,25 +368,60 @@ class HDHProcess:
                 .append(doc_n)
             self.table_history_per_user[user].append(table)
             self.time_history_per_user[user].append(t_n)
+            self.cousers_history_per_user[user].append(cousers)
             self.last_event_user_pattern[user][z_n] = t_n
 
+            #####
+            if user not in self.user_dish_cache:
+                self.user_dish_cache[user] = {}
+            if z_n not in self.user_dish_cache[user]:
+                self.user_dish_cache[user][z_n] = (t_n, 0)
+            else:
+                t_last, sum_kernels = self.user_dish_cache[user][z_n]
+                update_value = self.kernel(t_n, t_last)
+                sum_kernels += 1
+                sum_kernels *= update_value
+                self.user_dish_cache[user][z_n] = (t_last, sum_kernels)
+
+            for u in cousers:
+                self.last_event_user_pattern[u][z_n] = t_n
+
+                if u not in self.user_dish_cache:
+                    self.user_dish_cache[u] = {}
+                if z_n not in self.user_dish_cache[u]:
+                    self.user_dish_cache[u][z_n] = (t_n, 0)
+                else:
+                    t_last, sum_kernels = self.user_dish_cache[u][z_n]
+                    update_value = self.kernel(t_n, t_last)
+                    sum_kernels += 1
+                    sum_kernels *= update_value
+                    self.user_dish_cache[u][z_n] = (t_n, sum_kernels)
+
             # Resample time for that pattern
-            next_time_per_pattern[z_n] = self.sample_next_time(z_n, user)
-            z_n = next_time_per_pattern.argmin()
-            t_n = next_time_per_pattern[z_n]
+            next_time_per_pattern[(z_n, user)] = self.sample_next_time(z_n, user)
+            for u in cousers:
+                next_time_per_pattern[(z_n, u)] = self.sample_next_time(z_n, u)
             iteration += 1
 
-        events = [(self.time_history_per_user[user][i],
-                   self.document_history_per_user[user][i], user, [])
-                  for i in range(len(self.time_history_per_user[user]))]
+        # events = [(self.time_history_per_user[user][i],
+        #            self.document_history_per_user[user][i], [user] + self.cousers_history_per_user[user][i], [])
+        #           for i in range(len(self.time_history_per_user[user]))]
 
         # Update the full history of events with the ones generated for the
         # current user and re-order everything so that the events are
         # ordered by their timestamp
-        self.events += events
+        for user in xrange(self.total_users):
+            events = [(self.time_history_per_user[user][i],
+                       self.document_history_per_user[user][i], [user] + self.cousers_history_per_user[user][i],
+                       [self.dish_on_table_per_user[user][self.table_history_per_user[user][i]]])
+                      for i in xrange(len(self.time_history_per_user[user]))]
+            self.events.extend(events)
+
+            # Update the full history of events with the ones generated for the
+            # current user and re-order everything so that the events are
+            # ordered by their timestamp
         self.events = sorted(self.events, key=lambda x: x[0])
-        self.num_users += 1
-        return events
+        return self.events
 
     def kernel(self, t_i, t_j):
         """Returns the kernel function for t_i and t_j.
@@ -1052,7 +1102,7 @@ class HDHProcess:
     def annotatedEventsIter(self, keep_sorted=True):
 
         events = [(t, dish, table, u, doc)
-                  for u in xrange(self.num_users)
+                  for u in xrange(self.total_users)
                   for ((t, doc), (table, dish)) in izip([(t, d)
                                                          for t, d in izip(self.time_history_per_user[u],
                                                                           self.document_history_per_user[u])],

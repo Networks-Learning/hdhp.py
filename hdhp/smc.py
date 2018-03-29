@@ -135,6 +135,9 @@ class Particle(object):
         self.time_elapsed = 0
         self.active_tables_per_user = {}
 
+        ####
+        self.user_dish_cache = defaultdict(dict)
+
     def reseed(self, seed=None, uid=None):
         self.seed = seed
         self.prng = RandomState(self.seed)
@@ -161,6 +164,7 @@ class Particle(object):
                          vocab_types=self.vocab_types)
         ####
         new_p.vocab_types = copy(self.vocab_types)
+        new_p.user_dish_cache = copy_dict(self.user_dish_cache)
         ####
         new_p.alpha_0 = copy(self.alpha_0)
         new_p.num_events = self.num_events
@@ -223,7 +227,10 @@ class Particle(object):
         # t_n : time of the n-th event
         # d_n : text of the n-th event
         # q_n : any metadata for the n-th event, e.g. the question id
-        t_n, d_n, u_n, q_n = event
+        t_n, d_n, u, q_n = event
+        u_n = u[0]
+        cousers = u[1:]
+
         d_n = {vocab_type: d_n[vocab_type].split() for vocab_type in d_n}
 
         if self.num_events == 0:
@@ -258,7 +265,7 @@ class Particle(object):
             self._max_dish = z_n
         else:
             if self.update_kernels:
-                self.update_time_kernel(t_n, z_n)
+                self.update_time_kernel(t_n, z_n, len(u))
         if self.update_kernels and self.keep_alpha_history:
             if z_n not in self.alpha_history:
                 self.alpha_history[z_n] = []
@@ -276,12 +283,42 @@ class Particle(object):
         self.user_previous_event = u_n
         self.table_previous_event = b_n
         self.active_tables_per_user[u_n].add(b_n)
+
         if z_n not in self.dish_counters:
             self.dish_counters[z_n] = 1
         elif opened_table:
             self.dish_counters[z_n] += 1
         if u_n not in self.first_observed_user_time:
             self.first_observed_user_time[u_n] = t_n
+
+        #####
+        if u_n not in self.user_dish_cache:
+            self.user_dish_cache[u_n] = {}
+        if z_n not in self.user_dish_cache[u_n]:
+            self.user_dish_cache[u_n][z_n] = (t_n, 0)
+        else:
+            t_last, sum_kernels = self.user_dish_cache[u_n][z_n]
+            update_value = self.kernel(t_n, t_last)
+            sum_kernels += 1
+            sum_kernels *= update_value
+            self.user_dish_cache[u_n][z_n] = (t_n, sum_kernels)
+
+        for u in cousers:
+            self.time_previous_user_event[u] = t_n
+
+            if u not in self.first_observed_user_time:
+                self.first_observed_user_time[u] = t_n
+            if u not in self.user_dish_cache:
+                self.user_dish_cache[u] = {}
+            if z_n not in self.user_dish_cache[u]:
+                self.user_dish_cache[u][z_n] = (t_n, 0)
+            else:
+                t_last, sum_kernels = self.user_dish_cache[u][z_n]
+                update_value = self.kernel(t_n, t_last)
+                sum_kernels += 1
+                sum_kernels *= update_value
+                self.user_dish_cache[u][z_n] = (t_n, sum_kernels)
+
         return b_n, z_n
 
     def sample_table(self, t_n, d_n, u_n):
@@ -433,22 +470,32 @@ class Particle(object):
         """
         return exp(-self.omega * (t_i - t_j))
 
-    def update_time_kernel(self, t_n, z_n):
+    def update_time_kernel(self, t_n, z_n, num_users):
         """Updates the parameter of the time kernel of the chosen pattern
         """
-        v_1, v_2 = self.time_kernel_prior[z_n]
+        # v_1, v_2 = self.time_kernel_prior[z_n]
+        # sum_dish_kernel = 0
+        # for user in self.user_dish_cache:
+        #     if z_n in self.user_dish_cache[user]:
+        #         sum_dish_kernel += self.user_dish_cache[user][z_n][1]
+
+
         t_last, sum_kernels, event_count, intensity, prod = self.dish_cache[z_n]
         update_value = self.kernel(t_n, t_last)
 
         sum_kernels += 1
         sum_kernels *= update_value
+        # prod = sum_kernels
         prod = sum_kernels
+        # sum_integrals = event_count - sum_kernels
         sum_integrals = event_count - sum_kernels
+        # print(str(event_count) + " : " + str(sum_dish_kernel))
         sum_integrals /= self.omega
 
         self.time_kernel_prior[z_n] = self.alpha_0[0] + event_count - self.dish_counters[z_n], \
             self.alpha_0[1] + (sum_integrals)
         prior = self.time_kernel_prior[z_n]
+
         self.time_kernels[z_n] = self.sample_time_kernel(prior)
 
         self.dish_cache[z_n] = t_n, sum_kernels, event_count + 1, intensity, prod
@@ -524,16 +571,17 @@ class Particle(object):
         mu = self.mu_per_user[u_n]
         integral = (t_n - self.time_previous_user_event[u_n]) * mu
         intensity = mu
-        for table in self.user_table_cache[u_n]:
-            t_last, sum_timedeltas = self.user_table_cache[u_n][table]
+
+        for dish in self.user_dish_cache[u_n]:
+            t_last, sum_timedeltas = self.user_dish_cache[u_n][dish]
             update_value = self.kernel(t_n, t_last)
             topic_sum = (sum_timedeltas + 1) - \
-                (sum_timedeltas + 1) * update_value
-            dish = self.dish_on_table_per_user[u_n][table]
+                        (sum_timedeltas + 1) * update_value
             topic_sum *= self.time_kernels[dish]
             integral += topic_sum
             intensity += (sum_timedeltas + 1) \
-                * self.time_kernels[dish] * update_value
+                         * self.time_kernels[dish] * update_value
+
         return ln(intensity) - integral
 
     def _update_word_counters(self, d_n, z_n):
@@ -563,7 +611,7 @@ class Particle(object):
         process = HDHProcess(num_patterns=len(self.time_kernels),
                              mu_0=self.mu_0,
                              alpha_0=self.alpha_0,
-                             vocabulary=self.vocabulary, vocab_types=[key for key in self.vocabulary])
+                             vocabulary=self.vocabulary, vocab_types=[key for key in self.vocabulary], total_user=len(self.mu_per_user))
 
         process.mu_per_user = self.mu_per_user
         process.table_history_per_user = self.table_history_per_user
@@ -597,8 +645,9 @@ def _extract_words_users(history, vocab_types):
     """
     vocabulary = {vocab_type: set() for vocab_type in vocab_types}
     users = set()
-    for t, doc, u, q in history:
-        users.add(u)
+    for t, doc, all_users, q in history:
+        for u in all_users:
+            users.add(u)
         for vocab_type in doc:
             for word in doc[vocab_type].split():
                 vocabulary[vocab_type].add(word)
@@ -678,6 +727,7 @@ def _infer_single_thread(history, params):
         weights = []
         total = 0
         t_i, d_i, u_i, q_i = h_i
+        u_i = u_i[0]
         if u_i not in time_history_per_user:
             time_history_per_user[u_i] = []
             doc_history_per_user[u_i] = []
