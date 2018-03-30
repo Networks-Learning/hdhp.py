@@ -66,3 +66,5 @@ ci
 appveyor.yml
 .ropeproject
 *.log
+examples/Figs
+examples/Results

@@ -110,12 +110,12 @@ def generate(num_users, num_patterns, alpha_0, mu_0, omega, vocab_size, doc_min_
                               omega=omega, words_per_pattern=words_per_pattern,
                               random_state=12)
 
-    overlap = notebook_helpers.compute_pattern_overlap(process)
-    ax = sns.distplot(overlap, kde=True, norm_hist=True, axlabel='Content overlap')
-    fig = ax.get_figure()
-    fig.savefig("Figs/" + str(num_patterns) + "_pattern_overlaps.pdf")
-    fig.clf()
-    plt.close(fig)
+    # overlap = notebook_helpers.compute_pattern_overlap(process)
+    # ax = sns.distplot(overlap, kde=True, norm_hist=True, axlabel='Content overlap')
+    # fig = ax.get_figure()
+    # fig.savefig("Figs/" + str(num_patterns) + "_pattern_overlaps.pdf")
+    # fig.clf()
+    # plt.close(fig)
 
     process.reset()  # removes any previously generated data
     for i in range(num_users):
@@ -128,30 +128,30 @@ def generate(num_users, num_patterns, alpha_0, mu_0, omega, vocab_size, doc_min_
     num_events = len(process.events)
     print 'Total #events', num_events
 
-    start_date = datetime.datetime(2015, 9, 15)
-    fig = process.plot(start_date=start_date, user_limit=5,
-                       num_samples=5000, time_unit='days',
-                       label_every=1, seed=5)
-    fig.savefig("Figs/U_" + str(num_users) + "_E_" + str(num_events) + "_generated_intensity_trace.pdf")
-    plt.close(fig)
+    # start_date = datetime.datetime(2015, 9, 15)
+    # fig = process.plot(start_date=start_date, user_limit=5,
+    #                    num_samples=5000, time_unit='days',
+    #                    label_every=1, seed=5)
+    # fig.savefig("Figs/U_" + str(num_users) + "_E_" + str(num_events) + "_generated_intensity_trace.pdf")
+    # plt.close(fig)
 
     return process
 
-def infer(generated_process, alpha_0, mu_0, omega):
+def infer(generated_process, alpha_0, mu_0, omega, num_users):
 
     particle, norms = hdhp.infer(generated_process.events, alpha_0=alpha_0, mu_0=mu_0,
                                  omega=omega, num_particles=10, seed=512)
 
     inferred_process = particle.to_process()
 
-    start_date = datetime.datetime(2015, 9, 15)
+    # start_date = datetime.datetime(2015, 9, 15)
 
-    fig = inferred_process.plot(task_detail=True, num_samples=1000, seed=170,
-                          time_unit='days', user_limit=5,
-                          T_min=0, start_date=start_date, paper=True)
-
-    fig.savefig("Figs/U_" + str(num_users) + "_E_" + str(num_events) + "_inferred_intensity_trace.pdf")
-    plt.close(fig)
+    # fig = inferred_process.plot(task_detail=True, num_samples=1000, seed=170,
+    #                       time_unit='days', user_limit=5,
+    #                       T_min=0, start_date=start_date, paper=True)
+    #
+    # fig.savefig("Figs/U_" + str(num_users) + "_E_" + str(len(generated_process.events)) + "_inferred_intensity_trace.pdf")
+    # plt.close(fig)
 
     return inferred_process
 
@@ -169,34 +169,34 @@ def main():
 
     num_patterns = 20
     num_users = 20
-    num_samples = 3000
+    num_samples = 300
 
     start = timeit.default_timer()
     generated_process = generate(num_users, num_patterns, alpha_0, mu_0, omega, vocab_size, doc_min_length, doc_length, words_per_pattern, num_samples)
     print("Generation Time: " + str(timeit.default_timer() - start))
 
     start = timeit.default_timer()
-    inferred_process = infer(generated_process, alpha_0, mu_0, omega)
+    inferred_process = infer(generated_process, alpha_0, mu_0, omega, num_users)
     print("Inference Time: " + str(timeit.default_timer() - start))
 
     num_events = len(generated_process.events)
 
-    with open("Results/U_" + str(num_users) + "_E_" + str(num_events) + "_base_rates.tsv", "w") as fout:
+    with open("Results/Paper_U_" + str(num_users) + "_E_" + str(num_events) + "_base_rates.tsv", "w") as fout:
         for key in generated_process.mu_per_user:
             fout.write("\t".join([str(key), str(generated_process.mu_per_user[key]), str(inferred_process.mu_per_user[key])]) + "\n")
 
-    with open("Results/U_" + str(num_users) + "_E_" + str(num_events) + "_set_time_kernels.tsv" ,"w") as fout:
+    with open("Results/Paper_U_" + str(num_users) + "_E_" + str(num_events) + "_set_time_kernels.tsv" ,"w") as fout:
         for key in generated_process.time_kernels:
             fout.write("\t".join([str(key), str(generated_process.time_kernels[key])]) + "\n")
 
-    with open("Results/U_" + str(num_users) + "_E_" + str(num_events) + "_est_time_kernels.tsv", "w") as fout:
+    with open("Results/Paper_U_" + str(num_users) + "_E_" + str(num_events) + "_est_time_kernels.tsv", "w") as fout:
         for key in inferred_process.time_kernels:
             fout.write("\t".join([str(key), str(inferred_process.time_kernels[key])]) + "\n")
 
 
     # plot the base rates and the estimated alpha values
     plotMuScatterPlot(generated_process.mu_per_user, inferred_process.mu_per_user,
-                      "Figs/U_" + str(num_users) + "_E_" + str(
+                      "Figs/Paper_U_" + str(num_users) + "_E_" + str(
                           num_events) + "_base_rates.pdf")
 
     trueLabs = [e[1] for e in generated_process.annotatedEventsIter()]
@@ -216,10 +216,10 @@ def main():
         new_inferred_time_kernels[key] = inferred_time_kernels[kernel_mappings[key]]
 
     plotAlphaScatterPlot(generated_time_kernels, new_inferred_time_kernels,
-                         "Figs/U_" + str(num_users) + "_E_" + str(
+                         "Figs/Paper_U_" + str(num_users) + "_E_" + str(
                              num_events) + "_time_kernels.pdf")
 
-    with open("Results/U_" + str(num_users) + "_E_" + str(num_events) + "_patterns.tsv", "w") as fout:
+    with open("Results/Paper_U_" + str(num_users) + "_E_" + str(num_events) + "_patterns.tsv", "w") as fout:
         for i in xrange(len(trueLabs)):
             fout.write("\t".join([str(trueLabs[i]), str(predLabs[i])]) + "\n")
 
