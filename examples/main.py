@@ -105,7 +105,7 @@ def generate(num_users, num_patterns, alpha_0, mu_0, omega, vocab_size, doc_min_
 
     vocabulary = ['word' + str(i) for i in range(vocab_size)]  # the `words` of our documents
 
-    process = hdhp.HDHProcess(num_patterns=num_patterns, alpha_0=alpha_0,
+    process = hdhp.HDHProcess(num_patterns=num_patterns, alpha_0=alpha_0, num_users=num_users,
                               mu_0=mu_0, vocabulary=vocabulary,
                               omega=omega, words_per_pattern=words_per_pattern,
                               random_state=12)
@@ -118,8 +118,7 @@ def generate(num_users, num_patterns, alpha_0, mu_0, omega, vocab_size, doc_min_
     # plt.close(fig)
 
     process.reset()  # removes any previously generated data
-    for i in range(num_users):
-        _ = process.sample_user_events(min_num_events=100,
+    process.sample_user_events(min_num_events=100,
                                        max_num_events=num_samples,
                                        t_max=365)
     for cluster in process.dish_counters:
@@ -163,13 +162,13 @@ def main():
     doc_length = 20
     words_per_pattern = 30
 
-    alpha_0 = (2.5, 0.75)
-    mu_0 = (2, 0.5)
-    omega = 3.5
+    alpha_0 = (10, 0.2)
+    mu_0 = (8, 0.25)
+    omega = 5
 
-    num_patterns = 20
-    num_users = 20
-    num_samples = 300
+    num_patterns = 40
+    num_users = 100
+    num_samples = 40000
 
     start = timeit.default_timer()
     generated_process = generate(num_users, num_patterns, alpha_0, mu_0, omega, vocab_size, doc_min_length, doc_length, words_per_pattern, num_samples)
@@ -181,22 +180,22 @@ def main():
 
     num_events = len(generated_process.events)
 
-    with open("Results/Paper_U_" + str(num_users) + "_E_" + str(num_events) + "_base_rates.tsv", "w") as fout:
+    with open("Results/C_U_" + str(num_users) + "_E_" + str(num_events) + "_base_rates.tsv", "w") as fout:
         for key in generated_process.mu_per_user:
             fout.write("\t".join([str(key), str(generated_process.mu_per_user[key]), str(inferred_process.mu_per_user[key])]) + "\n")
 
-    with open("Results/Paper_U_" + str(num_users) + "_E_" + str(num_events) + "_set_time_kernels.tsv" ,"w") as fout:
+    with open("Results/C_U_" + str(num_users) + "_E_" + str(num_events) + "_set_time_kernels.tsv" ,"w") as fout:
         for key in generated_process.time_kernels:
             fout.write("\t".join([str(key), str(generated_process.time_kernels[key])]) + "\n")
 
-    with open("Results/Paper_U_" + str(num_users) + "_E_" + str(num_events) + "_est_time_kernels.tsv", "w") as fout:
-        for key in inferred_process.time_kernels:
-            fout.write("\t".join([str(key), str(inferred_process.time_kernels[key])]) + "\n")
+    # with open("Results/C_U_" + str(num_users) + "_E_" + str(num_events) + "_est_time_kernels.tsv", "w") as fout:
+    #     for key in inferred_process.time_kernels:
+    #         fout.write("\t".join([str(key), str(inferred_process.time_kernels[key])]) + "\n")
 
 
     # plot the base rates and the estimated alpha values
     plotMuScatterPlot(generated_process.mu_per_user, inferred_process.mu_per_user,
-                      "Figs/Paper_U_" + str(num_users) + "_E_" + str(
+                      "Figs/C_U_" + str(num_users) + "_E_" + str(
                           num_events) + "_base_rates.pdf")
 
     trueLabs = [e[1] for e in generated_process.annotatedEventsIter()]
@@ -216,10 +215,10 @@ def main():
         new_inferred_time_kernels[key] = inferred_time_kernels[kernel_mappings[key]]
 
     plotAlphaScatterPlot(generated_time_kernels, new_inferred_time_kernels,
-                         "Figs/Paper_U_" + str(num_users) + "_E_" + str(
+                         "Figs/C_U_" + str(num_users) + "_E_" + str(
                              num_events) + "_time_kernels.pdf")
 
-    with open("Results/Paper_U_" + str(num_users) + "_E_" + str(num_events) + "_patterns.tsv", "w") as fout:
+    with open("Results/C_U_" + str(num_users) + "_E_" + str(num_events) + "_patterns.tsv", "w") as fout:
         for i in xrange(len(trueLabs)):
             fout.write("\t".join([str(trueLabs[i]), str(predLabs[i])]) + "\n")
 
