@@ -166,9 +166,9 @@ def main():
     mu_0 = (8, 0.25)
     omega = 5
 
-    num_patterns = 40
-    num_users = 100
-    num_samples = 40000
+    num_patterns = 30
+    num_users = 50
+    num_samples = 42000
 
     start = timeit.default_timer()
     generated_process = generate(num_users, num_patterns, alpha_0, mu_0, omega, vocab_size, doc_min_length, doc_length, words_per_pattern, num_samples)
@@ -180,11 +180,11 @@ def main():
 
     num_events = len(generated_process.events)
 
-    with open("Results/C_U_" + str(num_users) + "_E_" + str(num_events) + "_base_rates.tsv", "w") as fout:
+    with open("Results/C_U_" + str(num_users) + "_E_" + str(num_events) + "_P_" + str(num_patterns) + "_base_rates.tsv", "w") as fout:
         for key in generated_process.mu_per_user:
             fout.write("\t".join([str(key), str(generated_process.mu_per_user[key]), str(inferred_process.mu_per_user[key])]) + "\n")
 
-    with open("Results/C_U_" + str(num_users) + "_E_" + str(num_events) + "_set_time_kernels.tsv" ,"w") as fout:
+    with open("Results/C_U_" + str(num_users) + "_E_" + str(num_events) + "_P_" + str(num_patterns) + "_set_time_kernels.tsv" ,"w") as fout:
         for key in generated_process.time_kernels:
             fout.write("\t".join([str(key), str(generated_process.time_kernels[key])]) + "\n")
 
@@ -196,7 +196,7 @@ def main():
     # plot the base rates and the estimated alpha values
     plotMuScatterPlot(generated_process.mu_per_user, inferred_process.mu_per_user,
                       "Figs/C_U_" + str(num_users) + "_E_" + str(
-                          num_events) + "_base_rates.pdf")
+                          num_events) + "_P_" + str(num_patterns) + "_base_rates.pdf")
 
     trueLabs = [e[1] for e in generated_process.annotatedEventsIter()]
     predLabs = [e[1] for e in inferred_process.annotatedEventsIter()]
@@ -216,7 +216,7 @@ def main():
 
     plotAlphaScatterPlot(generated_time_kernels, new_inferred_time_kernels,
                          "Figs/C_U_" + str(num_users) + "_E_" + str(
-                             num_events) + "_time_kernels.pdf")
+                             num_events) + "_P_" + str(num_patterns) + "_time_kernels.pdf")
 
     with open("Results/C_U_" + str(num_users) + "_E_" + str(num_events) + "_patterns.tsv", "w") as fout:
         for i in xrange(len(trueLabs)):
