@@ -92,8 +92,8 @@ def plotAlphaScatterPlot (xdict, ydict, outFile):
     sns.plt.ylim(min_axis_value, 10)
     sns.plt.xlim(min_axis_value, 10)
 
-    sns.plt.ylim(min_axis_value, max_axis_value)
-    sns.plt.xlim(min_axis_value, max_axis_value)
+    # sns.plt.ylim(min_axis_value, max_axis_value)
+    # sns.plt.xlim(min_axis_value, max_axis_value)
 
     fig = ax.get_figure ()
     fig.savefig (outFile)
@@ -101,14 +101,16 @@ def plotAlphaScatterPlot (xdict, ydict, outFile):
     plt.close(fig)
 
 
-def generate(num_users, num_patterns, alpha_0, mu_0, omega, vocab_size, doc_min_length, doc_length, words_per_pattern, num_samples):
+def generate(num_users, num_patterns, alpha_0, mu_0, omega, vocab_size, doc_min_length, doc_length, words_per_pattern, num_samples, vocab_types):
 
-    vocabulary = ['word' + str(i) for i in range(vocab_size)]  # the `words` of our documents
+    vocabulary = {}
+    for vocab_type in vocab_types:
+        vocabulary[vocab_type] = [vocab_type + str(i) for i in range(vocab_size[vocab_type])]  # the `words` of our documents
 
-    process = hdhp.HDHProcess(num_patterns=num_patterns, alpha_0=alpha_0, num_users=num_users,
-                              mu_0=mu_0, vocabulary=vocabulary,
+    process = hdhp.HDHProcess(num_patterns=num_patterns, alpha_0=alpha_0, num_users=num_users, vocab_types=vocab_types,
+                              mu_0=mu_0, vocabulary=vocabulary, doc_length=doc_length, doc_min_length=doc_min_length,
                               omega=omega, words_per_pattern=words_per_pattern,
-                              random_state=12)
+                              random_state=12, generate=True)
 
     # overlap = notebook_helpers.compute_pattern_overlap(process)
     # ax = sns.distplot(overlap, kde=True, norm_hist=True, axlabel='Content overlap')
@@ -136,10 +138,10 @@ def generate(num_users, num_patterns, alpha_0, mu_0, omega, vocab_size, doc_min_
 
     return process
 
-def infer(generated_process, alpha_0, mu_0, omega, num_users):
+def infer(generated_process, alpha_0, mu_0, omega, num_users, vocab_types, num_particles):
 
     particle, norms = hdhp.infer(generated_process.events, alpha_0=alpha_0, mu_0=mu_0,
-                                 omega=omega, num_particles=10, seed=512)
+                                 omega=omega, num_particles=num_particles, seed=512, vocab_types=vocab_types)
 
     inferred_process = particle.to_process()
 
@@ -156,46 +158,49 @@ def infer(generated_process, alpha_0, mu_0, omega, num_users):
 
 
 def main():
-    vocab_size = 100
 
-    doc_min_length = 10
-    doc_length = 20
-    words_per_pattern = 30
+    vocab_types = ['auths', 'docs']
+    vocab_size = {'auths': 100, 'docs': 100}
+
+    doc_min_length = {'auths': 10, 'docs': 10}
+    doc_length = {'auths': 20, 'docs': 20}
+    words_per_pattern = {'auths': 30, 'docs': 30}
 
     alpha_0 = (10, 0.2)
     mu_0 = (8, 0.25)
     omega = 5
 
-    num_patterns = 30
-    num_users = 50
-    num_samples = 42000
+    num_patterns = 20
+    num_users = 40
+    num_samples = 8000
+    num_particles = 20
 
     start = timeit.default_timer()
-    generated_process = generate(num_users, num_patterns, alpha_0, mu_0, omega, vocab_size, doc_min_length, doc_length, words_per_pattern, num_samples)
+    generated_process = generate(num_users, num_patterns, alpha_0, mu_0, omega, vocab_size, doc_min_length, doc_length, words_per_pattern, num_samples, vocab_types)
     print("Generation Time: " + str(timeit.default_timer() - start))
 
     start = timeit.default_timer()
-    inferred_process = infer(generated_process, alpha_0, mu_0, omega, num_users)
+    inferred_process = infer(generated_process, alpha_0, mu_0, omega, num_users, vocab_types, num_particles)
     print("Inference Time: " + str(timeit.default_timer() - start))
 
     num_events = len(generated_process.events)
 
-    with open("Results/C_U_" + str(num_users) + "_E_" + str(num_events) + "_P_" + str(num_patterns) + "_base_rates.tsv", "w") as fout:
+    with open("Results/CM_U_" + str(num_users) + "_E_" + str(num_events) + "_P_" + str(num_patterns) + "_base_rates.tsv", "w") as fout:
         for key in generated_process.mu_per_user:
             fout.write("\t".join([str(key), str(generated_process.mu_per_user[key]), str(inferred_process.mu_per_user[key])]) + "\n")
 
-    with open("Results/C_U_" + str(num_users) + "_E_" + str(num_events) + "_P_" + str(num_patterns) + "_set_time_kernels.tsv" ,"w") as fout:
+    with open("Results/CM_U_" + str(num_users) + "_E_" + str(num_events) + "_P_" + str(num_patterns) + "_set_time_kernels.tsv" ,"w") as fout:
         for key in generated_process.time_kernels:
             fout.write("\t".join([str(key), str(generated_process.time_kernels[key])]) + "\n")
-
-    # with open("Results/C_U_" + str(num_users) + "_E_" + str(num_events) + "_est_time_kernels.tsv", "w") as fout:
+    #
+    # with open("Results/CM_U_" + str(num_users) + "_E_" + str(num_events) + "_est_time_kernels.tsv", "w") as fout:
     #     for key in inferred_process.time_kernels:
     #         fout.write("\t".join([str(key), str(inferred_process.time_kernels[key])]) + "\n")
 
 
     # plot the base rates and the estimated alpha values
     plotMuScatterPlot(generated_process.mu_per_user, inferred_process.mu_per_user,
-                      "Figs/C_U_" + str(num_users) + "_E_" + str(
+                      "Figs/CM_U_" + str(num_users) + "_E_" + str(
                           num_events) + "_P_" + str(num_patterns) + "_base_rates.pdf")
 
     trueLabs = [e[1] for e in generated_process.annotatedEventsIter()]
@@ -214,11 +219,16 @@ def main():
     for key in kernel_mappings:
         new_inferred_time_kernels[key] = inferred_time_kernels[kernel_mappings[key]]
 
+
+    with open("Results/CM_U_" + str(num_users) + "_E_" + str(num_events) + "_est_time_kernels.tsv", "w") as fout:
+        for key in new_inferred_time_kernels:
+            fout.write("\t".join([str(key), str(new_inferred_time_kernels[key])]) + "\n")
+
     plotAlphaScatterPlot(generated_time_kernels, new_inferred_time_kernels,
-                         "Figs/C_U_" + str(num_users) + "_E_" + str(
+                         "Figs/CM_U_" + str(num_users) + "_E_" + str(
                              num_events) + "_P_" + str(num_patterns) + "_time_kernels.pdf")
 
-    with open("Results/C_U_" + str(num_users) + "_E_" + str(num_events) + "_patterns.tsv", "w") as fout:
+    with open("Results/CM_U_" + str(num_users) + "_E_" + str(num_events) + "_patterns.tsv", "w") as fout:
         for i in xrange(len(trueLabs)):
             fout.write("\t".join([str(trueLabs[i]), str(predLabs[i])]) + "\n")
 
