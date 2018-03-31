@@ -54,15 +54,15 @@ def plotMuScatterPlot (xdict, ydict, outFile):
     max_axis_value = max(max(x), max(y)) + 1
     min_axis_value = min(min(x), min(y)) - 1
 
-    z = np.linspace(int(min_axis_value), 10)
+    z = np.linspace(int(min_axis_value), 6)
     sns.plt.plot(z, z + 0, linestyle='solid')
 
     # ax = sns.regplot(x=x, y=x)
     ax = sns.regplot(x=x, y=y, marker="+", fit_reg=False)
     ax.set(title="Fig Title: Base Intensity")
 
-    sns.plt.ylim(min_axis_value, 10)
-    sns.plt.xlim(min_axis_value, 10)
+    sns.plt.ylim(min_axis_value, 6)
+    sns.plt.xlim(min_axis_value, 6)
 
 
     fig = ax.get_figure ()
@@ -83,14 +83,14 @@ def plotAlphaScatterPlot (xdict, ydict, outFile):
     max_axis_value = max(max(x), max(y)) + 1
     min_axis_value = min(min(x), min(y)) - 1
 
-    z = np.linspace(int(min_axis_value), int(max_axis_value))
+    z = np.linspace(int(min_axis_value), 6)
     sns.plt.plot(z, z + 0, linestyle='solid')
 
     ax = sns.regplot (x=x, y=y, marker="o", fit_reg=False)
     ax.set(title="Fig Title: Kernel Parameter")
 
-    sns.plt.ylim(min_axis_value, 10)
-    sns.plt.xlim(min_axis_value, 10)
+    sns.plt.ylim(min_axis_value, 6)
+    sns.plt.xlim(min_axis_value, 6)
 
     # sns.plt.ylim(min_axis_value, max_axis_value)
     # sns.plt.xlim(min_axis_value, max_axis_value)
@@ -170,8 +170,8 @@ def main():
     mu_0 = (8, 0.25)
     omega = 5
 
-    num_patterns = 20
-    num_users = 40
+    num_patterns = 25
+    num_users = 30
     num_samples = 8000
     num_particles = 20
 
