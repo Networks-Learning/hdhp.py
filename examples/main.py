@@ -134,10 +134,10 @@ def generate(num_users, num_patterns, alpha_0, mu_0, omega, vocab_size, doc_min_
 
     return process
 
-def infer(generated_process, alpha_0, mu_0, omega, num_users):
+def infer(generated_process, alpha_0, mu_0, omega, num_users, num_particles):
 
     particle, norms = hdhp.infer(generated_process.events, alpha_0=alpha_0, mu_0=mu_0,
-                                 omega=omega, num_particles=10, seed=512)
+                                 omega=omega, num_particles=num_particles, seed=512)
 
     inferred_process = particle.to_process()
 
@@ -163,17 +163,18 @@ def main():
     alpha_0 = (10, 0.2)
     mu_0 = (8, 0.25)
     omega = 5
+    num_particles = 20
 
-    num_patterns = 30
-    num_users = 50
-    num_samples = 42000
+    num_patterns = 50
+    num_users = 100
+    num_samples = 50000
 
     start = timeit.default_timer()
     generated_process = generate(num_users, num_patterns, alpha_0, mu_0, omega, vocab_size, doc_min_length, doc_length, words_per_pattern, num_samples)
     print("Generation Time: " + str(timeit.default_timer() - start))
 
     start = timeit.default_timer()
-    inferred_process = infer(generated_process, alpha_0, mu_0, omega, num_users)
+    inferred_process = infer(generated_process, alpha_0, mu_0, omega, num_users, num_particles)
     print("Inference Time: " + str(timeit.default_timer() - start))
 
     num_events = len(generated_process.events)
