@@ -162,9 +162,9 @@ def main():
     vocab_types = ['auths', 'docs']
     vocab_size = {'auths': 100, 'docs': 100}
 
-    doc_min_length = {'auths': 10, 'docs': 10}
-    doc_length = {'auths': 20, 'docs': 20}
-    words_per_pattern = {'auths': 30, 'docs': 30}
+    doc_min_length = {'auths': 20, 'docs': 10}
+    doc_length = {'auths': 30, 'docs': 20}
+    words_per_pattern = {'auths': 30, 'docs': 20}
 
     alpha_0 = (10, 0.2)
     mu_0 = (8, 0.25)
@@ -177,11 +177,11 @@ def main():
 
     start = timeit.default_timer()
     generated_process = generate(num_users, num_patterns, alpha_0, mu_0, omega, vocab_size, doc_min_length, doc_length, words_per_pattern, num_samples, vocab_types)
-    print("Generation Time: " + str(timeit.default_timer() - start))
+    print("Generation Time: " + str(timeit.default_timer() - start) + " seconds")
 
     start = timeit.default_timer()
     inferred_process = infer(generated_process, alpha_0, mu_0, omega, num_users, vocab_types, num_particles)
-    print("Inference Time: " + str(timeit.default_timer() - start))
+    print("Inference Time: " + str(timeit.default_timer() - start) + " seconds")
 
     num_events = len(generated_process.events)
 
@@ -192,10 +192,10 @@ def main():
     with open("Results/CM_U_" + str(num_users) + "_E_" + str(num_events) + "_P_" + str(num_patterns) + "_set_time_kernels.tsv" ,"w") as fout:
         for key in generated_process.time_kernels:
             fout.write("\t".join([str(key), str(generated_process.time_kernels[key])]) + "\n")
-    #
-    # with open("Results/CM_U_" + str(num_users) + "_E_" + str(num_events) + "_est_time_kernels.tsv", "w") as fout:
-    #     for key in inferred_process.time_kernels:
-    #         fout.write("\t".join([str(key), str(inferred_process.time_kernels[key])]) + "\n")
+
+    with open("Results/CM_U_" + str(num_users) + "_E_" + str(num_events) + "_est_time_kernels.tsv", "w") as fout:
+        for key in inferred_process.time_kernels:
+            fout.write("\t".join([str(key), str(inferred_process.time_kernels[key])]) + "\n")
 
 
     # plot the base rates and the estimated alpha values
@@ -206,8 +206,8 @@ def main():
     trueLabs = [e[1] for e in generated_process.annotatedEventsIter()]
     predLabs = [e[1] for e in inferred_process.annotatedEventsIter()]
 
-    print("True Labels Size: " + str(len(trueLabs)) + " seconds")
-    print("predicted Labels Size: " + str(len(predLabs))+ " seconds")
+    print("True Labels Size: " + str(len(trueLabs)) )
+    print("predicted Labels Size: " + str(len(predLabs)))
 
     kernel_mappings = find_kernel_mapping(trueLabs, predLabs)
 
@@ -219,10 +219,6 @@ def main():
     for key in kernel_mappings:
         new_inferred_time_kernels[key] = inferred_time_kernels[kernel_mappings[key]]
 
-
-    with open("Results/CM_U_" + str(num_users) + "_E_" + str(num_events) + "_est_time_kernels.tsv", "w") as fout:
-        for key in new_inferred_time_kernels:
-            fout.write("\t".join([str(key), str(new_inferred_time_kernels[key])]) + "\n")
 
     plotAlphaScatterPlot(generated_time_kernels, new_inferred_time_kernels,
                          "Figs/CM_U_" + str(num_users) + "_E_" + str(
