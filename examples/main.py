@@ -170,10 +170,10 @@ def main():
     mu_0 = (8, 0.25)
     omega = 5
 
-    num_patterns = 25
+    num_patterns = 30
     num_users = 30
-    num_samples = 8000
-    num_particles = 20
+    num_samples = 30000
+    num_particles = 10
 
     start = timeit.default_timer()
     generated_process = generate(num_users, num_patterns, alpha_0, mu_0, omega, vocab_size, doc_min_length, doc_length, words_per_pattern, num_samples, vocab_types)
