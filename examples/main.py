@@ -103,6 +103,7 @@ def plotAlphaScatterPlot (xdict, ydict, outFile):
 
 def generate(num_users, num_patterns, alpha_0, mu_0, omega, vocab_size, doc_min_length, doc_length, words_per_pattern, num_samples, vocab_types):
 
+    start = timeit.default_timer()
     vocabulary = {}
     for vocab_type in vocab_types:
         vocabulary[vocab_type] = [vocab_type + str(i) for i in range(vocab_size[vocab_type])]  # the `words` of our documents
@@ -112,12 +113,13 @@ def generate(num_users, num_patterns, alpha_0, mu_0, omega, vocab_size, doc_min_
                               omega=omega, words_per_pattern=words_per_pattern,
                               random_state=12, generate=True)
 
-    # overlap = notebook_helpers.compute_pattern_overlap(process)
-    # ax = sns.distplot(overlap, kde=True, norm_hist=True, axlabel='Content overlap')
-    # fig = ax.get_figure()
-    # fig.savefig("Figs/" + str(num_patterns) + "_pattern_overlaps.pdf")
-    # fig.clf()
-    # plt.close(fig)
+    # overlap = notebook_helpers.compute_pattern_overlap(process, vocab_types)
+    # for vocab_type in vocab_types:
+    #     ax = sns.distplot(overlap[vocab_type], kde=True, norm_hist=True, axlabel='Content overlap')
+    #     fig = ax.get_figure()
+    #     fig.savefig("Figs/Pattern_Overlaps" + str(vocab_type) + "_" + str(num_patterns) + "_pattern_overlaps.pdf")
+    #     fig.clf()
+    #     plt.close(fig)
 
     process.reset()  # removes any previously generated data
     process.sample_user_events(min_num_events=100,
@@ -128,6 +130,7 @@ def generate(num_users, num_patterns, alpha_0, mu_0, omega, vocab_size, doc_min_
 
     num_events = len(process.events)
     print 'Total #events', num_events
+    print("Generation Time: " + str(timeit.default_timer() - start) + " seconds")
 
     # start_date = datetime.datetime(2015, 9, 15)
     # fig = process.plot(start_date=start_date, user_limit=5,
@@ -140,8 +143,10 @@ def generate(num_users, num_patterns, alpha_0, mu_0, omega, vocab_size, doc_min_
 
 def infer(generated_process, alpha_0, mu_0, omega, num_users, vocab_types, num_particles):
 
+    start = timeit.default_timer()
     particle, norms = hdhp.infer(generated_process.events, alpha_0=alpha_0, mu_0=mu_0,
                                  omega=omega, num_particles=num_particles, seed=512, vocab_types=vocab_types)
+    print("Inference Time: " + str(timeit.default_timer() - start) + " seconds")
 
     inferred_process = particle.to_process()
 
@@ -160,28 +165,35 @@ def infer(generated_process, alpha_0, mu_0, omega, num_users, vocab_types, num_p
 def main():
 
     vocab_types = ['auths', 'docs']
-    vocab_size = {'auths': 100, 'docs': 100}
+    vocab_size = {'auths': 100, 'docs': 250}
 
-    doc_min_length = {'auths': 20, 'docs': 10}
-    doc_length = {'auths': 30, 'docs': 20}
-    words_per_pattern = {'auths': 30, 'docs': 20}
+    doc_min_length = {'auths': 10, 'docs': 20}
+    doc_length = {'auths': 20, 'docs': 30}
+    words_per_pattern = {'auths': 30, 'docs': 40}
 
     alpha_0 = (10, 0.2)
     mu_0 = (8, 0.25)
     omega = 5
 
-    num_patterns = 30
-    num_users = 30
-    num_samples = 30000
+    num_patterns = 20
+    num_users = 21
+    num_samples = 10000
     num_particles = 10
 
-    start = timeit.default_timer()
-    generated_process = generate(num_users, num_patterns, alpha_0, mu_0, omega, vocab_size, doc_min_length, doc_length, words_per_pattern, num_samples, vocab_types)
-    print("Generation Time: " + str(timeit.default_timer() - start) + " seconds")
+    print("****************************************")
+    print(" Number of expected events: " + str(num_samples))
+    print(" Number of users: " + str(num_users))
+    print(" Number of patterns: " + str(num_patterns))
+    print(" Number of particles: " + str(num_particles))
+    print("****************************************")
+    print()
 
-    start = timeit.default_timer()
+
+    generated_process = generate(num_users, num_patterns, alpha_0, mu_0, omega, vocab_size, doc_min_length, doc_length, words_per_pattern, num_samples, vocab_types)
+
+
     inferred_process = infer(generated_process, alpha_0, mu_0, omega, num_users, vocab_types, num_particles)
-    print("Inference Time: " + str(timeit.default_timer() - start) + " seconds")
+
 
     num_events = len(generated_process.events)
 
@@ -230,9 +242,6 @@ def main():
 
     print ("NMI = " + str(normalized_mutual_info_score(trueLabs, predLabs)))
 
-
-    # max_NMI, order = NMI.calculate_all_NMIs(trueLabs, predLabs, num_patterns)
-    # print ("Max NMI: " + str(max_NMI))
 
 
 if __name__ == "__main__":
