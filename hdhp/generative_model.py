@@ -132,6 +132,7 @@ class HDHProcess:
         ###
         self.user_dish_cache = defaultdict(dict)
         self.couser_history_per_user = defaultdict(list)
+        self.user_pattern_times = defaultdict(dict)
 
     def sample_cousers_for(self, user):
         counts = self.prng.multinomial(self.num_users, self.couser_params[user])
@@ -309,6 +310,7 @@ class HDHProcess:
             ######
             lambda_star = lambda_u_pattern + pattern_intensity
 
+
             # New event
             accepted = False
             while not accepted:
@@ -318,17 +320,15 @@ class HDHProcess:
                 for table in pattern_tables:
                     t_last, sum_kernels = self.user_table_cache[user][table]
                     update_value = self.kernel(s, t_last)
-                    # update_value should be 1, so practically we are just adding
-                    # \alpha to the intensity dt after the event
                     table_intensity = alpha * sum_kernels * update_value
                     table_intensity += alpha * update_value
                     pattern_intensity += table_intensity
                 ####
-                t_last, sum_kernels = self.user_dish_cache[user][pattern]
-                update_value = self.kernel(s, t_last)
-                dish_intensity = alpha * sum_kernels * update_value
-                dish_intensity += alpha * update_value
-                pattern_intensity += dish_intensity
+                # t_last, sum_kernels = self.user_dish_cache[user][pattern]
+                # update_value = self.kernel(s, t_last)
+                # dish_intensity = alpha * sum_kernels * update_value
+                # dish_intensity += alpha * update_value
+                # pattern_intensity += dish_intensity
                 ######
                 lambda_s = lambda_u_pattern + pattern_intensity
                 if U() < lambda_s / lambda_star:
