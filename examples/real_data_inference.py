@@ -1,3 +1,6 @@
+import matplotlib
+matplotlib.use('Agg')
+
 import hdhp
 import json
 import numpy as np
@@ -185,14 +188,10 @@ def authors_info(dataset_file_path, output_file_path):
         print("Number of unique authors: " + str(len(authors_info)))
 
 
-def infer(rawEvents, indices, num_particles, use_cousers=False):
+def infer(rawEvents, indices, num_particles, alpha_0, mu_0, omega, use_cousers=False):
     start = timeit.default_timer()
 
     types = ["docs", "auths"]
-    # priors to control the time dynamics of the events
-    alpha_0 = (4.0, 0.5)  # prior for excitation
-    mu_0 = (8, 0.25)  # prior for base intensity
-    o = 5  # decay kernel
 
     # num_patterns = 10
     # num_users = 64442 # Number of unique authors
@@ -215,7 +214,7 @@ def infer(rawEvents, indices, num_particles, use_cousers=False):
                                  alpha_0,
                                  mu_0,
                                  types,
-                                 omega=o,
+                                 omega=omega,
                                  beta=1,
                                  threads=1,
                                  num_particles=num_particles,
@@ -232,7 +231,12 @@ def infer(rawEvents, indices, num_particles, use_cousers=False):
 
 
 def main():
-    real_data_file_path = "/NL/publications-corpus/work/new_CS_arXiv_real_data.json"
+    real_data_file_path = "../Real_Dataset/new_CS_arXiv_real_data.json"
+    # priors to control the time dynamics of the events
+    alpha_0 = (4.0, 0.5)  # prior for excitation
+    mu_0 = (8, 0.25)  # prior for base intensity
+    omega = 5  # decay kernel
+    num_particles = 10
 
     # maps_authors_to_ids(real_data_file_path)
 
@@ -244,14 +248,13 @@ def main():
              2: ([0, 1], False),
              3: ([0, 1], True)}
 
-    # cases = {3: ([0,1], True)}
 
     for case in [3, 2, 1]:
         print "Case: {0}".format(case)
         indices, use_cousers = cases[case]
 
         print("Start inferring.....")
-        infHDHP = infer(events[: number_of_events], indices, use_cousers)
+        infHDHP = infer(events[: number_of_events], indices, num_particles, alpha_0, mu_0, omega, use_cousers=use_cousers)
         print("End inferring...")
 
         with open("real_data_results/" + "Case:{0}".format(case) + "/title_base_rates_" + str(
