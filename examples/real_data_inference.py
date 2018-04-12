@@ -241,7 +241,7 @@ def main():
     # maps_authors_to_ids(real_data_file_path)
 
     events = jsonFileToEvents(real_data_file_path)
-    number_of_events = len(events)
+    number_of_events = 8000
     print("Number of events: " + str(number_of_events))
 
     cases = {1: ([0], False),
@@ -257,30 +257,30 @@ def main():
         infHDHP = infer(events[: number_of_events], indices, num_particles, alpha_0, mu_0, omega, use_cousers=use_cousers)
         print("End inferring...")
 
-        with open("real_data_results/" + "Case:{0}".format(case) + "/title_base_rates_" + str(
+        with open("real_data_results/" + "Case{0}".format(case) + "/title_base_rates_" + str(
                 number_of_events) + ".tsv", "w") as output_file:
             for key in infHDHP.mu_per_user:
                 output_file.write("\t".join([str(key), str(infHDHP.mu_per_user[key])]) + "\n")
 
-        with open("real_data_results/" + "Case:{0}".format(case) + "/title_est_time_kernels_" + str(
+        with open("real_data_results/" + "Case{0}".format(case) + "/title_est_time_kernels_" + str(
                 number_of_events) + ".tsv", "w") as output_file:
             for key in infHDHP.time_kernels:
                 output_file.write("\t".join([str(key), str(infHDHP.time_kernels[key])]) + "\n")
 
         clusters = infHDHP.show_annotated_events()
-        with codecs.open("real_data_results/" + "Case:{0}".format(case) + "/title_annotated_events_" + str(
+        with codecs.open("real_data_results/" + "Case{0}".format(case) + "/title_annotated_events_" + str(
                 number_of_events) + ".txt", "w", encoding="utf-8") as output_file:
             output_file.write(clusters)
 
         dist = infHDHP.show_pattern_content()
-        with codecs.open("real_data_results/" + "Case:{0}".format(case) + "/title_pattern_content_" + str(
+        with codecs.open("real_data_results/" + "Case{0}".format(case) + "/title_pattern_content_" + str(
                 number_of_events) + ".txt", "w", encoding="utf-8") as output_file:
             output_file.write(dist)
         # print("show_pattern_content return: \n" + dist)
 
         predLabs = [e[1] for e in infHDHP.annotatedEventsIter()]
 
-        with open("real_data_results/" + "Case:{0}".format(case) + "/title_patterns_" + str(number_of_events) + ".tsv",
+        with open("real_data_results/" + "Case{0}".format(case) + "/title_patterns_" + str(number_of_events) + ".tsv",
                   "w") as output_file:
             for i in xrange(len(predLabs)):
                 output_file.write("\t".join(str(predLabs[i])) + "\n")
