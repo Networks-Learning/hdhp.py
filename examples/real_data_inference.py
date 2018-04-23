@@ -36,12 +36,12 @@ def metadata_to_database(metadata_file_path, db_connection_info, metadata_collec
     """
 
     from pymongo import MongoClient
-    import xml
+    import xml.etree.ElementTree as ElementTree
 
     client = MongoClient(db_connection_info)  # Connect to the MongoDB
     db = client.arXiv  # Gets the related database
 
-    for event, elem in xml.etree.ElementTree.iterparse(metadata_file_path):
+    for event, elem in ElementTree.iterparse(metadata_file_path):
 
         if elem.tag == "metadata":
             mongoDB_document = {}
@@ -79,78 +79,81 @@ def modify_CS_Papers(db_connection_info, old_file_path, new_file_path, metadata_
 
     print("stopwords: " + str(len(stopwords)))
 
+
     client = MongoClient(db_connection_info)  # Connect to the MongoDB
     db = client.arXiv  # Gets the related database
 
-    old_data = json.load(open(old_file_path))
     new_data = {}
 
-    for identifier in old_data:
-        paper = old_data.get(identifier)
-        document = db[metadata_collection].find_one({'identifier': {'$in': [identifier]}})
-        new_abstract = document['description'][0]
+    with open(old_file_path) as old_file:
+        old_data = json.load(open(old_file))
 
-        paper_abstract = new_abstract.lower()
-        paper_abstract = re.sub("{|}|(|)|=|;|,|\?|\d+", "", paper_abstract)
-        paper_abstract = re.sub("(|)|:|\d+|\.", " ", paper_abstract)
-        paper_abstract = ' '.join(
-            [word.strip() for word in paper_abstract.split() if word not in stopwords and len(word) > 1])
-        paper["abstract"] = paper_abstract
+        for identifier in old_data:
+            paper = old_data.get(identifier)
+            document = db[metadata_collection].find_one({'identifier': {'$in': [identifier]}})
+            new_abstract = document['description'][0]
 
-        paper_title = document["title"].lower()
-        paper_title = re.sub("{|}|;|,|\?|\.", "", paper_title)
-        paper_title = re.sub(":|;|,|\?|\.", " ", paper_title)
-        paper_title = ' '.join([word.strip() for word in paper_title.split() if word not in stopwords])
-        paper["title"] = paper_title
+            paper_abstract = new_abstract.lower()
+            paper_abstract = re.sub("{|}|(|)|=|;|,|\?|\d+", "", paper_abstract)
+            paper_abstract = re.sub("(|)|:|\d+|\.", " ", paper_abstract)
+            paper_abstract = ' '.join(
+                [word.strip() for word in paper_abstract.split() if word not in stopwords and len(word) > 1])
+            paper["abstract"] = paper_abstract
 
-        citations = paper['citations']
-        new_citations = []
+            paper_title = document["title"].lower()
+            paper_title = re.sub("{|}|;|,|\?|\.", "", paper_title)
+            paper_title = re.sub(":|;|,|\?|\.", " ", paper_title)
+            paper_title = ' '.join([word.strip() for word in paper_title.split() if word not in stopwords])
+            paper["title"] = paper_title
 
-        for index in range(len(citations)):
+            citations = paper['citations']
+            new_citations = []
 
-            citation = citations[index]
-            author = citation['author']
-            new_author = []
+            for index in range(len(citations)):
 
-            for item in author:
-                item = item.strip()
-                if len(item) < 2:
-                    continue
-                if 'et al.' in item:
-                    item = item[0: item.index('et al.')]
-                if 'title' in item:
-                    continue
-                if item.startswith(','):
-                    continue
+                citation = citations[index]
+                author = citation['author']
+                new_author = []
 
-                if '{' in item and len(item.split(' ')) > 3:
-                    item = item[0: item.index('{')]
-                if '$' in item:
-                    item = item[0: item.index('$')]
-                if ',' in item:
-                    splitted = item.split(',')
-                    if len(splitted) > 1:
-                        item = splitted[1].strip() + ' ' + splitted[0].strip()
-                    else:
-                        item = splitted[0]
-                if ':' in item:
-                    item = item[0: item.index(':')]
+                for item in author:
+                    item = item.strip()
+                    if len(item) < 2:
+                        continue
+                    if 'et al.' in item:
+                        item = item[0: item.index('et al.')]
+                    if 'title' in item:
+                        continue
+                    if item.startswith(','):
+                        continue
 
-                splitted_item = item.split(' ')
+                    if '{' in item and len(item.split(' ')) > 3:
+                        item = item[0: item.index('{')]
+                    if '$' in item:
+                        item = item[0: item.index('$')]
+                    if ',' in item:
+                        splitted = item.split(',')
+                        if len(splitted) > 1:
+                            item = splitted[1].strip() + ' ' + splitted[0].strip()
+                        else:
+                            item = splitted[0]
+                    if ':' in item:
+                        item = item[0: item.index(':')]
 
-                new_item = ''
+                    splitted_item = item.split(' ')
 
-                for temp in splitted_item:
-                    new_item += temp.strip() + '#'
+                    new_item = ''
 
-                new_item = new_item[0:-1]
-                new_author.append(new_item)
-                citation['author'] = new_author
+                    for temp in splitted_item:
+                        new_item += temp.strip() + '#'
 
-                new_citations.append(citation)
+                    new_item = new_item[0:-1]
+                    new_author.append(new_item)
+                    citation['author'] = new_author
 
-            paper['citations'] = new_citations
-        new_data[identifier] = paper
+                    new_citations.append(citation)
+
+                paper['citations'] = new_citations
+            new_data[identifier] = paper
 
     json_file = open(new_file_path, 'w')
     json.dump(new_data, json_file, indent=0)
@@ -404,12 +407,12 @@ def main():
     db_name = ""
     db_server = ""
     db_connection_info = create_mongodb_connection_info(db_server, db_name, db_user, db_password)
-    metadata_collection = ""
-    metadata_file_path = ""
+    metadata_collection = "new_metadata"
+    metadata_file_path = "all_arXiv_metadata.xml"
 
     old_file_path = "/NL/publications-corpus/work/new_CS_arXiv_real_data.json"
     new_file_path = "/NL/publications-corpus/work/modified_CS_arXiv_real_data.json"
-    metadata_to_database(metadata_file_path, db_connection_info, metadata_collection)
+    # metadata_to_database(metadata_file_path, db_connection_info, metadata_collection)
 
     modify_CS_Papers(db_connection_info, old_file_path, new_file_path, metadata_collection)
 
