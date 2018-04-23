@@ -176,8 +176,8 @@ def main():
     omega = 5
 
     num_patterns = 20
-    num_users = 21
-    num_samples = 10000
+    num_users = 20
+    num_samples = 6008
     num_particles = 10
 
     print("****************************************")
@@ -186,7 +186,7 @@ def main():
     print(" Number of patterns: " + str(num_patterns))
     print(" Number of particles: " + str(num_particles))
     print("****************************************")
-    print()
+    print
 
 
     generated_process = generate(num_users, num_patterns, alpha_0, mu_0, omega, vocab_size, doc_min_length, doc_length, words_per_pattern, num_samples, vocab_types)
