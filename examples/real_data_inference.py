@@ -11,7 +11,6 @@ from datetime import datetime
 import random
 import operator
 import codecs
-# from nltk.corpus import stopwords
 import re
 
 
@@ -26,6 +25,7 @@ def create_mongodb_connection_info(db_server, db_name, db_user, db_password):
     """
     db_connection = "mongodb://" + db_user + ":" + db_password + "@" + db_server + "/" + db_name
     return db_connection
+
 
 def metadata_to_database(metadata_file_path, db_connection_info, metadata_collection):
     """
@@ -67,18 +67,27 @@ def metadata_to_database(metadata_file_path, db_connection_info, metadata_collec
     client.close()
 
 
-def modify_CS_Papers(db_connection_info, old_file_path, new_file_path, metadata_collection):
+def clean_real_data(db_connection_info, old_file_path, new_file_path, metadata_collection, stopwords_file_path):
+    """
+    This function clean the text of the abstract, title, and citations of each paper in the real dataset. Modified data
+    stored in a new json file.
+    :param db_connection_info: MongoDB connection info
+    :param old_file_path: Real data file path (format: json)
+    :param new_file_path: New data file path (format: json)
+    :param metadata_collection: metadata collection
+    :param stopwords_file_path: Stopwords file path
+    :return: Nothing.
+    """
+
     from pymongo import MongoClient
 
-    stopwords_file_path = "stopwords.txt"
+    start = timeit.default_timer()
+
     with open(stopwords_file_path) as stopwords_file:
         stopwords = stopwords_file.readlines()
 
     for i in range(len(stopwords)):
         stopwords[i] = stopwords[i].strip()
-
-    print("stopwords: " + str(len(stopwords)))
-
 
     client = MongoClient(db_connection_info)  # Connect to the MongoDB
     db = client.arXiv  # Gets the related database
@@ -86,7 +95,8 @@ def modify_CS_Papers(db_connection_info, old_file_path, new_file_path, metadata_
     new_data = {}
 
     with open(old_file_path) as old_file:
-        old_data = json.load(open(old_file))
+
+        old_data = json.load(old_file)
 
         for identifier in old_data:
             paper = old_data.get(identifier)
@@ -116,28 +126,28 @@ def modify_CS_Papers(db_connection_info, old_file_path, new_file_path, metadata_
                 new_author = []
 
                 for item in author:
-                    item = item.strip()
+                    item = item.strip().lower()
                     if len(item) < 2:
                         continue
                     if 'et al.' in item:
                         item = item[0: item.index('et al.')]
-                    if 'title' in item:
-                        continue
                     if item.startswith(','):
                         continue
+                    if ':' in item:
+                        item = item[0: item.index(':')]
 
                     if '{' in item and len(item.split(' ')) > 3:
                         item = item[0: item.index('{')]
                     if '$' in item:
                         item = item[0: item.index('$')]
+                    if 'title' in item:
+                        continue
                     if ',' in item:
                         splitted = item.split(',')
                         if len(splitted) > 1:
                             item = splitted[1].strip() + ' ' + splitted[0].strip()
                         else:
-                            item = splitted[0]
-                    if ':' in item:
-                        item = item[0: item.index(':')]
+                            item = splitted[0].strip()
 
                     splitted_item = item.split(' ')
 
@@ -148,9 +158,10 @@ def modify_CS_Papers(db_connection_info, old_file_path, new_file_path, metadata_
 
                     new_item = new_item[0:-1]
                     new_author.append(new_item)
-                    citation['author'] = new_author
 
-                    new_citations.append(citation)
+                citation['author'] = new_author
+
+                new_citations.append(citation)
 
                 paper['citations'] = new_citations
             new_data[identifier] = paper
@@ -159,11 +170,11 @@ def modify_CS_Papers(db_connection_info, old_file_path, new_file_path, metadata_
     json.dump(new_data, json_file, indent=0)
     json_file.close()
     client.close()
+    print("Execution Time: " + str(timeit.default_timer() - start))
 
 
-def jsonFileToEvents(targetFile):
+def jsonFileToEvents(targetFile, vocabTypes):
     start = timeit.default_timer()
-    # names_to_ids = maps_authors_to_ids(targetFile)
 
     events = list()
     json_data = json.load(open(targetFile))
@@ -201,7 +212,7 @@ def jsonFileToEvents(targetFile):
                 authors_ids.append(unique_authors[author])
 
         # vocabularies = {"docs": paper["abstract"], "auths": authors_vocabs.strip()}
-        vocabularies = {"docs": paper["title"], "auths": authors_vocabs.strip()}
+        vocabularies = {"docs": paper[vocabTypes[0]], "auths": authors_vocabs.strip()}
 
         paper["author_ids"] = authors_ids
         event = (paper["time"], vocabularies, paper["author_ids"], [])
@@ -261,7 +272,6 @@ def maps_authors_to_ids(targetFile):
     new_file = "/NL/publications-corpus/work/new_CS_arXiv_real_data.json"
 
     base_time = datetime.strptime('1996-06-03', '%Y-%m-%d')
-
 
     counter = 0
     names_to_ids = {}
@@ -340,14 +350,14 @@ def authors_info(dataset_file_path):
 
         with open("num_events_per_user.txt", 'w') as out_file:
 
-            for author_id in sorted_num_events:
-                out_file.write(str(author_id) + '\t' + str(sorted_num_events.get(author_id)) + '\n')
+            for item in sorted_num_events:
+                out_file.write(str(item[0]) + '\t' + str(item[1]) + '\n')
 
         sorted_num_papers = sorted(papers_per_user.items(), key=operator.itemgetter(1))
         with open("num_papers_per_author.txt", 'w') as out_file:
 
-            for author_id in sorted_num_papers:
-                out_file.write(str(author_id) + '\t' + str(sorted_num_papers.get(author_id)) + '\n')
+            for item in sorted_num_papers:
+                out_file.write(str(item[0]) + '\t' + str(item[1]) + '\n')
 
         print("Number of unique authors: " + str(len(unique_authors)))
 
@@ -357,12 +367,7 @@ def infer(rawEvents, indices, num_particles, alpha_0, mu_0, omega, use_cousers=F
 
     types = ["docs", "auths"]
 
-    # num_patterns = 10
-    # num_users = 64442 # Number of unique authors
-    num_users = get_number_of_authors(rawEvents)  # Number of unique authors
-    print("Num of authors: " + str(num_users))
-
-    # # Inference
+    # Inference
     types = [types[i] for i in indices]
 
     events = list()
@@ -395,32 +400,18 @@ def infer(rawEvents, indices, num_particles, alpha_0, mu_0, omega, use_cousers=F
 
 
 def main():
-    real_data_file_path = "../Real_Dataset/new_CS_arXiv_real_data.json"
+    real_data_file_path = "modified_CS_arXiv_real_data.json"
+
     # priors to control the time dynamics of the events
     alpha_0 = (4.0, 0.5)  # prior for excitation
     mu_0 = (8, 0.25)  # prior for base intensity
     omega = 5  # decay kernel
     num_particles = 10
 
-    db_user = ""
-    db_password = ""
-    db_name = ""
-    db_server = ""
-    db_connection_info = create_mongodb_connection_info(db_server, db_name, db_user, db_password)
-    metadata_collection = "new_metadata"
-    metadata_file_path = "all_arXiv_metadata.xml"
+    vocabTypes = ["abstract", "auths"]
+    events = jsonFileToEvents(real_data_file_path, vocabTypes)
+    number_of_events = len(events)
 
-    old_file_path = "/NL/publications-corpus/work/new_CS_arXiv_real_data.json"
-    new_file_path = "/NL/publications-corpus/work/modified_CS_arXiv_real_data.json"
-    # metadata_to_database(metadata_file_path, db_connection_info, metadata_collection)
-
-    modify_CS_Papers(db_connection_info, old_file_path, new_file_path, metadata_collection)
-
-    authors_info(new_file_path)
-
-
-    events = jsonFileToEvents(real_data_file_path)
-    number_of_events = 10
     print("Number of events: " + str(number_of_events))
 
     cases = {1: ([0], False),
@@ -437,38 +428,32 @@ def main():
         print("End inferring...")
 
         with open("real_data_results/" + "Case{0}".format(case) + "/title_base_rates_" + str(
-                number_of_events) + ".tsv", "w") as output_file:
+                number_of_events) + "_" + vocabTypes[0] + ".tsv", "w") as output_file:
             for key in infHDHP.mu_per_user:
                 output_file.write("\t".join([str(key), str(infHDHP.mu_per_user[key])]) + "\n")
 
         with open("real_data_results/" + "Case{0}".format(case) + "/title_est_time_kernels_" + str(
-                number_of_events) + ".tsv", "w") as output_file:
+                number_of_events) + "_" + vocabTypes[0] + ".tsv", "w") as output_file:
             for key in infHDHP.time_kernels:
                 output_file.write("\t".join([str(key), str(infHDHP.time_kernels[key])]) + "\n")
 
         clusters = infHDHP.show_annotated_events()
         with codecs.open("real_data_results/" + "Case{0}".format(case) + "/title_annotated_events_" + str(
-                number_of_events) + ".txt", "w", encoding="utf-8") as output_file:
+                number_of_events) + "_" + vocabTypes[0] + ".txt", "w", encoding="utf-8") as output_file:
             output_file.write(clusters)
 
         dist = infHDHP.show_pattern_content()
         with codecs.open("real_data_results/" + "Case{0}".format(case) + "/title_pattern_content_" + str(
-                number_of_events) + ".txt", "w", encoding="utf-8") as output_file:
+                number_of_events) + "_" + vocabTypes[0] + ".txt", "w", encoding="utf-8") as output_file:
             output_file.write(dist)
-        # print("show_pattern_content return: \n" + dist)
 
         predLabs = [e[1] for e in infHDHP.annotatedEventsIter()]
 
-        with open("real_data_results/" + "Case{0}".format(case) + "/title_patterns_" + str(number_of_events) + ".tsv",
+        with open("real_data_results/" + "Case{0}".format(case) + "/title_patterns_" + str(number_of_events) + "_" +
+                          vocabTypes[0] + ".tsv",
                   "w") as output_file:
             for i in xrange(len(predLabs)):
                 output_file.write(str(predLabs[i]) + "\n")
-
-                # for key in infHDHP.time_history_per_user:
-                #     print(str(key) + " : " + str(infHDHP.time_history_per_user[key]))
-
-                # for key in infHDHP.pattern_popularity:
-                #     print(key + " : " + str(infHDHP.pattern_popularity[key]))
 
 
 if __name__ == "__main__":
