@@ -1,17 +1,14 @@
 import matplotlib
-
-matplotlib.use('Agg')
-
 import hdhp
 import json
-import numpy as np
-import os
 import timeit
 from datetime import datetime
 import random
 import operator
 import codecs
 import re
+
+matplotlib.use('Agg')
 
 
 def create_mongodb_connection_info(db_server, db_name, db_user, db_password):
@@ -32,6 +29,7 @@ def metadata_to_database(metadata_file_path, db_connection_info, metadata_collec
     This function gets the metadata of all papers as a xml file, and inserts them into a 'MongoDB' database.
     :param metadata_file_path: The address of the metadata file (xml file).
     :param db_connection_info: database connection information (server, username, password)
+    :param metadata_collection: Name of the metadata collection
     :return: Nothing.
     """
 
@@ -101,17 +99,17 @@ def clean_real_data(db_connection_info, old_file_path, new_file_path, metadata_c
         for identifier in old_data:
             paper = old_data.get(identifier)
             document = db[metadata_collection].find_one({'identifier': {'$in': [identifier]}})
-            new_abstract = document['description'][0]
+            new_abstract = document["description"][0]
 
             paper_abstract = new_abstract.lower()
-            paper_abstract = re.sub("{|}|(|)|=|;|,|\?|\d+", "", paper_abstract)
-            paper_abstract = re.sub("(|)|:|\d+|\.", " ", paper_abstract)
+            paper_abstract = re.sub("{|}|=|;|,|\?|\d+|'", "", paper_abstract)
+            paper_abstract = re.sub("\(|\)|:|\d+|\.", " ", paper_abstract)
             paper_abstract = ' '.join(
                 [word.strip() for word in paper_abstract.split() if word not in stopwords and len(word) > 1])
             paper["abstract"] = paper_abstract
 
             paper_title = document["title"].lower()
-            paper_title = re.sub("{|}|;|,|\?|\.", "", paper_title)
+            paper_title = re.sub("{|}", "", paper_title)
             paper_title = re.sub(":|;|,|\?|\.", " ", paper_title)
             paper_title = ' '.join([word.strip() for word in paper_title.split() if word not in stopwords])
             paper["title"] = paper_title
@@ -173,11 +171,11 @@ def clean_real_data(db_connection_info, old_file_path, new_file_path, metadata_c
     print("Execution Time: " + str(timeit.default_timer() - start))
 
 
-def jsonFileToEvents(targetFile, vocabTypes):
+def json_file_to_events(json_file_path, vocab_types):
     start = timeit.default_timer()
 
     events = list()
-    json_data = json.load(open(targetFile))
+    json_data = json.load(open(json_file_path))
     times = {}
 
     for identifier in json_data:
@@ -211,8 +209,7 @@ def jsonFileToEvents(targetFile, vocabTypes):
             else:
                 authors_ids.append(unique_authors[author])
 
-        # vocabularies = {"docs": paper["abstract"], "auths": authors_vocabs.strip()}
-        vocabularies = {"docs": paper[vocabTypes[0]], "auths": authors_vocabs.strip()}
+        vocabularies = {"docs": paper[vocab_types[0]], "auths": authors_vocabs.strip()}
 
         paper["author_ids"] = authors_ids
         event = (paper["time"], vocabularies, paper["author_ids"], [])
@@ -223,8 +220,8 @@ def jsonFileToEvents(targetFile, vocabTypes):
     return events
 
 
-def find_first_date(targetFile):
-    json_data = json.load(open(targetFile))
+def find_first_date(json_file_path):
+    json_data = json.load(open(json_file_path))
     first_date = datetime.now()
 
     for identifier in json_data:
@@ -237,8 +234,8 @@ def find_first_date(targetFile):
     print(str(first_date))
 
 
-def num_unique_authors(targetFile):
-    json_data = json.load(open(targetFile))
+def num_unique_authors(json_file_path):
+    json_data = json.load(open(json_file_path))
     unique_authors = []
 
     for identifier in json_data:
@@ -253,14 +250,14 @@ def num_unique_authors(targetFile):
 def get_number_of_authors(events):
     unique_authors = []
 
-    for tuple in events:
-        unique_authors += tuple[2]
+    for event in events:
+        unique_authors += event[2]
 
     return len(set(unique_authors))
 
 
-def maps_authors_to_ids(targetFile):
-    json_data = json.load(open(targetFile))
+def maps_authors_to_ids(json_file_path):
+    json_data = json.load(open(json_file_path))
     stopwords_file_path = "stopwords.txt"
 
     with open(stopwords_file_path) as stopwords_file:
@@ -362,7 +359,7 @@ def authors_info(dataset_file_path):
         print("Number of unique authors: " + str(len(unique_authors)))
 
 
-def infer(rawEvents, indices, num_particles, alpha_0, mu_0, omega, use_cousers=False):
+def infer(raw_events, indices, num_particles, alpha_0, mu_0, omega, use_cousers=False):
     start = timeit.default_timer()
 
     types = ["docs", "auths"]
@@ -373,10 +370,10 @@ def infer(rawEvents, indices, num_particles, alpha_0, mu_0, omega, use_cousers=F
     events = list()
 
     if use_cousers:
-        for event in rawEvents:
+        for event in raw_events:
             events.append((event[0], {t: event[1][t] for t in types}, event[2], event[3]))
     else:
-        for event in rawEvents:
+        for event in raw_events:
             events.append((event[0], {t: event[1][t] for t in types}, [event[2][0]], event[3]))
 
     particle, norms = hdhp.infer(events,
@@ -400,7 +397,7 @@ def infer(rawEvents, indices, num_particles, alpha_0, mu_0, omega, use_cousers=F
 
 
 def main():
-    real_data_file_path = "modified_CS_arXiv_real_data.json"
+    real_data_file_path = "../Real_Dataset/new_CS_arXiv_real_data.json"
 
     # priors to control the time dynamics of the events
     alpha_0 = (4.0, 0.5)  # prior for excitation
@@ -408,8 +405,8 @@ def main():
     omega = 5  # decay kernel
     num_particles = 10
 
-    vocabTypes = ["abstract", "auths"]
-    events = jsonFileToEvents(real_data_file_path, vocabTypes)
+    vocab_types = ["abstract", "auths"]
+    events = json_file_to_events(real_data_file_path, vocab_types)
     number_of_events = len(events)
 
     print("Number of events: " + str(number_of_events))
@@ -423,37 +420,37 @@ def main():
         indices, use_cousers = cases[case]
 
         print("Start inferring.....")
-        infHDHP = infer(events[: number_of_events], indices, num_particles, alpha_0, mu_0, omega,
-                        use_cousers=use_cousers)
+        inferred_process = infer(events[: number_of_events], indices, num_particles, alpha_0, mu_0, omega,
+                                 use_cousers=use_cousers)
         print("End inferring...")
 
         with open("real_data_results/" + "Case{0}".format(case) + "/title_base_rates_" + str(
-                number_of_events) + "_" + vocabTypes[0] + ".tsv", "w") as output_file:
-            for key in infHDHP.mu_per_user:
-                output_file.write("\t".join([str(key), str(infHDHP.mu_per_user[key])]) + "\n")
+                number_of_events) + "_" + vocab_types[0] + ".tsv", "w") as output_file:
+            for key in inferred_process.mu_per_user:
+                output_file.write("\t".join([str(key), str(inferred_process.mu_per_user[key])]) + "\n")
 
         with open("real_data_results/" + "Case{0}".format(case) + "/title_est_time_kernels_" + str(
-                number_of_events) + "_" + vocabTypes[0] + ".tsv", "w") as output_file:
-            for key in infHDHP.time_kernels:
-                output_file.write("\t".join([str(key), str(infHDHP.time_kernels[key])]) + "\n")
+                number_of_events) + "_" + vocab_types[0] + ".tsv", "w") as output_file:
+            for key in inferred_process.time_kernels:
+                output_file.write("\t".join([str(key), str(inferred_process.time_kernels[key])]) + "\n")
 
-        clusters = infHDHP.show_annotated_events()
+        clusters = inferred_process.show_annotated_events()
         with codecs.open("real_data_results/" + "Case{0}".format(case) + "/title_annotated_events_" + str(
-                number_of_events) + "_" + vocabTypes[0] + ".txt", "w", encoding="utf-8") as output_file:
+                number_of_events) + "_" + vocab_types[0] + ".txt", "w", encoding="utf-8") as output_file:
             output_file.write(clusters)
 
-        dist = infHDHP.show_pattern_content()
+        dist = inferred_process.show_pattern_content()
         with codecs.open("real_data_results/" + "Case{0}".format(case) + "/title_pattern_content_" + str(
-                number_of_events) + "_" + vocabTypes[0] + ".txt", "w", encoding="utf-8") as output_file:
+                number_of_events) + "_" + vocab_types[0] + ".txt", "w", encoding="utf-8") as output_file:
             output_file.write(dist)
 
-        predLabs = [e[1] for e in infHDHP.annotatedEventsIter()]
+        predicted_labels = [e[1] for e in inferred_process.annotatedEventsIter()]
 
         with open("real_data_results/" + "Case{0}".format(case) + "/title_patterns_" + str(number_of_events) + "_" +
-                          vocabTypes[0] + ".tsv",
+                          vocab_types[0] + ".tsv",
                   "w") as output_file:
-            for i in xrange(len(predLabs)):
-                output_file.write(str(predLabs[i]) + "\n")
+            for i in xrange(len(predicted_labels)):
+                output_file.write(str(predicted_labels[i]) + "\n")
 
 
 if __name__ == "__main__":
