@@ -102,16 +102,17 @@ def clean_real_data(db_connection_info, old_file_path, new_file_path, metadata_c
             new_abstract = document["description"][0]
 
             paper_abstract = new_abstract.lower()
-            paper_abstract = re.sub("{|}|=|;|,|\?|\d+|'", "", paper_abstract)
+            paper_abstract = re.sub("{|}|=|;|,|\?|\d+|'|\+|\^|\$|\[|\]", "", paper_abstract)
             paper_abstract = re.sub("\(|\)|:|\d+|\.", " ", paper_abstract)
             paper_abstract = ' '.join(
                 [word.strip() for word in paper_abstract.split() if word not in stopwords and len(word) > 1])
             paper["abstract"] = paper_abstract
 
             paper_title = document["title"].lower()
-            paper_title = re.sub("{|}", "", paper_title)
-            paper_title = re.sub(":|;|,|\?|\.", " ", paper_title)
-            paper_title = ' '.join([word.strip() for word in paper_title.split() if word not in stopwords])
+            paper_title = re.sub("{|}|\+|=|\d+|\^|\$|\[|\]|\+", "", paper_title)
+            paper_title = re.sub("\(|\)|:|;|,|\?|\.|'", " ", paper_title)
+            paper_title = ' '.join(
+                [word.strip() for word in paper_title.split() if word not in stopwords and len(word) > 1])
             paper["title"] = paper_title
 
             citations = paper['citations']
@@ -424,30 +425,32 @@ def main():
                                  use_cousers=use_cousers)
         print("End inferring...")
 
-        with open("real_data_results/" + "Case{0}".format(case) + "/title_base_rates_" + str(
-                number_of_events) + "_" + vocab_types[0] + ".tsv", "w") as output_file:
+        with open("real_data_results/" + "Case{0}".format(case) + "/" + vocab_types[0] + "_base_rates_" + str(
+                number_of_events) + ".tsv", "w") as output_file:
             for key in inferred_process.mu_per_user:
                 output_file.write("\t".join([str(key), str(inferred_process.mu_per_user[key])]) + "\n")
 
-        with open("real_data_results/" + "Case{0}".format(case) + "/title_est_time_kernels_" + str(
-                number_of_events) + "_" + vocab_types[0] + ".tsv", "w") as output_file:
+        with open("real_data_results/" + "Case{0}".format(case) + "/" + vocab_types[0] + "_est_time_kernels_" + str(
+                number_of_events) + ".tsv", "w") as output_file:
             for key in inferred_process.time_kernels:
                 output_file.write("\t".join([str(key), str(inferred_process.time_kernels[key])]) + "\n")
 
         clusters = inferred_process.show_annotated_events()
-        with codecs.open("real_data_results/" + "Case{0}".format(case) + "/title_annotated_events_" + str(
-                number_of_events) + "_" + vocab_types[0] + ".txt", "w", encoding="utf-8") as output_file:
+        with codecs.open("real_data_results/" + "Case{0}".format(case) + "/" + vocab_types[
+            0] + "_annotated_events_" + str(
+                number_of_events) + ".txt", "w", encoding="utf-8") as output_file:
             output_file.write(clusters)
 
         dist = inferred_process.show_pattern_content()
-        with codecs.open("real_data_results/" + "Case{0}".format(case) + "/title_pattern_content_" + str(
-                number_of_events) + "_" + vocab_types[0] + ".txt", "w", encoding="utf-8") as output_file:
+        with codecs.open("real_data_results/" + "Case{0}".format(case) + "/" + vocab_types[
+            0] + "_pattern_content_" + str(
+                number_of_events) + ".txt", "w", encoding="utf-8") as output_file:
             output_file.write(dist)
 
         predicted_labels = [e[1] for e in inferred_process.annotatedEventsIter()]
 
-        with open("real_data_results/" + "Case{0}".format(case) + "/title_patterns_" + str(number_of_events) + "_" +
-                          vocab_types[0] + ".tsv",
+        with open("real_data_results/" + "Case{0}".format(case) + "/" + vocab_types[0] + "_patterns_" + str(
+                number_of_events) + ".tsv",
                   "w") as output_file:
             for i in xrange(len(predicted_labels)):
                 output_file.write(str(predicted_labels[i]) + "\n")
