@@ -1,4 +1,6 @@
 import matplotlib
+matplotlib.use('Agg')
+
 import hdhp
 import json
 import timeit
@@ -7,8 +9,42 @@ import random
 import operator
 import codecs
 import re
+from sklearn.feature_extraction.text import TfidfVectorizer
 
-matplotlib.use('Agg')
+
+def find_important_words(dataset_file_path, new_file_path):
+    start = timeit.default_timer()
+
+    json_data = json.load(open(dataset_file_path))
+    docs = []
+    new_data = {}
+
+    for identifier in json_data:
+        docs.append(json_data.get(identifier).get('abstract'))
+
+    tfidf_vectorizer = TfidfVectorizer()
+
+    tfidf_matrix = tfidf_vectorizer.fit_transform(docs)
+
+    feature_names = tfidf_vectorizer.get_feature_names()
+    dense = tfidf_matrix.todense()
+
+    for index, (identifier, paper) in enumerate(json_data.items()):
+
+        doc = dense[index].tolist()[0]
+        word_scores = [pair for pair in zip(range(0, len(doc)), doc) if pair[1] > 0]
+
+        sorted_non_zero_scores = sorted(word_scores, key=lambda t: t[1] * -1)
+        sorted_features = []
+
+        for item in sorted_non_zero_scores:
+            sorted_features.append(feature_names[item[0]])
+
+        paper['sorted_features'] = sorted_features
+        new_data[identifier] = paper
+
+    json.dump(new_data, new_file_path, indent=1)
+    print ("tfidf process - execution time: " + str(timeit.default_timer() - start))
 
 
 def create_mongodb_connection_info(db_server, db_name, db_user, db_password):
@@ -125,22 +161,38 @@ def clean_real_data(db_connection_info, old_file_path, new_file_path, metadata_c
                 new_author = []
 
                 for item in author:
+                    item = re.sub("{\\\ A}", "", item)
                     item = item.strip().lower()
                     if len(item) < 2:
                         continue
+
                     if 'et al.' in item:
-                        item = item[0: item.index('et al.')]
+                        item = item[0: item.index('et al.')].strip()
                     if item.startswith(','):
                         continue
                     if ':' in item:
-                        item = item[0: item.index(':')]
+                        item = item[0: item.index(':')].strip()
+                    if 'physic' in item or 'ieee' in item or 'nature' in item:
+                        continue
+                    if ', {a}' in item:
+                        item = item[0: item.index(', {a}')].strip()
+                    if '{a}' in item:
+                        item = item[0: item.index('{a}')].strip()
+                    if '(' in item:
+                        item = item[0: item.index('(')]
 
-                    if '{' in item and len(item.split(' ')) > 3:
-                        item = item[0: item.index('{')]
+                    item = item.sub('{\\\ n}', 'n', item)
+                    item = item.sub('{\\\ a}', 'a', item)
+                    item = item.sub('\\\,', ' ', item)
+                    item = item.sub('\\\ ', '', item)
+
+
                     if '$' in item:
-                        item = item[0: item.index('$')]
+                        item = item[0: item.index('$')].strip()
                     if 'title' in item:
                         continue
+                    item = re.sub("{ | }", "", item)
+                    item = re.sub("{|}", "", item)
                     if ',' in item:
                         splitted = item.split(',')
                         if len(splitted) > 1:
@@ -172,7 +224,7 @@ def clean_real_data(db_connection_info, old_file_path, new_file_path, metadata_c
     print("Execution Time: " + str(timeit.default_timer() - start))
 
 
-def json_file_to_events(json_file_path, vocab_types):
+def json_file_to_events(json_file_path, vocab_types, num_words):
     start = timeit.default_timer()
 
     events = list()
@@ -210,7 +262,11 @@ def json_file_to_events(json_file_path, vocab_types):
             else:
                 authors_ids.append(unique_authors[author])
 
-        vocabularies = {"docs": paper[vocab_types[0]], "auths": authors_vocabs.strip()}
+        if vocab_types[0] == "tfidf":
+            n = min(num_words, len(paper["sorted_features"]))
+            vocabularies = {"docs": ' '.join(paper["sorted_features"][0:n]), "auths": authors_vocabs.strip()}
+        else:
+            vocabularies = {"docs": paper[vocab_types[0]], "auths": authors_vocabs.strip()}
 
         paper["author_ids"] = authors_ids
         event = (paper["time"], vocabularies, paper["author_ids"], [])
@@ -398,7 +454,7 @@ def infer(raw_events, indices, num_particles, alpha_0, mu_0, omega, use_cousers=
 
 
 def main():
-    real_data_file_path = "../Real_Dataset/new_CS_arXiv_real_data.json"
+    real_data_file_path = "new_CS_arXiv_real_data.json"
 
     # priors to control the time dynamics of the events
     alpha_0 = (4.0, 0.5)  # prior for excitation
@@ -406,8 +462,14 @@ def main():
     omega = 5  # decay kernel
     num_particles = 10
 
-    vocab_types = ["abstract", "auths"]
-    events = json_file_to_events(real_data_file_path, vocab_types)
+    db_connection_info = ""
+
+    vocab_types = ["tfidf", "auths"]
+
+    clean_real_data(db_connection_info, real_data_file_path, "modified_CS_arXiv_real_data.json")
+    find_important_words( "modified_CS_arXiv_real_data.json", "tfidf_CS_arXiv_real_data.json")
+
+    events = json_file_to_events("tfidf_CS_arXiv_real_data.json", vocab_types, 10)
     number_of_events = len(events)
 
     print("Number of events: " + str(number_of_events))
