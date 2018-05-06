@@ -43,7 +43,10 @@ def find_important_words(dataset_file_path, new_file_path):
         paper['sorted_features'] = sorted_features
         new_data[identifier] = paper
 
-    json.dump(new_data, new_file_path, indent=1)
+    with open(new_file_path, 'w') as outout_file:
+        json.dump(new_data, outout_file, indent=1)
+
+
     print ("tfidf process - execution time: " + str(timeit.default_timer() - start))
 
 
@@ -138,15 +141,15 @@ def clean_real_data(db_connection_info, old_file_path, new_file_path, metadata_c
             new_abstract = document["description"][0]
 
             paper_abstract = new_abstract.lower()
-            paper_abstract = re.sub("{|}|=|;|,|\?|\d+|'|\+|\^|\$|\[|\]", "", paper_abstract)
-            paper_abstract = re.sub("\(|\)|:|\d+|\.", " ", paper_abstract)
+            paper_abstract = re.sub("=|;|,|\?|\d+|'|\+|\^|\[|\]", "", paper_abstract)
+            paper_abstract = re.sub("{|}|\\\\\S*|\$\S*\$|\(|\)|:|\d+|\.", " ", paper_abstract)
             paper_abstract = ' '.join(
                 [word.strip() for word in paper_abstract.split() if word not in stopwords and len(word) > 1])
             paper["abstract"] = paper_abstract
 
             paper_title = document["title"].lower()
-            paper_title = re.sub("{|}|\+|=|\d+|\^|\$|\[|\]|\+", "", paper_title)
-            paper_title = re.sub("\(|\)|:|;|,|\?|\.|'", " ", paper_title)
+            paper_title = re.sub("\d+|\(|\)|:|;|,|\?|\.|'|\$\S*\$|\\\\\S*|{|}", " ", paper_title)
+            paper_title = re.sub("\+|=|\^|\[|\]", "", paper_title)
             paper_title = ' '.join(
                 [word.strip() for word in paper_title.split() if word not in stopwords and len(word) > 1])
             paper["title"] = paper_title
@@ -181,10 +184,10 @@ def clean_real_data(db_connection_info, old_file_path, new_file_path, metadata_c
                     if '(' in item:
                         item = item[0: item.index('(')]
 
-                    item = item.sub('{\\\ n}', 'n', item)
-                    item = item.sub('{\\\ a}', 'a', item)
-                    item = item.sub('\\\,', ' ', item)
-                    item = item.sub('\\\ ', '', item)
+                    item = re.sub('{\\\ n}', 'n', item)
+                    item = re.sub('{\\\ a}', 'a', item)
+                    item = re.sub('\\\,', ' ', item)
+                    item = re.sub('\\\ ', '', item)
 
 
                     if '$' in item:
@@ -217,11 +220,11 @@ def clean_real_data(db_connection_info, old_file_path, new_file_path, metadata_c
                 paper['citations'] = new_citations
             new_data[identifier] = paper
 
-    json_file = open(new_file_path, 'w')
-    json.dump(new_data, json_file, indent=0)
-    json_file.close()
+    with open(new_file_path,'w') as output_file:
+        json.dump(new_data, output_file, indent=0)
+
     client.close()
-    print("Execution Time: " + str(timeit.default_timer() - start))
+    print("Cleaning Data - Execution Time: " + str(timeit.default_timer() - start))
 
 
 def json_file_to_events(json_file_path, vocab_types, num_words):
