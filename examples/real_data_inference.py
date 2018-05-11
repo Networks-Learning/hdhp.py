@@ -20,7 +20,7 @@ def find_important_words(dataset_file_path, new_file_path):
     new_data = {}
 
     for identifier in json_data:
-        docs.append(json_data.get(identifier).get('abstract'))
+        docs.append(json_data.get(identifier).get('abstract') + ' ' + json_data.get(identifier).get('title'))
 
     tfidf_vectorizer = TfidfVectorizer()
 
@@ -144,14 +144,14 @@ def clean_real_data(db_connection_info, old_file_path, new_file_path, metadata_c
             paper_abstract = re.sub("=|;|,|\?|\d+|'|\+|\^|\[|\]", "", paper_abstract)
             paper_abstract = re.sub("{|}|\\\\\S*|\$\S*\$|\(|\)|:|\d+|\.", " ", paper_abstract)
             paper_abstract = ' '.join(
-                [word.strip() for word in paper_abstract.split() if word not in stopwords and len(word) > 1])
+                [word.strip() for word in paper_abstract.split() if word.strip() not in stopwords and len(word.strip()) > 1])
             paper["abstract"] = paper_abstract
 
             paper_title = document["title"].lower()
             paper_title = re.sub("\d+|\(|\)|:|;|,|\?|\.|'|\$\S*\$|\\\\\S*|{|}", " ", paper_title)
             paper_title = re.sub("\+|=|\^|\[|\]", "", paper_title)
             paper_title = ' '.join(
-                [word.strip() for word in paper_title.split() if word not in stopwords and len(word) > 1])
+                [word.strip() for word in paper_title.split() if word.strip() not in stopwords and len(word.strip()) > 1])
             paper["title"] = paper_title
 
             citations = paper['citations']
@@ -194,8 +194,17 @@ def clean_real_data(db_connection_info, old_file_path, new_file_path, metadata_c
                         item = item[0: item.index('$')].strip()
                     if 'title' in item:
                         continue
+
                     item = re.sub("{ | }", "", item)
                     item = re.sub("{|}", "", item)
+
+                    item = item.strip()
+
+                    if item.endswith(", A"):
+                        item = item[0:-3]
+                    if item.endswith(" A"):
+                        item = item[0:-2]
+
                     if ',' in item:
                         splitted = item.split(',')
                         if len(splitted) > 1:
@@ -205,13 +214,26 @@ def clean_real_data(db_connection_info, old_file_path, new_file_path, metadata_c
 
                     splitted_item = item.split(' ')
 
+
+                    if not splitted_item[0].strip().endswith('.'):
+                        if len(splitted_item) == 2 or len(splitted_item) == 3:
+                            for j in range(len(splitted_item) - 1):
+                                if '-' in splitted_item[j]:
+                                    temp = splitted_item[i].split('-')
+                                    splitted_item[j] = temp[0].strip() + '.-' + temp[1].strip() + '.'
+                                else:
+                                    splitted_item[j] = splitted_item[j].strip()[0] + '.'
+
                     new_item = ''
 
                     for temp in splitted_item:
-                        new_item += temp.strip() + '#'
+                        if temp.strip() != "":
+                            new_item += temp.strip() + '#'
 
                     new_item = new_item[0:-1]
-                    new_author.append(new_item)
+
+                    if len(new_item) > 4:
+                        new_author.append(new_item)
 
                 citation['author'] = new_author
 
@@ -469,10 +491,10 @@ def main():
 
     vocab_types = ["tfidf", "auths"]
 
-    clean_real_data(db_connection_info, real_data_file_path, "modified_CS_arXiv_real_data.json")
-    find_important_words( "modified_CS_arXiv_real_data.json", "tfidf_CS_arXiv_real_data.json")
+    clean_real_data(db_connection_info, real_data_file_path, "modified_2_CS_arXiv_real_data.json", "new_metadata", "stopwords.txt")
+    find_important_words( "modified_2_CS_arXiv_real_data.json", "tfidf_3_CS_arXiv_real_data.json")
 
-    events = json_file_to_events("tfidf_CS_arXiv_real_data.json", vocab_types, 10)
+    events = json_file_to_events("tfidf_3_CS_arXiv_real_data.json", vocab_types, 10)
     number_of_events = len(events)
 
     print("Number of events: " + str(number_of_events))
