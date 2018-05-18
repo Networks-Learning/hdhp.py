@@ -10,6 +10,7 @@ import operator
 import codecs
 import re
 from sklearn.feature_extraction.text import TfidfVectorizer
+from nltk.stem import PorterStemmer
 
 
 def find_important_words(dataset_file_path, new_file_path):
@@ -129,6 +130,8 @@ def clean_real_data(db_connection_info, old_file_path, new_file_path, metadata_c
     client = MongoClient(db_connection_info)  # Connect to the MongoDB
     db = client.arXiv  # Gets the related database
 
+    ps = PorterStemmer()
+
     new_data = {}
 
     with open(old_file_path) as old_file:
@@ -143,15 +146,29 @@ def clean_real_data(db_connection_info, old_file_path, new_file_path, metadata_c
             paper_abstract = new_abstract.lower()
             paper_abstract = re.sub("=|;|,|\?|\d+|'|\+|\^|\[|\]", "", paper_abstract)
             paper_abstract = re.sub("{|}|\\\\\S*|\$\S*\$|\(|\)|:|\d+|\.", " ", paper_abstract)
-            paper_abstract = ' '.join(
-                [word.strip() for word in paper_abstract.split() if word.strip() not in stopwords and len(word.strip()) > 1])
+
+            all_words = paper_abstract.split()
+            paper_abstract = ""
+
+            for word in all_words:
+                word = word.strip()
+                if len(word) > 1 and word not in stopwords:
+                    paper_abstract += ps.stem(word) + ' '
+
             paper["abstract"] = paper_abstract
 
             paper_title = document["title"].lower()
             paper_title = re.sub("\d+|\(|\)|:|;|,|\?|\.|'|\$\S*\$|\\\\\S*|{|}", " ", paper_title)
             paper_title = re.sub("\+|=|\^|\[|\]", "", paper_title)
-            paper_title = ' '.join(
-                [word.strip() for word in paper_title.split() if word.strip() not in stopwords and len(word.strip()) > 1])
+
+            all_words = paper_title.split()
+            paper_title = ""
+
+            for word in all_words:
+                word = word.strip()
+                if len(word) > 1 and word not in stopwords:
+                    paper_title += ps.stem(word)
+
             paper["title"] = paper_title
 
             citations = paper['citations']
@@ -164,7 +181,13 @@ def clean_real_data(db_connection_info, old_file_path, new_file_path, metadata_c
                 new_author = []
 
                 for item in author:
-                    item = re.sub("{\\\ A}", "", item)
+                    item = re.sub("{\\\\ A}", "", item).strip()
+
+                    if item.endswith(", A"):
+                        item = item[0:-3]
+                    if item.endswith(" A"):
+                        item = item[0:-2]
+
                     item = item.strip().lower()
                     if len(item) < 2:
                         continue
@@ -188,6 +211,7 @@ def clean_real_data(db_connection_info, old_file_path, new_file_path, metadata_c
                     item = re.sub('{\\\ a}', 'a', item)
                     item = re.sub('\\\,', ' ', item)
                     item = re.sub('\\\ ', '', item)
+                    item = re.sub('\\\\', '', item)
 
 
                     if '$' in item:
@@ -200,10 +224,6 @@ def clean_real_data(db_connection_info, old_file_path, new_file_path, metadata_c
 
                     item = item.strip()
 
-                    if item.endswith(", A"):
-                        item = item[0:-3]
-                    if item.endswith(" A"):
-                        item = item[0:-2]
 
                     if ',' in item:
                         splitted = item.split(',')
@@ -219,10 +239,11 @@ def clean_real_data(db_connection_info, old_file_path, new_file_path, metadata_c
                         if len(splitted_item) == 2 or len(splitted_item) == 3:
                             for j in range(len(splitted_item) - 1):
                                 if '-' in splitted_item[j]:
-                                    temp = splitted_item[i].split('-')
+                                    temp = splitted_item[j].split('-')
                                     splitted_item[j] = temp[0].strip() + '.-' + temp[1].strip() + '.'
                                 else:
-                                    splitted_item[j] = splitted_item[j].strip()[0] + '.'
+                                    if splitted_item[j].strip() != '':
+                                        splitted_item[j] = splitted_item[j].strip()[0] + '.'
 
                     new_item = ''
 
@@ -491,8 +512,8 @@ def main():
 
     vocab_types = ["tfidf", "auths"]
 
-    clean_real_data(db_connection_info, real_data_file_path, "modified_2_CS_arXiv_real_data.json", "new_metadata", "stopwords.txt")
-    find_important_words( "modified_2_CS_arXiv_real_data.json", "tfidf_3_CS_arXiv_real_data.json")
+    clean_real_data(db_connection_info, real_data_file_path, "modified_CS_arXiv_real_data.json", "new_metadata", "stopwords.txt")
+    find_important_words( "modified_CS_arXiv_real_data.json", "tfidf_CS_arXiv_real_data.json")
 
     events = json_file_to_events("tfidf_3_CS_arXiv_real_data.json", vocab_types, 10)
     number_of_events = len(events)
