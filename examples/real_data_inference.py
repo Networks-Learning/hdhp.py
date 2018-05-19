@@ -510,12 +510,12 @@ def main():
 
     db_connection_info = ""
 
-    vocab_types = ["tfidf", "auths"]
+    vocab_types = ["abstract", "auths"]
 
     clean_real_data(db_connection_info, real_data_file_path, "modified_CS_arXiv_real_data.json", "new_metadata", "stopwords.txt")
     find_important_words( "modified_CS_arXiv_real_data.json", "tfidf_CS_arXiv_real_data.json")
 
-    events = json_file_to_events("tfidf_3_CS_arXiv_real_data.json", vocab_types, 10)
+    events = json_file_to_events("abstract_CS_arXiv_real_data.json", vocab_types, 10)
     number_of_events = len(events)
 
     print("Number of events: " + str(number_of_events))
@@ -529,9 +529,10 @@ def main():
         indices, use_cousers = cases[case]
 
         print("Start inferring.....")
+        start = timeit.default_timer()
         inferred_process = infer(events[: number_of_events], indices, num_particles, alpha_0, mu_0, omega,
                                  use_cousers=use_cousers)
-        print("End inferring...")
+        print("End inferring in : " + str(timeit.default_timer() - start))
 
         with open("real_data_results/" + "Case{0}".format(case) + "/" + vocab_types[0] + "_base_rates_" + str(
                 number_of_events) + ".tsv", "w") as output_file:
@@ -549,7 +550,7 @@ def main():
                 number_of_events) + ".txt", "w", encoding="utf-8") as output_file:
             output_file.write(clusters)
 
-        dist = inferred_process.show_pattern_content()
+        dist = inferred_process.show_term_frequencies()
         with codecs.open("real_data_results/" + "Case{0}".format(case) + "/" + vocab_types[
             0] + "_pattern_content_" + str(
                 number_of_events) + ".txt", "w", encoding="utf-8") as output_file:

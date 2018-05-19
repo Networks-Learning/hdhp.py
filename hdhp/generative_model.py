@@ -1103,7 +1103,7 @@ class HDHProcess:
                               and (T_max is None or (T_max is not None and t <= T_max))])
 
     def show_pattern_content(self, patterns=None, words=0, detail_threshold=5):
-        """Shows the content distrubution of the inferred patterns.
+        """Shows the content distribution of the inferred patterns.
 
 
         Parameters
@@ -1153,6 +1153,27 @@ class HDHProcess:
                 for docType in docTypes for pattern in self.per_pattern_word_counts[docType] if pattern in patterns]
         return '\n\n'.join(text)
 
+    def show_term_frequencies(self, words=0, detail_threshold=5):
+
+        docTypes = self.per_pattern_word_counts.keys()
+        # even if there are multiple doc types, the patterns should be the same
+        for docType in docTypes:
+            patterns = self.per_pattern_word_counts[docType].keys()
+            print("Number of Patterns: " + str(len(patterns)))
+
+        text = ""
+        for docType in docTypes:
+            for pattern in patterns:
+                text += 'DocType ' + docType + ', ___Pattern ' + str(pattern) + '___ \n'
+                sorted_words = sorted(self.per_pattern_word_counts[docType][pattern].iteritems(), key=lambda x: (x[1], x[0]), reverse=True)
+                for i, (k, v) in enumerate(sorted_words):
+                    if v >= detail_threshold and (words == 0 or i < words):
+                        text += k + ':' + v + '\n'
+                text += '\n'
+        text += '\n *************************************************************************************** \n'
+
+
+
     def annotatedEventsIter(self, keep_sorted=True):
 
         events = [(t, dish, table, u, doc)
@@ -1167,3 +1188,5 @@ class HDHProcess:
 
         for event in events:
             yield event
+
+
