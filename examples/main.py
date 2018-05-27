@@ -1,4 +1,5 @@
 import matplotlib
+
 matplotlib.use('Agg')
 
 import notebook_helpers
@@ -6,7 +7,9 @@ import notebook_helpers
 import argparse
 import datetime
 import hdhp
-import seaborn as sns; sns.set(color_codes=True)
+import seaborn as sns;
+
+sns.set(color_codes=True)
 import pandas as pd
 from collections import Counter
 from sklearn.metrics import normalized_mutual_info_score
@@ -22,7 +25,6 @@ import matplotlib.pyplot as plt
 
 
 def find_kernel_mapping(true_labels, estimated_labels):
-
     mappings = {}
 
     for i in range(len(true_labels)):
@@ -44,8 +46,8 @@ def find_kernel_mapping(true_labels, estimated_labels):
 
     return best_mapping
 
-def plotMuScatterPlot (xdict, ydict, outFile):
 
+def plotMuScatterPlot(xdict, ydict, outFile):
     keys = xdict.keys()
 
     x = pd.Series([xdict[k] for k in keys], name="True Value")
@@ -64,18 +66,17 @@ def plotMuScatterPlot (xdict, ydict, outFile):
     sns.plt.ylim(min_axis_value, 6)
     sns.plt.xlim(min_axis_value, 6)
 
-
-    fig = ax.get_figure ()
-    fig.savefig (outFile)
+    fig = ax.get_figure()
+    fig.savefig(outFile)
     fig.clf()
     plt.close(fig)
 
-def plotAlphaScatterPlot (xdict, ydict, outFile):
 
+def plotAlphaScatterPlot(xdict, ydict, outFile):
     xkeys = xdict.keys()
     ykeys = ydict.keys()
 
-    inter = set (xkeys) & set (ykeys)
+    inter = set(xkeys) & set(ykeys)
 
     x = pd.Series([xdict[k] for k in inter], name="True Value")
     y = pd.Series([ydict[k] for k in inter], name="Inferred Value")
@@ -86,7 +87,7 @@ def plotAlphaScatterPlot (xdict, ydict, outFile):
     z = np.linspace(int(min_axis_value), 6)
     sns.plt.plot(z, z + 0, linestyle='solid')
 
-    ax = sns.regplot (x=x, y=y, marker="o", fit_reg=False)
+    ax = sns.regplot(x=x, y=y, marker="o", fit_reg=False)
     ax.set(title="Fig Title: Kernel Parameter")
 
     sns.plt.ylim(min_axis_value, 6)
@@ -95,18 +96,19 @@ def plotAlphaScatterPlot (xdict, ydict, outFile):
     # sns.plt.ylim(min_axis_value, max_axis_value)
     # sns.plt.xlim(min_axis_value, max_axis_value)
 
-    fig = ax.get_figure ()
-    fig.savefig (outFile)
+    fig = ax.get_figure()
+    fig.savefig(outFile)
     fig.clf()
     plt.close(fig)
 
 
-def generate(num_users, num_patterns, alpha_0, mu_0, omega, vocab_size, doc_min_length, doc_length, words_per_pattern, num_samples, vocab_types):
-
+def generate(num_users, num_patterns, alpha_0, mu_0, omega, vocab_size, doc_min_length, doc_length, words_per_pattern,
+             num_samples, vocab_types):
     start = timeit.default_timer()
     vocabulary = {}
     for vocab_type in vocab_types:
-        vocabulary[vocab_type] = [vocab_type + str(i) for i in range(vocab_size[vocab_type])]  # the `words` of our documents
+        vocabulary[vocab_type] = [vocab_type + str(i) for i in
+                                  range(vocab_size[vocab_type])]  # the `words` of our documents
 
     process = hdhp.HDHProcess(num_patterns=num_patterns, alpha_0=alpha_0, num_users=num_users, vocab_types=vocab_types,
                               mu_0=mu_0, vocabulary=vocabulary, doc_length=doc_length, doc_min_length=doc_min_length,
@@ -123,8 +125,8 @@ def generate(num_users, num_patterns, alpha_0, mu_0, omega, vocab_size, doc_min_
 
     process.reset()  # removes any previously generated data
     process.sample_user_events(min_num_events=100,
-                                       max_num_events=num_samples,
-                                       t_max=365)
+                               max_num_events=num_samples,
+                               t_max=365)
     for cluster in process.dish_counters:
         print("Cluster " + str(cluster) + " : " + str(process.dish_counters[cluster]))
 
@@ -141,8 +143,8 @@ def generate(num_users, num_patterns, alpha_0, mu_0, omega, vocab_size, doc_min_
 
     return process
 
-def infer(generated_process, alpha_0, mu_0, omega, num_users, vocab_types, num_particles):
 
+def infer(generated_process, alpha_0, mu_0, omega, num_users, vocab_types, num_particles):
     start = timeit.default_timer()
     particle, norms = hdhp.infer(generated_process.events, alpha_0=alpha_0, mu_0=mu_0,
                                  omega=omega, num_particles=num_particles, seed=512, vocab_types=vocab_types)
@@ -163,7 +165,6 @@ def infer(generated_process, alpha_0, mu_0, omega, num_users, vocab_types, num_p
 
 
 def main():
-
     vocab_types = ['auths', 'docs']
     vocab_size = {'auths': 100, 'docs': 250}
 
@@ -175,9 +176,9 @@ def main():
     mu_0 = (8, 0.25)
     omega = 5
 
-    num_patterns = 20
-    num_users = 20
-    num_samples = 6008
+    num_patterns = 50
+    num_users = 101
+    num_samples = 100000
     num_particles = 10
 
     print("****************************************")
@@ -188,27 +189,27 @@ def main():
     print("****************************************")
     print
 
-
-    generated_process = generate(num_users, num_patterns, alpha_0, mu_0, omega, vocab_size, doc_min_length, doc_length, words_per_pattern, num_samples, vocab_types)
-
+    generated_process = generate(num_users, num_patterns, alpha_0, mu_0, omega, vocab_size, doc_min_length, doc_length,
+                                 words_per_pattern, num_samples, vocab_types)
 
     inferred_process = infer(generated_process, alpha_0, mu_0, omega, num_users, vocab_types, num_particles)
 
-
     num_events = len(generated_process.events)
 
-    with open("Results/CM_U_" + str(num_users) + "_E_" + str(num_events) + "_P_" + str(num_patterns) + "_base_rates.tsv", "w") as fout:
+    with open("Results/CM_U_" + str(num_users) + "_E_" + str(num_events) + "_P_" + str(
+            num_patterns) + "_base_rates.tsv", "w") as fout:
         for key in generated_process.mu_per_user:
-            fout.write("\t".join([str(key), str(generated_process.mu_per_user[key]), str(inferred_process.mu_per_user[key])]) + "\n")
+            fout.write("\t".join(
+                [str(key), str(generated_process.mu_per_user[key]), str(inferred_process.mu_per_user[key])]) + "\n")
 
-    with open("Results/CM_U_" + str(num_users) + "_E_" + str(num_events) + "_P_" + str(num_patterns) + "_set_time_kernels.tsv" ,"w") as fout:
+    with open("Results/CM_U_" + str(num_users) + "_E_" + str(num_events) + "_P_" + str(
+            num_patterns) + "_set_time_kernels.tsv", "w") as fout:
         for key in generated_process.time_kernels:
             fout.write("\t".join([str(key), str(generated_process.time_kernels[key])]) + "\n")
 
     with open("Results/CM_U_" + str(num_users) + "_E_" + str(num_events) + "_est_time_kernels.tsv", "w") as fout:
         for key in inferred_process.time_kernels:
             fout.write("\t".join([str(key), str(inferred_process.time_kernels[key])]) + "\n")
-
 
     # plot the base rates and the estimated alpha values
     plotMuScatterPlot(generated_process.mu_per_user, inferred_process.mu_per_user,
@@ -218,7 +219,7 @@ def main():
     trueLabs = [e[1] for e in generated_process.annotatedEventsIter()]
     predLabs = [e[1] for e in inferred_process.annotatedEventsIter()]
 
-    print("True Labels Size: " + str(len(trueLabs)) )
+    print("True Labels Size: " + str(len(trueLabs)))
     print("predicted Labels Size: " + str(len(predLabs)))
 
     kernel_mappings = find_kernel_mapping(trueLabs, predLabs)
@@ -231,7 +232,6 @@ def main():
     for key in kernel_mappings:
         new_inferred_time_kernels[key] = inferred_time_kernels[kernel_mappings[key]]
 
-
     plotAlphaScatterPlot(generated_time_kernels, new_inferred_time_kernels,
                          "Figs/CM_U_" + str(num_users) + "_E_" + str(
                              num_events) + "_P_" + str(num_patterns) + "_time_kernels.pdf")
@@ -243,8 +243,5 @@ def main():
     print ("NMI = " + str(normalized_mutual_info_score(trueLabs, predLabs)))
 
 
-
 if __name__ == "__main__":
-    main ()
-
-
+    main()

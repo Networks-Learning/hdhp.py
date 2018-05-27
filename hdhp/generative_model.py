@@ -31,7 +31,6 @@ from itertools import izip
 
 
 class HDHProcess:
-
     def __init__(self, num_patterns, alpha_0, mu_0, vocabulary, num_users, vocab_types, omega=1,
                  doc_length=20, doc_min_length=5, words_per_pattern=10,
                  random_state=None, generate=False):
@@ -95,8 +94,6 @@ class HDHProcess:
             self.pattern_popularity = self.sample_pattern_popularity()
             self.couser_params = self.sample_couser_params()
 
-
-
         # Initialize all the counters etc.
         self.reset()
 
@@ -127,7 +124,8 @@ class HDHProcess:
         self.cache_per_user = defaultdict(dict)
         self.total_tables_per_user = defaultdict(int)
         self.events = []
-        self.per_pattern_word_counts = {vocab_type: defaultdict(lambda: defaultdict(int)) for vocab_type in self.vocab_types}
+        self.per_pattern_word_counts = {vocab_type: defaultdict(lambda: defaultdict(int)) for vocab_type in
+                                        self.vocab_types}
         self.per_pattern_word_count_total = {vocab_type: defaultdict(int) for vocab_type in self.vocab_types}
         ###
         self.user_dish_cache = defaultdict(dict)
@@ -310,7 +308,6 @@ class HDHProcess:
             ######
             lambda_star = lambda_u_pattern + pattern_intensity
 
-
             # New event
             accepted = False
             while not accepted:
@@ -324,11 +321,11 @@ class HDHProcess:
                     table_intensity += alpha * update_value
                     pattern_intensity += table_intensity
                 ####
-                # t_last, sum_kernels = self.user_dish_cache[user][pattern]
-                # update_value = self.kernel(s, t_last)
-                # dish_intensity = alpha * sum_kernels * update_value
-                # dish_intensity += alpha * update_value
-                # pattern_intensity += dish_intensity
+                t_last, sum_kernels = self.user_dish_cache[user][pattern]
+                update_value = self.kernel(s, t_last)
+                dish_intensity = alpha * sum_kernels * update_value
+                dish_intensity += alpha * update_value
+                pattern_intensity += dish_intensity
                 ######
                 lambda_s = lambda_u_pattern + pattern_intensity
                 if U() < lambda_s / lambda_star:
@@ -382,7 +379,6 @@ class HDHProcess:
             num_tables_user = self.total_tables_per_user[user] \
                 if user in self.total_tables_per_user else 0
 
-
             tables = range(num_tables_user)
             tables = [table for table in tables
                       if self.dish_on_table_per_user[user][table] == z_n]
@@ -422,14 +418,14 @@ class HDHProcess:
                 self.user_table_cache[user][table] = (t_n, 0)
                 self.dish_on_table_per_user[user][table] = z_n
 
-            if z_n not in self.first_observed_time or\
-                    t_n < self.first_observed_time[z_n]:
+            if z_n not in self.first_observed_time or \
+                            t_n < self.first_observed_time[z_n]:
                 self.first_observed_time[z_n] = t_n
             self.dish_counters[z_n] += 1
 
             doc_n = self.sample_document(z_n)
             self._update_word_counters(doc_n, z_n)
-            self.document_history_per_user[user]\
+            self.document_history_per_user[user] \
                 .append(doc_n)
             self.table_history_per_user[user].append(table)
             self.time_history_per_user[user].append(t_n)
@@ -457,7 +453,6 @@ class HDHProcess:
                 next_time_per_pattern[(z_n, c)] = self.sample_next_time(z_n, c)
 
             iteration += 1
-
 
         for user in xrange(self.num_users):
             events = [(self.time_history_per_user[user][i],
@@ -509,15 +504,13 @@ class HDHProcess:
         vocabulary = {vocab_type: '' for vocab_type in self.vocab_types}
 
         for vocab_type in vocabulary:
-
             length = self.doc_prng.randint(self.document_length[vocab_type]) + \
-                self.document_min_length[vocab_type]
+                     self.document_min_length[vocab_type]
             words = self.doc_prng.multinomial(length, self.pattern_params[vocab_type][pattern])
             vocabulary[vocab_type] = ' '.join([self.vocabulary[vocab_type][i]
-                         for i, repeats in enumerate(words)
-                         for j in range(repeats)])
+                                               for i, repeats in enumerate(words)
+                                               for j in range(repeats)])
         return vocabulary
-
 
     def _update_word_counters(self, doc, pattern):
         """Updates the word counters of the process for the particular document
@@ -764,8 +757,8 @@ class HDHProcess:
             if dish in dish_cache:
                 t_last_dish, sum_kernels_dish = dish_cache[dish]
                 update_value_dish = self.kernel(t, t_last_dish)
-                dish_intensity = lambda_uz + alpha * sum_kernels_dish *\
-                    update_value_dish
+                dish_intensity = lambda_uz + alpha * sum_kernels_dish * \
+                                             update_value_dish
                 dish_intensity += alpha * update_value_dish
             else:
                 dish_intensity = lambda_uz
@@ -773,8 +766,8 @@ class HDHProcess:
                 # table already exists
                 t_last_table, sum_kernels_table = table_cache[table]
                 update_value_table = self.kernel(t, t_last_table)
-                table_intensity = alpha * sum_kernels_table *\
-                    update_value_table
+                table_intensity = alpha * sum_kernels_table * \
+                                  update_value_table
                 table_intensity += alpha * update_value_table
             else:
                 # table does not exist yet
@@ -981,10 +974,11 @@ class HDHProcess:
             user_plt.set_xlim((T_min, T_max))
             if paper:
                 if start_date is None:
-                    raise ValueError('For paper-level quality plots, the actual datetime for t=0 must be provided as `start_date`')
+                    raise ValueError(
+                        'For paper-level quality plots, the actual datetime for t=0 must be provided as `start_date`')
                 if start_date.microsecond > 500000:
                     start_date = start_date.replace(microsecond=0) \
-                        + datetime.timedelta(seconds=1)
+                                 + datetime.timedelta(seconds=1)
                 else:
                     start_date = start_date.replace(microsecond=0)
                 if time_unit == 'days':
@@ -1130,7 +1124,7 @@ class HDHProcess:
         # even if there are multiple doc types, the patterns should be the same
         for docType in docTypes:
             patterns = self.per_pattern_word_counts[docType].keys()
-            print(patterns)
+            print("Number of inferred Patterns: " + str(len(patterns)))
 
         if patterns is None:
             patterns = self.per_pattern_word_counts.keys()
@@ -1165,14 +1159,14 @@ class HDHProcess:
         for docType in docTypes:
             for pattern in patterns:
                 text += 'DocType ' + docType + ', ___Pattern ' + str(pattern) + '___ \n'
-                sorted_words = sorted(self.per_pattern_word_counts[docType][pattern].iteritems(), key=lambda x: (x[1], x[0]), reverse=True)
+                sorted_words = sorted(self.per_pattern_word_counts[docType][pattern].iteritems(),
+                                      key=lambda x: (x[1], x[0]), reverse=True)
                 for i, (k, v) in enumerate(sorted_words):
                     if v >= detail_threshold and (words == 0 or i < words):
-                        text += k + ':' + v + '\n'
+                        text += k.encode('utf-8') + ':' + v.encode('utf-8') + '\n'
                 text += '\n'
         text += '\n *************************************************************************************** \n'
-
-
+        return text
 
     def annotatedEventsIter(self, keep_sorted=True):
 
@@ -1188,5 +1182,3 @@ class HDHProcess:
 
         for event in events:
             yield event
-
-

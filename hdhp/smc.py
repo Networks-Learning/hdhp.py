@@ -198,8 +198,14 @@ class Particle(object):
                     if t in self.user_table_cache[u]:
                         del self.user_table_cache[u][t]
 
-        new_p.per_topic_word_counts = copy_dict(self.per_topic_word_counts)
-        new_p.per_topic_word_count_total = copy_dict(self.per_topic_word_count_total)
+        new_p.per_topic_word_count = {}
+        for doc_type in self.per_topic_word_counts:
+            new_p.per_topic_word_counts[doc_type] = copy_dict(self.per_topic_word_counts)
+
+        new_p.per_topic_word_count_total = {}
+        for doc_type in self.per_topic_word_count_total:
+            new_p.per_topic_word_count_total[doc_type] = copy_dict(doc_type)
+
         new_p.time_kernels = copy_dict(self.time_kernels)
         new_p.time_kernel_prior = copy_dict(self.time_kernel_prior)
         new_p.user_table_cache = copy_dict(self.user_table_cache)
@@ -915,10 +921,10 @@ def infer(history, alpha_0, mu_0, vocab_types, omega=1, beta=1, theta_0=None,
         The number of particles that the SMC algorithm will use.
 
     particle_weight_threshold : float, default is 1
-        A parameter that controls when the particles need to be resampled
+        A parameter that controls when the particles need to be re-sampled
 
-    resample_every : int, default is 10
-        The frequency with which we check if we need to resample or not. The
+    re-sample_every : int, default is 10
+        The frequency with which we check if we need to re-sample or not. The
         number is in inference steps (number of events)
 
     update_kernels : bool, default is True
@@ -961,4 +967,4 @@ def infer(history, alpha_0, mu_0, vocab_types, omega=1, beta=1, theta_0=None,
     if threads == 1:
         return _infer_single_thread(history, params)
     else:
-        raise NotImplementedError("Multi-threaded versoin not yet implemented")
+        raise NotImplementedError("Multi-threaded version not yet implemented")

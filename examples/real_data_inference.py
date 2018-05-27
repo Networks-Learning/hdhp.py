@@ -1,4 +1,5 @@
 import matplotlib
+
 matplotlib.use('Agg')
 
 import hdhp
@@ -11,6 +12,21 @@ import codecs
 import re
 from sklearn.feature_extraction.text import TfidfVectorizer
 from nltk.stem import PorterStemmer
+
+
+def plot_pattern_popularity(file_path):
+    with open(file_path) as input_file:
+        patterns = {}
+        lines = input_file.readlines()
+        for line in lines:
+            line = line.strip()
+            if line not in patterns:
+                patterns[line] = 1
+            else:
+                patterns[line] += 1
+
+        sorted_patterns = sorted(patterns, key=lambda t: t[1] * 1)
+        print(sorted_patterns)
 
 
 def find_important_words(dataset_file_path, new_file_path):
@@ -46,7 +62,6 @@ def find_important_words(dataset_file_path, new_file_path):
 
     with open(new_file_path, 'w') as outout_file:
         json.dump(new_data, outout_file, indent=1)
-
 
     print ("tfidf process - execution time: " + str(timeit.default_timer() - start))
 
@@ -167,7 +182,7 @@ def clean_real_data(db_connection_info, old_file_path, new_file_path, metadata_c
             for word in all_words:
                 word = word.strip()
                 if len(word) > 1 and word not in stopwords:
-                    paper_title += ps.stem(word)
+                    paper_title += ps.stem(word) + ' '
 
             paper["title"] = paper_title
 
@@ -213,7 +228,6 @@ def clean_real_data(db_connection_info, old_file_path, new_file_path, metadata_c
                     item = re.sub('\\\ ', '', item)
                     item = re.sub('\\\\', '', item)
 
-
                     if '$' in item:
                         item = item[0: item.index('$')].strip()
                     if 'title' in item:
@@ -224,7 +238,6 @@ def clean_real_data(db_connection_info, old_file_path, new_file_path, metadata_c
 
                     item = item.strip()
 
-
                     if ',' in item:
                         splitted = item.split(',')
                         if len(splitted) > 1:
@@ -234,13 +247,12 @@ def clean_real_data(db_connection_info, old_file_path, new_file_path, metadata_c
 
                     splitted_item = item.split(' ')
 
-
                     if not splitted_item[0].strip().endswith('.'):
                         if len(splitted_item) == 2 or len(splitted_item) == 3:
                             for j in range(len(splitted_item) - 1):
                                 if '-' in splitted_item[j]:
                                     temp = splitted_item[j].split('-')
-                                    splitted_item[j] = temp[0].strip() + '.-' + temp[1].strip() + '.'
+                                    splitted_item[j] = temp[0][0].strip() + '.-' + temp[1][0].strip() + '.'
                                 else:
                                     if splitted_item[j].strip() != '':
                                         splitted_item[j] = splitted_item[j].strip()[0] + '.'
@@ -263,7 +275,7 @@ def clean_real_data(db_connection_info, old_file_path, new_file_path, metadata_c
                 paper['citations'] = new_citations
             new_data[identifier] = paper
 
-    with open(new_file_path,'w') as output_file:
+    with open(new_file_path, 'w') as output_file:
         json.dump(new_data, output_file, indent=0)
 
     client.close()
@@ -301,6 +313,26 @@ def json_file_to_events(json_file_path, vocab_types, num_words):
         authors_ids = []
 
         for author in authors:
+
+            author = author.lower().strip()
+            if ',' in author:
+                splitted_author = author.split(',')
+                author = splitted_author[1].strip() + ' ' + splitted_author[0].strip()
+            splitted_author = author.split(' ')
+
+            if not splitted_author[0].endswith('.'):
+
+                for i in range(len(splitted_author) - 1):
+                    if '-' in splitted_author[i]:
+                        temp = splitted_author[i].split('-')
+                        splitted_author[i] = temp[0][0].strip() + '.-' + temp[1][0].strip() + '.'
+                    else:
+                        splitted_author[i] = splitted_author[i].strip()[0] + '.'
+            author = ""
+            for temp in splitted_author:
+                author += temp + ' '
+            author = author.strip()
+
             if author not in unique_authors:
                 unique_authors[author] = counter
                 authors_ids.append(counter)
@@ -319,6 +351,7 @@ def json_file_to_events(json_file_path, vocab_types, num_words):
         events.append(event)
 
     print("Number of events: " + str(len(events)))
+    print("Number of unique authors: " + str(len(unique_authors)))
     print("Execution Time: " + str(timeit.default_timer() - start))
     return events
 
@@ -506,16 +539,16 @@ def main():
     alpha_0 = (4.0, 0.5)  # prior for excitation
     mu_0 = (8, 0.25)  # prior for base intensity
     omega = 5  # decay kernel
-    num_particles = 10
+    num_particles = 20
 
     db_connection_info = ""
 
-    vocab_types = ["abstract", "auths"]
+    vocab_types = ["title", "auths"]
 
-    clean_real_data(db_connection_info, real_data_file_path, "modified_CS_arXiv_real_data.json", "new_metadata", "stopwords.txt")
-    find_important_words( "modified_CS_arXiv_real_data.json", "tfidf_CS_arXiv_real_data.json")
+    # clean_real_data(db_connection_info, real_data_file_path, "modified_CS_arXiv_real_data.json", "new_metadata", "stopwords.txt")
+    # find_important_words( "../Real_Dataset/modified_CS_arXiv_real_data.json", "tfidf_CS_arXiv_real_data.json")
 
-    events = json_file_to_events("abstract_CS_arXiv_real_data.json", vocab_types, 10)
+    events = json_file_to_events("../Real_Dataset/modified_CS_arXiv_real_data.json", vocab_types, 10)
     number_of_events = len(events)
 
     print("Number of events: " + str(number_of_events))
@@ -547,13 +580,13 @@ def main():
         clusters = inferred_process.show_annotated_events()
         with codecs.open("real_data_results/" + "Case{0}".format(case) + "/" + vocab_types[
             0] + "_annotated_events_" + str(
-                number_of_events) + ".txt", "w", encoding="utf-8") as output_file:
+            number_of_events) + ".txt", "w", encoding="utf-8") as output_file:
             output_file.write(clusters)
 
         dist = inferred_process.show_term_frequencies()
         with codecs.open("real_data_results/" + "Case{0}".format(case) + "/" + vocab_types[
             0] + "_pattern_content_" + str(
-                number_of_events) + ".txt", "w", encoding="utf-8") as output_file:
+            number_of_events) + ".txt", "w", encoding="utf-8") as output_file:
             output_file.write(dist)
 
         predicted_labels = [e[1] for e in inferred_process.annotatedEventsIter()]
