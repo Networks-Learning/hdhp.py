@@ -254,7 +254,10 @@ def clean_real_data(db_connection_info, old_file_path, new_file_path, metadata_c
                             for j in range(len(splitted_item) - 1):
                                 if '-' in splitted_item[j]:
                                     temp = splitted_item[j].split('-')
-                                    splitted_item[j] = temp[0][0].strip() + '.-' + temp[1][0].strip() + '.'
+                                    if temp[0] != '':
+                                        splitted_item[j] = temp[0][0].strip() + '.-'
+                                    if temp[1] != '':
+                                        splitted_item[j] += temp[1][0].strip() + '.'
                                 else:
                                     if splitted_item[j].strip() != '':
                                         splitted_item[j] = splitted_item[j].strip()[0] + '.'
@@ -299,8 +302,6 @@ def clean_real_data(db_connection_info, old_file_path, new_file_path, metadata_c
                                     splitted_author[i] = temp[0][0].strip() + '.-'
                                 if temp[1] != '':
                                     splitted_author[i] += temp[1][0].strip() + '.'
-                            else:
-                                splitted_author[i] = splitted_author[i].strip()[0] + '.'
                     author = ""
                     for temp in splitted_author:
                         author += temp + ' '
