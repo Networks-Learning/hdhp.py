@@ -200,11 +200,11 @@ class Particle(object):
 
         new_p.per_topic_word_count = {}
         for doc_type in self.per_topic_word_counts:
-            new_p.per_topic_word_counts[doc_type] = copy_dict(self.per_topic_word_counts)
+            new_p.per_topic_word_counts[doc_type] = copy_dict(self.per_topic_word_counts[doc_type])
 
         new_p.per_topic_word_count_total = {}
         for doc_type in self.per_topic_word_count_total:
-            new_p.per_topic_word_count_total[doc_type] = copy_dict(doc_type)
+            new_p.per_topic_word_count_total[doc_type] = copy_dict(self.per_topic_word_count_total[doc_type])
 
         new_p.time_kernels = copy_dict(self.time_kernels)
         new_p.time_kernel_prior = copy_dict(self.time_kernel_prior)

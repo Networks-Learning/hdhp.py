@@ -148,6 +148,8 @@ def clean_real_data(db_connection_info, old_file_path, new_file_path, metadata_c
     ps = PorterStemmer()
 
     new_data = {}
+    unique_authors = {}
+    counter = 0
 
     with open(old_file_path) as old_file:
 
@@ -264,6 +266,8 @@ def clean_real_data(db_connection_info, old_file_path, new_file_path, metadata_c
                             new_item += temp.strip() + '#'
 
                     new_item = new_item[0:-1]
+                    if new_item.endswith('.'):
+                        new_item = new_item[0:-1]
 
                     if len(new_item) > 4:
                         new_author.append(new_item)
@@ -273,6 +277,43 @@ def clean_real_data(db_connection_info, old_file_path, new_file_path, metadata_c
                 new_citations.append(citation)
 
                 paper['citations'] = new_citations
+
+                authors = paper['author']
+                authors_ids = []
+
+                for author in authors:
+
+                    author = author.lower().strip()
+                    if ',' in author:
+                        splitted_author = author.split(',')
+                        author = splitted_author[1].strip() + ' ' + splitted_author[0].strip()
+                    splitted_author = author.split(' ')
+
+                    if not splitted_author[0].endswith('.'):
+
+                        for i in range(len(splitted_author) - 1):
+                            if '-' in splitted_author[i]:
+                                temp = splitted_author[i].split('-')
+
+                                if temp[0] != '':
+                                    splitted_author[i] = temp[0][0].strip() + '.-'
+                                if temp[1] != '':
+                                    splitted_author[i] += temp[1][0].strip() + '.'
+                            else:
+                                splitted_author[i] = splitted_author[i].strip()[0] + '.'
+                    author = ""
+                    for temp in splitted_author:
+                        author += temp + ' '
+                    author = author.strip()
+
+                    if author not in unique_authors:
+                        unique_authors[author] = counter
+                        authors_ids.append(counter)
+                        counter += 1
+                    else:
+                        authors_ids.append(unique_authors[author])
+
+                paper['authors_ids'] = authors_ids
             new_data[identifier] = paper
 
     with open(new_file_path, 'w') as output_file:
@@ -315,6 +356,7 @@ def json_file_to_events(json_file_path, vocab_types, num_words):
         for author in authors:
 
             author = author.lower().strip()
+
             if ',' in author:
                 splitted_author = author.split(',')
                 author = splitted_author[1].strip() + ' ' + splitted_author[0].strip()
@@ -325,7 +367,11 @@ def json_file_to_events(json_file_path, vocab_types, num_words):
                 for i in range(len(splitted_author) - 1):
                     if '-' in splitted_author[i]:
                         temp = splitted_author[i].split('-')
-                        splitted_author[i] = temp[0][0].strip() + '.-' + temp[1][0].strip() + '.'
+
+                        if temp[0] != '':
+                            splitted_author[i] = temp[0][0].strip() + '.-'
+                        if temp[1] != '':
+                            splitted_author[i] += temp[1][0].strip() + '.'
                     else:
                         splitted_author[i] = splitted_author[i].strip()[0] + '.'
             author = ""
