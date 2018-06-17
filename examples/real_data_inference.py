@@ -365,7 +365,7 @@ def clean_real_data(db_connection_info, old_file_path, new_file_path, metadata_c
     print("Cleaning Data - Execution Time: " + str(timeit.default_timer() - start))
 
 
-def json_file_to_events(json_file_path, vocab_types, num_words, base_year):
+def json_file_to_events(json_file_path, vocab_types, num_words, base_year, selected_authors):
     from datetime import datetime
     start = timeit.default_timer()
     base_time = datetime.strptime(base_year + '-01-01', '%Y-%m-%d')
@@ -403,6 +403,7 @@ def json_file_to_events(json_file_path, vocab_types, num_words, base_year):
 
         authors = paper['author']
         authors_ids = []
+        processed_authors = []
 
         for author in authors:
 
@@ -429,13 +430,16 @@ def json_file_to_events(json_file_path, vocab_types, num_words, base_year):
             for temp in splitted_author:
                 author += temp + ' '
             author = author.strip()
-
+            processed_authors.append(author)
             if author not in unique_authors:
                 unique_authors[author] = counter
                 authors_ids.append(counter)
                 counter += 1
             else:
                 authors_ids.append(unique_authors[author])
+
+        if authors_ids[0] not in selected_authors:
+            continue
 
         if vocab_types[0] == "tfidf":
             n = min(num_words, len(paper["sorted_features"]))
@@ -572,6 +576,72 @@ def maps_authors_to_ids(json_file_path):
         json.dump(new_json_data, output_file, indent=1)
     print("Number of unique ids: " + str(len(names_to_ids)))
     return names_to_ids
+
+
+def get_authors_with_n_papers(dataset_file_path, base_year, number_of_papers):
+    json_data = json.load(open(dataset_file_path))
+    unique_authors = {}
+    papers_per_user = {}
+    events_per_user = {}
+    counter = 0
+
+    for identifier in json_data:
+
+        paper = json_data.get(identifier)
+        if not paper['year'] > int(base_year):
+            continue
+
+        authors = paper['author']
+        authors_ids = []
+
+        for index, author in enumerate(authors):
+
+            author = author.lower().strip()
+
+            if ',' in author:
+                splitted_author = author.split(',')
+                author = splitted_author[1].strip() + ' ' + splitted_author[0].strip()
+            splitted_author = author.split(' ')
+
+            if not splitted_author[0].endswith('.'):
+
+                for i in range(len(splitted_author) - 1):
+                    if '-' in splitted_author[i]:
+                        temp = splitted_author[i].split('-')
+
+                        if temp[0] != '':
+                            splitted_author[i] = temp[0][0].strip() + '.-'
+                        if temp[1] != '':
+                            splitted_author[i] += temp[1][0].strip() + '.'
+                    else:
+                        splitted_author[i] = splitted_author[i].strip()[0] + '.'
+            author = ""
+            for temp in splitted_author:
+                author += temp + ' '
+            author = author.strip()
+
+            if author not in unique_authors:
+                unique_authors[author] = counter
+                authors_ids.append(counter)
+                counter += 1
+            else:
+                authors_ids.append(unique_authors[author])
+
+            if unique_authors[author] not in papers_per_user:
+                papers_per_user[unique_authors[author]] = 1
+            else:
+                papers_per_user[unique_authors[author]] += 1
+
+            if index == 0:
+                if unique_authors.get(author) not in events_per_user:
+                    events_per_user[unique_authors.get(author)] = 1
+                else:
+                    events_per_user[unique_authors.get(author)] += 1
+
+    first_authors = [author for author in events_per_user if events_per_user[author] > number_of_papers]
+    all_authors = [author for author in papers_per_user if papers_per_user[author] > number_of_papers]
+
+    return first_authors, all_authors
 
 
 def authors_info(dataset_file_path):
@@ -749,11 +819,15 @@ def main():
     # clean_real_data(db_connection_info, real_data_file_path, "modified_CS_arXiv_real_data.json", "new_metadata", "stopwords.txt")
     # find_important_words( "../Real_Dataset/modified_CS_arXiv_real_data.json", "tfidf_CS_arXiv_real_data.json")
 
+    dataset_file_path = "../Real_Dataset/modified_2_CS_arXiv_real_data.json"
     base_year = '2010'
-    events = json_file_to_events("../Real_Dataset/modified_2_CS_arXiv_real_data.json", vocab_types, 10, base_year)
-    print(events[0])
-    print(events[len(events) - 1])
-    number_of_events = 100
+    time_unit = "months"
+    number_of_papers = 1
+
+    first_authors, all_authors = get_authors_with_n_papers(dataset_file_path, base_year, number_of_papers)
+    events = json_file_to_events(dataset_file_path, vocab_types, 10, base_year, first_authors)
+
+    number_of_events = len(events)
 
     print("Number of events: " + str(number_of_events))
 
@@ -771,31 +845,34 @@ def main():
                                  use_cousers=use_cousers)
         print("End inferring in : " + str(timeit.default_timer() - start))
 
-        with open("real_data_results/" + "Case{0}".format(case) + "/" + vocab_types[0] + "_base_rates_" + str(
+        with open("real_data_results/" + "Case{0}".format(case) + "/" + time_unit + "/" + vocab_types[
+            0] + "_base_rates_" + str(
                 number_of_events) + ".tsv", "w") as output_file:
             for key in inferred_process.mu_per_user:
                 output_file.write("\t".join([str(key), str(inferred_process.mu_per_user[key])]) + "\n")
 
-        with open("real_data_results/" + "Case{0}".format(case) + "/" + vocab_types[0] + "_est_time_kernels_" + str(
+        with open("real_data_results/" + "Case{0}".format(case) + "/" + time_unit + "/" + vocab_types[
+            0] + "_est_time_kernels_" + str(
                 number_of_events) + ".tsv", "w") as output_file:
             for key in inferred_process.time_kernels:
                 output_file.write("\t".join([str(key), str(inferred_process.time_kernels[key])]) + "\n")
 
         clusters = inferred_process.show_annotated_events()
-        with codecs.open("real_data_results/" + "Case{0}".format(case) + "/" + vocab_types[
+        with codecs.open("real_data_results/" + "Case{0}".format(case) + "/" + time_unit + "/" + vocab_types[
             0] + "_annotated_events_" + str(
             number_of_events) + ".txt", "w", encoding="utf-8") as output_file:
             output_file.write(clusters)
 
         dist = inferred_process.show_pattern_content()
-        with codecs.open("real_data_results/" + "Case{0}".format(case) + "/" + vocab_types[
+        with codecs.open("real_data_results/" + "Case{0}".format(case) + "/" + time_unit + "/" + vocab_types[
             0] + "_pattern_content_" + str(
             number_of_events) + ".txt", "w", encoding="utf-8") as output_file:
             output_file.write(dist)
 
         predicted_labels = [e[1] for e in inferred_process.annotatedEventsIter()]
 
-        with open("real_data_results/" + "Case{0}".format(case) + "/" + vocab_types[0] + "_patterns_" + str(
+        with open("real_data_results/" + "Case{0}".format(case) + "/" + time_unit + "/" + vocab_types[
+            0] + "_patterns_" + str(
                 number_of_events) + ".tsv",
                   "w") as output_file:
             for i in xrange(len(predicted_labels)):
