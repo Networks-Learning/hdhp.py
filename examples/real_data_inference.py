@@ -2,6 +2,7 @@ import matplotlib
 
 matplotlib.use('Agg')
 
+import matplotlib.pyplot as plt
 import hdhp
 import json
 import timeit
@@ -12,6 +13,46 @@ import codecs
 import re
 from sklearn.feature_extraction.text import TfidfVectorizer
 from nltk.stem import PorterStemmer
+import datetime
+import os
+from dateutil import relativedelta
+
+
+def plot_papers_per_year(dataset_file_path):
+    """
+    This function plot number of papers published in each year
+    :param dataset_file_path: Dataset File Path
+    :return: Nothing.
+    """
+
+    start = timeit.default_timer()
+    json_data = json.load(open(dataset_file_path))
+    years = {}
+
+    for identifier in json_data:
+        paper = json_data[identifier]
+        paper_year = paper['year']
+        if paper_year in years:
+            years[paper_year] += 1
+        else:
+            years[paper_year] = 1
+    x = []
+    y = []
+
+    for key in years:
+        x.append(int(key))
+        y.append(years.get(key))
+
+    width = 1 / 1.5
+    fig, ax = plt.subplots()
+    ax.bar(x, y, width, color="c", linewidth=0.4)
+    ax.set_ylabel('Number of Papers')
+    ax.set_title('Publish Year')
+    fig = plt.gcf()
+    fig.savefig('years.png')
+    fig.clf()
+    plt.close(fig)
+    print("Plotting number of papers for each year in " + str(timeit.default_timer() - start) + " seconds")
 
 
 def plot_pattern_popularity(file_path):
@@ -324,8 +365,10 @@ def clean_real_data(db_connection_info, old_file_path, new_file_path, metadata_c
     print("Cleaning Data - Execution Time: " + str(timeit.default_timer() - start))
 
 
-def json_file_to_events(json_file_path, vocab_types, num_words):
+def json_file_to_events(json_file_path, vocab_types, num_words, base_year):
+    from datetime import datetime
     start = timeit.default_timer()
+    base_time = datetime.strptime(base_year + '-01-01', '%Y-%m-%d')
 
     events = list()
     json_data = json.load(open(json_file_path))
@@ -333,11 +376,18 @@ def json_file_to_events(json_file_path, vocab_types, num_words):
 
     for identifier in json_data:
         paper = json_data.get(identifier)
-        times[identifier] = paper["time"]
+        if int(paper['year']) > int(base_year):
+            paper_time = datetime.strptime(paper['date'][0], '%Y-%m-%d')
+            diff = relativedelta.relativedelta(paper_time, base_time)
+            num_months = diff.years * 12 + diff.months
+            times[identifier] = num_months + random.uniform(0, 1)
 
     sorted_times = sorted(times.items(), key=operator.itemgetter(1))
     counter = 0
     unique_authors = {}
+
+    unique_vocabs_1 = {}
+    unique_vocabs_2 = {}
 
     for item in sorted_times:
         identifier = item[0]
@@ -390,16 +440,43 @@ def json_file_to_events(json_file_path, vocab_types, num_words):
         if vocab_types[0] == "tfidf":
             n = min(num_words, len(paper["sorted_features"]))
             vocabularies = {"docs": ' '.join(paper["sorted_features"][0:n]), "auths": authors_vocabs.strip()}
+
+            for vocab in paper["sorted_features"][0:n]:
+                if vocab in unique_vocabs_1:
+                    unique_vocabs_1[vocab] += 1
+                else:
+                    unique_vocabs_1[vocab] = 0
+
+            for vocab in authors_vocabs.split(' '):
+                if vocab in unique_vocabs_2:
+                    unique_vocabs_2[vocab] += 1
+                else:
+                    unique_vocabs_2[vocab] = 0
+
         else:
             vocabularies = {"docs": paper[vocab_types[0]], "auths": authors_vocabs.strip()}
+            for vocab in paper[vocab_types[0]].split(' '):
+                if vocab in unique_vocabs_1:
+                    unique_vocabs_1[vocab] += 1
+                else:
+                    unique_vocabs_1[vocab] = 0
+
+            for vocab in authors_vocabs.split(' '):
+                if vocab in unique_vocabs_2:
+                    unique_vocabs_2[vocab] += 1
+                else:
+                    unique_vocabs_2[vocab] = 0
 
         paper["author_ids"] = authors_ids
-        event = (paper["time"], vocabularies, paper["author_ids"], [])
+        event = (times[identifier], vocabularies, paper["author_ids"], [])
         events.append(event)
 
     print("Number of events: " + str(len(events)))
     print("Number of unique authors: " + str(len(unique_authors)))
     print("Execution Time: " + str(timeit.default_timer() - start))
+    print
+    print("Docs vocab size: " + str(len(unique_vocabs_1)))
+    print("Authors vocab size: " + str(len(unique_vocabs_2)))
     return events
 
 
@@ -509,40 +586,110 @@ def authors_info(dataset_file_path):
         for identifier in json_data:
 
             paper = json_data.get(identifier)
-            authors = paper["author"]
+            authors = paper['author']
+            authors_ids = []
 
-            for author in authors:
+            for index, author in enumerate(authors):
+
+                author = author.lower().strip()
+
+                if ',' in author:
+                    splitted_author = author.split(',')
+                    author = splitted_author[1].strip() + ' ' + splitted_author[0].strip()
+                splitted_author = author.split(' ')
+
+                if not splitted_author[0].endswith('.'):
+
+                    for i in range(len(splitted_author) - 1):
+                        if '-' in splitted_author[i]:
+                            temp = splitted_author[i].split('-')
+
+                            if temp[0] != '':
+                                splitted_author[i] = temp[0][0].strip() + '.-'
+                            if temp[1] != '':
+                                splitted_author[i] += temp[1][0].strip() + '.'
+                        else:
+                            splitted_author[i] = splitted_author[i].strip()[0] + '.'
+                author = ""
+                for temp in splitted_author:
+                    author += temp + ' '
+                author = author.strip()
+
                 if author not in unique_authors:
                     unique_authors[author] = counter
+                    authors_ids.append(counter)
                     counter += 1
+                else:
+                    authors_ids.append(unique_authors[author])
 
                 if unique_authors[author] not in papers_per_user:
                     papers_per_user[unique_authors[author]] = 1
                 else:
                     papers_per_user[unique_authors[author]] += 1
 
-            if unique_authors.get(authors[0]) not in events_per_user:
-                events_per_user[unique_authors.get(authors[0])] = 1
-            else:
-                events_per_user[unique_authors.get(authors[0])] += 1
+                if index == 0:
+                    if unique_authors.get(author) not in events_per_user:
+                        events_per_user[unique_authors.get(author)] = 1
+                    else:
+                        events_per_user[unique_authors.get(author)] += 1
 
-        sorted_num_events = sorted(events_per_user.items(), key=operator.itemgetter(1))
+        sorted_num_events = sorted(events_per_user.items(), key=operator.itemgetter(1), reverse=True)
 
         with open("num_events_per_user.txt", 'w') as out_file:
 
             for item in sorted_num_events:
                 out_file.write(str(item[0]) + '\t' + str(item[1]) + '\n')
 
-        sorted_num_papers = sorted(papers_per_user.items(), key=operator.itemgetter(1))
+        sorted_num_papers = sorted(papers_per_user.items(), key=operator.itemgetter(1), reverse=True)
         with open("num_papers_per_author.txt", 'w') as out_file:
 
             for item in sorted_num_papers:
                 out_file.write(str(item[0]) + '\t' + str(item[1]) + '\n')
 
         print("Number of unique authors: " + str(len(unique_authors)))
+        print("Events per user size: " + str(len(events_per_user)))
+        print("Papers per user size: " + str(len(papers_per_user)))
 
 
-def infer(raw_events, indices, num_particles, alpha_0, mu_0, omega, use_cousers=False):
+def save_inferred_process(inf_process, vocab_types, directory_path):
+    predicted_labels = [e[1] for e in inf_process.annotatedEventsIter()]
+    popularity = {}
+
+    for label in predicted_labels:
+        if label not in popularity:
+            popularity[label] = 0
+        else:
+            popularity[label] += 1
+
+    for label in popularity:
+        popularity[label] = popularity[label] * 1.0 / len(predicted_labels)
+
+    with open(os.path.join(directory_path, vocab_types[0] + '_popularity_' + str(len(predicted_labels)) + '.json'),
+              'w') as output_file:
+        json.dump(popularity, output_file, indent=1)
+
+    with open(os.path.join(directory_path, vocab_types[0] + '_time_kernels_' + str(len(predicted_labels)) + '.json'),
+              'w') as output_file:
+        json.dump(inf_process.time_kernels, output_file, indent=1)
+
+    with open(os.path.join(directory_path, vocab_types[0] + '_table_history_' + str(len(predicted_labels)) + '.json'),
+              'w') as output_file:
+        json.dump(inf_process.table_history_per_user, output_file, indent=1)
+
+    with open(os.path.join(directory_path, vocab_types[0] + '_time_history_' + str(len(predicted_labels)) + '.json'),
+              'w') as output_file:
+        json.dump(inf_process.time_history_per_user, output_file, indent=1)
+
+    with open(os.path.join(directory_path, vocab_types[0] + '_dish_on_table_' + str(len(predicted_labels)) + '.json'),
+              'w') as output_file:
+        json.dump(inf_process.dish_on_table_per_user, output_file, indent=1)
+
+    with open(os.path.join(directory_path, vocab_types[0] + '_mu_per_user_' + str(len(predicted_labels)) + '.json'),
+              'w') as output_file:
+        json.dump(inf_process.mu_per_user, output_file, indent=1)
+
+
+def infer(raw_events, indices, num_particles, alpha_0, mu_0, omega, vocab_types, use_cousers=False):
     start = timeit.default_timer()
 
     types = ["docs", "auths"]
@@ -574,12 +721,17 @@ def infer(raw_events, indices, num_particles, alpha_0, mu_0, omega, use_cousers=
     start = timeit.default_timer()
 
     inf_process = particle.to_process()
+
+    save_inferred_process(inf_process, vocab_types, "real_data_results/Inference/")
+
     print("Convert to process - time: " + str(timeit.default_timer() - start))
 
     return inf_process
 
 
 def main():
+    # plot_papers_per_year("../Real_Dataset/modified_2_CS_arXiv_real_data.json")
+    # authors_info("../Real_Dataset/modified_2_CS_arXiv_real_data.json")
     real_data_file_path = "new_CS_arXiv_real_data.json"
 
     # priors to control the time dynamics of the events
@@ -591,12 +743,17 @@ def main():
     db_connection_info = ""
 
     vocab_types = ["title", "auths"]
+    print("Vocab Types: " + str(vocab_types))
+    print("Number of Particles: " + str(num_particles))
 
     # clean_real_data(db_connection_info, real_data_file_path, "modified_CS_arXiv_real_data.json", "new_metadata", "stopwords.txt")
     # find_important_words( "../Real_Dataset/modified_CS_arXiv_real_data.json", "tfidf_CS_arXiv_real_data.json")
 
-    events = json_file_to_events("../Real_Dataset/modified_CS_arXiv_real_data.json", vocab_types, 10)
-    number_of_events = len(events)
+    base_year = '2010'
+    events = json_file_to_events("../Real_Dataset/modified_2_CS_arXiv_real_data.json", vocab_types, 10, base_year)
+    print(events[0])
+    print(events[len(events) - 1])
+    number_of_events = 100
 
     print("Number of events: " + str(number_of_events))
 
@@ -604,13 +761,13 @@ def main():
              2: ([0, 1], False),
              3: ([0, 1], True)}
 
-    for case in [3, 2, 1]:
+    for case in [3]:
         print "Case: {0}".format(case)
         indices, use_cousers = cases[case]
 
         print("Start inferring.....")
         start = timeit.default_timer()
-        inferred_process = infer(events[: number_of_events], indices, num_particles, alpha_0, mu_0, omega,
+        inferred_process = infer(events[: number_of_events], indices, num_particles, alpha_0, mu_0, omega, vocab_types,
                                  use_cousers=use_cousers)
         print("End inferring in : " + str(timeit.default_timer() - start))
 
@@ -630,7 +787,7 @@ def main():
             number_of_events) + ".txt", "w", encoding="utf-8") as output_file:
             output_file.write(clusters)
 
-        dist = inferred_process.show_term_frequencies()
+        dist = inferred_process.show_pattern_content()
         with codecs.open("real_data_results/" + "Case{0}".format(case) + "/" + vocab_types[
             0] + "_pattern_content_" + str(
             number_of_events) + ".txt", "w", encoding="utf-8") as output_file:

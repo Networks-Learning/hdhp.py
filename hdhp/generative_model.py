@@ -930,7 +930,8 @@ class HDHProcess:
         prng = RandomState(seed)
         num_users = len(self.dish_on_table_per_user)
         if users is None:
-            users = range(num_users)
+            # users = range(num_users)
+            users = list(self.dish_on_table_per_user.keys())
         num_users_to_plot = min(len(users), user_limit)
         users = users[:num_users_to_plot]
         if T_max is None:
@@ -1146,27 +1147,6 @@ class HDHProcess:
                    )
                 for docType in docTypes for pattern in self.per_pattern_word_counts[docType] if pattern in patterns]
         return '\n\n'.join(text)
-
-    def show_term_frequencies(self, words=0, detail_threshold=5):
-
-        docTypes = self.per_pattern_word_counts.keys()
-        # even if there are multiple doc types, the patterns should be the same
-        for docType in docTypes:
-            patterns = self.per_pattern_word_counts[docType].keys()
-            print("Number of Patterns: " + str(len(patterns)))
-
-        text = ""
-        for docType in docTypes:
-            for pattern in patterns:
-                text += 'DocType ' + docType + ', ___Pattern ' + str(pattern) + '___ \n'
-                sorted_words = sorted(self.per_pattern_word_counts[docType][pattern].iteritems(),
-                                      key=lambda x: (x[1], x[0]), reverse=True)
-                for i, (k, v) in enumerate(sorted_words):
-                    if v >= detail_threshold and (words == 0 or i < words):
-                        text += k.encode('utf-8') + ':' + v.encode('utf-8') + '\n'
-                text += '\n'
-        text += '\n *************************************************************************************** \n'
-        return text
 
     def annotatedEventsIter(self, keep_sorted=True):
 

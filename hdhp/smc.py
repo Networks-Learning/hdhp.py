@@ -496,7 +496,8 @@ class Particle(object):
     def sample_time_kernel(self, alpha_0=None):
         if alpha_0 is None:
             alpha_0 = self.alpha_0
-        return self.prng.gamma(alpha_0[0], 1. / alpha_0[1])
+
+        return self.prng.gamma(alpha_0[0], 1.0 / alpha_0[1])
 
     def sample_mu(self):
         """Samples a value from the prior of the base intensity mu.
