@@ -827,7 +827,7 @@ def main():
     first_authors, all_authors = get_authors_with_n_papers(dataset_file_path, base_year, number_of_papers)
     events = json_file_to_events(dataset_file_path, vocab_types, 10, base_year, first_authors)
 
-    number_of_events = len(events)
+    number_of_events = 100
 
     print("Number of events: " + str(number_of_events))
 

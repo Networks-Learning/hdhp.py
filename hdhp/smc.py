@@ -78,7 +78,7 @@ class InferenceParameters:
 
 
 class Particle(object):
-    def __init__(self, vocabulary_length, num_users, time_kernels=None,
+    def __init__(self, vocabulary_length, users, time_kernels=None,
                  alpha_0=(2, 2), mu_0=1, theta_0=None,
                  seed=None, logweight=0, update_kernels=False, uid=0,
                  omega=1, beta=1, keep_alpha_history=False, mu_rate=0.6):
@@ -108,7 +108,9 @@ class Particle(object):
         self._Qn = None
         self.omega = omega
         self.beta = beta
-        self.num_users = num_users
+        self.num_users = len(users)
+        self.users = users
+        self.max_users_id = max(users) + 1
         self.keep_alpha_history = keep_alpha_history
 
         self.user_table_cache = {}
@@ -148,7 +150,7 @@ class Particle(object):
         self.logweight = 0
 
     def copy(self):
-        new_p = Particle(num_users=self.num_users,
+        new_p = Particle(users=self.users,
                          vocabulary_length=self.vocabulary_length,
                          seed=self.seed, mu_rate=self.mu_rate,
                          theta_0=self.theta_0,
@@ -237,12 +239,12 @@ class Particle(object):
         d_n = {vocab_type: d_n[vocab_type].split() for vocab_type in d_n}
 
         if self.num_events == 0:
-            self.time_previous_user_event = [0 for i in range(self.num_users)]
-            self.total_tables_per_user = [0 for i in range(self.num_users)]
+            self.time_previous_user_event = [0 for i in range(self.max_users_id)]
+            self.total_tables_per_user = [0 for i in range(self.max_users_id)]
             self.mu_per_user = {i: self.sample_mu()
-                                for i in range(self.num_users)}
+                                for i in self.users}
             self.active_tables_per_user = {i: set()
-                                           for i in range(self.num_users)}
+                                           for i in self.users}
         if self.num_events >= 1 and u_n in self.time_previous_user_event and \
                         self.time_previous_user_event[u_n] > 0:
             log_likelihood_tn = self.time_event_log_likelihood(t_n, u_n)
@@ -719,7 +721,7 @@ def _infer_single_thread(history, params):
                                              params.vocabulary},
                           update_kernels=params.update_kernels,
                           omega=params.omega, beta=params.beta,
-                          num_users=len(params.users),
+                          users=params.users,
                           keep_alpha_history=params.keep_alpha_history,
                           mu_rate=params.mu_rate)
                  for i in range(params.num_particles)]
