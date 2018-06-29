@@ -10,11 +10,10 @@ from datetime import datetime
 import random
 import operator
 import codecs
-import re
 from sklearn.feature_extraction.text import TfidfVectorizer
-from nltk.stem import PorterStemmer
 import datetime
 import os
+import utility
 from dateutil import relativedelta
 
 
@@ -53,21 +52,6 @@ def plot_papers_per_year(dataset_file_path):
     fig.clf()
     plt.close(fig)
     print("Plotting number of papers for each year in " + str(timeit.default_timer() - start) + " seconds")
-
-
-def plot_pattern_popularity(file_path):
-    with open(file_path) as input_file:
-        patterns = {}
-        lines = input_file.readlines()
-        for line in lines:
-            line = line.strip()
-            if line not in patterns:
-                patterns[line] = 1
-            else:
-                patterns[line] += 1
-
-        sorted_patterns = sorted(patterns, key=lambda t: t[1] * 1)
-        print(sorted_patterns)
 
 
 def find_important_words(dataset_file_path, new_file_path):
@@ -186,8 +170,6 @@ def clean_real_data(db_connection_info, old_file_path, new_file_path, metadata_c
     client = MongoClient(db_connection_info)  # Connect to the MongoDB
     db = client.arXiv  # Gets the related database
 
-    ps = PorterStemmer()
-
     new_data = {}
     unique_authors = {}
     counter = 0
@@ -198,168 +180,44 @@ def clean_real_data(db_connection_info, old_file_path, new_file_path, metadata_c
 
         for identifier in old_data:
             paper = old_data.get(identifier)
+            new_paper = {}
             document = db[metadata_collection].find_one({'identifier': {'$in': [identifier]}})
-            new_abstract = document["description"][0]
+            abstract = document["description"][0]
+            title = document["title"].lower()
+            new_paper['abstract'] = abstract
+            new_paper['title'] = title
 
-            paper_abstract = new_abstract.lower()
-            paper_abstract = re.sub("=|;|,|\?|\d+|'|\+|\^|\[|\]", "", paper_abstract)
-            paper_abstract = re.sub("{|}|\\\\\S*|\$\S*\$|\(|\)|:|\d+|\.", " ", paper_abstract)
-
-            all_words = paper_abstract.split()
-            paper_abstract = ""
-
-            for word in all_words:
-                word = word.strip()
-                if len(word) > 1 and word not in stopwords:
-                    paper_abstract += ps.stem(word) + ' '
-
-            paper["abstract"] = paper_abstract
-
-            paper_title = document["title"].lower()
-            paper_title = re.sub("\d+|\(|\)|:|;|,|\?|\.|'|\$\S*\$|\\\\\S*|{|}", " ", paper_title)
-            paper_title = re.sub("\+|=|\^|\[|\]", "", paper_title)
-
-            all_words = paper_title.split()
-            paper_title = ""
-
-            for word in all_words:
-                word = word.strip()
-                if len(word) > 1 and word not in stopwords:
-                    paper_title += ps.stem(word) + ' '
-
-            paper["title"] = paper_title
+            paper_abstract, paper_title = utility.process_abstract_title(abstract, title, stopwords)
+            new_paper["processed_abstract"] = paper_abstract
+            new_paper["processed_title"] = paper_title
 
             citations = paper['citations']
             new_citations = []
 
             for index in range(len(citations)):
+                processed_citation = utility.process_citation(citations[index])
+                new_citations.append(processed_citation)
 
-                citation = citations[index]
-                author = citation['author']
-                new_author = []
+            new_paper['citations'] = new_citations
 
-                for item in author:
-                    item = re.sub("{\\\\ A}", "", item).strip()
+            authors = paper['author']
+            authors_ids, counter = utility.process_authors(authors, unique_authors, counter)
 
-                    if item.endswith(", A"):
-                        item = item[0:-3]
-                    if item.endswith(" A"):
-                        item = item[0:-2]
-
-                    item = item.strip().lower()
-                    if len(item) < 2:
-                        continue
-
-                    if 'et al.' in item:
-                        item = item[0: item.index('et al.')].strip()
-                    if item.startswith(','):
-                        continue
-                    if ':' in item:
-                        item = item[0: item.index(':')].strip()
-                    if 'physic' in item or 'ieee' in item or 'nature' in item:
-                        continue
-                    if ', {a}' in item:
-                        item = item[0: item.index(', {a}')].strip()
-                    if '{a}' in item:
-                        item = item[0: item.index('{a}')].strip()
-                    if '(' in item:
-                        item = item[0: item.index('(')]
-
-                    item = re.sub('{\\\ n}', 'n', item)
-                    item = re.sub('{\\\ a}', 'a', item)
-                    item = re.sub('\\\,', ' ', item)
-                    item = re.sub('\\\ ', '', item)
-                    item = re.sub('\\\\', '', item)
-
-                    if '$' in item:
-                        item = item[0: item.index('$')].strip()
-                    if 'title' in item:
-                        continue
-
-                    item = re.sub("{ | }", "", item)
-                    item = re.sub("{|}", "", item)
-
-                    item = item.strip()
-
-                    if ',' in item:
-                        splitted = item.split(',')
-                        if len(splitted) > 1:
-                            item = splitted[1].strip() + ' ' + splitted[0].strip()
-                        else:
-                            item = splitted[0].strip()
-
-                    splitted_item = item.split(' ')
-
-                    if not splitted_item[0].strip().endswith('.'):
-                        if len(splitted_item) == 2 or len(splitted_item) == 3:
-                            for j in range(len(splitted_item) - 1):
-                                if '-' in splitted_item[j]:
-                                    temp = splitted_item[j].split('-')
-                                    if temp[0] != '':
-                                        splitted_item[j] = temp[0][0].strip() + '.-'
-                                    if temp[1] != '':
-                                        splitted_item[j] += temp[1][0].strip() + '.'
-                                else:
-                                    if splitted_item[j].strip() != '':
-                                        splitted_item[j] = splitted_item[j].strip()[0] + '.'
-
-                    new_item = ''
-
-                    for temp in splitted_item:
-                        if temp.strip() != "":
-                            new_item += temp.strip() + '#'
-
-                    new_item = new_item[0:-1]
-                    if new_item.endswith('.'):
-                        new_item = new_item[0:-1]
-
-                    if len(new_item) > 4:
-                        new_author.append(new_item)
-
-                citation['author'] = new_author
-
-                new_citations.append(citation)
-
-                paper['citations'] = new_citations
-
-                authors = paper['author']
-                authors_ids = []
-
-                for author in authors:
-
-                    author = author.lower().strip()
-                    if ',' in author:
-                        splitted_author = author.split(',')
-                        author = splitted_author[1].strip() + ' ' + splitted_author[0].strip()
-                    splitted_author = author.split(' ')
-
-                    if not splitted_author[0].endswith('.'):
-
-                        for i in range(len(splitted_author) - 1):
-                            if '-' in splitted_author[i]:
-                                temp = splitted_author[i].split('-')
-
-                                if temp[0] != '':
-                                    splitted_author[i] = temp[0][0].strip() + '.-'
-                                if temp[1] != '':
-                                    splitted_author[i] += temp[1][0].strip() + '.'
-                    author = ""
-                    for temp in splitted_author:
-                        author += temp + ' '
-                    author = author.strip()
-
-                    if author not in unique_authors:
-                        unique_authors[author] = counter
-                        authors_ids.append(counter)
-                        counter += 1
-                    else:
-                        authors_ids.append(unique_authors[author])
-
-                paper['authors_ids'] = authors_ids
-            new_data[identifier] = paper
+            new_paper['authors_ids'] = authors_ids
+            new_paper['author'] = paper.get('author')
+            new_paper['file_name'] = paper.get('file_name')
+            new_paper['tar_file'] = paper.get('tar_file')
+            new_paper['year'] = paper.get('year')
+            new_paper['date'] = paper.get('date')
+            new_paper['subject'] = paper.get('subject')
+            new_paper['time'] = paper.get('time')
+            new_data[identifier] = new_paper
 
     with open(new_file_path, 'w') as output_file:
         json.dump(new_data, output_file, indent=0)
+
+    with open("Statistics/authors_names_mapping.json", "w") as output_file:
+        json.dump(unique_authors, output_file, indent=1)
 
     client.close()
     print("Cleaning Data - Execution Time: " + str(timeit.default_timer() - start))
@@ -380,11 +238,9 @@ def json_file_to_events(json_file_path, vocab_types, num_words, base_year, selec
             paper_time = datetime.strptime(paper['date'][0], '%Y-%m-%d')
             diff = relativedelta.relativedelta(paper_time, base_time)
             num_months = diff.years * 12 + diff.months
-            times[identifier] = num_months + random.uniform(0, 1)
+            times[identifier] = (num_months / 6.0) + random.uniform(0, 1)
 
     sorted_times = sorted(times.items(), key=operator.itemgetter(1))
-    counter = 0
-    unique_authors = {}
 
     unique_vocabs_1 = {}
     unique_vocabs_2 = {}
@@ -401,42 +257,9 @@ def json_file_to_events(json_file_path, vocab_types, num_words, base_year, selec
             for author in authors:
                 authors_vocabs += author.strip() + ' '
 
-        authors = paper['author']
-        authors_ids = []
-        processed_authors = []
-
-        for author in authors:
-
-            author = author.lower().strip()
-
-            if ',' in author:
-                splitted_author = author.split(',')
-                author = splitted_author[1].strip() + ' ' + splitted_author[0].strip()
-            splitted_author = author.split(' ')
-
-            if not splitted_author[0].endswith('.'):
-
-                for i in range(len(splitted_author) - 1):
-                    if '-' in splitted_author[i]:
-                        temp = splitted_author[i].split('-')
-
-                        if temp[0] != '':
-                            splitted_author[i] = temp[0][0].strip() + '.-'
-                        if temp[1] != '':
-                            splitted_author[i] += temp[1][0].strip() + '.'
-                    else:
-                        splitted_author[i] = splitted_author[i].strip()[0] + '.'
-            author = ""
-            for temp in splitted_author:
-                author += temp + ' '
-            author = author.strip()
-            processed_authors.append(author)
-            if author not in unique_authors:
-                unique_authors[author] = counter
-                authors_ids.append(counter)
-                counter += 1
-            else:
-                authors_ids.append(unique_authors[author])
+        authors_ids = paper['authors_ids']
+        if authors_ids is None:
+            continue
 
         if authors_ids[0] not in selected_authors:
             continue
@@ -459,7 +282,7 @@ def json_file_to_events(json_file_path, vocab_types, num_words, base_year, selec
 
         else:
             vocabularies = {"docs": paper[vocab_types[0]], "auths": authors_vocabs.strip()}
-            for vocab in paper[vocab_types[0]].split(' '):
+            for vocab in paper['processed_' + vocab_types[0]].split(' '):
                 if vocab in unique_vocabs_1:
                     unique_vocabs_1[vocab] += 1
                 else:
@@ -476,7 +299,6 @@ def json_file_to_events(json_file_path, vocab_types, num_words, base_year, selec
         events.append(event)
 
     print("Number of events: " + str(len(events)))
-    print("Number of unique authors: " + str(len(unique_authors)))
     print("Execution Time: " + str(timeit.default_timer() - start))
     print
     print("Docs vocab size: " + str(len(unique_vocabs_1)))
@@ -498,92 +320,11 @@ def find_first_date(json_file_path):
     print(str(first_date))
 
 
-def num_unique_authors(json_file_path):
-    json_data = json.load(open(json_file_path))
-    unique_authors = []
-
-    for identifier in json_data:
-        paper = json_data.get(identifier)
-        for author in paper["author"]:
-            unique_authors.append(author.strip())
-
-    print("Number of all authors: " + str(len(unique_authors)))
-    print("Number of unique authors: " + str(len(set(unique_authors))))
-
-
-def get_number_of_authors(events):
-    unique_authors = []
-
-    for event in events:
-        unique_authors += event[2]
-
-    return len(set(unique_authors))
-
-
-def maps_authors_to_ids(json_file_path):
-    json_data = json.load(open(json_file_path))
-    stopwords_file_path = "stopwords.txt"
-
-    with open(stopwords_file_path) as stopwords_file:
-        stopwords = stopwords_file.readlines()
-
-    for i in range(len(stopwords)):
-        stopwords[i] = stopwords[i].strip()
-
-    new_file = "/NL/publications-corpus/work/new_CS_arXiv_real_data.json"
-
-    base_time = datetime.strptime('1996-06-03', '%Y-%m-%d')
-
-    counter = 0
-    names_to_ids = {}
-    new_json_data = {}
-
-    for identifier in json_data:
-        paper = json_data.get(identifier)
-
-        authors = paper["author"]
-        for author in authors:
-            if author.strip() not in names_to_ids:
-                counter += 1
-                names_to_ids[author.strip()] = counter
-
-    for identifier in json_data:
-        paper = json_data.get(identifier)
-
-        authors = paper["author"]
-        ids = []
-        for author in authors:
-            ids.append(names_to_ids.get(author.strip()))
-        paper_abstract = paper["abstract"].lower()
-        paper_abstract = ' '.join([word for word in paper_abstract.split() if word not in stopwords])
-        paper_abstract = re.sub(":|;|,|\?|\.", "", paper_abstract)
-        paper["abstract"] = paper_abstract
-
-        paper_title = paper["title"].lower()
-        paper_title = ' '.join([word for word in paper_title.split() if word not in stopwords])
-        paper_title = re.sub(":|;|,|\?|\.", "", paper_title)
-        paper["title"] = paper_title
-
-        paper['author_ids'] = ids
-
-        paper_time = datetime.strptime(paper["date"][0], '%Y-%m-%d')
-        time_diff = paper_time - base_time
-        time = time_diff.total_seconds() / (3600 * 24) + random.uniform(0, 1)
-        paper['time'] = time
-        new_json_data[identifier] = paper
-
-    with open(new_file, 'w') as output_file:
-        json.dump(new_json_data, output_file, indent=1)
-    print("Number of unique ids: " + str(len(names_to_ids)))
-    return names_to_ids
-
-
 def get_authors_with_n_papers(dataset_file_path, base_year, number_of_papers):
     json_data = json.load(open(dataset_file_path))
-    unique_authors = {}
     papers_per_user = {}
-    events_per_user = {}
-    counter = 0
+    events_per_first_user = {}
+    events_per_last_user = {}
 
     for identifier in json_data:
 
@@ -591,134 +332,43 @@ def get_authors_with_n_papers(dataset_file_path, base_year, number_of_papers):
         if not paper['year'] > int(base_year):
             continue
 
-        authors = paper['author']
-        authors_ids = []
+        authors_ids = paper.get('authors_ids')
+        if authors_ids is None:
+            continue
 
-        for index, author in enumerate(authors):
+        if authors_ids[0] not in events_per_first_user:
+            events_per_first_user[authors_ids[0]] = 1
+        else:
+            events_per_first_user[authors_ids[0]] += 1
 
-            author = author.lower().strip()
+        if authors_ids[-1] not in events_per_last_user:
+            events_per_last_user[authors_ids[-1]] = 1
+        else:
+            events_per_last_user[authors_ids[-1]] += 1
 
-            if ',' in author:
-                splitted_author = author.split(',')
-                author = splitted_author[1].strip() + ' ' + splitted_author[0].strip()
-            splitted_author = author.split(' ')
-
-            if not splitted_author[0].endswith('.'):
-
-                for i in range(len(splitted_author) - 1):
-                    if '-' in splitted_author[i]:
-                        temp = splitted_author[i].split('-')
-
-                        if temp[0] != '':
-                            splitted_author[i] = temp[0][0].strip() + '.-'
-                        if temp[1] != '':
-                            splitted_author[i] += temp[1][0].strip() + '.'
-                    else:
-                        splitted_author[i] = splitted_author[i].strip()[0] + '.'
-            author = ""
-            for temp in splitted_author:
-                author += temp + ' '
-            author = author.strip()
-
-            if author not in unique_authors:
-                unique_authors[author] = counter
-                authors_ids.append(counter)
-                counter += 1
+        for id in authors_ids:
+            if id not in papers_per_user:
+                papers_per_user[id] = 1
             else:
-                authors_ids.append(unique_authors[author])
+                papers_per_user[id] += 1
 
-            if unique_authors[author] not in papers_per_user:
-                papers_per_user[unique_authors[author]] = 1
-            else:
-                papers_per_user[unique_authors[author]] += 1
+    with open("Statistics/num_events_per_first_user_" + str(number_of_papers) + '.json', 'w') as output_file:
+        json.dump(events_per_first_user, output_file, indent=1)
+        print ("Number of unique first authors: " + str(len(events_per_first_user)))
 
-            if index == 0:
-                if unique_authors.get(author) not in events_per_user:
-                    events_per_user[unique_authors.get(author)] = 1
-                else:
-                    events_per_user[unique_authors.get(author)] += 1
+    with open("Statistics/num_papers_per_author_" + str(number_of_papers) + '.json', 'w') as output_file:
+        json.dump(papers_per_user, output_file, indent=1)
+        print ("Number of unique authors: " + str(len(papers_per_user)))
 
-    first_authors = [author for author in events_per_user if events_per_user[author] > number_of_papers]
+    with open("Statistics/num_events_per_last_user_" + str(number_of_papers) + '.json', 'w') as output_file:
+        json.dump(events_per_last_user, output_file, indent=1)
+        print ("Number of unique last authors: " + str(len(events_per_last_user)))
+
+    first_authors = [author for author in events_per_first_user if events_per_first_user[author] > number_of_papers]
+    last_authors = [author for author in events_per_last_user if events_per_last_user[author] > number_of_papers]
     all_authors = [author for author in papers_per_user if papers_per_user[author] > number_of_papers]
 
-    return first_authors, all_authors
-
-
-def authors_info(dataset_file_path):
-    with open(dataset_file_path) as input_file:
-
-        json_data = json.load(input_file)
-        unique_authors = {}
-        papers_per_user = {}
-        events_per_user = {}
-        counter = 0
-
-        for identifier in json_data:
-
-            paper = json_data.get(identifier)
-            authors = paper['author']
-            authors_ids = []
-
-            for index, author in enumerate(authors):
-
-                author = author.lower().strip()
-
-                if ',' in author:
-                    splitted_author = author.split(',')
-                    author = splitted_author[1].strip() + ' ' + splitted_author[0].strip()
-                splitted_author = author.split(' ')
-
-                if not splitted_author[0].endswith('.'):
-
-                    for i in range(len(splitted_author) - 1):
-                        if '-' in splitted_author[i]:
-                            temp = splitted_author[i].split('-')
-
-                            if temp[0] != '':
-                                splitted_author[i] = temp[0][0].strip() + '.-'
-                            if temp[1] != '':
-                                splitted_author[i] += temp[1][0].strip() + '.'
-                        else:
-                            splitted_author[i] = splitted_author[i].strip()[0] + '.'
-                author = ""
-                for temp in splitted_author:
-                    author += temp + ' '
-                author = author.strip()
-
-                if author not in unique_authors:
-                    unique_authors[author] = counter
-                    authors_ids.append(counter)
-                    counter += 1
-                else:
-                    authors_ids.append(unique_authors[author])
-
-                if unique_authors[author] not in papers_per_user:
-                    papers_per_user[unique_authors[author]] = 1
-                else:
-                    papers_per_user[unique_authors[author]] += 1
-
-                if index == 0:
-                    if unique_authors.get(author) not in events_per_user:
-                        events_per_user[unique_authors.get(author)] = 1
-                    else:
-                        events_per_user[unique_authors.get(author)] += 1
-
-        sorted_num_events = sorted(events_per_user.items(), key=operator.itemgetter(1), reverse=True)
-
-        with open("num_events_per_user.txt", 'w') as out_file:
-
-            for item in sorted_num_events:
-                out_file.write(str(item[0]) + '\t' + str(item[1]) + '\n')
-
-        sorted_num_papers = sorted(papers_per_user.items(), key=operator.itemgetter(1), reverse=True)
-        with open("num_papers_per_author.txt", 'w') as out_file:
-
-            for item in sorted_num_papers:
-                out_file.write(str(item[0]) + '\t' + str(item[1]) + '\n')
-
-        print("Number of unique authors: " + str(len(unique_authors)))
-        print("Events per user size: " + str(len(events_per_user)))
-        print("Papers per user size: " + str(len(papers_per_user)))
+    return first_authors, last_authors, all_authors
 
 
 def save_inferred_process(inf_process, vocab_types, directory_path):
@@ -774,7 +424,7 @@ def infer(raw_events, indices, num_particles, alpha_0, mu_0, omega, vocab_types,
             events.append((event[0], {t: event[1][t] for t in types}, event[2], event[3]))
     else:
         for event in raw_events:
-            events.append((event[0], {t: event[1][t] for t in types}, [event[2][0]], event[3]))
+            events.append((event[0], {t: event[1][t] for t in types}, [event[2][-1]], event[3]))
 
     particle, norms = hdhp.infer(events,
                                  alpha_0,
@@ -800,8 +450,6 @@ def infer(raw_events, indices, num_particles, alpha_0, mu_0, omega, vocab_types,
 
 
 def main():
-    # plot_papers_per_year("../Real_Dataset/modified_2_CS_arXiv_real_data.json")
-    # authors_info("../Real_Dataset/modified_2_CS_arXiv_real_data.json")
     real_data_file_path = "new_CS_arXiv_real_data.json"
 
     # priors to control the time dynamics of the events
@@ -816,18 +464,18 @@ def main():
     print("Vocab Types: " + str(vocab_types))
     print("Number of Particles: " + str(num_particles))
 
-    # clean_real_data(db_connection_info, real_data_file_path, "modified_CS_arXiv_real_data.json", "new_metadata", "stopwords.txt")
-    # find_important_words( "../Real_Dataset/modified_CS_arXiv_real_data.json", "tfidf_CS_arXiv_real_data.json")
+    # clean_real_data(db_connection_info, real_data_file_path, "modified_CS_2_arXiv_real_data.json", "new_metadata", "stopwords.txt")
+    # find_important_words( "../Real_Dataset/modified_2_CS_arXiv_real_data.json", "tfidf_2_CS_arXiv_real_data.json")
 
     dataset_file_path = "../Real_Dataset/modified_2_CS_arXiv_real_data.json"
     base_year = '2010'
     time_unit = "months"
     number_of_papers = 1
 
-    first_authors, all_authors = get_authors_with_n_papers(dataset_file_path, base_year, number_of_papers)
+    first_authors, last_authors, all_authors = get_authors_with_n_papers(dataset_file_path, base_year, number_of_papers)
     events = json_file_to_events(dataset_file_path, vocab_types, 10, base_year, first_authors)
 
-    number_of_events = 100
+    number_of_events = len(events)
 
     print("Number of events: " + str(number_of_events))
 
@@ -835,7 +483,7 @@ def main():
              2: ([0, 1], False),
              3: ([0, 1], True)}
 
-    for case in [3]:
+    for case in [1, 2, 3]:
         print "Case: {0}".format(case)
         indices, use_cousers = cases[case]
 
@@ -847,13 +495,13 @@ def main():
 
         with open("real_data_results/" + "Case{0}".format(case) + "/" + time_unit + "/" + vocab_types[
             0] + "_base_rates_" + str(
-                number_of_events) + ".tsv", "w") as output_file:
+            number_of_events) + ".tsv", "w") as output_file:
             for key in inferred_process.mu_per_user:
                 output_file.write("\t".join([str(key), str(inferred_process.mu_per_user[key])]) + "\n")
 
         with open("real_data_results/" + "Case{0}".format(case) + "/" + time_unit + "/" + vocab_types[
             0] + "_est_time_kernels_" + str(
-                number_of_events) + ".tsv", "w") as output_file:
+            number_of_events) + ".tsv", "w") as output_file:
             for key in inferred_process.time_kernels:
                 output_file.write("\t".join([str(key), str(inferred_process.time_kernels[key])]) + "\n")
 
@@ -873,7 +521,7 @@ def main():
 
         with open("real_data_results/" + "Case{0}".format(case) + "/" + time_unit + "/" + vocab_types[
             0] + "_patterns_" + str(
-                number_of_events) + ".tsv",
+            number_of_events) + ".tsv",
                   "w") as output_file:
             for i in xrange(len(predicted_labels)):
                 output_file.write(str(predicted_labels[i]) + "\n")
