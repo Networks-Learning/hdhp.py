@@ -2,18 +2,18 @@ import matplotlib
 
 matplotlib.use('Agg')
 
+import timeit
+import json
 import matplotlib.pyplot as plt
 import hdhp
-import json
-import timeit
-from datetime import datetime
-import random
-import operator
-import codecs
-from sklearn.feature_extraction.text import TfidfVectorizer
 import datetime
 import os
 import utility
+import random
+import operator
+import codecs
+from datetime import datetime
+from sklearn.feature_extraction.text import TfidfVectorizer
 from dateutil import relativedelta
 
 
@@ -223,7 +223,7 @@ def clean_real_data(db_connection_info, old_file_path, new_file_path, metadata_c
     print("Cleaning Data - Execution Time: " + str(timeit.default_timer() - start))
 
 
-def json_file_to_events(json_file_path, vocab_types, num_words, base_year, selected_authors):
+def json_file_to_events(json_file_path, vocab_types, num_words, base_year, selected_authors, author_index):
     from datetime import datetime
     start = timeit.default_timer()
     base_time = datetime.strptime(base_year + '-01-01', '%Y-%m-%d')
@@ -249,6 +249,11 @@ def json_file_to_events(json_file_path, vocab_types, num_words, base_year, selec
         identifier = item[0]
         paper = json_data.get(identifier)
 
+        authors_ids = paper['authors_ids']
+
+        if authors_ids[author_index] not in selected_authors:
+            continue
+
         authors_vocabs = ''
 
         for citation in paper["citations"]:
@@ -256,13 +261,6 @@ def json_file_to_events(json_file_path, vocab_types, num_words, base_year, selec
 
             for author in authors:
                 authors_vocabs += author.strip() + ' '
-
-        authors_ids = paper['authors_ids']
-        if authors_ids is None:
-            continue
-
-        if authors_ids[0] not in selected_authors:
-            continue
 
         if vocab_types[0] == "tfidf":
             n = min(num_words, len(paper["sorted_features"]))
@@ -346,27 +344,36 @@ def get_authors_with_n_papers(dataset_file_path, base_year, number_of_papers):
         else:
             events_per_last_user[authors_ids[-1]] += 1
 
-        for id in authors_ids:
-            if id not in papers_per_user:
-                papers_per_user[id] = 1
+        for author_id in authors_ids:
+            if author_id not in papers_per_user:
+                papers_per_user[author_id] = 1
             else:
-                papers_per_user[id] += 1
+                papers_per_user[author_id] += 1
 
-    with open("Statistics/num_events_per_first_user_" + str(number_of_papers) + '.json', 'w') as output_file:
-        json.dump(events_per_first_user, output_file, indent=1)
+    with open("Statistics/num_events_per_first_user_" + str(number_of_papers) + '.txt', 'w') as output_file:
+        sorted_authors = sorted(events_per_first_user.items(), key=lambda kv: kv[1], reverse=True)
+        for item in sorted_authors:
+            output_file.write(str(item[0]) + '\t' + str(item[1]) + '\n')
         print ("Number of unique first authors: " + str(len(events_per_first_user)))
 
-    with open("Statistics/num_papers_per_author_" + str(number_of_papers) + '.json', 'w') as output_file:
-        json.dump(papers_per_user, output_file, indent=1)
+    with open("Statistics/num_papers_per_author_" + str(number_of_papers) + '.txt', 'w') as output_file:
+        sorted_authors = sorted(papers_per_user.items(), key=lambda kv: kv[1], reverse=True)
+        for item in sorted_authors:
+            output_file.write(str(item[0]) + '\t' + str(item[1]) + '\n')
         print ("Number of unique authors: " + str(len(papers_per_user)))
 
-    with open("Statistics/num_events_per_last_user_" + str(number_of_papers) + '.json', 'w') as output_file:
-        json.dump(events_per_last_user, output_file, indent=1)
-        print ("Number of unique last authors: " + str(len(events_per_last_user)))
+    with open("Statistics/num_events_per_last_user_" + str(number_of_papers) + '.txt', 'w') as output_file:
+        sorted_authors = sorted(events_per_last_user.items(), key=lambda kv: kv[1], reverse=True)
+        for item in sorted_authors:
+            output_file.write(str(item[0]) + '\t' + str(item[1]) + '\n')
+        print ("Number of unique last authors: " + str(len(events_per_last_user)) + '\n')
 
     first_authors = [author for author in events_per_first_user if events_per_first_user[author] > number_of_papers]
+    print("First authors with more than one paper: " + str(len(first_authors)))
     last_authors = [author for author in events_per_last_user if events_per_last_user[author] > number_of_papers]
+    print("Last authors with more than one paper: " + str(len(last_authors)))
     all_authors = [author for author in papers_per_user if papers_per_user[author] > number_of_papers]
+    print("Authors with more than one paper: " + str(len(all_authors)) + '\n')
 
     return first_authors, last_authors, all_authors
 
@@ -409,7 +416,7 @@ def save_inferred_process(inf_process, vocab_types, directory_path):
         json.dump(inf_process.mu_per_user, output_file, indent=1)
 
 
-def infer(raw_events, indices, num_particles, alpha_0, mu_0, omega, vocab_types, use_cousers=False):
+def infer(raw_events, indices, num_particles, alpha_0, mu_0, omega, author_index, use_cousers=False):
     start = timeit.default_timer()
 
     types = ["docs", "auths"]
@@ -424,7 +431,7 @@ def infer(raw_events, indices, num_particles, alpha_0, mu_0, omega, vocab_types,
             events.append((event[0], {t: event[1][t] for t in types}, event[2], event[3]))
     else:
         for event in raw_events:
-            events.append((event[0], {t: event[1][t] for t in types}, [event[2][-1]], event[3]))
+            events.append((event[0], {t: event[1][t] for t in types}, [event[2][author_index]], event[3]))
 
     particle, norms = hdhp.infer(events,
                                  alpha_0,
@@ -435,14 +442,13 @@ def infer(raw_events, indices, num_particles, alpha_0, mu_0, omega, vocab_types,
                                  threads=1,
                                  num_particles=num_particles,
                                  keep_alpha_history=True,
-                                 seed=512)
+                                 seed=512,
+                                 author_index=author_index)
 
     print("Execution time of calling infer function: " + str(timeit.default_timer() - start))
     start = timeit.default_timer()
 
     inf_process = particle.to_process()
-
-    save_inferred_process(inf_process, vocab_types, "real_data_results/Inference/")
 
     print("Convert to process - time: " + str(timeit.default_timer() - start))
 
@@ -461,37 +467,45 @@ def main():
     db_connection_info = ""
 
     vocab_types = ["title", "auths"]
-    print("Vocab Types: " + str(vocab_types))
-    print("Number of Particles: " + str(num_particles))
 
-    # clean_real_data(db_connection_info, real_data_file_path, "modified_CS_2_arXiv_real_data.json", "new_metadata", "stopwords.txt")
-    # find_important_words( "../Real_Dataset/modified_2_CS_arXiv_real_data.json", "tfidf_2_CS_arXiv_real_data.json")
+    # clean_real_data(db_connection_info, real_data_file_path, "modified_CS_2_arXiv_real_data.json", "new_metadata",
+    #                 "stopwords.txt")
+    # find_important_words("../Real_Dataset/modified_2_CS_arXiv_real_data.json", "tfidf_2_CS_arXiv_real_data.json")
 
     dataset_file_path = "../Real_Dataset/modified_2_CS_arXiv_real_data.json"
     base_year = '2010'
     time_unit = "months"
     number_of_papers = 1
+    author_index = -1  # 0 for first authors and -1 for last authors
 
     first_authors, last_authors, all_authors = get_authors_with_n_papers(dataset_file_path, base_year, number_of_papers)
-    events = json_file_to_events(dataset_file_path, vocab_types, 10, base_year, first_authors)
 
-    number_of_events = len(events)
+    events = json_file_to_events(dataset_file_path, vocab_types, 10, base_year, last_authors, author_index)
+
+    number_of_events = 100
 
     print("Number of events: " + str(number_of_events))
+    print("Vocab Types: " + str(vocab_types))
+    print("Number of Particles: " + str(num_particles) + '\n')
 
     cases = {1: ([0], False),
              2: ([0, 1], False),
              3: ([0, 1], True)}
 
-    for case in [1, 2, 3]:
+    for case in [3, 2, 1]:
         print "Case: {0}".format(case)
         indices, use_cousers = cases[case]
 
         print("Start inferring.....")
         start = timeit.default_timer()
-        inferred_process = infer(events[: number_of_events], indices, num_particles, alpha_0, mu_0, omega, vocab_types,
-                                 use_cousers=use_cousers)
-        print("End inferring in : " + str(timeit.default_timer() - start))
+        inferred_process = infer(events[: number_of_events], indices, num_particles, alpha_0, mu_0, omega,
+                                 author_index, use_cousers=use_cousers)
+
+        save_inferred_process(inferred_process, vocab_types,
+                              "real_data_results/" + "Case{0}".format(case) + "/Inference/")
+
+        print("End inferring in : " + str(timeit.default_timer() - start) + '\n')
+        print("***********************************************************************************\n")
 
         with open("real_data_results/" + "Case{0}".format(case) + "/" + time_unit + "/" + vocab_types[
             0] + "_base_rates_" + str(

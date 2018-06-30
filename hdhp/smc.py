@@ -58,7 +58,7 @@ class InferenceParameters:
                  particle_weight_threshold, resample_every,
                  update_kernels, mu_rate,
                  keep_alpha_history, progress_file, seed,
-                 vocabulary, users):
+                 vocabulary, users, author_index):
         self.alpha_0 = alpha_0
         self.mu_0 = mu_0
         self.omega = omega
@@ -75,13 +75,14 @@ class InferenceParameters:
         self.seed = seed
         self.vocabulary = vocabulary
         self.users = users
+        self.author_index = author_index
 
 
 class Particle(object):
     def __init__(self, vocabulary_length, users, time_kernels=None,
                  alpha_0=(2, 2), mu_0=1, theta_0=None,
                  seed=None, logweight=0, update_kernels=False, uid=0,
-                 omega=1, beta=1, keep_alpha_history=False, mu_rate=0.6):
+                 omega=1, beta=1, keep_alpha_history=False, mu_rate=0.6, author_index=0):
         self.vocabulary_length = vocabulary_length
         self.vocabulary = None
         self.seed = seed
@@ -137,6 +138,7 @@ class Particle(object):
         self.active_tables_per_user = {}
         ####
         self.user_dish_cache = defaultdict(dict)
+        self.author_index = author_index
 
     def reseed(self, seed=None, uid=None):
         self.seed = seed
@@ -160,7 +162,8 @@ class Particle(object):
                          uid=self.uid,
                          logweight=self.logweight,
                          update_kernels=self.update_kernels,
-                         keep_alpha_history=self.keep_alpha_history)
+                         keep_alpha_history=self.keep_alpha_history,
+                         author_index=self.author_index)
 
         ####
         new_p.user_dish_cache = copy_dict(self.user_dish_cache)
@@ -233,8 +236,10 @@ class Particle(object):
         # d_n : text of the n-th event
         # q_n : any metadata for the n-th event, e.g. the question id
         t_n, d_n, u_n, q_n = event
-        cousers = u_n[1:]
-        u_n = u_n[0]
+        cousers = u_n[:]
+        u_n = u_n[self.author_index]
+        del cousers[self.author_index]
+
 
         d_n = {vocab_type: d_n[vocab_type].split() for vocab_type in d_n}
 
@@ -723,7 +728,8 @@ def _infer_single_thread(history, params):
                           omega=params.omega, beta=params.beta,
                           users=params.users,
                           keep_alpha_history=params.keep_alpha_history,
-                          mu_rate=params.mu_rate)
+                          mu_rate=params.mu_rate,
+                          author_index=params.author_index)
                  for i in range(params.num_particles)]
 
     inferred_tables = {}  # for each particle, save the topic history
@@ -738,7 +744,7 @@ def _infer_single_thread(history, params):
         weights = []
         total = 0
         t_i, d_i, u_i, q_i = h_i
-        u_i = u_i[0]
+        u_i = u_i[params.author_index]
 
         if u_i not in time_history_per_user:
             time_history_per_user[u_i] = []
@@ -890,7 +896,7 @@ def infer(history, alpha_0, mu_0, vocab_types, omega=1, beta=1, theta_0=None,
           particle_weight_threshold=1, resample_every=10,
           update_kernels=True, mu_rate=0.6,
           # enable_log=False, logfile='particles.log',
-          keep_alpha_history=False, progress_file=None, seed=None):
+          keep_alpha_history=False, progress_file=None, seed=None, author_index=0):
     """Runs the inference algorithm and returns a particle.
 
     Parameters
@@ -965,7 +971,7 @@ def infer(history, alpha_0, mu_0, vocab_types, omega=1, beta=1, theta_0=None,
                                  num_particles, particle_weight_threshold,
                                  resample_every, update_kernels, mu_rate,
                                  keep_alpha_history, progress_file, seed,
-                                 vocabulary, users)
+                                 vocabulary, users, author_index)
 
     if threads == 1:
         return _infer_single_thread(history, params)
