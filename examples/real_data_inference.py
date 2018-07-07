@@ -17,41 +17,27 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from dateutil import relativedelta
 
 
-def plot_papers_per_year(dataset_file_path):
-    """
-    This function plot number of papers published in each year
-    :param dataset_file_path: Dataset File Path
-    :return: Nothing.
-    """
+def get_year_based_events(dataset_file_path, base_year):
+    from datetime import datetime
 
-    start = timeit.default_timer()
-    json_data = json.load(open(dataset_file_path))
-    years = {}
+    base_time = datetime.strptime(base_year + '-01-01', '%Y-%m-%d')
+    data = json.load(open(dataset_file_path))
+    new_data = {}
 
-    for identifier in json_data:
-        paper = json_data[identifier]
-        paper_year = paper['year']
-        if paper_year in years:
-            years[paper_year] += 1
-        else:
-            years[paper_year] = 1
-    x = []
-    y = []
+    for identifier in data:
+        paper = data.get(identifier)
+        if int(paper['year']) > int(base_year):
+            paper_time = datetime.strptime(paper['date'][0], '%Y-%m-%d')
+            diff = relativedelta.relativedelta(paper_time, base_time)
+            num_months = diff.years * 12 + diff.months
+            paper['time'] = paper_time
+            paper['num_months'] = num_months
+            paper['time_months'] = num_months + random.uniform(0, 1)
+            paper['time_half_year'] = (num_months / 6.0) + random.uniform(0, 1)
+            new_data[identifier] = paper
 
-    for key in years:
-        x.append(int(key))
-        y.append(years.get(key))
-
-    width = 1 / 1.5
-    fig, ax = plt.subplots()
-    ax.bar(x, y, width, color="c", linewidth=0.4)
-    ax.set_ylabel('Number of Papers')
-    ax.set_title('Publish Year')
-    fig = plt.gcf()
-    fig.savefig('years.png')
-    fig.clf()
-    plt.close(fig)
-    print("Plotting number of papers for each year in " + str(timeit.default_timer() - start) + " seconds")
+    with open('Real_Dataset/data_after_year_' + str(base_year) + '.json') as output_file:
+        json.dump(new_data, output_file, indent=1)
 
 
 def find_important_words(dataset_file_path, new_file_path):
@@ -279,7 +265,7 @@ def json_file_to_events(json_file_path, vocab_types, num_words, base_year, selec
                     unique_vocabs_2[vocab] = 0
 
         else:
-            vocabularies = {"docs": paper[vocab_types[0]], "auths": authors_vocabs.strip()}
+            vocabularies = {"docs": paper['processed_' + vocab_types[0]], "auths": authors_vocabs.strip()}
             for vocab in paper['processed_' + vocab_types[0]].split(' '):
                 if vocab in unique_vocabs_1:
                     unique_vocabs_1[vocab] += 1
@@ -472,12 +458,14 @@ def main():
     #                 "stopwords.txt")
     # find_important_words("../Real_Dataset/modified_2_CS_arXiv_real_data.json", "tfidf_2_CS_arXiv_real_data.json")
 
-    dataset_file_path = "../Real_Dataset/modified_2_CS_arXiv_real_data.json"
+    dataset_file_path = "Real_Dataset/modified_2_CS_arXiv_real_data.json"
     base_year = '2010'
     time_unit = "months"
     number_of_papers = 1
     author_index = -1  # 0 for first authors and -1 for last authors
 
+    get_authors_with_n_papers(dataset_file_path, base_year)
+    dataset_file_path = 'Real_Dataset/data_after_year_' + str(base_year) + '.json'
     first_authors, last_authors, all_authors = get_authors_with_n_papers(dataset_file_path, base_year, number_of_papers)
 
     events = json_file_to_events(dataset_file_path, vocab_types, 10, base_year, last_authors, author_index)
