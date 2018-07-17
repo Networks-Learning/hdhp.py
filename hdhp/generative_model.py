@@ -690,7 +690,7 @@ class HDHProcess:
                 j += 1
         if patterns is not None:
             dish_set = set([d for d in patterns if d in dish_set])
-        dish_dict = {dish: i for i, dish in enumerate(dish_set)}
+        dish_dict = {dish: dish for i, dish in enumerate(dish_set)}
 
         if colormap is None:
             prng = RandomState(seed)
@@ -699,11 +699,14 @@ class HDHProcess:
             colormap = prng.permutation(colormap)
 
         if not task_detail:
+            handles = []
             for dish in dish_set:
-                fig.plot(tics, dish_intensities[dish],
-                         color=colormap[dish_dict[dish]], linestyle='-',
-                         label="Pattern " + str(dish),
-                         linewidth=3.)
+                temp, = fig.plot(tics, dish_intensities[dish],
+                                 color=colormap[dish_dict[dish]], linestyle='-',
+                                 label="Pattern: " + str(dish),
+                                 linewidth=3.)
+                handles.append(temp)
+            fig.legend(handles=handles)
         else:
             for table in active_tables:
                 dish = self.dish_on_table_per_user[user][table]
@@ -973,6 +976,8 @@ class HDHProcess:
                                        colormap=colormap, T_min=T_min,
                                        paper=paper)
             user_plt.set_xlim((T_min, T_max))
+            user_plt.set_title('User: ' + str(user), rotation='vertical', x=-0.03, y=0.5, fontweight="bold",
+                               fontsize=22)
             if paper:
                 if start_date is None:
                     raise ValueError(
@@ -995,6 +1000,9 @@ class HDHProcess:
                     ticks = monthly_ticks_for_months(t1, t2)
                     labels = monthly_labels(t1, t2, every=label_every)
                 labels[-1] = ''
+                for i in range(len(labels)):
+                    if i % 6 != 0:
+                        labels[i] = ''
                 user_plt.set_xlim((ticks[0], ticks[-1]))
                 user_plt.yaxis.set_ticks([])
                 user_plt.xaxis.set_ticks(ticks)
@@ -1152,11 +1160,9 @@ class HDHProcess:
 
         events = [(t, dish, table, u, doc)
                   for u in self.time_history_per_user
-                  for ((t, doc), (table, dish)) in izip([(t, d)
-                                                         for t, d in izip(self.time_history_per_user[u],
-                                                                          self.document_history_per_user[u])],
-                                                        [(table, self.dish_on_table_per_user[u][table])
-                                                         for table in self.table_history_per_user[u]])]
+                  for ((t, doc), (table, dish)) in
+                  izip([(t, d) for t, d in izip(self.time_history_per_user[u], self.document_history_per_user[u])],
+                       [(table, self.dish_on_table_per_user[u][table]) for table in self.table_history_per_user[u]])]
 
         if keep_sorted: events = sorted(events, key=lambda x: x[0])
 

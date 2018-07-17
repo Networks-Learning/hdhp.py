@@ -635,6 +635,11 @@ class Particle(object):
         process.document_history_per_user = self.doc_history_per_user
         process.per_pattern_word_counts = copy_dict(self.per_topic_word_counts)
         process.per_pattern_word_count_total = copy_dict(self.per_topic_word_count_total)
+        process.theta_0 = copy_dict(self.theta_0)
+        process.vocabulary_length = self.vocabulary_length
+        process._max_dish = self._max_dish
+        process._lntheta = self._lntheta
+
         return process
 
     def get_intensity(self, t_n, u_n, z_n):

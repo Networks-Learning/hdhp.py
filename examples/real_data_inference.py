@@ -4,10 +4,8 @@ matplotlib.use('Agg')
 
 import timeit
 import json
-import matplotlib.pyplot as plt
 import hdhp
 import datetime
-import os
 import utility
 import random
 import operator
@@ -15,9 +13,32 @@ import codecs
 from datetime import datetime
 from sklearn.feature_extraction.text import TfidfVectorizer
 from dateutil import relativedelta
+import dill
+import pickle
 
 
-def get_year_based_events(dataset_file_path, base_year):
+def get_train_test_data(dataset_file_path, base_year, test_data_file_path, train_data_file_path):
+    dataset = json.load(open(dataset_file_path))
+    test_dataset = {}
+    train_dataset = {}
+
+    for identifier in dataset:
+        paper = dataset.get(identifier)
+        if int(paper['year']) >= int(base_year):
+            test_dataset[identifier] = paper
+        else:
+            train_dataset[identifier] = paper
+
+    with open(test_data_file_path, "w") as output_file:
+        print("Test Dataset Size: " + str(len(test_dataset)))
+        json.dump(test_dataset, output_file, indent=1)
+
+    with open(train_data_file_path, "w") as output_file:
+        print("Train Dataset Size: " + str(len(train_dataset)))
+        json.dump(train_dataset, output_file, indent=1)
+
+
+def get_year_based_events(dataset_file_path, base_year, new_dataset_file_path):
     from datetime import datetime
 
     base_time = datetime.strptime(base_year + '-01-01', '%Y-%m-%d')
@@ -30,13 +51,13 @@ def get_year_based_events(dataset_file_path, base_year):
             paper_time = datetime.strptime(paper['date'][0], '%Y-%m-%d')
             diff = relativedelta.relativedelta(paper_time, base_time)
             num_months = diff.years * 12 + diff.months
-            paper['time'] = paper_time
             paper['num_months'] = num_months
             paper['time_months'] = num_months + random.uniform(0, 1)
             paper['time_half_year'] = (num_months / 6.0) + random.uniform(0, 1)
             new_data[identifier] = paper
 
-    with open('Real_Dataset/data_after_year_' + str(base_year) + '.json') as output_file:
+    with open(new_dataset_file_path, 'w') as output_file:
+        print("Dataset Size: " + str(len(new_data)) + "\n")
         json.dump(new_data, output_file, indent=1)
 
 
@@ -200,19 +221,19 @@ def clean_real_data(db_connection_info, old_file_path, new_file_path, metadata_c
             new_data[identifier] = new_paper
 
     with open(new_file_path, 'w') as output_file:
+        print("Dataset Size: " + str(len(new_data)))
         json.dump(new_data, output_file, indent=0)
 
     with open("Statistics/authors_names_mapping.json", "w") as output_file:
+        print("Number of Unique Authors: " + str(len(unique_authors)))
         json.dump(unique_authors, output_file, indent=1)
 
     client.close()
     print("Cleaning Data - Execution Time: " + str(timeit.default_timer() - start))
 
 
-def json_file_to_events(json_file_path, vocab_types, num_words, base_year, selected_authors, author_index):
-    from datetime import datetime
+def json_file_to_events(json_file_path, vocab_types, num_words, selected_authors, author_index):
     start = timeit.default_timer()
-    base_time = datetime.strptime(base_year + '-01-01', '%Y-%m-%d')
 
     events = list()
     json_data = json.load(open(json_file_path))
@@ -220,11 +241,7 @@ def json_file_to_events(json_file_path, vocab_types, num_words, base_year, selec
 
     for identifier in json_data:
         paper = json_data.get(identifier)
-        if int(paper['year']) > int(base_year):
-            paper_time = datetime.strptime(paper['date'][0], '%Y-%m-%d')
-            diff = relativedelta.relativedelta(paper_time, base_time)
-            num_months = diff.years * 12 + diff.months
-            times[identifier] = (num_months / 6.0) + random.uniform(0, 1)
+        times[identifier] = paper['time_half_year']
 
     sorted_times = sorted(times.items(), key=operator.itemgetter(1))
 
@@ -234,7 +251,6 @@ def json_file_to_events(json_file_path, vocab_types, num_words, base_year, selec
     for item in sorted_times:
         identifier = item[0]
         paper = json_data.get(identifier)
-
         authors_ids = paper['authors_ids']
 
         if authors_ids[author_index] not in selected_authors:
@@ -317,8 +333,6 @@ def get_authors_with_n_papers(dataset_file_path, base_year, number_of_papers):
             continue
 
         authors_ids = paper.get('authors_ids')
-        if authors_ids is None:
-            continue
 
         if authors_ids[0] not in events_per_first_user:
             events_per_first_user[authors_ids[0]] = 1
@@ -364,44 +378,6 @@ def get_authors_with_n_papers(dataset_file_path, base_year, number_of_papers):
     return first_authors, last_authors, all_authors
 
 
-def save_inferred_process(inf_process, vocab_types, directory_path):
-    predicted_labels = [e[1] for e in inf_process.annotatedEventsIter()]
-    popularity = {}
-
-    for label in predicted_labels:
-        if label not in popularity:
-            popularity[label] = 0
-        else:
-            popularity[label] += 1
-
-    for label in popularity:
-        popularity[label] = popularity[label] * 1.0 / len(predicted_labels)
-
-    with open(os.path.join(directory_path, vocab_types[0] + '_popularity_' + str(len(predicted_labels)) + '.json'),
-              'w') as output_file:
-        json.dump(popularity, output_file, indent=1)
-
-    with open(os.path.join(directory_path, vocab_types[0] + '_time_kernels_' + str(len(predicted_labels)) + '.json'),
-              'w') as output_file:
-        json.dump(inf_process.time_kernels, output_file, indent=1)
-
-    with open(os.path.join(directory_path, vocab_types[0] + '_table_history_' + str(len(predicted_labels)) + '.json'),
-              'w') as output_file:
-        json.dump(inf_process.table_history_per_user, output_file, indent=1)
-
-    with open(os.path.join(directory_path, vocab_types[0] + '_time_history_' + str(len(predicted_labels)) + '.json'),
-              'w') as output_file:
-        json.dump(inf_process.time_history_per_user, output_file, indent=1)
-
-    with open(os.path.join(directory_path, vocab_types[0] + '_dish_on_table_' + str(len(predicted_labels)) + '.json'),
-              'w') as output_file:
-        json.dump(inf_process.dish_on_table_per_user, output_file, indent=1)
-
-    with open(os.path.join(directory_path, vocab_types[0] + '_mu_per_user_' + str(len(predicted_labels)) + '.json'),
-              'w') as output_file:
-        json.dump(inf_process.mu_per_user, output_file, indent=1)
-
-
 def infer(raw_events, indices, num_particles, alpha_0, mu_0, omega, author_index, use_cousers=False):
     start = timeit.default_timer()
 
@@ -442,7 +418,7 @@ def infer(raw_events, indices, num_particles, alpha_0, mu_0, omega, author_index
 
 
 def main():
-    real_data_file_path = "new_CS_arXiv_real_data.json"
+    raw_real_data_file_path = "new_CS_arXiv_real_data.json"
 
     # priors to control the time dynamics of the events
     alpha_0 = (4.0, 0.5)  # prior for excitation
@@ -454,23 +430,28 @@ def main():
 
     vocab_types = ["title", "auths"]
 
-    # clean_real_data(db_connection_info, real_data_file_path, "modified_CS_2_arXiv_real_data.json", "new_metadata",
-    #                 "stopwords.txt")
-    # find_important_words("../Real_Dataset/modified_2_CS_arXiv_real_data.json", "tfidf_2_CS_arXiv_real_data.json")
+    dataset_file_path = "Real_Dataset/final_CS_arXiv_real_data.json"
+    clean_real_data(db_connection_info, raw_real_data_file_path, dataset_file_path, "new_metadata", "stopwords.txt")
 
-    dataset_file_path = "Real_Dataset/modified_2_CS_arXiv_real_data.json"
     base_year = '2010'
     time_unit = "months"
     number_of_papers = 1
     author_index = -1  # 0 for first authors and -1 for last authors
 
-    get_authors_with_n_papers(dataset_file_path, base_year)
-    dataset_file_path = 'Real_Dataset/data_after_year_' + str(base_year) + '.json'
-    first_authors, last_authors, all_authors = get_authors_with_n_papers(dataset_file_path, base_year, number_of_papers)
+    final_dataset_file_path = "Real_Dataset/data_after_year_" + str(base_year) + ".json"
+    get_year_based_events(dataset_file_path, base_year, final_dataset_file_path)
 
-    events = json_file_to_events(dataset_file_path, vocab_types, 10, base_year, last_authors, author_index)
+    test_data_base_year = '2016'
+    train_data_file_path = "Real_Dataset/train_data_after_" + test_data_base_year + ".json"
+    test_data_file_path = "Real_Dataset/train_data_before_" + test_data_base_year + ".json"
 
-    number_of_events = 100
+    get_train_test_data(dataset_file_path, test_data_base_year, test_data_file_path, train_data_file_path)
+
+    first_authors, last_authors, all_authors = get_authors_with_n_papers(train_data_file_path, base_year,
+                                                                         number_of_papers)
+    events = json_file_to_events(train_data_file_path, vocab_types, 10, last_authors, author_index)
+
+    number_of_events = len(events)
 
     print("Number of events: " + str(number_of_events))
     print("Vocab Types: " + str(vocab_types))
@@ -480,7 +461,7 @@ def main():
              2: ([0, 1], False),
              3: ([0, 1], True)}
 
-    for case in [3, 2, 1]:
+    for case in [3]:
         print "Case: {0}".format(case)
         indices, use_cousers = cases[case]
 
@@ -489,8 +470,9 @@ def main():
         inferred_process = infer(events[: number_of_events], indices, num_particles, alpha_0, mu_0, omega,
                                  author_index, use_cousers=use_cousers)
 
-        save_inferred_process(inferred_process, vocab_types,
-                              "real_data_results/" + "Case{0}".format(case) + "/Inference/")
+        with open("real_data_results/" + "Case{0}".format(case) + "/Inference/" +
+                          vocab_types[0] + "_inferred_process_" + str(number_of_events) + ".pkl", "wb") as output_file:
+            pickle.dump(inferred_process, output_file, pickle.HIGHEST_PROTOCOL)
 
         print("End inferring in : " + str(timeit.default_timer() - start) + '\n')
         print("***********************************************************************************\n")
@@ -522,11 +504,15 @@ def main():
         predicted_labels = [e[1] for e in inferred_process.annotatedEventsIter()]
 
         with open("real_data_results/" + "Case{0}".format(case) + "/" + time_unit + "/" + vocab_types[
-            0] + "_patterns_" + str(
-            number_of_events) + ".tsv",
-                  "w") as output_file:
+            0] + "_patterns_" + str(number_of_events) + ".tsv", "w") as output_file:
             for i in xrange(len(predicted_labels)):
                 output_file.write(str(predicted_labels[i]) + "\n")
+
+        with open("real_data_results/" + "Case{0}".format(case) + "/" + time_unit + "/" + vocab_types[
+            0] + "_events_" + str(number_of_events) + ".tsv", "w") as output_file:
+            for event in inferred_process.annotatedEventsIter():
+                output_file.write(
+                    '(' + str(event[0]) + ', ' + str(event[1]) + ', ' + str(event[2]) + ', ' + str(event[3]) + ')\n')
 
 
 if __name__ == "__main__":

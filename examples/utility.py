@@ -139,6 +139,8 @@ def process_authors(authors, unique_authors, counter):
                         split_author[i] = temp[0][0].strip() + '.-'
                     if temp[1] != '':
                         split_author[i] += temp[1][0].strip() + '.'
+                else:
+                    split_author[i] = split_author[i].strip()[0] + '.'
         author = ""
         for temp in split_author:
             author += temp + ' '
