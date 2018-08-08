@@ -253,7 +253,7 @@ def json_file_to_events(json_file_path, vocab_types, num_words, selected_authors
         paper = json_data.get(identifier)
         authors_ids = paper['authors_ids']
 
-        if authors_ids[author_index] not in selected_authors:
+        if authors_ids[0] not in selected_authors and authors_ids[-1] not in selected_authors:
             continue
 
         authors_vocabs = ''
@@ -418,7 +418,7 @@ def infer(raw_events, indices, num_particles, alpha_0, mu_0, omega, author_index
 
 
 def main():
-    raw_real_data_file_path = "new_CS_arXiv_real_data.json"
+    raw_real_data_file_path = "Real_Dataset/new_CS_arXiv_real_data.json"
 
     # priors to control the time dynamics of the events
     alpha_0 = (4.0, 0.5)  # prior for excitation
@@ -431,25 +431,25 @@ def main():
     vocab_types = ["title", "auths"]
 
     dataset_file_path = "Real_Dataset/final_CS_arXiv_real_data.json"
-    clean_real_data(db_connection_info, raw_real_data_file_path, dataset_file_path, "new_metadata", "stopwords.txt")
+    # clean_real_data(db_connection_info, raw_real_data_file_path, dataset_file_path, "new_metadata", "stopwords.txt")
 
     base_year = '2010'
     time_unit = "months"
     number_of_papers = 1
     author_index = -1  # 0 for first authors and -1 for last authors
 
-    final_dataset_file_path = "Real_Dataset/data_after_year_" + str(base_year) + ".json"
-    get_year_based_events(dataset_file_path, base_year, final_dataset_file_path)
+    final_dataset_file_path = "../Real_Dataset/data_after_year_" + str(base_year) + ".json"
+    # get_year_based_events(dataset_file_path, base_year, final_dataset_file_path)
 
     test_data_base_year = '2016'
-    train_data_file_path = "Real_Dataset/train_data_after_" + test_data_base_year + ".json"
-    test_data_file_path = "Real_Dataset/train_data_before_" + test_data_base_year + ".json"
+    train_data_file_path = "Real_Dataset/train_data_before_" + test_data_base_year + ".json"
+    test_data_file_path = "Real_Dataset/test_data_after_" + test_data_base_year + ".json"
 
-    get_train_test_data(dataset_file_path, test_data_base_year, test_data_file_path, train_data_file_path)
+    # get_train_test_data(final_dataset_file_path, test_data_base_year, test_data_file_path, train_data_file_path)
 
-    first_authors, last_authors, all_authors = get_authors_with_n_papers(train_data_file_path, base_year,
+    first_authors, last_authors, all_authors = get_authors_with_n_papers(final_dataset_file_path, base_year,
                                                                          number_of_papers)
-    events = json_file_to_events(train_data_file_path, vocab_types, 10, last_authors, author_index)
+    events = json_file_to_events(final_dataset_file_path, vocab_types, 10, all_authors, author_index)
 
     number_of_events = len(events)
 
