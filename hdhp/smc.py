@@ -305,12 +305,22 @@ class Particle(object):
             self.first_observed_user_time[u_n] = t_n
 
         #####
+
+        if u_n not in self.user_dish_cache or z_n not in self.user_dish_cache[u_n]:
+            self.user_dish_cache[u_n][z_n] = (t_n, 0)
+        else:
+            t_last, sum_kernels = self.user_dish_cache[u_n][z_n]
+            update_value = self.kernel(t_n, t_last)
+            sum_kernels += 1
+            sum_kernels *= update_value
+            self.user_dish_cache[u_n][z_n] = (t_n, sum_kernels)
+
         for c in cousers:
 
             self.time_previous_user_event[c] = t_n
 
-            if c not in self.first_observed_user_time:
-                self.first_observed_user_time[c] = t_n
+            # if c not in self.first_observed_user_time:
+            #     self.first_observed_user_time[c] = t_n
 
             if c not in self.user_dish_cache:
                 self.user_dish_cache[c] = {}
@@ -571,17 +581,18 @@ class Particle(object):
         mu = self.mu_per_user[u_n]
         integral = (t_n - self.time_previous_user_event[u_n]) * mu
         intensity = mu
-        if u_n in self.user_table_cache:
-            for table in self.user_table_cache[u_n]:
-                t_last, sum_timedeltas = self.user_table_cache[u_n][table]
-                update_value = self.kernel(t_n, t_last)
-                topic_sum = (sum_timedeltas + 1) - \
-                            (sum_timedeltas + 1) * update_value
-                dish = self.dish_on_table_per_user[u_n][table]
-                topic_sum *= self.time_kernels[dish]
-                integral += topic_sum
-                intensity += (sum_timedeltas + 1) \
-                             * self.time_kernels[dish] * update_value
+
+        # if u_n in self.user_table_cache:
+        #     for table in self.user_table_cache[u_n]:
+        #         t_last, sum_timedeltas = self.user_table_cache[u_n][table]
+        #         update_value = self.kernel(t_n, t_last)
+        #         topic_sum = (sum_timedeltas + 1) - \
+        #                     (sum_timedeltas + 1) * update_value
+        #         dish = self.dish_on_table_per_user[u_n][table]
+        #         topic_sum *= self.time_kernels[dish]
+        #         integral += topic_sum
+        #         intensity += (sum_timedeltas + 1) \
+        #                      * self.time_kernels[dish] * update_value
         #####
         if u_n in self.user_dish_cache:
             for dish in self.user_dish_cache[u_n]:

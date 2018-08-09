@@ -235,77 +235,25 @@ class HDHProcess:
         mu_u = self.mu_per_user[user]
         lambda_u_pattern = mu_u * self.pattern_popularity[pattern]
 
-        if user in self.total_tables_per_user:
-            # We have seen the user before
-            num_tables = self.total_tables_per_user[user]
-            pattern_tables = [table for table in range(num_tables)
-                              if self.dish_on_table_per_user[user][table]
-                              == pattern]
-        else:
-            pattern_tables = []
-
         alpha = self.time_kernels[pattern]
 
-        if user not in self.user_dish_cache or pattern not in self.user_dish_cache[user]:
-            if not pattern_tables:
-                lambda_star = lambda_u_pattern
-                s = -1 / lambda_star * np.log(U())
-                return s
-            else:
-                # Add the \alpha of the most recent table (previous event) in the
-                # user-pattern intensity
-                s = self.last_event_user_pattern[user][pattern]
-                pattern_intensity = 0
-                for table in pattern_tables:
-                    t_last, sum_kernels = self.user_table_cache[user][table]
-                    update_value = self.kernel(s, t_last)
-                    # update_value should be 1, so practically we are just adding
-                    # \alpha to the intensity dt after the event
-                    table_intensity = alpha * sum_kernels * update_value
-                    table_intensity += alpha * update_value
-                    pattern_intensity += table_intensity
-                lambda_star = lambda_u_pattern + pattern_intensity
-
-                # New event
-                accepted = False
-                while not accepted:
-                    s = s - 1 / lambda_star * np.log(U())
-                    # Rejection test
-                    pattern_intensity = 0
-                    for table in pattern_tables:
-                        t_last, sum_kernels = self.user_table_cache[user][table]
-                        update_value = self.kernel(s, t_last)
-                        # update_value should be 1, so practically we are just adding
-                        # \alpha to the intensity dt after the event
-                        table_intensity = alpha * sum_kernels * update_value
-                        table_intensity += alpha * update_value
-                        pattern_intensity += table_intensity
-
-                    lambda_s = lambda_u_pattern + pattern_intensity
-                    if U() < lambda_s / lambda_star:
-                        return s
-                    else:
-                        lambda_star = lambda_s
-
+        if user not in self.user_dish_cache:
+            lambda_star = lambda_u_pattern
+            s = -1 / lambda_star * np.log(U())
+            return s
         else:
-            s = self.last_event_user_pattern[user][pattern]
-            pattern_intensity = 0
-            for table in pattern_tables:
-                t_last, sum_kernels = self.user_table_cache[user][table]
-                update_value = self.kernel(s, t_last)
-                # update_value should be 1, so practically we are just adding
-                # \alpha to the intensity dt after the event
-                table_intensity = alpha * sum_kernels * update_value
-                table_intensity += alpha * update_value
-                pattern_intensity += table_intensity
 
-            #####
-            # t_last, sum_kernels = self.user_dish_cache[user][pattern]
-            # update_value = self.kernel(s, t_last)
-            # dish_intensity = alpha * sum_kernels * update_value
-            # dish_intensity += alpha * update_value
-            # pattern_intensity += dish_intensity
-            ######
+            # Add the \alpha of the most recent table (previous event) in the
+            # user-pattern intensity
+            s = self.last_event_user_pattern[user][pattern]
+
+            t_last, sum_kernels = self.user_dish_cache[user][pattern]
+            update_value = self.kernel(s, t_last)
+            # update_value should be 1, so practically we are just adding
+            # \alpha to the intensity dt after the event
+            pattern_intensity = alpha * sum_kernels * update_value
+            pattern_intensity += alpha * update_value
+
             lambda_star = lambda_u_pattern + pattern_intensity
 
             # New event
@@ -313,25 +261,20 @@ class HDHProcess:
             while not accepted:
                 s = s - 1 / lambda_star * np.log(U())
                 # Rejection test
-                pattern_intensity = 0
-                for table in pattern_tables:
-                    t_last, sum_kernels = self.user_table_cache[user][table]
-                    update_value = self.kernel(s, t_last)
-                    table_intensity = alpha * sum_kernels * update_value
-                    table_intensity += alpha * update_value
-                    pattern_intensity += table_intensity
-                ####
-                t_last, sum_kernels = self.user_dish_cache[user][pattern]
+                # t_last, sum_kernels = self.user_dish_cache[user][pattern]
                 update_value = self.kernel(s, t_last)
-                dish_intensity = alpha * sum_kernels * update_value
-                dish_intensity += alpha * update_value
-                pattern_intensity += dish_intensity
-                ######
+                # update_value should be 1, so practically we are just adding
+                # \alpha to the intensity dt after the event
+                pattern_intensity = alpha * sum_kernels * update_value
+                pattern_intensity += alpha * update_value
+
                 lambda_s = lambda_u_pattern + pattern_intensity
+
                 if U() < lambda_s / lambda_star:
                     return s
                 else:
                     lambda_star = lambda_s
+
 
     def sample_user_events(self, min_num_events=100, max_num_events=None,
                            t_max=None):
@@ -434,6 +377,15 @@ class HDHProcess:
 
             # Update dish cache
 
+            if user not in self.user_dish_cache or z_n not in self.user_dish_cache[user]:
+                self.user_dish_cache[user][z_n] = (t_n, 0)
+            else:
+                t_last, sum_kernels = self.user_dish_cache[user][z_n]
+                update_value = self.kernel(t_n, t_last)
+                sum_kernels += 1
+                sum_kernels *= update_value
+                self.user_dish_cache[user][z_n] = (t_n, sum_kernels)
+
             for c in cousers:
                 self.last_event_user_pattern[c][z_n] = t_n
 
@@ -448,7 +400,7 @@ class HDHProcess:
 
             # Resample time for that pattern
             next_time_per_pattern[(z_n, user)] = self.sample_next_time(z_n, user)
-
+            #
             for c in cousers:
                 next_time_per_pattern[(z_n, c)] = self.sample_next_time(z_n, c)
 

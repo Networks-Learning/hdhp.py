@@ -176,9 +176,9 @@ def main():
     mu_0 = (8, 0.25)
     omega = 5
 
-    num_patterns = 50
-    num_users = 101
-    num_samples = 100000
+    num_patterns = 30
+    num_users = 20
+    num_samples = 2000
     num_particles = 10
 
     print("****************************************")
@@ -213,7 +213,7 @@ def main():
 
     # plot the base rates and the estimated alpha values
     plotMuScatterPlot(generated_process.mu_per_user, inferred_process.mu_per_user,
-                      "Figs/CM_U_" + str(num_users) + "_E_" + str(
+                      "Results/Figs/CM_U_" + str(num_users) + "_E_" + str(
                           num_events) + "_P_" + str(num_patterns) + "_base_rates.pdf")
 
     trueLabs = [e[1] for e in generated_process.annotatedEventsIter()]
@@ -233,7 +233,7 @@ def main():
         new_inferred_time_kernels[key] = inferred_time_kernels[kernel_mappings[key]]
 
     plotAlphaScatterPlot(generated_time_kernels, new_inferred_time_kernels,
-                         "Figs/CM_U_" + str(num_users) + "_E_" + str(
+                         "Results/Figs/CM_U_" + str(num_users) + "_E_" + str(
                              num_events) + "_P_" + str(num_patterns) + "_time_kernels.pdf")
 
     with open("Results/CM_U_" + str(num_users) + "_E_" + str(num_events) + "_patterns.tsv", "w") as fout:
