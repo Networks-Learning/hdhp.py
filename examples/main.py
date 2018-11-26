@@ -1,15 +1,18 @@
 import matplotlib
 
 matplotlib.use('Agg')
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+plt.rcdefaults()
 
 import notebook_helpers
 
 import argparse
 import datetime
 import hdhp
-import seaborn as sns;
 
-sns.set(color_codes=True)
+# sns.set(color_codes=True)
 import pandas as pd
 from collections import Counter
 from sklearn.metrics import normalized_mutual_info_score
@@ -21,7 +24,128 @@ import timeit
 import itertools
 import operator
 import NMI
-import matplotlib.pyplot as plt
+
+import pandas as pd
+
+
+def plot_synthetic_stats(file_name):
+    with open(file_name + "_base_rates.tsv") as base_rates_file, open(
+                    file_name + "_est_time_kernels.tsv") as estimated_kernel_file, open(
+                file_name + "_set_time_kernels.tsv") as set_time_kernels_file, open(
+                file_name + "_patterns.tsv") as patterns_file:
+
+        # Plot Base Rates
+
+        lines = base_rates_file.readlines()
+        x = []
+        y = []
+
+        for line in lines:
+            temp = line.split('\t')
+            x.append(float(temp[1]))
+            y.append(float(temp[2]))
+        min_x = min(x)
+        max_x = max(x)
+
+        z = np.linspace(int(min_x) + 0.4, max_x)
+
+        fig, ax = plt.subplots(facecolor='white', figsize=(5, 5))
+        ax.plot(z, z, color='#616A6B', alpha=0.5)
+
+        ax.scatter(x, y, edgecolors='#6076E1', color='#A2AEE7', alpha=0.6)
+
+        ax.spines['bottom'].set_color('black')
+        ax.set_xlim([0, 5])
+        ax.set_ylim([0, 5])
+        # ax.scatter(x, y, edgecolors='#ADB5DB', color='#A2AEE7', alpha=0.6, s=25)
+        # ax.set_title('Distance vs Workout Duration')
+
+        ax.set_ylabel('Inferred Value', fontsize=20)  # , fontweight="bold")
+        ax.set_xlabel('True Value', fontsize=20)  # , fontweight="bold")
+        # removing top and right borders
+        ax.spines['top'].set_visible(False)
+        ax.spines['right'].set_visible(False)
+        # ax.spines['left'].set_linewidth(2)
+        # ax.xaxis.set_tick_params(labelsize=14)
+        # ax.yaxis.set_tick_params(labelsize=14)
+        sns.set_style("ticks")
+        sns.despine(offset=10, trim=True)
+        sns.set_context("paper", font_scale=1.5, rc={"lines.linewidth": 2.5})
+
+        # plt.show()
+
+        temp = file_name.split('/')[-1][0:-4]
+        plt.savefig("Results/Figs/" + temp + "base_rates.pdf", bbox_inches='tight')
+        plt.clf()
+        plt.close()
+
+        # Plot time kernels
+        true_labels = []
+        pred_labels = []
+        patterns_lines = patterns_file.readlines()
+
+        for line in patterns_lines:
+            split_line = line.split('\t')
+            true_labels.append(split_line[0])
+            pred_labels.append(split_line[1].strip())
+
+        generated_time_kernels = {}
+        lines = set_time_kernels_file.readlines()
+        for line in lines:
+            split_line = line.split('\t')
+            generated_time_kernels[split_line[0]] = float(split_line[1])
+
+
+        estimated_time_kernels = {}
+        lines = estimated_kernel_file.readlines()
+        for line in lines:
+            split_line = line.split('\t')
+            estimated_time_kernels[split_line[0]] = float(split_line[1])
+
+        kernel_mappings = find_kernel_mapping(true_labels, pred_labels)
+        new_inferred_time_kernels = {}
+
+        for key in kernel_mappings:
+            new_inferred_time_kernels[key] = estimated_time_kernels[kernel_mappings[key]]
+
+        x = []
+        y = []
+
+        for key in kernel_mappings:
+            x.append(generated_time_kernels[key])
+            y.append(new_inferred_time_kernels[key])
+
+
+        min_x = min(x)
+        max_x = max(x)
+
+        z = np.linspace(int(min_x) + 0.4, max_x + 0.2)
+
+        fig, ax = plt.subplots(facecolor='white', figsize=(5, 5))
+        ax.plot(z, z, color='#616A6B', alpha=0.5)
+
+        ax.scatter(x, y, edgecolors='#6076E1', color='#A2AEE7', alpha=0.6)
+
+        ax.spines['bottom'].set_color('black')
+        ax.set_xlim([0, 4])
+        ax.set_ylim([0, 4])
+        ax.set_xticks([0,1,2,3,4])
+        ax.set_yticks([0, 1, 2, 3, 4])
+
+        ax.set_ylabel('Inferred Value', fontsize=20)  # , fontweight="bold")
+        ax.set_xlabel('True Value', fontsize=20)  # , fontweight="bold")
+        # removing top and right borders
+        ax.spines['top'].set_visible(False)
+        ax.spines['right'].set_visible(False)
+
+        sns.set_style("ticks")
+        sns.despine(offset=10, trim=True)
+        sns.set_context("paper", font_scale=1.5, rc={"lines.linewidth": 2.5})
+
+        temp = file_name.split('/')[-1][0:-4]
+        plt.savefig("Results/Figs/" + temp + "time_kernels.pdf", bbox_inches='tight')
+        plt.clf()
+        plt.close()
 
 
 def find_kernel_mapping(true_labels, estimated_labels):
@@ -165,6 +289,10 @@ def infer(generated_process, alpha_0, mu_0, omega, num_users, vocab_types, num_p
 
 
 def main():
+    file_name = "../Synthetic_Results/CM_U_200_E_250560_P_50"
+    plot_synthetic_stats(file_name)
+
+    return
     vocab_types = ['auths', 'docs']
     vocab_size = {'auths': 100, 'docs': 250}
 
@@ -176,10 +304,10 @@ def main():
     mu_0 = (8, 0.25)
     omega = 5
 
-    num_patterns = 30
-    num_users = 20
-    num_samples = 2000
-    num_particles = 10
+    num_patterns = 50
+    num_users = 200
+    num_samples = 150000
+    num_particles = 20
 
     print("****************************************")
     print(" Number of expected events: " + str(num_samples))
