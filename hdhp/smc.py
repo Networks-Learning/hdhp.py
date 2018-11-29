@@ -143,6 +143,8 @@ class Particle(object):
         ####
         self.user_dish_cache = defaultdict(dict)
         self.author_index = author_index
+        self.dish_counters_endo_per_user = defaultdict(dict)
+        self.dish_counters_exo = {}
 
     def reseed(self, seed=None, uid=None):
         self.seed = seed
@@ -171,6 +173,8 @@ class Particle(object):
 
         ####
         new_p.user_dish_cache = copy_dict(self.user_dish_cache)
+        new_p.dish_counters_endo_per_user = copy_dict(self.dish_counters_endo_per_user)
+        new_p.dish_counters_exo = copy_dict(self.dish_counters_exo)
         ####
         new_p.alpha_0 = copy(self.alpha_0)
         new_p.num_events = self.num_events
@@ -189,26 +193,6 @@ class Particle(object):
 
         new_p.dish_cache = copy_dict(self.dish_cache)
         new_p.dish_counters = copy_dict(self.dish_counters)
-        # new_p.dish_on_table_per_user = \
-        #     copy_dict(self.dish_on_table_per_user)
-
-        # new_p.dish_on_table_per_user = {}
-        # new_p.dish_on_table_todelete = {}
-        # for u in self.dish_on_table_per_user:
-        #     new_p.dish_on_table_per_user[u] = {}
-        #     new_p.dish_on_table_todelete[u] = {}
-        #     self.dish_on_table_todelete[u] = {}
-        #
-        #     for t in self.dish_on_table_per_user[u]:
-        #         if t in self.active_tables_per_user[u]:
-        #             new_p.dish_on_table_per_user[u][t] = \
-        #                 self.dish_on_table_per_user[u][t]
-        #         else:
-        #             dish = self.dish_on_table_per_user[u][t]
-        #             self.dish_on_table_todelete[u][t] = dish
-        #             new_p.dish_on_table_todelete[u][t] = dish
-        #             if t in self.user_table_cache[u]:
-        #                 del self.user_table_cache[u][t]
 
         new_p.per_topic_word_count = {}
         for doc_type in self.per_topic_word_counts:
@@ -252,10 +236,11 @@ class Particle(object):
 
         if self.num_events == 0:
             self.time_previous_user_event = [0 for i in range(self.max_users_id)]
-            # self.total_tables_per_user = [0 for i in range(self.max_users_id)]
             self.total_dishes_per_user = [0 for i in range(self.max_users_id)]
+            self.dish_counters_endo_per_user = [0 for i in range(self.max_users_id)]
             self.mu_per_user = {i: self.sample_mu()
                                 for i in self.users}
+            # self.total_tables_per_user = [0 for i in range(self.max_users_id)]
             # self.active_tables_per_user = {i: set()
             #                                for i in self.users}
         if self.num_events >= 1 and u_n in self.time_previous_user_event and \
@@ -267,8 +252,8 @@ class Particle(object):
         # tables_before = self.total_tables_per_user[u_n]
         dishes_before = self.total_dishes_per_user[u_n]
 
-        z_n, new_dish, log_likelihood_dn = \
-            self.sample_table(t_n, d_n, u_n, cousers)
+        z_n, is_exo_even, is_new_dish, log_likelihood_dn = \
+            self.sample_task(t_n, d_n, u_n, cousers)
 
         if self.total_dishes_per_user[u_n] > dishes_before and dishes_before > 0:
             # opened a new table
@@ -295,63 +280,50 @@ class Particle(object):
                 self.alpha_distribution_history[z_n] = []
             self.alpha_history[z_n].append(self.time_kernels[z_n])
             self.alpha_distribution_history[z_n].append(self.time_kernel_prior[z_n])
+
         if self.num_events >= 1:
             self.logweight += log_likelihood_tn
             self.logweight += self._Qn
+
         self.num_events += 1
         self._update_word_counters(d_n, z_n)
 
         self.time_previous_user_event[u_n] = t_n
         self.topic_previous_event = z_n
         self.user_previous_event = u_n
+
+        if is_new_dish:
+            self.dish_counters_exo[z_n] = 1
+        elif is_exo_even:
+            self.dish_counters_exo[z_n] += 1
+        else:
+            self.dish_counters_endo_per_user[u_n][z_n] += 1
+
+
+        if u_n not in self.first_observed_user_time:
+            self.first_observed_user_time[u_n] = t_n
+
+        for c in cousers:
+            self.time_previous_user_event[c] = t_n
+
+            #TODO: I'm not sure about this part!
+            if c not in self.first_observed_user_time:
+                self.first_observed_user_time[c] = t_n
+
         # self.table_previous_event = b_n
         # self.active_tables_per_user[u_n].add(b_n)
 
-        if new_dish:
-            self.dish_counters[z_n] = 1
-        else:
-            self.dish_counters[z_n] += 1
         # if z_n not in self.dish_counters:
         #     self.dish_counters[z_n] = 1
         # elif opened_table:
         #     self.dish_counters[z_n] += 1
-        if u_n not in self.first_observed_user_time:
-            self.first_observed_user_time[u_n] = t_n
 
-        #####
 
-        # if u_n not in self.user_dish_cache or z_n not in self.user_dish_cache[u_n]:
-        #     self.user_dish_cache[u_n][z_n] = (t_n, 0)
-        # else:
-        #     t_last, sum_kernels = self.user_dish_cache[u_n][z_n]
-        #     update_value = self.kernel(t_n, t_last)
-        #     sum_kernels += 1
-        #     sum_kernels *= update_value
-        #     self.user_dish_cache[u_n][z_n] = (t_n, sum_kernels)
 
-        for c in cousers:
-
-            self.time_previous_user_event[c] = t_n
-
-            # if c not in self.first_observed_user_time:
-            #     self.first_observed_user_time[c] = t_n
-
-            # if c not in self.user_dish_cache:
-            #     self.user_dish_cache[c] = {}
-            #     self.user_dish_cache[c][z_n] = (t_n, 0)
-            #
-            # elif z_n not in self.user_dish_cache[c]:
-            #     self.user_dish_cache[c][z_n] = (t_n, 0)
-            # else:
-            #     t_last, sum_kernels = self.user_dish_cache[c][z_n]
-            #     update_value = self.kernel(t_n, t_last)
-            #     sum_kernels += 1
-            #     sum_kernels *= update_value
-            #     self.user_dish_cache[c][z_n] = (t_n, sum_kernels)
 
         return z_n
 
-    def sample_table(self, t_n, d_n, u_n, cousers):
+    def sample_task(self, t_n, d_n, u_n, cousers):
         """Samples table b_n and topic z_n together for the event n.
 
 
@@ -380,10 +352,12 @@ class Particle(object):
             # self.user_table_cache[u_n] = {}
             self.user_dish_cache[u_n] = {}
             self.time_previous_user_event[u_n] = 0
+            self.dish_counters_endo_per_user[u_n] = {}
+            self.dish_counters_exo[u_n] = {}
 
         # tables = range(self.total_tables_per_user[u_n])
         user_dishes = self.user_dish_cache[u_n].keys()
-        num_dishes = len(self.dish_counters)
+        num_dishes = len(self.dish_counters_exo)
         intensities = []
 
         dn_word_counts = {vocab_type: Counter(d_n[vocab_type]) for vocab_type in d_n}
@@ -391,7 +365,7 @@ class Particle(object):
 
         # Precompute the doc_log_likelihood for each of the dishes
         dish_log_likelihood = []
-        for dish in self.dish_counters:
+        for dish in self.dish_counters_exo:
             temp_dll = {}
             for vocab_type in d_n:
                 temp_dll[vocab_type] = self.document_log_likelihood(dn_word_counts[vocab_type], count_dn[vocab_type],
@@ -404,9 +378,9 @@ class Particle(object):
 
         # Provide one option for each of the already open tables
         mu = self.mu_per_user[u_n]
-        # total_table_int = mu
         dish_log_likelihood_array = []
         total_dish_intensity = mu
+        # total_table_int = mu
 
         for dish in user_dishes:
             alpha = self.time_kernels[dish]
@@ -421,12 +395,13 @@ class Particle(object):
                            for i, inten_i in enumerate(intensities)]
 
         # Provide one option for new table with already existing dish
-        # for dish in self.dish_counters:
-        #     dish_intensity = (mu / total_table_int) * \
-        #                      self.dish_counters[dish] / (self.total_tables + self.beta)
-        #     dish_intensity = ln(dish_intensity)
-        #     dish_intensity += dish_log_likelihood[dish]
-        #     log_intensities.append(dish_intensity)
+        global_dishes = self.dish_counters_exo.keys()
+        for dish in global_dishes:
+            #TODO I'm not sure about the formula
+            dish_intensity = (mu / total_dish_intensity) * self.dish_counters_exo[dish] / (self.total_dishes + self.beta)
+            dish_intensity = ln(dish_intensity)
+            dish_intensity += dish_log_likelihood[dish]
+            log_intensities.append(dish_intensity)
 
         # Provide a last option for new table with new dish
         # new_dish_intensity = mu * self.beta / (total_table_int * (self.total_tables + self.beta))
@@ -448,44 +423,49 @@ class Particle(object):
                        for log_intensity in log_intensities]
         self._Qn = normalizing_log_intensity
         k = weighted_choice(intensities, self.prng)
-        new_dish = False
+        is_new_dish = False
+        is_exo_even = False
 
         if k < len(user_dishes):
             # Assign to one of the already existing tables
             # table = k
             # dish = self.dish_on_table_per_user[u_n][table]
-            dish = user_dishes[k]
+            # self.dish_counters_endo_per_user[u_n][dish] += 1
             # update cache for that table
             # t_last, sum_kernels = self.user_table_cache[u_n][table]
+            # self.user_table_cache[u_n][table] = (t_n, sum_kernels)
+            dish = user_dishes[k]
             t_last, sum_kernels = self.user_dish_cache[u_n][dish]
             update_value = self.kernel(t_n, t_last)
             sum_kernels += 1
             sum_kernels *= update_value
-            # self.user_table_cache[u_n][table] = (t_n, sum_kernels)
             self.user_dish_cache[u_n][dish] = (t_n, sum_kernels)
+
         else:
             # k = k - len(tables)
             # table = len(tables)
             # self.total_tables += 1
-            dish = self.total_dishes
-            self.total_dishes += 1
             # self.total_tables_per_user[u_n] += 1
-            self.total_dishes_per_user[u_n] += 1
 
             # Since this is a new table, initialize the cache accordingly
             # self.user_table_cache[u_n][table] = (t_n, 0)
-            self.user_dish_cache[u_n][dish] = (t_n, 0)
             # self.dish_on_table_per_user[u_n][table] = dish
 
-            for c in cousers:
-                if c not in self.user_dish_cache:
-                    self.total_dishes_per_user[c] = 0
-                    self.user_dish_cache[c] = {}
+            is_exo_even = True
 
-                self.user_dish_cache[c][dish] = (t_n, 0)
-                self.total_dishes_per_user[c] += 1
+            self.total_dishes_per_user[u_n] += 1
 
-            new_dish = True
+            if k == (len(intensities) - 1):
+                is_new_dish = True
+                dish = self.total_dishes
+                self.total_dishes += 1
+            else:
+                k = k - len(user_dishes)
+                dish = global_dishes[k]
+
+            self.user_dish_cache[u_n][dish] = (t_n, 0)
+
+
             if dish not in self.time_kernel_prior:
                 self.time_kernel_prior[dish] = self.alpha_0
 
@@ -496,10 +476,25 @@ class Particle(object):
                 dll = sum(temp_dll.values())
                 dish_log_likelihood.append(dll)
 
+        for c in cousers:
+            if c not in self.user_dish_cache:
+                self.total_dishes_per_user[c] = 0
+                self.user_dish_cache[c] = {}
+
+            if dish not in self.user_dish_cache[c]:
+                self.user_dish_cache[c][dish] = (t_n, 0)
+                self.total_dishes_per_user[c] += 1
+            else:
+                t_last, sum_kernels = self.user_dish_cache[c][dish]
+                update_value = self.kernel(t_n, t_last)
+                sum_kernels += 1
+                sum_kernels *= update_value
+                self.user_dish_cache[c][dish] = (t_n, sum_kernels)
+
         # self.table_history_with_user.append((u_n, table))
         self.dish_history_with_user.append((u_n, dish))
         self.time_previous_user_event[u_n] = t_n
-        return dish, new_dish, dish_log_likelihood[dish]
+        return dish, is_exo_even, is_new_dish, dish_log_likelihood[dish]
 
     def kernel(self, t_i, t_j):
         """Returns the kernel function for t_i and t_j.
@@ -521,6 +516,7 @@ class Particle(object):
         return exp(-self.omega * (t_i - t_j))
 
     def update_time_kernel(self, t_n, z_n):
+        #TODO It should be changed!
         """Updates the parameter of the time kernel of the chosen pattern
         """
         # v_1, v_2 = self.time_kernel_prior[z_n]
@@ -535,6 +531,7 @@ class Particle(object):
 
         self.time_kernel_prior[z_n] = self.alpha_0[0] + event_count - self.dish_counters[z_n], \
                                       self.alpha_0[1] + (sum_integrals)
+
         prior = self.time_kernel_prior[z_n]
         self.time_kernels[z_n] = self.sample_time_kernel(prior)
 
@@ -684,20 +681,20 @@ class Particle(object):
 
         return process
 
-    def get_intensity(self, t_n, u_n, z_n):
-        pi_z = self.dish_counters[z_n] / self.total_tables
-        mu = self.mu_per_user[u_n]
-        alpha = self.time_kernels[z_n]
-        intensity = pi_z * mu
-        for table in self.user_table_cache[u_n]:
-            dish = self.dish_on_table_per_user[u_n][table]
-            if dish == z_n:
-                t_last, sum_timedeltas = self.user_table_cache[u_n][table]
-                update_value = self.kernel(t_n, t_last)
-                table_intensity = alpha * sum_timedeltas * update_value
-                table_intensity += alpha * update_value
-                intensity += table_intensity
-        return intensity
+    # def get_intensity(self, t_n, u_n, z_n):
+    #     pi_z = self.dish_counters[z_n] / self.total_tables
+    #     mu = self.mu_per_user[u_n]
+    #     alpha = self.time_kernels[z_n]
+    #     intensity = pi_z * mu
+    #     for table in self.user_table_cache[u_n]:
+    #         dish = self.dish_on_table_per_user[u_n][table]
+    #         if dish == z_n:
+    #             t_last, sum_timedeltas = self.user_table_cache[u_n][table]
+    #             update_value = self.kernel(t_n, t_last)
+    #             table_intensity = alpha * sum_timedeltas * update_value
+    #             table_intensity += alpha * update_value
+    #             intensity += table_intensity
+    #     return intensity
 
 
 def _extract_words_users(history, vocab_types):
