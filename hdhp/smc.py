@@ -114,28 +114,32 @@ class Particle(object):
         self.max_users_id = max(users) + 1
         self.keep_alpha_history = keep_alpha_history
 
-        self.user_table_cache = {}
+        # self.user_table_cache = {}
         self.dish_on_table_per_user = {}
-        self.dish_on_table_todelete = {}
+        # self.dish_on_table_todelete = {}
         self.dish_counters = {}
         self._max_dish = -1
-        self.total_tables = 0
+        # self.total_tables = 0
+        self.total_dishes = 0
 
-        self.table_history_with_user = []
+        # self.table_history_with_user = []
+        self.dish_history_with_user = []
         self.time_previous_user_event = []
-        self.total_tables_per_user = []
+        # self.total_tables_per_user = []
+        self.total_dishes_per_user = []
         self.dish_cache = {}
         self.time_kernel_prior = {}
         self.time_history_per_user = {}
         self.doc_history_per_user = {}
         self.question_history_per_user = {}
-        self.table_history_per_user = {}
+        # self.table_history_per_user = {}
+        self.dish_history_per_user = {}
         self.alpha_history = {}
         self.alpha_distribution_history = {}
         self.mu_rate = mu_rate
         self.mu_per_user = {}
         self.time_elapsed = 0
-        self.active_tables_per_user = {}
+        # self.active_tables_per_user = {}
         ####
         self.user_dish_cache = defaultdict(dict)
         self.author_index = author_index
@@ -171,37 +175,40 @@ class Particle(object):
         new_p.alpha_0 = copy(self.alpha_0)
         new_p.num_events = self.num_events
         new_p.topic_previous_event = self.topic_previous_event
-        new_p.total_tables = self.total_tables
+        # new_p.total_tables = self.total_tables
+        new_p.total_dishes = self.total_dishes
         new_p._max_dish = self._max_dish
 
         new_p.time_previous_user_event = copy(self.time_previous_user_event)
-        new_p.total_tables_per_user = copy(self.total_tables_per_user)
+        # new_p.total_tables_per_user = copy(self.total_tables_per_user)
+        new_p.total_dishes_per_user = copy(self.total_dishes_per_user)
         new_p.first_observed_time = copy(self.first_observed_time)
         new_p.first_observed_user_time = copy(self.first_observed_user_time)
-        new_p.table_history_with_user = copy(self.table_history_with_user)
+        # new_p.table_history_with_user = copy(self.table_history_with_user)
+        new_p.dish_history_with_user = copy(self.dish_history_with_user)
 
         new_p.dish_cache = copy_dict(self.dish_cache)
         new_p.dish_counters = copy_dict(self.dish_counters)
-        new_p.dish_on_table_per_user = \
-            copy_dict(self.dish_on_table_per_user)
+        # new_p.dish_on_table_per_user = \
+        #     copy_dict(self.dish_on_table_per_user)
 
-        new_p.dish_on_table_per_user = {}
-        new_p.dish_on_table_todelete = {}
-        for u in self.dish_on_table_per_user:
-            new_p.dish_on_table_per_user[u] = {}
-            new_p.dish_on_table_todelete[u] = {}
-            self.dish_on_table_todelete[u] = {}
-
-            for t in self.dish_on_table_per_user[u]:
-                if t in self.active_tables_per_user[u]:
-                    new_p.dish_on_table_per_user[u][t] = \
-                        self.dish_on_table_per_user[u][t]
-                else:
-                    dish = self.dish_on_table_per_user[u][t]
-                    self.dish_on_table_todelete[u][t] = dish
-                    new_p.dish_on_table_todelete[u][t] = dish
-                    if t in self.user_table_cache[u]:
-                        del self.user_table_cache[u][t]
+        # new_p.dish_on_table_per_user = {}
+        # new_p.dish_on_table_todelete = {}
+        # for u in self.dish_on_table_per_user:
+        #     new_p.dish_on_table_per_user[u] = {}
+        #     new_p.dish_on_table_todelete[u] = {}
+        #     self.dish_on_table_todelete[u] = {}
+        #
+        #     for t in self.dish_on_table_per_user[u]:
+        #         if t in self.active_tables_per_user[u]:
+        #             new_p.dish_on_table_per_user[u][t] = \
+        #                 self.dish_on_table_per_user[u][t]
+        #         else:
+        #             dish = self.dish_on_table_per_user[u][t]
+        #             self.dish_on_table_todelete[u][t] = dish
+        #             new_p.dish_on_table_todelete[u][t] = dish
+        #             if t in self.user_table_cache[u]:
+        #                 del self.user_table_cache[u][t]
 
         new_p.per_topic_word_count = {}
         for doc_type in self.per_topic_word_counts:
@@ -213,13 +220,13 @@ class Particle(object):
 
         new_p.time_kernels = copy_dict(self.time_kernels)
         new_p.time_kernel_prior = copy_dict(self.time_kernel_prior)
-        new_p.user_table_cache = copy_dict(self.user_table_cache)
+        # new_p.user_table_cache = copy_dict(self.user_table_cache)
         if self.keep_alpha_history:
             new_p.alpha_history = copy_dict(self.alpha_history)
             new_p.alpha_distribution_history = \
                 copy_dict(self.alpha_distribution_history)
         new_p.mu_per_user = copy_dict(self.mu_per_user)
-        new_p.active_tables_per_user = copy_dict(self.active_tables_per_user)
+        # new_p.active_tables_per_user = copy_dict(self.active_tables_per_user)
         return new_p
 
     def update(self, event):
@@ -245,29 +252,32 @@ class Particle(object):
 
         if self.num_events == 0:
             self.time_previous_user_event = [0 for i in range(self.max_users_id)]
-            self.total_tables_per_user = [0 for i in range(self.max_users_id)]
+            # self.total_tables_per_user = [0 for i in range(self.max_users_id)]
+            self.total_dishes_per_user = [0 for i in range(self.max_users_id)]
             self.mu_per_user = {i: self.sample_mu()
                                 for i in self.users}
-            self.active_tables_per_user = {i: set()
-                                           for i in self.users}
+            # self.active_tables_per_user = {i: set()
+            #                                for i in self.users}
         if self.num_events >= 1 and u_n in self.time_previous_user_event and \
                         self.time_previous_user_event[u_n] > 0:
             log_likelihood_tn = self.time_event_log_likelihood(t_n, u_n)
         else:
             log_likelihood_tn = 0
 
-        tables_before = self.total_tables_per_user[u_n]
+        # tables_before = self.total_tables_per_user[u_n]
+        dishes_before = self.total_dishes_per_user[u_n]
 
-        b_n, z_n, opened_table, log_likelihood_dn = \
-            self.sample_table(t_n, d_n, u_n)
+        z_n, new_dish, log_likelihood_dn = \
+            self.sample_table(t_n, d_n, u_n, cousers)
 
-        if self.total_tables_per_user[u_n] > tables_before and tables_before > 0:
+        if self.total_dishes_per_user[u_n] > dishes_before and dishes_before > 0:
             # opened a new table
             old_mu = self.mu_per_user[u_n]
-            tables_num = tables_before + 1
+            # tables_num = tables_before + 1
+            dishes_num = dishes_before + 1
             user_alive_time = t_n - self.first_observed_user_time[u_n]
             new_mu = (self.mu_rate * old_mu +
-                      (1 - self.mu_rate) * tables_num / user_alive_time)
+                      (1 - self.mu_rate) * dishes_num / user_alive_time)
             self.mu_per_user[u_n] = new_mu
 
         if z_n not in self.time_kernels:
@@ -294,26 +304,30 @@ class Particle(object):
         self.time_previous_user_event[u_n] = t_n
         self.topic_previous_event = z_n
         self.user_previous_event = u_n
-        self.table_previous_event = b_n
-        self.active_tables_per_user[u_n].add(b_n)
+        # self.table_previous_event = b_n
+        # self.active_tables_per_user[u_n].add(b_n)
 
-        if z_n not in self.dish_counters:
+        if new_dish:
             self.dish_counters[z_n] = 1
-        elif opened_table:
+        else:
             self.dish_counters[z_n] += 1
+        # if z_n not in self.dish_counters:
+        #     self.dish_counters[z_n] = 1
+        # elif opened_table:
+        #     self.dish_counters[z_n] += 1
         if u_n not in self.first_observed_user_time:
             self.first_observed_user_time[u_n] = t_n
 
         #####
 
-        if u_n not in self.user_dish_cache or z_n not in self.user_dish_cache[u_n]:
-            self.user_dish_cache[u_n][z_n] = (t_n, 0)
-        else:
-            t_last, sum_kernels = self.user_dish_cache[u_n][z_n]
-            update_value = self.kernel(t_n, t_last)
-            sum_kernels += 1
-            sum_kernels *= update_value
-            self.user_dish_cache[u_n][z_n] = (t_n, sum_kernels)
+        # if u_n not in self.user_dish_cache or z_n not in self.user_dish_cache[u_n]:
+        #     self.user_dish_cache[u_n][z_n] = (t_n, 0)
+        # else:
+        #     t_last, sum_kernels = self.user_dish_cache[u_n][z_n]
+        #     update_value = self.kernel(t_n, t_last)
+        #     sum_kernels += 1
+        #     sum_kernels *= update_value
+        #     self.user_dish_cache[u_n][z_n] = (t_n, sum_kernels)
 
         for c in cousers:
 
@@ -322,22 +336,22 @@ class Particle(object):
             # if c not in self.first_observed_user_time:
             #     self.first_observed_user_time[c] = t_n
 
-            if c not in self.user_dish_cache:
-                self.user_dish_cache[c] = {}
-                self.user_dish_cache[c][z_n] = (t_n, 0)
+            # if c not in self.user_dish_cache:
+            #     self.user_dish_cache[c] = {}
+            #     self.user_dish_cache[c][z_n] = (t_n, 0)
+            #
+            # elif z_n not in self.user_dish_cache[c]:
+            #     self.user_dish_cache[c][z_n] = (t_n, 0)
+            # else:
+            #     t_last, sum_kernels = self.user_dish_cache[c][z_n]
+            #     update_value = self.kernel(t_n, t_last)
+            #     sum_kernels += 1
+            #     sum_kernels *= update_value
+            #     self.user_dish_cache[c][z_n] = (t_n, sum_kernels)
 
-            elif z_n not in self.user_dish_cache[c]:
-                self.user_dish_cache[c][z_n] = (t_n, 0)
-            else:
-                t_last, sum_kernels = self.user_dish_cache[c][z_n]
-                update_value = self.kernel(t_n, t_last)
-                sum_kernels += 1
-                sum_kernels *= update_value
-                self.user_dish_cache[c][z_n] = (t_n, sum_kernels)
+        return z_n
 
-        return b_n, z_n
-
-    def sample_table(self, t_n, d_n, u_n):
+    def sample_table(self, t_n, d_n, u_n, cousers):
         """Samples table b_n and topic z_n together for the event n.
 
 
@@ -359,13 +373,16 @@ class Particle(object):
 
         dish : int
         """
-        if self.total_tables_per_user[u_n] == 0:
+        # if self.total_tables_per_user[u_n] == 0:
+        if self.total_dishes_per_user[u_n] == 0:
             # This is going to be the user's first table
-            self.dish_on_table_per_user[u_n] = {}
-            self.user_table_cache[u_n] = {}
+            # self.dish_on_table_per_user[u_n] = {}
+            # self.user_table_cache[u_n] = {}
+            self.user_dish_cache[u_n] = {}
             self.time_previous_user_event[u_n] = 0
 
-        tables = range(self.total_tables_per_user[u_n])
+        # tables = range(self.total_tables_per_user[u_n])
+        user_dishes = self.user_dish_cache[u_n].keys()
         num_dishes = len(self.dish_counters)
         intensities = []
 
@@ -387,39 +404,34 @@ class Particle(object):
 
         # Provide one option for each of the already open tables
         mu = self.mu_per_user[u_n]
-        total_table_int = mu
+        # total_table_int = mu
         dish_log_likelihood_array = []
-        for table in tables:
-            if table in self.active_tables_per_user[u_n]:
-                dish = self.dish_on_table_per_user[u_n][table]
-                alpha = self.time_kernels[dish]
-                t_last, sum_kernels = self.user_table_cache[u_n][table]
-                update_value = self.kernel(t_n, t_last)
-                table_intensity = alpha * sum_kernels * update_value
-                table_intensity += alpha * update_value
-                total_table_int += table_intensity
-                if table_intensity < table_intensity_threshold:
-                    self.active_tables_per_user[u_n].remove(table)
-                dish_log_likelihood_array.append(dish_log_likelihood[dish])
-                intensities.append(table_intensity)
-            else:
-                dish_log_likelihood_array.append(0)
-                intensities.append(0)
-        log_intensities = [ln(inten_i / total_table_int) + dish_log_likelihood_array[i]
+        total_dish_intensity = mu
+
+        for dish in user_dishes:
+            alpha = self.time_kernels[dish]
+            t_last, sum_kernels = self.user_dish_cache[u_n][dish]
+            update_value = self.kernel(t_n, t_last)
+            dish_intensity = alpha * sum_kernels * update_value
+            dish_intensity += alpha * update_value
+            total_dish_intensity += dish_intensity
+
+        log_intensities = [ln(inten_i / total_dish_intensity) + dish_log_likelihood_array[i]
                            if inten_i > 0 else -float('inf')
                            for i, inten_i in enumerate(intensities)]
 
         # Provide one option for new table with already existing dish
-        for dish in self.dish_counters:
-            dish_intensity = (mu / total_table_int) * \
-                             self.dish_counters[dish] / (self.total_tables + self.beta)
-            dish_intensity = ln(dish_intensity)
-            dish_intensity += dish_log_likelihood[dish]
-            log_intensities.append(dish_intensity)
+        # for dish in self.dish_counters:
+        #     dish_intensity = (mu / total_table_int) * \
+        #                      self.dish_counters[dish] / (self.total_tables + self.beta)
+        #     dish_intensity = ln(dish_intensity)
+        #     dish_intensity += dish_log_likelihood[dish]
+        #     log_intensities.append(dish_intensity)
 
         # Provide a last option for new table with new dish
-        new_dish_intensity = mu * self.beta / \
-                             (total_table_int * (self.total_tables + self.beta))
+        # new_dish_intensity = mu * self.beta / (total_table_int * (self.total_tables + self.beta))
+        new_dish_intensity = mu * self.beta / (total_dish_intensity * (self.total_dishes + self.beta))
+
         new_dish_intensity = ln(new_dish_intensity)
         temp_dll = {}
         for vocab_type in d_n:
@@ -436,27 +448,44 @@ class Particle(object):
                        for log_intensity in log_intensities]
         self._Qn = normalizing_log_intensity
         k = weighted_choice(intensities, self.prng)
-        opened_table = False
-        if k in tables:
+        new_dish = False
+
+        if k < len(user_dishes):
             # Assign to one of the already existing tables
-            table = k
-            dish = self.dish_on_table_per_user[u_n][table]
+            # table = k
+            # dish = self.dish_on_table_per_user[u_n][table]
+            dish = user_dishes[k]
             # update cache for that table
-            t_last, sum_kernels = self.user_table_cache[u_n][table]
+            # t_last, sum_kernels = self.user_table_cache[u_n][table]
+            t_last, sum_kernels = self.user_dish_cache[u_n][dish]
             update_value = self.kernel(t_n, t_last)
             sum_kernels += 1
             sum_kernels *= update_value
-            self.user_table_cache[u_n][table] = (t_n, sum_kernels)
+            # self.user_table_cache[u_n][table] = (t_n, sum_kernels)
+            self.user_dish_cache[u_n][dish] = (t_n, sum_kernels)
         else:
-            k = k - len(tables)
-            table = len(tables)
-            self.total_tables += 1
-            self.total_tables_per_user[u_n] += 1
-            dish = k
+            # k = k - len(tables)
+            # table = len(tables)
+            # self.total_tables += 1
+            dish = self.total_dishes
+            self.total_dishes += 1
+            # self.total_tables_per_user[u_n] += 1
+            self.total_dishes_per_user[u_n] += 1
+
             # Since this is a new table, initialize the cache accordingly
-            self.user_table_cache[u_n][table] = (t_n, 0)
-            self.dish_on_table_per_user[u_n][table] = dish
-            opened_table = True
+            # self.user_table_cache[u_n][table] = (t_n, 0)
+            self.user_dish_cache[u_n][dish] = (t_n, 0)
+            # self.dish_on_table_per_user[u_n][table] = dish
+
+            for c in cousers:
+                if c not in self.user_dish_cache:
+                    self.total_dishes_per_user[c] = 0
+                    self.user_dish_cache[c] = {}
+
+                self.user_dish_cache[c][dish] = (t_n, 0)
+                self.total_dishes_per_user[c] += 1
+
+            new_dish = True
             if dish not in self.time_kernel_prior:
                 self.time_kernel_prior[dish] = self.alpha_0
 
@@ -467,9 +496,10 @@ class Particle(object):
                 dll = sum(temp_dll.values())
                 dish_log_likelihood.append(dll)
 
-        self.table_history_with_user.append((u_n, table))
+        # self.table_history_with_user.append((u_n, table))
+        self.dish_history_with_user.append((u_n, dish))
         self.time_previous_user_event[u_n] = t_n
-        return table, dish, opened_table, dish_log_likelihood[dish]
+        return dish, new_dish, dish_log_likelihood[dish]
 
     def kernel(self, t_i, t_j):
         """Returns the kernel function for t_i and t_j.
@@ -636,7 +666,8 @@ class Particle(object):
                              vocabulary=self.vocabulary, num_users=self.num_users,
                              vocab_types=[vocab_type for vocab_type in self.vocabulary_length])
         process.mu_per_user = self.mu_per_user
-        process.table_history_per_user = self.table_history_per_user
+        # process.table_history_per_user = self.table_history_per_user
+        process.dish_history_per_user = self.dish_history_per_user
         process.time_history_per_user = self.time_history_per_user
         process.dish_on_table_per_user = self.dish_on_table_per_user
         process.time_kernels = self.time_kernels
@@ -721,8 +752,8 @@ def _infer_single_thread(history, params):
     time_history_per_user = defaultdict(list)
     doc_history_per_user = defaultdict(list)
     question_history_per_user = defaultdict(list)
-    table_history_with_user = []
-    dish_on_table_per_user = []
+    # table_history_with_user = []
+    # dish_on_table_per_user = []
 
     # Set the accuracy
     count_resamples = 0
@@ -748,13 +779,15 @@ def _infer_single_thread(history, params):
                           author_index=params.author_index)
                  for i in range(params.num_particles)]
 
-    inferred_tables = {}  # for each particle, save the topic history
+    # inferred_tables = {}  # for each particle, save the topic history
+    inferred_dishes = {}  # for each particle, save the topic history
     for p in particles:
-        inferred_tables[p.uid] = []
+        inferred_dishes[p.uid] = []
     # Fit each particle to the history
     square_norms = []
-    table_history_with_user = []
-    dish_on_table_per_user = []
+    # table_history_with_user = []
+    dish_history_with_user = []
+    # dish_on_table_per_user = []
     for i, h_i in enumerate(history):
         max_logweight = None
         weights = []
@@ -772,8 +805,9 @@ def _infer_single_thread(history, params):
 
         for p_i in particles:
             # Fit each particle to the next event
-            b_i, z_i = p_i.update(h_i)
-            inferred_tables[p_i.uid].append((b_i, z_i))
+            z_i = p_i.update(h_i)
+            # inferred_tables[p_i.uid].append((b_i, z_i))
+            inferred_dishes[p_i.uid].append(z_i)
 
         if i > 0 and i % params.resample_every == 0:
             # Start resampling
@@ -800,55 +834,56 @@ def _infer_single_thread(history, params):
                 new_particle_indices = pick_new_particles(particles,
                                                           normalized, prng)
                 new_particles = []
-                new_table_history_with_user = []
-                new_dish_on_table_per_user = []
+                new_dish_history_with_user = []
+                # new_dish_on_table_per_user = []
+
                 for index in new_particle_indices:
                     # copy table_history for that particle
-                    if len(table_history_with_user):
-                        old_history = copy(table_history_with_user[index])
+                    if len(dish_history_with_user):
+                        old_history = copy(dish_history_with_user[index])
                     else:
                         old_history = []
-                    new_history = copy(particles[index].table_history_with_user)
+                    new_history = copy(particles[index].dish_history_with_user)
                     old_history.extend(new_history)
-                    new_table_history_with_user.append(old_history)
-                    if len(dish_on_table_per_user):
-                        dish_table_user = copy_dict(dish_on_table_per_user[index])
-                    else:
-                        dish_table_user = {}
-                    dishes_toadd = copy_dict(particles[index].dish_on_table_todelete)
-                    for user in dishes_toadd:
-                        if user not in dish_table_user:
-                            dish_table_user[user] = {}
-                        for t in dishes_toadd[user]:
-                            assert t not in dish_table_user[user]
-                            dish_table_user[user][t] = dishes_toadd[user][t]
-                    new_dish_on_table_per_user.append(dish_table_user)
+                    new_dish_history_with_user.append(old_history)
+                    # if len(dish_on_table_per_user):
+                    #     dish_table_user = copy_dict(dish_on_table_per_user[index])
+                    # else:
+                    #     dish_table_user = {}
+                    # dishes_toadd = copy_dict(particles[index].dish_on_table_todelete)
+                    # for user in dishes_toadd:
+                    #     if user not in dish_table_user:
+                    #         dish_table_user[user] = {}
+                    #     for t in dishes_toadd[user]:
+                    #         assert t not in dish_table_user[user]
+                    #         dish_table_user[user][t] = dishes_toadd[user][t]
+                    # new_dish_on_table_per_user.append(dish_table_user)
 
                 # delete history from new particles
                 for index in new_particle_indices:
-                    particles[index].table_history_with_user = []
-                    for user in particles[index].dish_on_table_todelete:
-                        particles[index].dish_on_table_todelete[user] = {}
+                    particles[index].dish_history_with_user = []
+                    # for user in particles[index].dish_on_table_todelete:
+                    #     particles[index].dish_on_table_todelete[user] = {}
 
                 for index in new_particle_indices:
-                    particles[index].table_history_with_user = []
+                    particles[index].dish_history_with_user = []
                     new_particle = particles[index].copy()
                     new_particle.reseed(prng.randint(maxint))
                     new_particle.reset_weight()
                     new_particles.append(new_particle)
-                    inferred_tables[new_particle.uid] = \
-                        copy(inferred_tables[particles[index].uid])
+                    inferred_dishes[new_particle.uid] = \
+                        copy(inferred_dishes[particles[index].uid])
                 particles = new_particles
-                table_history_with_user = new_table_history_with_user
-                dish_on_table_per_user = new_dish_on_table_per_user
+                dish_history_with_user = new_dish_history_with_user
+                # dish_on_table_per_user = new_dish_on_table_per_user
 
                 # If inferred tables dictionary grows too big, prune it
-                if len(inferred_tables) > 50 * params.num_particles:
-                    new_inferred_tables = {}
+                if len(inferred_dishes) > 50 * params.num_particles:
+                    new_inferred_dishes = {}
                     for p in particles:
-                        new_inferred_tables[p.uid] = copy(inferred_tables[p.uid])
-                    del inferred_tables
-                    inferred_tables = new_inferred_tables
+                        new_inferred_dishes[p.uid] = copy(inferred_dishes[p.uid])
+                    del inferred_dishes
+                    inferred_dishes = new_inferred_dishes
                 with open(params.progress_file, mode='a') as temp:
                     temp.write("Time: %.2f (%d)\n" % (time() - start_tic, i))
 
@@ -868,36 +903,37 @@ def _infer_single_thread(history, params):
     final_particle_id = pick_new_particles(particles, normalized, prng)[0]
     final_particle = particles[final_particle_id]
 
-    table_history_with_user = table_history_with_user[final_particle_id]
-    new_history = copy(final_particle.table_history_with_user)
-    table_history_with_user.extend(new_history)
-    final_particle.table_history_with_user = table_history_with_user
-    dish_on_table_per_user = dish_on_table_per_user[final_particle_id]
-    dishes_toadd = copy_dict(final_particle.dish_on_table_per_user)
+    dish_history_with_user = dish_history_with_user[final_particle_id]
+    new_history = copy(final_particle.dish_history_with_user)
+    dish_history_with_user.extend(new_history)
+    final_particle.dish_history_with_user = dish_history_with_user
+    # dish_on_table_per_user = dish_on_table_per_user[final_particle_id]
+    # dishes_toadd = copy_dict(final_particle.dish_on_table_per_user)
 
-    for user in dishes_toadd:
-        if user not in dish_on_table_per_user:
-            dish_on_table_per_user[user] = {}
-        for t in dishes_toadd[user]:
-            assert t not in dish_on_table_per_user[user]
-            dish_on_table_per_user[user][t] = dishes_toadd[user][t]
-    for user in final_particle.dish_on_table_todelete:
-        if user not in dish_on_table_per_user:
-            dish_on_table_per_user[user] = {}
-        for t in final_particle.dish_on_table_todelete[user]:
-            assert t not in dish_on_table_per_user[user]
-            dish_on_table_per_user[user][t] = \
-                final_particle.dish_on_table_todelete[user][t]
-    final_particle.dish_on_table_per_user = dish_on_table_per_user
+    # for user in dishes_toadd:
+    #     if user not in dish_on_table_per_user:
+    #         dish_on_table_per_user[user] = {}
+    #     for t in dishes_toadd[user]:
+    #         assert t not in dish_on_table_per_user[user]
+    #         dish_on_table_per_user[user][t] = dishes_toadd[user][t]
+    # for user in final_particle.dish_on_table_todelete:
+    #     if user not in dish_on_table_per_user:
+    #         dish_on_table_per_user[user] = {}
+    #     for t in final_particle.dish_on_table_todelete[user]:
+    #         assert t not in dish_on_table_per_user[user]
+    #         dish_on_table_per_user[user][t] = \
+    #             final_particle.dish_on_table_todelete[user][t]
+    # final_particle.dish_on_table_per_user = dish_on_table_per_user
 
     final_particle.time_history_per_user = copy(time_history_per_user)
     final_particle.doc_history_per_user = copy(doc_history_per_user)
     final_particle.question_history_per_user = copy(question_history_per_user)
-    final_particle.table_history_per_user = {}
-    for (u_i, table) in final_particle.table_history_with_user:
-        if u_i not in final_particle.table_history_per_user:
-            final_particle.table_history_per_user[u_i] = []
-        final_particle.table_history_per_user[u_i].append(table)
+    final_particle.dish_history_per_user = {}
+
+    for (u_i, dish) in final_particle.dish_history_with_user:
+        if u_i not in final_particle.dish_history_per_user:
+            final_particle.dish_history_per_user[u_i] = []
+        final_particle.dish_history_per_user[u_i].append(dish)
     final_particle.vocabulary = params.vocabulary
     # pool.close()
     with open(params.progress_file, mode='a') as temp:

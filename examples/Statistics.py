@@ -20,7 +20,7 @@ from scipy.special import gamma
 from collections import Counter
 import dill
 import pickle
-import bigfloat
+# import bigfloat
 from operator import mul
 import math
 
@@ -546,7 +546,7 @@ def plot_anderson_darling_test(user_integrals, threshold, lead_author):
         for user in all_integrals:
             if len(all_integrals.get(user)) < 2:
                 continue
-            statistic, critical_values, significance_level = stats.anderson(all_integrals.get(user), dist='norm')
+            statistic, critical_values, significance_level = stats.anderson(all_integrals.get(user), dist='expon')
             if statistic > critical_values[2]:
                 reject_percentage[case] += 1
 
@@ -556,6 +556,7 @@ def plot_anderson_darling_test(user_integrals, threshold, lead_author):
     plt.show(block=False)
     ind = np.arange(1, 4)
     y = [reject_percentage[1], reject_percentage[2], reject_percentage[3]]
+    print(y)
 
     pm, pc, pn = plt.bar(ind, y)
     pm.set_facecolor('r')
@@ -568,10 +569,10 @@ def plot_anderson_darling_test(user_integrals, threshold, lead_author):
     ax.set_xticks([1.4, 2.4, 3.4], minor=True)
     ax.set_xticklabels(['HDHP', 'HDHP-multi-vocab', 'multi_user_vocab'], minor=True)
 
-    ax.set_ylim([0, 20])
+    ax.set_ylim([0, 0.2])
     ax.set_ylabel('% Users Rejected')
     ax.set_title('Cases')
-    ax.set_title('Anderson Test')
+    ax.set_title('Anderson Test - ' + str(lead_author))
     fig = plt.gcf()
     plt.close(fig)
     fig.savefig("anderson_darling_TEST_" + lead_author + ".png")
@@ -594,7 +595,7 @@ def plot_ks_test_results(user_integrals, threshold, lead_author):
         for user in all_integrals:
             if len(all_integrals.get(user)) < 2:
                 continue
-            test_value, p_value = stats.kstest(all_integrals.get(user), 'norm')
+            test_value, p_value = stats.kstest(all_integrals.get(user), 'expon')
             if p_value > threshold:
                 reject_percentage[case] += 1
 
@@ -620,7 +621,7 @@ def plot_ks_test_results(user_integrals, threshold, lead_author):
     ax.set_ylim([0, 30])
     ax.set_ylabel('% Users Rejected')
     ax.set_title('Cases')
-    ax.set_title('KS Test')
+    ax.set_title('KS Test - ' + str(lead_author))
     fig = plt.gcf()
     plt.close(fig)
     fig.savefig("KS_TEST_" + lead_author + ".png")
@@ -641,7 +642,7 @@ def calculate_transformed_points(events, events_per_user, mu_per_user, kernel_ti
     :return: A dictionary contains the integrals per user
     """
     user_integrals = {user: [] for user in events_per_user}
-
+    print("number of users: {}".format(len(mu_per_user)))
     for user in events_per_user:
 
         user_mu = mu_per_user[user]
@@ -1046,6 +1047,86 @@ def average_published_time_per_user(dataset_file_path, base_year):
     bar_plot(x, y, title, 'Avg num of months', 'Number of authors', output_file, color="#408000")
 
 
+###########
+
+def calculate_fitness_of_good_test(dataset_file_path, num_events, author_index, omega, lead_author):
+    """
+    Run Anderson Darling and KS tests
+    :param dataset_file_path: Dataset file path
+    :param inferred_process_file_path: Inferred process file path (pickle file)
+    :param author_index: 0 for first authors and -1 for last authors
+    :param omega: Kernel decay
+    :param lead_author: First or last author
+    :return: Nothing
+    """
+
+    vocab_types = ["title", "auths"]
+    base_year = '2010'
+    number_of_papers = 1
+    # author_index = -1  # 0 for first authors and -1 for last authors
+
+    first_authors, last_authors, all_authors = real_data_inference.get_authors_with_n_papers(dataset_file_path,
+                                                                                             base_year,
+                                                                                             number_of_papers)
+    raw_events = real_data_inference.json_file_to_events(dataset_file_path, vocab_types, 10, all_authors, author_index)
+
+    cases = {1: ([0], False),
+             2: ([0, 1], False),
+             3: ([0, 1], True)}
+    user_integrals = {}
+
+
+    for case in [3, 2, 1]:
+
+        inferred_process_file_path = "real_data_results/Case" + str(case) + "/Inference/title_inferred_process_" + num_events + "_" + lead_author + ".pkl"
+        with open(inferred_process_file_path) as inferred_process_file:
+            inferred_process = pickle.load(inferred_process_file)
+
+        print "Case: {0}".format(case)
+        indices, use_cousers = cases[case]
+
+        types = ["docs", "auths"]
+
+        # Inference
+        types = [types[i] for i in indices]
+
+        events = list()
+        events_per_user = {}
+        # Create the events from the dataset file
+
+        if use_cousers:
+            for index, event in enumerate(raw_events):
+                events.append((event[0], {t: event[1][t] for t in types}, event[2], event[3]))
+                for user in event[2]:
+                    # user = str(user)
+                    if user not in events_per_user:
+                        events_per_user[user] = []
+                    events_per_user[user].append(index)
+        else:
+            for index, event in enumerate(raw_events):
+                events.append((event[0], {t: event[1][t] for t in types}, [event[2][author_index]], event[3]))
+                user = event[2][author_index]
+                # user = str(user)
+                if user not in events_per_user:
+                    events_per_user[user] = []
+                events_per_user[user].append(index)
+
+        mu_per_user = inferred_process.mu_per_user
+        estimated_kernels = inferred_process.time_kernels
+        predicted_labels = {}
+
+        with open("real_data_results/" + "Case{0}".format(case) + "/months/title_patterns_" + str(
+                len(events)) + '_' + lead_author + ".tsv") as patterns_file:
+            lines = patterns_file.readlines()
+            for index, line in enumerate(lines):
+                predicted_labels[index] = int(line.strip())
+
+        user_integrals[case] = calculate_transformed_points(events, events_per_user, mu_per_user, estimated_kernels,
+                                                            predicted_labels, omega)
+    plot_ks_test_results(user_integrals, 0.05, lead_author)
+    plot_anderson_darling_test(user_integrals, 0.05, lead_author)
+
+#################
 def main():
     base_year = '2010'
     time_unit = 'time_half_year'
@@ -1060,24 +1141,25 @@ def main():
     ids_to_names_file_path = "real_data_results/Statistics/authors_ids_to_names.json"
     vocab_types = ["title", "auths"]
 
-    first_authors, last_authors, all_authors = real_data_inference.get_authors_with_n_papers(dataset_file_path,
-                                                                                             base_year,
-                                                                                             number_of_papers)
+    # first_authors, last_authors, all_authors = real_data_inference.get_authors_with_n_papers(dataset_file_path,
+    #                                                                                          base_year,
+    #                                                                                          number_of_papers)
 
 
     num_events = '35344'
     doc_type = "title"
 
-    for case in ['Case1', 'Case2', 'Case3']:
+    for case in ['Case3']:
         print("Setup: " + case)
 
-        author_index = -1
-        for lead_author in ["first_author", "last_author"]:
+        author_index = 0
+        for lead_author in ["first_author"]:
 
             inferred_process_file_path = "real_data_results/" + case + "/Inference/title_inferred_process_" + num_events + "_" + lead_author + ".pkl"
             patterns_file_path = "real_data_results/" + case + "/months/title_patterns_" + num_events + "_" + lead_author + ".tsv"
 
             # calculate_fitness_of_good(dataset_file_path, inferred_process_file_path, author_index, omega, lead_author)
+            calculate_fitness_of_good_test(dataset_file_path, num_events, author_index, omega, lead_author)
             # calculate_perplexity(inferred_process_file_path, test_data_file_path, all_authors, author_index, vocab_types)
             #
             # plot_popularity_vs_burstiness(inferred_process_file_path, num_events, case, lead_author, doc_type)

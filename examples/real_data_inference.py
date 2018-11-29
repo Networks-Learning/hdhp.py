@@ -436,7 +436,7 @@ def main():
     base_year = '2010'
     time_unit = "months"
     number_of_papers = 1
-    author_index = -1  # 0 for first authors and -1 for last authors
+    author_index = 0  # 0 for first authors and -1 for last authors
 
     final_dataset_file_path = "../Real_Dataset/data_after_year_" + str(base_year) + ".json"
     # get_year_based_events(dataset_file_path, base_year, final_dataset_file_path)
