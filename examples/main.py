@@ -58,7 +58,7 @@ def plot_synthetic_stats(file_name):
         ax.set_xlim([0, 5])
         ax.set_ylim([0, 5])
         # ax.scatter(x, y, edgecolors='#ADB5DB', color='#A2AEE7', alpha=0.6, s=25)
-        # ax.set_title('Distance vs Workout Duration')
+        ax.set_title('Base Rates')
 
         ax.set_ylabel('Inferred Value', fontsize=20)  # , fontweight="bold")
         ax.set_xlabel('True Value', fontsize=20)  # , fontweight="bold")
@@ -134,6 +134,7 @@ def plot_synthetic_stats(file_name):
 
         ax.set_ylabel('Inferred Value', fontsize=20)  # , fontweight="bold")
         ax.set_xlabel('True Value', fontsize=20)  # , fontweight="bold")
+        ax.set_title('Time Kernels')
         # removing top and right borders
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
@@ -289,10 +290,11 @@ def infer(generated_process, alpha_0, mu_0, omega, num_users, vocab_types, num_p
 
 
 def main():
-    file_name = "../Synthetic_Results/CM_U_200_E_250560_P_50"
-    plot_synthetic_stats(file_name)
 
-    return
+    file_name = "../Synthetic_Results/CM_U_200_E_250560_P_50"
+    # plot_synthetic_stats(file_name)
+    #
+    # return
     vocab_types = ['auths', 'docs']
     vocab_size = {'auths': 100, 'docs': 250}
 
@@ -304,9 +306,9 @@ def main():
     mu_0 = (8, 0.25)
     omega = 5
 
-    num_patterns = 50
-    num_users = 200
-    num_samples = 150000
+    num_patterns = 20
+    num_users = 20
+    num_samples = 10000
     num_particles = 20
 
     print("****************************************")
@@ -324,6 +326,12 @@ def main():
 
     num_events = len(generated_process.events)
 
+    trueLabs = [e[1] for e in generated_process.annotatedEventsIter()]
+    predLabs = [e[1] for e in inferred_process.annotatedInfEventsIter()]
+
+    print("True Labels Size: " + str(len(trueLabs)))
+    print("predicted Labels Size: " + str(len(predLabs)))
+
     with open("Results/CM_U_" + str(num_users) + "_E_" + str(num_events) + "_P_" + str(
             num_patterns) + "_base_rates.tsv", "w") as fout:
         for key in generated_process.mu_per_user:
@@ -339,16 +347,20 @@ def main():
         for key in inferred_process.time_kernels:
             fout.write("\t".join([str(key), str(inferred_process.time_kernels[key])]) + "\n")
 
+    # with open("Results/CM_U_" + str(num_users) + "_E_" + str(num_events) + "_time_kernels.tsv", "w") as fout:
+    #     print (generated_process.time_kernels.keys())
+    #     print(inferred_process.time_kernels.keys())
+    #     for key in inferred_process.time_kernels:
+    #         fout.write("\t".join(
+    #             [str(key), str(generated_process.time_kernels[key]), str(inferred_process.time_kernels[key])]) + "\n")
+
+
+
     # plot the base rates and the estimated alpha values
     plotMuScatterPlot(generated_process.mu_per_user, inferred_process.mu_per_user,
                       "Results/Figs/CM_U_" + str(num_users) + "_E_" + str(
                           num_events) + "_P_" + str(num_patterns) + "_base_rates.pdf")
 
-    trueLabs = [e[1] for e in generated_process.annotatedEventsIter()]
-    predLabs = [e[1] for e in inferred_process.annotatedEventsIter()]
-
-    print("True Labels Size: " + str(len(trueLabs)))
-    print("predicted Labels Size: " + str(len(predLabs)))
 
     kernel_mappings = find_kernel_mapping(trueLabs, predLabs)
 

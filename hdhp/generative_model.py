@@ -275,7 +275,6 @@ class HDHProcess:
                 else:
                     lambda_star = lambda_s
 
-
     def sample_user_events(self, min_num_events=100, max_num_events=None,
                            t_max=None):
         """Samples events for a user.
@@ -362,7 +361,7 @@ class HDHProcess:
                 self.dish_on_table_per_user[user][table] = z_n
 
             if z_n not in self.first_observed_time or \
-                            t_n < self.first_observed_time[z_n]:
+                    t_n < self.first_observed_time[z_n]:
                 self.first_observed_time[z_n] = t_n
             self.dish_counters[z_n] += 1
 
@@ -713,7 +712,7 @@ class HDHProcess:
                 t_last_dish, sum_kernels_dish = dish_cache[dish]
                 update_value_dish = self.kernel(t, t_last_dish)
                 dish_intensity = lambda_uz + alpha * sum_kernels_dish * \
-                                             update_value_dish
+                                 update_value_dish
                 dish_intensity += alpha * update_value_dish
             else:
                 dish_intensity = lambda_uz
@@ -1107,6 +1106,19 @@ class HDHProcess:
                    )
                 for docType in docTypes for pattern in self.per_pattern_word_counts[docType] if pattern in patterns]
         return '\n\n'.join(text)
+
+    def annotatedInfEventsIter(self, keep_sorted=True):
+
+        events = [(t, dish, u, doc)
+                  for u in self.time_history_per_user
+                  for (t, doc, dish) in
+                  izip(self.time_history_per_user[u],
+                       self.document_history_per_user[u], self.dish_history_per_user[u])]
+
+        if keep_sorted: events = sorted(events, key=lambda x: x[0])
+
+        for event in events:
+            yield event
 
     def annotatedEventsIter(self, keep_sorted=True):
 
