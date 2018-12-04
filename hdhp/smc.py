@@ -438,7 +438,9 @@ class Particle(object):
             else:
                 k = k - len(user_dishes)
                 dish = global_dishes[k]
-
+            
+            if u_n not in self.user_dish_cache:
+                self.user_dish_cache[u_n] = {}
             self.user_dish_cache[u_n][dish] = (t_n, 0)
 
             if dish not in self.time_kernel_prior:
